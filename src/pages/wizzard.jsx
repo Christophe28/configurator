@@ -1,6 +1,6 @@
 //React import
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 //Component import
 import ChooseTown from '../components/wizzardComponents/pages/chosse-town';
