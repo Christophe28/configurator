@@ -1015,7 +1015,7 @@ var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 var _app = require("./app");
 var _appDefault = parcelHelpers.interopDefault(_app);
 _reactDomDefault.default.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
-    basename: "/configurator",
+    baseName: "/configurator",
     children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appDefault.default, {}, void 0, false, {
         fileName: "src/index.js",
         lineNumber: 8,
