@@ -1,0 +1,29 @@
+{
+  "name": "configurator",
+  "source": "index.html",
+  "version": "1.0.0",
+  "homepage": "https://christophe28.github.io/configurator",
+  "description": "",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "predeploy": "npm run build -- --public-url .",
+    "deploy": "gh-pages -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.3.2",
+    "gh-pages": "^3.2.3",
+    "parcel": "^2.3.2",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.2"
+  }
+}

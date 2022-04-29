@@ -1,0 +1,26 @@
+.container-input {
+
+    h2 {
+        text-align: center;
+        font-weight: 500;
+        color: #3b3b8c;
+    }
+
+    section {
+
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+
+        button {
+            height: 50px;
+            width: 50px;
+            margin-right: 30px;
+            border-radius: 50%;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

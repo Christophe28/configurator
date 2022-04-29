@@ -1,0 +1,11 @@
+.container-scheme-pickers {
+    text-align: center;
+    margin-top: 20px;
+
+    button {
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+//Faire deux composants nommé <step1 /> <step2 /> les stocker dans un tableau [<step1 />, <step2 />]
+
+//Faire un currentstate et un setState qui prendra l'index des step dans le tableau. Au démarrage currentState vaudra 0 const state = [currentState, setState] = useState(0);
+
+//Faire deux boutons <input précédent /> <input suivant /> 
+//Au click de suivant incrémenter le state de 1 
+//Au click de précédent décrémenter le state de 1
+
+//Si le currentState vaut 0 impossible de décrémenter
+//Si le currentState vaut plus que la longueur du tableau impossible d'incrémenter
