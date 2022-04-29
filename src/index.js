@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import App from "./app";
 
 ReactDOM.render(
-    <Router basename="/configurator">
+    <Router baseName="/configurator">
         <App />
     </Router>,
     document.getElementById("root")
