@@ -28,38 +28,6 @@ export const materials = [
     }
 ]
 
-//Peut être un peu to much
-// export const colorsSchemes = [{
-//     darkScheme : {
-//         secondaryColor : {
-//             name: "COULEUR_SECONDAIRE0000",
-//             value: "#3E844A"
-//         },
-//         panelColor: {
-//             name: "COULEUR_PANNEAU",
-//             value: "#000000"
-//         },
-//         dominantColor: {
-//             name: "COULEUR_DOMINANTE",
-//             value: "#BB0000"
-//         }
-//     },
-//     lightScheme: {
-//         secondaryColor : {
-//             name: "COULEUR_SECONDAIRE0000",
-//             value: "#3E844A"
-//         },
-//         panelColor : {
-//             name: "COULEUR_PANNEAU",
-//             value: "#000000"
-//         },
-//         dominantColor: {
-//             name: "COULEUR_DOMINANTE",
-//             value: "#BB0000"
-//         }
-//     }
-// }]
-
 export const colorsDarkScheme = 
     {
         COULEUR_SECONDAIRE0000: "#3E844A",
@@ -73,3 +41,32 @@ export const colorsLightScheme =
         COULEUR_PANNEAU: "#FFFFFF",
         COULEUR_DOMINANTE: "#FFFFFF"
     }
+
+//Config wizzard
+
+export const themeColors = [
+    {
+        value: "blue",
+        hexadecimalColor: "#1E00FF",
+        label: "bleu"
+    },
+    {
+        value: "red",
+        hexadecimalColor: "#DD2727",
+        label: "rouge"
+    },
+    {
+        value: "green",
+        hexadecimalColor: "#15D121",
+        label: "vert"
+    }
+]
+
+export const signals = [
+    "Effet de porte aux entrées de la commune",
+    "Orientation des véhicules vers les ressources",
+    "Identification des parkings",
+    "Information sur les ressources du centre-ville",
+    "Orientation des piétons vers les ressources",
+    "Interprétation historique des ressources"
+]
