@@ -13,6 +13,7 @@ const ChooseSignal = ({ signals }) => {
             <Checkbox 
                 data={signals}
                 checked={checkboxesState}
+                setCurrentChecked={setCheckboxesState}
             />
         </div>
     );

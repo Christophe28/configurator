@@ -1,6 +1,10 @@
+//React import
 import React from 'react';
 
-const Checkbox = ({ data, checked }) => {
+//Logic import
+import setDefaultChecked from '../../../functions/set-defaultChecked';
+
+const Checkbox = ({ data, checked, setCurrentChecked }) => {
     return (
         <div>
             {
@@ -11,7 +15,7 @@ const Checkbox = ({ data, checked }) => {
                             id={dataElement} 
                             name={dataElement} 
                             defaultChecked={checked[index]}
-                            onChange={(e) => console.log(e.target.checked)}
+                            onChange={(e) => setDefaultChecked(setCurrentChecked, index, e.target.checked)}
                         />
                         <label htmlFor={dataElement}>{dataElement}</label>
                     </div>
