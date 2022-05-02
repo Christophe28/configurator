@@ -1,7 +1,11 @@
 import React from 'react';
 import { useEffect } from 'react';
+
 import { VctrApi } from '../../../lib/api';
+
 import Iframe from './iframe';
+
+import updateMaterial from '../../../functions/update-material';
 
 const VectaryItems = ({ models, dominantColor }) => {
     const viewerModels = [];
@@ -13,11 +17,7 @@ const VectaryItems = ({ models, dominantColor }) => {
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
 
-                const updateColor = {
-                    color: dominantColor
-                }
-                const allSceneMaterials = await viewerApi.getMaterials();
-                await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor);
+                updateMaterial(dominantColor, viewerApi);
             })
         }
         run();
