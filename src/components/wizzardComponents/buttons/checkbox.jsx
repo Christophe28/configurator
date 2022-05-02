@@ -1,10 +1,7 @@
 //React import
 import React from 'react';
 
-//Logic import
-import setDefaultChecked from '../../../functions/set-defaultChecked';
-
-const Checkbox = ({ data, checked, setCurrentChecked }) => {
+const Checkbox = ({ data, checked, setCurrentChecked, setDefaultChecked }) => {
     return (
         <div>
             {

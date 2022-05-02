@@ -4,10 +4,7 @@ import React from 'react';
 //Component import
 import Buttons from '../buttons/buttons';
 
-//Logic, config import
-import { themeColors } from '../../../config/config';
-
-const ChooseDominantColor = ({color, setColor}) => {
+const ChooseDominantColor = ({ themeColors, setColor }) => {
 
     return (
         <div className="container-dominant-color">

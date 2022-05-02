@@ -23,5 +23,6 @@
 
 ===========================================Etape Trois, les checkbox !===========================================4
 //Créer un tableau qui comprend les texte dans l'exemple de Valérian (y);
-//Si la checkbox est checked, on set le state en ajoutant la valeur de la checkbox, setState(valueCheckbox
+//Créer un state qui contiendra pour chaque élément de la config qui contient les informations.
+//Si la checkbox est checked, on set le state en ajoutant la valeur de la checkbox, setState(valueCheckbox)
 //si la checkbox est unchecked setState en retirant la valeur de la checkbox

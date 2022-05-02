@@ -5,12 +5,15 @@ import { useState } from 'react';
 //Component import
 import ChooseTown from '../components/wizzardComponents/pages/choose-town';
 import ChooseDominantColor from '../components/wizzardComponents/pages/choose-dominant-colors';
-import ChooseSignal from '../components/wizzardComponents/pages/choose-signal';
+import ChooseSignals from '../components/wizzardComponents/pages/choose-signals';
 import SignalSystem from '../components/wizzardComponents/pages/signal-system';
 import Input from '../components/wizzardComponents/buttons/input';
 
 //Config import
-import { signals } from '../config/config';
+import { themeColors, signals } from '../config/config';
+
+//Logic import
+import setDefaultChecked from '../functions/set-defaultChecked';
 
 const Wizzard = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -24,9 +27,11 @@ const Wizzard = () => {
         <ChooseDominantColor
             color={color}
             setColor={setColor}
+            themeColors={themeColors}
         />,
-        <ChooseSignal
+        <ChooseSignals
             signals={signals}
+            setDefaultChecked={setDefaultChecked}
         />,
         <SignalSystem />
     ];
