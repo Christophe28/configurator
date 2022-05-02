@@ -10,7 +10,7 @@ import SignalSystem from '../components/wizzardComponents/pages/signal-system';
 import Input from '../components/wizzardComponents/buttons/input';
 
 //Config import
-import { themeColors, signals, signals2, model } from '../config/config';
+import { themeColors, signals, model } from '../config/config';
 
 //Logic import
 import setDefaultChecked from '../functions/set-defaultChecked';
@@ -32,7 +32,6 @@ const Wizzard = () => {
         <ChooseSignals
             signals={signals}
             setDefaultChecked={setDefaultChecked}
-            signals2={signals2}
         />,
         <SignalSystem 
             models={model}

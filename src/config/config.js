@@ -63,15 +63,6 @@ export const themeColors = [
 ]
 
 export const signals = [
-    "Effet de porte aux entrées de la commune",
-    "Orientation des véhicules vers les ressources",
-    "Identification des parkings",
-    "Information sur les ressources du centre-ville",
-    "Orientation des piétons vers les ressources",
-    "Interprétation historique des ressources"
-]
-
-export const signals2 = [
     {
         value: "",
         id: "box_1",
