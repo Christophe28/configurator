@@ -21,8 +21,12 @@
 
 //Faire une condition pour vérifier la valeur de l'élément target avec la config qui contient les couleurs pour ensuite récupérer la couleur en hexadécimal (je n'apprécie pas la façon dont je récupère la valeur)
 
-===========================================Etape Trois, les checkbox !===========================================4
+===========================================Etape Trois, les checkbox !===========================================
 //Créer un tableau qui comprend les texte dans l'exemple de Valérian (y);
-//Créer un state qui contiendra pour chaque élément de la config qui contient les informations.
-//Si la checkbox est checked, on set le state en ajoutant la valeur de la checkbox, setState(valueCheckbox)
-//si la checkbox est unchecked setState en retirant la valeur de la checkbox
+//Si la checkbox est checked, on set le state en ajoutant la valeur de la checkbox, setState(valueCheckbox) (y);
+//si la checkbox est unchecked setState en retirant la valeur de la checkbox (y);
+
+==========================================Etape Quatre, les models vectary !====================================
+//Dans un premier temps, afficher autant de model qu'il y'a des éléments dans la config models = [{}] (y);
+//Dans un second temps il faudra afficher les modèles vectary en fonction des checkbox sélectionnée
+//Dans un premier temps, Sauvegarder la couleur sélectionnée dans couleur dominantes et update le matériel avec la couleur souhaitée

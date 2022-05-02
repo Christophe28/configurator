@@ -10,7 +10,7 @@ import SignalSystem from '../components/wizzardComponents/pages/signal-system';
 import Input from '../components/wizzardComponents/buttons/input';
 
 //Config import
-import { themeColors, signals } from '../config/config';
+import { themeColors, signals, model } from '../config/config';
 
 //Logic import
 import setDefaultChecked from '../functions/set-defaultChecked';
@@ -33,7 +33,10 @@ const Wizzard = () => {
             signals={signals}
             setDefaultChecked={setDefaultChecked}
         />,
-        <SignalSystem />
+        <SignalSystem 
+            models={model}
+            currentColor={color}
+        />
     ];
 
     //A déplacer éventuellement dans un fichier fonction
@@ -54,6 +57,7 @@ const Wizzard = () => {
                 label={"Précédent"}
                 onClick={onClick=() => updateIndex(0)}
             />
+
             <Input 
                 label={"Suivant"}
                 onClick={onClick=() => updateIndex(components.length)}
