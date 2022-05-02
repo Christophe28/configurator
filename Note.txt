@@ -1,4 +1,4 @@
-==================================================Etape Une! Fait==================================================
+==============================================Etape Une, composants dynamique! Fait==============================================
 //Faire deux composants nommé <step1 /> <step2 /> les stocker dans un tableau [<step1 />, <step2 />](y)
 
 //Faire un currentstate et un setState qui prendra l'index des step dans le tableau. Au démarrage currentState vaudra 0 const state = [currentState, setState] = useState(0);(y)
@@ -10,7 +10,7 @@
 //Si le currentState vaut 0 impossible de décrémenter(y)
 //Si le currentState vaut plus que la longueur du tableau impossible d'incrémenter(y)
 
-==================================================Etape Deux ! ==================================================
+==================================================Etape Deux, les couleurs ! ==================================================
 //Faire une config qui contient le thème des couleurs (actuellement rouge, bleu, vert), probablement un tableau qui contient un objet (y)
 
 //Afficher autant de boutton de couleurs que la config propose via un map (y)
@@ -20,3 +20,8 @@
 //Refracto quelques bouts de code dans l'étape (je pense)
 
 //Faire une condition pour vérifier la valeur de l'élément target avec la config qui contient les couleurs pour ensuite récupérer la couleur en hexadécimal (je n'apprécie pas la façon dont je récupère la valeur)
+
+===========================================Etape Trois, les checkbox !===========================================4
+//Créer un tableau qui comprend les texte dans l'exemple de Valérian (y);
+//Si la checkbox est checked, on set le state en ajoutant la valeur de la checkbox, setState(valueCheckbox
+//si la checkbox est unchecked setState en retirant la valeur de la checkbox
