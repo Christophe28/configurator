@@ -70,3 +70,54 @@ export const signals = [
     "Orientation des piétons vers les ressources",
     "Interprétation historique des ressources"
 ]
+
+export const signals2 = [
+    {
+        value: "",
+        id: "box_1",
+        index: "0",
+        label: "Effet de porte aux entrées de la commune",
+        target: "",
+        checked: ""
+    },
+    {
+        value: "",
+        id: "box_2",
+        index: "1",
+        label: "Orientation des véhicules vers les ressources",
+        target: "",
+        checked: ""
+    },
+    {
+        value: "short_sleeve_big_panel_no_arrow",
+        id: "box_3",
+        index: "2",
+        label: "Identification des parkings",
+        target: "",
+        checked: ""
+    },
+    {
+        value: "",
+        id: "box_4",
+        index: "3",
+        label: "Information sur les ressources du centre-ville",
+        target: "",
+        checked: ""
+    },
+    {
+        value: "big_sleeve_no_panel_multi_arrow",
+        id: "box_5",
+        index: "4",
+        label: "Orientation des piétons vers les ressources",
+        target: "",
+        checked: ""
+    },
+    {
+        value: "",
+        id: "box_6",
+        index: "5",
+        label: "Interprétation historique des ressources",
+        target: "",
+        checked: ""
+    }
+]

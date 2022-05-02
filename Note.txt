@@ -29,4 +29,15 @@
 ==========================================Etape Quatre, les models vectary !====================================
 //Dans un premier temps, afficher autant de model qu'il y'a des éléments dans la config models = [{}] (y);
 //Dans un second temps il faudra afficher les modèles vectary en fonction des checkbox sélectionnée
-//Dans un premier temps, Sauvegarder la couleur sélectionnée dans couleur dominantes et update le matériel avec la couleur souhaitée
+//Dans un premier temps, Sauvegarder la couleur sélectionnée dans couleur dominantes et update le matériel avec la couleur souhaitée(y);
+
+==========================================Etape Cinq, nom de commune sur manchon !================================
+//Ecrire le nom de la commune noté par l'utilisateur et l'afficher sur le manchon. Pour se faire, utiliser Annotations de l'api vectary (voir pour une meilleur solution, probablement mettre un forma image qui s'affichera sur le manchon);
+
+==========================Etape Six, appliquer les changement quand on prend une photo Ar ! ===============================
+//Utiliser Ar badge de l'Api vectary (quelques complications pour la manipulation)
+//Check si il n'y a pas des pistes sur le modèle avec le casque (N);
+
+=========================Etape Sept, selon la sélection checkbox afficher les panneaux adequat !============================
+//Faire un tableau qui contient un objet au lieu d'un tableau sur const signals = [] dans config.js
+//const obj = [{name: "", value:"", id:"", label:"", target: "", checked: "checkboxesState"}]

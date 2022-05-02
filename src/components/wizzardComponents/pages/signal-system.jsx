@@ -5,7 +5,7 @@ const SignalSystem = ({ models, currentColor }) => {
 
     return (
         <div className="container-signal-system">
-            <h2>Votre systeme signalitique</h2>
+            <h3>Votre systeme signalitique</h3>
             <VectaryItems 
                 models={models}
                 dominantColor={currentColor}
