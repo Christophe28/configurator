@@ -16,6 +16,12 @@ export const model = [
         name: "panel3000",
         value: "panel3000",
         id: "d7e90749-acb2-4861-bb20-08881e0777ce",
+    },
+    {
+        label: "Manchon text",
+        name: "sleeveText",
+        value: "sleeveText",
+        id: "57cf45e9-d355-4463-af66-f08c72993784",
     }
 ];
 
@@ -81,6 +87,7 @@ export const signals = [
     },
     {
         value: "short_sleeve_big_panel_no_arrow",
+        rank: "noArrow",
         id: "box_3",
         index: "2",
         label: "Identification des parkings",
@@ -97,6 +104,7 @@ export const signals = [
     },
     {
         value: "big_sleeve_no_panel_multi_arrow",
+        rank: "multiArrow",
         id: "box_5",
         index: "4",
         label: "Orientation des piétons vers les ressources",

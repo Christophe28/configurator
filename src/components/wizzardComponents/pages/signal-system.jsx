@@ -1,7 +1,7 @@
 import React from 'react';
 import VectaryItems from '../vectary-items/vectary-items';
 
-const SignalSystem = ({ models, currentColor }) => {
+const SignalSystem = ({ models, currentColor, pictureSleeve }) => {
 
     return (
         <div className="container-signal-system">
@@ -9,6 +9,7 @@ const SignalSystem = ({ models, currentColor }) => {
             <VectaryItems 
                 models={models}
                 dominantColor={currentColor}
+                pictureSleeve={pictureSleeve}
             />
         </div>
     );

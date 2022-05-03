@@ -7,7 +7,7 @@ import Iframe from './iframe';
 
 import updateMaterial from '../../../functions/update-material';
 
-const VectaryItems = ({ models, dominantColor }) => {
+const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
 
     useEffect(() => {
@@ -17,7 +17,10 @@ const VectaryItems = ({ models, dominantColor }) => {
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
 
-                updateMaterial(dominantColor, viewerApi);
+                updateMaterial(dominantColor, viewerApi, pictureSleeve);
+
+                const allMaterials = await viewerApi.getMaterials();
+                console.log(model.id, allMaterials);
             })
         }
         run();
