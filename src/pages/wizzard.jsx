@@ -1,6 +1,6 @@
 //React import
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 //Component import
 import ChooseTown from "../components/wizzardComponents/pages/choose-town";
@@ -17,9 +17,6 @@ import { themeColors, signals, model } from "../config/config";
 import setDefaultChecked from "../functions/set-defaultChecked";
 import exportAsImage from "../functions/export-as-image";
 
-//Pictures
-import img from "../../public/assets/CHARLEROI.png";
-
 const Wizzard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [town, setTown] = useState("");
@@ -28,24 +25,19 @@ const Wizzard = () => {
   const exportRef = useRef();
 
   const components = [
-    <ChooseTown 
-        setTown={setTown}
-     />,
+    <ChooseTown setTown={setTown} />,
     <ChooseDominantColor
       color={color}
       setColor={setColor}
       themeColors={themeColors}
     />,
-    <ChooseSignals 
-        signals={signals} 
-        setDefaultChecked={setDefaultChecked} 
-    />,
-    <SignalSystem 
-        models={model} 
-        currentColor={color} 
-        pictureSleeve={img} 
-    />,
+    <ChooseSignals signals={signals} setDefaultChecked={setDefaultChecked} />,
+    <SignalSystem models={model} currentColor={color} pictureSleeve={image} />,
   ];
+
+  const style = {
+    backgroundColor: color,
+  };
 
   //A déplacer éventuellement dans un fichier fonction
   const updateIndex = (value) => {
@@ -55,29 +47,21 @@ const Wizzard = () => {
       setCurrentIndex(currentIndex - 1);
     }
   };
+
+  useEffect(() => {
+    exportAsImage(exportRef.current, setImage);
+  }, [town]);
+
   return (
     <div>
       {components[currentIndex]}
-
-      <div ref={exportRef}>
-        <img src={image} />
-        <DynamicalPng text={town} />
-      </div>
-      <button
-        onClick={() => exportAsImage(exportRef.current, "test", setImage)}
-      >
-        Capture Image
-      </button>
-
-      <Input 
-        label={"Précédent"} 
-        onClick={(onClick = () => updateIndex(0))} 
-      />
+      <Input label={"Précédent"} onClick={(onClick = () => updateIndex(0))} />
 
       <Input
         label={"Suivant"}
         onClick={(onClick = () => updateIndex(components.length))}
       />
+      <DynamicalPng text={town} reference={exportRef} />
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import React from 'react';
-import html2canvas from 'html2canvas';
 
-const DynamicalPng = ({text}) => {
+const DynamicalPng = ({ reference, text }) => {
 
     return (
-        <div id="container-png">
-            <h1>{text}</h1>
+        <div ref={reference} className="container-png" >
+            <h2>{text}</h2>
         </div>
     );
 };
