@@ -9,6 +9,8 @@ import ChooseSignals from "../components/wizzardComponents/pages/choose-signals"
 import SignalSystem from "../components/wizzardComponents/pages/signal-system";
 import Input from "../components/wizzardComponents/buttons/input";
 import DynamicalPng from "../components/wizzardComponents/dynamical_png/dynamical_png";
+import CalculateCost from "../components/wizzardComponents/pages/calculate-cost";
+import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
 //Config import
 import { themeColors, signals, model } from "../config/config";
@@ -17,6 +19,7 @@ import { themeColors, signals, model } from "../config/config";
 import setDefaultChecked from "../functions/set-defaultChecked";
 import exportAsImage from "../functions/export-as-image";
 
+
 const Wizzard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [town, setTown] = useState("");
@@ -24,20 +27,29 @@ const Wizzard = () => {
   const [image, setImage] = useState();
   const exportRef = useRef();
 
+  console.log(town);
   const components = [
-    <ChooseTown setTown={setTown} />,
+    <ChooseTown 
+      setTown={setTown} 
+      town={town}
+    />,
     <ChooseDominantColor
       color={color}
       setColor={setColor}
       themeColors={themeColors}
     />,
-    <ChooseSignals signals={signals} setDefaultChecked={setDefaultChecked} />,
-    <SignalSystem models={model} currentColor={color} pictureSleeve={image} />,
+    <ChooseSignals 
+      signals={signals} 
+      setDefaultChecked={setDefaultChecked} 
+    />,
+    <SignalSystem 
+      models={model} 
+      currentColor={color} 
+      pictureSleeve={image} 
+    />,
+    <CalculateCost />,
+    <TotalCost />
   ];
-
-  const style = {
-    backgroundColor: color,
-  };
 
   //A déplacer éventuellement dans un fichier fonction
   const updateIndex = (value) => {
@@ -53,14 +65,17 @@ const Wizzard = () => {
   }, [town]);
 
   return (
-    <div>
+    <div className="container-components">
       {components[currentIndex]}
-      <Input label={"Précédent"} onClick={(onClick = () => updateIndex(0))} />
 
-      <Input
-        label={"Suivant"}
-        onClick={(onClick = () => updateIndex(components.length))}
-      />
+      <section className="container-before-next">
+        <Input label={"Précédent"} onClick={(onClick = () => updateIndex(0))} />
+
+        <Input
+          label={"Suivant"}
+          onClick={(onClick = () => updateIndex(components.length))}
+        />
+      </section>
       <DynamicalPng text={town} reference={exportRef} />
     </div>
   );

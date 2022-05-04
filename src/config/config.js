@@ -25,15 +25,6 @@ export const model = [
     }
 ];
 
-export const materials = [
-    {
-        value: "COULEUR_DOMINANTE",
-    },
-    {
-        value: "COULEUR_PANNEAU",
-    }
-]
-
 export const colorsDarkScheme = 
     {
         COULEUR_SECONDAIRE0000: "#3E844A",

@@ -17,7 +17,7 @@ const ChooseSignals = ({ signals, setDefaultChecked, }) => {
         const optionChecked = [];
         checkboxesState.map((option, index) => {
             if(option === true) {
-                optionChecked.push(signals[index].value)
+                optionChecked.push(signals[index].label)
             }
         })
         setCurrentChoice(optionChecked);
@@ -26,7 +26,7 @@ const ChooseSignals = ({ signals, setDefaultChecked, }) => {
     console.log(currentChoice);
     return (
         <div className="container-signal-fonction">
-            <h2>Choix des fonctions signalitiques</h2>
+            <h2>Quelles fonctions de signalétique souhaitez-vous implanter ?</h2>
             <Checkbox 
                 data={signals}
                 checked={checkboxesState}

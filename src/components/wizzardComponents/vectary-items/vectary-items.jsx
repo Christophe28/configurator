@@ -18,9 +18,6 @@ const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
                 await viewerApi.init();
 
                 updateMaterial(dominantColor, viewerApi, pictureSleeve);
-
-                const allMaterials = await viewerApi.getMaterials();
-                console.log(model.id, allMaterials);
             })
         }
         run();

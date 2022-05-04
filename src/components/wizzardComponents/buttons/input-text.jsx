@@ -1,11 +1,9 @@
 import React from 'react';
 
-const InputText = ({ setTown }) => {
+const InputText = ({ placeholder, onChange }) => {
     return (
         <div className="container-input-text">
-            <input type="text" onChange={(e) => {
-                setTown(e.target.value)
-            }}/>
+            <input type="text" placeholder={placeholder} onChange={onChange}/>
         </div>
     );
 };

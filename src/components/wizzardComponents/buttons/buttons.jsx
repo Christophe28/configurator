@@ -3,10 +3,11 @@ import React from "react";
 const Buttons = ({ themeColors }) => {
   return (
     <div className="container-color-pickers">
-      {themeColors.map((themeColor) => (
+
+      {themeColors.map((themeColor) => (        
         <input 
           type="button" 
-          value={themeColor.label} 
+          style={{backgroundColor: themeColor.hexadecimalColor}}
           name={themeColor.hexadecimalColor}
           key={themeColor.hexadecimalColor}
           onClick={onClick}

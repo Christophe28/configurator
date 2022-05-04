@@ -1,11 +1,5 @@
-//Configurator
-@import "./pages/configurator.scss";
-@import "./components/dropdown.scss";
-@import "./components/iframe.scss";
-@import "./components/colorsPickers.scss";
-@import "./components/colors.scss";
-@import "./components/radios.scss";
-@import "./components/colors-scheme-pickers.scss";
-
-//Wizard
+@import "./settings.scss";
+@import "./pages/wizzard.scss";
 @import "./components/dynamical-png.scss";
+@import "./components/input-text.scss";
+@import "./components/pages/choose-dominant-colors.scss";
