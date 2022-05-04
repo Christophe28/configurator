@@ -25,9 +25,10 @@ const Wizzard = () => {
   const [town, setTown] = useState("");
   const [color, setColor] = useState("");
   const [image, setImage] = useState();
+  const [currentChoice, setCurrentChoice] = useState([]);
+
   const exportRef = useRef();
 
-  console.log(town);
   const components = [
     <ChooseTown 
       setTown={setTown} 
@@ -41,14 +42,22 @@ const Wizzard = () => {
     <ChooseSignals 
       signals={signals} 
       setDefaultChecked={setDefaultChecked} 
+      currentChoice={currentChoice}
+      setCurrentChoice={setCurrentChoice}
     />,
     <SignalSystem 
       models={model} 
       currentColor={color} 
       pictureSleeve={image} 
     />,
-    <CalculateCost />,
-    <TotalCost />
+    <CalculateCost 
+      data={currentChoice}
+    />,
+    <TotalCost 
+      town={town}
+      color={color}
+      data={currentChoice}
+    />
   ];
 
   //A déplacer éventuellement dans un fichier fonction

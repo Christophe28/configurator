@@ -5,13 +5,11 @@ import { useState, useEffect } from 'react';
 //Component import
 import Checkbox from '../buttons/checkbox';
 
-const ChooseSignals = ({ signals, setDefaultChecked, }) => {
+const ChooseSignals = ({ signals, setDefaultChecked, setCurrentChoice }) => {
 
     const [checkboxesState, setCheckboxesState] = useState(
         signals.map((signal) => false)
     );
-
-    const [currentChoice, setCurrentChoice] = useState([]);
 
     useEffect(() => {
         const optionChecked = [];
@@ -23,7 +21,6 @@ const ChooseSignals = ({ signals, setDefaultChecked, }) => {
         setCurrentChoice(optionChecked);
     }, [checkboxesState]);    
 
-    console.log(currentChoice);
     return (
         <div className="container-signal-fonction">
             <h2>Quelles fonctions de signalétique souhaitez-vous implanter ?</h2>
