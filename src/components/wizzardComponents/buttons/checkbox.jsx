@@ -1,22 +1,22 @@
 //React import
 import React from 'react';
 
-const Checkbox = ({ data, checked, setCurrentChecked, setDefaultChecked }) => {
+const Checkbox = ({ items, checked, setCurrentChecked, setDefaultChecked }) => {
 
     return (
         <div>
             {
-                data.map((dataElement, index) => (
-                    <div key={dataElement.id}>
+                items.map((item, index) => (
+                    <div key={item.id}>
                         <input 
                             type="checkbox" 
-                            id={dataElement.id} 
-                            name={dataElement.value} 
-                            value={dataElement.value}
+                            id={item.id} 
+                            name={item.value} 
+                            value={item.value}
                             defaultChecked={checked[index]}
-                            onChange={(e) => setDefaultChecked(setCurrentChecked, dataElement.index, e.target.checked)}            
+                            onChange={(e) => setDefaultChecked(setCurrentChecked, item.index, e.target.checked)}            
                         />
-                        <label htmlFor={dataElement.id}>{dataElement.label}</label>
+                        <label htmlFor={item.id}>{item.label}</label>
                     </div>
                 ))
             }

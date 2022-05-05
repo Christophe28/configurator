@@ -25,6 +25,9 @@ const Wizzard = () => {
   const [townName, setTownName] = useState("");
   const [color, setColor] = useState("");
   const [image, setImage] = useState();
+  const [checkboxesState, setCheckboxesState] = useState(
+    signals.map((signal) => false)
+  );
   const [currentUsersSignals, setCurrentUsersSignals] = useState([]);
 
   const exportRef = useRef();
@@ -40,6 +43,8 @@ const Wizzard = () => {
       themeColors={themeColors}
     />,
     <ChooseSignals 
+      checkboxesState={checkboxesState}
+      setCheckboxesState={setCheckboxesState}
       signals={signals} 
       setDefaultChecked={setDefaultChecked} 
       currentChoice={currentUsersSignals}
@@ -64,6 +69,16 @@ const Wizzard = () => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
 
+  useEffect(() => {
+    const optionChecked = [];
+    checkboxesState.map((option, index) => {
+        if(option === true) {
+            optionChecked.push(signals[index].label)
+        }
+    })
+    setCurrentUsersSignals(optionChecked);
+  }, [checkboxesState]);  
+  
   return (
     <div className="container-components">
       {components[currentIndex]}
