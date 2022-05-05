@@ -111,3 +111,5 @@ export const signals = [
         checked: ""
     }
 ]
+
+export const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {return ++i});

@@ -13,7 +13,7 @@ import CalculateCost from "../components/wizzardComponents/pages/calculate-cost"
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
 //Config import
-import { themeColors, signals, vectaryModels } from "../config/config";
+import { themeColors, signals, vectaryModels, productQuantity } from "../config/config";
 
 //Logic import
 import setDefaultChecked from "../functions/set-defaultChecked";
@@ -29,7 +29,20 @@ const Wizzard = () => {
     signals.map((signal) => false)
   );
   const [currentUsersSignals, setCurrentUsersSignals] = useState([]);
+  const [currentUsersSignalsItems, setCurrentUsersSignalsItems] = useState([]);
 
+  useEffect(() => {
+    const test = []
+    currentUsersSignals.map((currentUserSignal) => {
+      const items = {
+        quantity: 0,
+        items: currentUserSignal
+      }
+      test.push(items);
+    })
+    setCurrentUsersSignalsItems(test);
+  }, [currentUsersSignals])
+  
   const exportRef = useRef();
 
   const components = [
@@ -54,7 +67,10 @@ const Wizzard = () => {
       pictureSleeve={image} 
     />,
     <CalculateCost 
-      data={currentUsersSignals}
+      choiceOfUsersSignals={currentUsersSignals}
+      options={productQuantity}
+      setCurrentTotalItems={setCurrentUsersSignalsItems}
+      currentTotalItems={currentUsersSignalsItems}
     />,
     <TotalCost 
       town={townName}

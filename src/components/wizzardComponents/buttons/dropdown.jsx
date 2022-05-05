@@ -1,16 +1,15 @@
 import React from 'react';
 
-const Dropdown = ({ data, onClick }) => {
+const Dropdown = ({ items, onChange }) => {
 
     return (
         <>
-            <select onChange={onClick}>
+            <select onChange={onChange}>
                 {
-                    data.map((element) => (
-                        <option key={element}>{element}</option>
+                    items.map((item) => (
+                        <option key={item}>{item}</option>
                     ))
-                }
-
+                } 
             </select>
         </>
     );
