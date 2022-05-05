@@ -1,4 +1,4 @@
-export const model = [
+export const vectaryModels = [
     {
         label: "Panneau directionnel",
         name: "directionnalSign",

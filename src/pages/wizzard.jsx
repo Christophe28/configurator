@@ -13,26 +13,26 @@ import CalculateCost from "../components/wizzardComponents/pages/calculate-cost"
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
 //Config import
-import { themeColors, signals, model } from "../config/config";
+import { themeColors, signals, vectaryModels } from "../config/config";
 
 //Logic import
 import setDefaultChecked from "../functions/set-defaultChecked";
 import exportAsImage from "../functions/export-as-image";
-
+import updateIndex from "../functions/updateIndex";
 
 const Wizzard = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [town, setTown] = useState("");
+  const [townName, setTownName] = useState("");
   const [color, setColor] = useState("");
   const [image, setImage] = useState();
-  const [currentChoice, setCurrentChoice] = useState([]);
+  const [currentUsersSignals, setCurrentUsersSignals] = useState([]);
 
   const exportRef = useRef();
 
   const components = [
     <ChooseTown 
-      setTown={setTown} 
-      town={town}
+      setTownName={setTownName} 
+      townName={townName}
     />,
     <ChooseDominantColor
       color={color}
@@ -42,50 +42,41 @@ const Wizzard = () => {
     <ChooseSignals 
       signals={signals} 
       setDefaultChecked={setDefaultChecked} 
-      currentChoice={currentChoice}
-      setCurrentChoice={setCurrentChoice}
+      currentChoice={currentUsersSignals}
+      setCurrentChoice={setCurrentUsersSignals}
     />,
     <SignalSystem 
-      models={model} 
+      models={vectaryModels} 
       currentColor={color} 
       pictureSleeve={image} 
     />,
     <CalculateCost 
-      data={currentChoice}
+      data={currentUsersSignals}
     />,
     <TotalCost 
-      town={town}
+      town={townName}
       color={color}
-      data={currentChoice}
+      data={currentUsersSignals}
     />
   ];
 
-  //A déplacer éventuellement dans un fichier fonction
-  const updateIndex = (value) => {
-    if (currentIndex < value - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else if (currentIndex > value) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
-  }, [town]);
+  }, [townName]);
 
   return (
     <div className="container-components">
       {components[currentIndex]}
 
-      <section className="container-before-next">
-        <Input label={"Précédent"} onClick={(onClick = () => updateIndex(0))} />
+      <section className="container-navigation">
+        <Input label={"Précédent"} onClick={(onClick = () => updateIndex(currentIndex, 0, setCurrentIndex))} />
 
         <Input
           label={"Suivant"}
-          onClick={(onClick = () => updateIndex(components.length))}
+          onClick={(onClick = () => updateIndex(currentIndex, components.length, setCurrentIndex))}
         />
       </section>
-      <DynamicalPng text={town} reference={exportRef} />
+      <DynamicalPng text={townName} reference={exportRef} />
     </div>
   );
 };

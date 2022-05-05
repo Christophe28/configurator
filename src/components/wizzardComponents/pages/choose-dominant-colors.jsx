@@ -9,10 +9,18 @@ const ChooseDominantColor = ({ themeColors, setColor }) => {
     return (
         <div className="container-dominant-color">
             <h2>Couleur dominante</h2>
-            <Buttons 
-                themeColors={themeColors}
-                onClick={onClick = (e) => setColor(e.target.name)}
-            />
+            {
+                themeColors.map((themeColor) => (                
+                    <Buttons 
+                        style={{background: themeColor.hexadecimalColor}}
+                        items={themeColor}
+                        name={themeColor.hexadecimalColor}
+                        key={themeColor.hexadecimalColor}
+                        onClick={(e) => setColor(e.target.name)}
+                    />
+                ))
+            }
+
         </div>
     );
 };

@@ -1,19 +1,16 @@
 import React from "react";
 
-const Buttons = ({ themeColors }) => {
+const Buttons = ({ style, name, onClick }) => {
+  
   return (
-    <div className="container-color-pickers">
-
-      {themeColors.map((themeColor) => (        
-        <input 
-          type="button" 
-          style={{backgroundColor: themeColor.hexadecimalColor}}
-          name={themeColor.hexadecimalColor}
-          key={themeColor.hexadecimalColor}
-          onClick={onClick}
-        />
-      ))}
-    </div>
+    <>
+      <input 
+        type="button" 
+        style={style}
+        name={name}
+        onClick={onClick}
+      />
+    </>
   );
 };
 
