@@ -61,7 +61,7 @@ export const themeColors = [
 
 export const signals = [
     {
-        value: "",
+        value: "box_1",
         id: "box_1",
         index: "0",
         label: "Effet de porte aux entrées de la commune",
@@ -69,7 +69,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "",
+        value: "box_2",
         id: "box_2",
         index: "1",
         label: "Orientation des véhicules vers les ressources",
@@ -77,7 +77,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "short_sleeve_big_panel_no_arrow",
+        value: "box_3",
         rank: "noArrow",
         id: "box_3",
         index: "2",
@@ -86,7 +86,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "",
+        value: "box_4",
         id: "box_4",
         index: "3",
         label: "Information sur les ressources du centre-ville",
@@ -94,7 +94,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "big_sleeve_no_panel_multi_arrow",
+        value: "box_5",
         rank: "multiArrow",
         id: "box_5",
         index: "4",
@@ -103,7 +103,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "",
+        value: "box_6",
         id: "box_6",
         index: "5",
         label: "Interprétation historique des ressources",

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Dropdown = ({ data }) => {
- 
+const Dropdown = ({ data, onClick }) => {
+
     return (
         <>
-            <select>
+            <select onChange={onClick}>
                 {
                     data.map((element) => (
                         <option key={element}>{element}</option>

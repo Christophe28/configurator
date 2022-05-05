@@ -1,6 +1,7 @@
 import React from 'react';
 
 const TotalCost = ({ town, color, data}) => {
+
     return (
         <div className="container-total-cost">
             <h2>Coût total</h2>
