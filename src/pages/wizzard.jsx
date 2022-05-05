@@ -32,8 +32,24 @@ const Wizzard = () => {
   const [currentUsersSignalsItems, setCurrentUsersSignalsItems] = useState([]);
 
   useEffect(() => {
+    exportAsImage(exportRef.current, setImage);
+  }, [townName]);
+
+  useEffect(() => {
+    const optionChecked = [];
+    checkboxesState.map((option, index) => {
+        if(option === true) {
+            optionChecked.push(signals[index].label)
+        }
+    })
+    setCurrentUsersSignals(optionChecked);
+
+  }, [checkboxesState]);  
+
+  useEffect(() => {
     const test = []
     currentUsersSignals.map((currentUserSignal) => {
+      
       const items = {
         quantity: 0,
         items: currentUserSignal
@@ -43,6 +59,7 @@ const Wizzard = () => {
     setCurrentUsersSignalsItems(test);
   }, [currentUsersSignals])
   
+
   const exportRef = useRef();
 
   const components = [
@@ -75,23 +92,9 @@ const Wizzard = () => {
     <TotalCost 
       town={townName}
       color={color}
-      data={currentUsersSignals}
+      items={currentUsersSignalsItems}
     />
   ];
-
-  useEffect(() => {
-    exportAsImage(exportRef.current, setImage);
-  }, [townName]);
-
-  useEffect(() => {
-    const optionChecked = [];
-    checkboxesState.map((option, index) => {
-        if(option === true) {
-            optionChecked.push(signals[index].label)
-        }
-    })
-    setCurrentUsersSignals(optionChecked);
-  }, [checkboxesState]);  
 
   return (
     <div className="container-components">

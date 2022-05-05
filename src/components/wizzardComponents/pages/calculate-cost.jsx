@@ -6,8 +6,7 @@ import InputText from '../buttons/input-text';
 import setItems from '../../../functions/set-items';
 
 const CalculateCost = ({ choiceOfUsersSignals, options, setCurrentTotalItems, currentTotalItems }) => {
-
-    console.log(currentTotalItems);
+    
     return (
         <div>
             <h2>Quelles quantités de chaque élément ?</h2>
@@ -18,6 +17,7 @@ const CalculateCost = ({ choiceOfUsersSignals, options, setCurrentTotalItems, cu
                         <p>{choiceOfUserSignal}</p>
                         <Dropdown 
                             items={options}
+                            defaultValue={currentTotalItems[index].quantity}
                             onChange={(e) => {
                             setItems(setCurrentTotalItems, index, e.target.value);
                             }}

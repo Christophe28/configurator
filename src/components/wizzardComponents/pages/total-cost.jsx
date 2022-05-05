@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TotalCost = ({ town, color, data}) => {
+const TotalCost = ({ town, color, items}) => {
 
     return (
         <div className="container-total-cost">
@@ -8,8 +8,8 @@ const TotalCost = ({ town, color, data}) => {
             <p>{town}</p>
             <p>{color}</p>
             {
-                data.map((dataElement) => (
-                    <p key={dataElement}>{dataElement}</p>
+                items.map((item) => (
+                    <p key={item.items}>{item.quantity + "==>" + item.items}</p>
                 ))
             }
         </div>
