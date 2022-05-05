@@ -47,8 +47,6 @@ const Wizzard = () => {
       setCheckboxesState={setCheckboxesState}
       signals={signals} 
       setDefaultChecked={setDefaultChecked} 
-      currentChoice={currentUsersSignals}
-      setCurrentChoice={setCurrentUsersSignals}
     />,
     <SignalSystem 
       models={vectaryModels} 
@@ -78,7 +76,7 @@ const Wizzard = () => {
     })
     setCurrentUsersSignals(optionChecked);
   }, [checkboxesState]);  
-  
+
   return (
     <div className="container-components">
       {components[currentIndex]}

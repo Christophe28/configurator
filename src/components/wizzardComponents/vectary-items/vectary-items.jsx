@@ -1,10 +1,14 @@
+//React import
 import React from 'react';
 import { useEffect } from 'react';
 
+//Lib import
 import { VctrApi } from '../../../lib/api';
 
+//Component import
 import Iframe from './iframe';
 
+//Logic import
 import updateMaterial from '../../../functions/update-material';
 
 const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
@@ -27,7 +31,7 @@ const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
             {
                 models.map((model) => (
                     <Iframe
-                        model={model}
+                        id={model.id}
                         key={model.id}
                     />
                 ))
