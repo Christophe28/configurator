@@ -63,26 +63,32 @@ export const signageEquipment = [
     {
         value: "option1",
         label: "Effet de porte aux entrées de la commune",
+        price: 2400
     },
     {
         value: "option2",
         label: "Orientation des véhicules vers les ressources",
+        price: 980
     },
     {
         value: "option3",
         label: "Identification des parkings",
+        price: 1200
     },
     {
         value: "option4",
         label: "Information sur les ressources du centre-ville",
+        price: 4800
     },
     {
         value: "option5",
         label: "Orientation des piétons vers les ressources",
+        price: 3200
     },
     {
         value: "option6",
         label: "Interprétation historique des ressources",
+        price: 240
     }
 ]
 
