@@ -61,7 +61,7 @@ export const themeColors = [
 
 export const signals = [
     {
-        value: "box_1",
+        value: "option1",
         id: "box_1",
         index: "0",
         label: "Effet de porte aux entrées de la commune",
@@ -69,7 +69,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "box_2",
+        value: "option2",
         id: "box_2",
         index: "1",
         label: "Orientation des véhicules vers les ressources",
@@ -77,7 +77,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "box_3",
+        value: "option3",
         rank: "noArrow",
         id: "box_3",
         index: "2",
@@ -86,7 +86,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "box_4",
+        value: "option4",
         id: "box_4",
         index: "3",
         label: "Information sur les ressources du centre-ville",
@@ -94,7 +94,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "box_5",
+        value: "option5",
         rank: "multiArrow",
         id: "box_5",
         index: "4",
@@ -103,7 +103,7 @@ export const signals = [
         checked: ""
     },
     {
-        value: "box_6",
+        value: "option6",
         id: "box_6",
         index: "5",
         label: "Interprétation historique des ressources",
@@ -112,4 +112,4 @@ export const signals = [
     }
 ]
 
-export const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {return ++i});
+export const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {return i++});
