@@ -21,46 +21,42 @@ import exportAsImage from "../functions/export-as-image";
 import updateIndex from "../functions/updateIndex";
 
 const Wizzard = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentWizardStep, setCurrentWizardStep] = useState(0);
   const [townName, setTownName] = useState("");
   const [color, setColor] = useState("");
   const [image, setImage] = useState();
-  const [checkboxesState, setCheckboxesState] = useState(
-    signals.map((signal) => false)
-  );
   const [currentUsersSignals, setCurrentUsersSignals] = useState([]);
   const [currentUsersSignalsItems, setCurrentUsersSignalsItems] = useState([]);
+
+  const exportRef = useRef();
 
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     const optionChecked = [];
+
     checkboxesState.map((option, index) => {
         if(option === true) {
-            optionChecked.push(signals[index].label)
+            optionChecked.push(signals[index].label);
         }
     })
     setCurrentUsersSignals(optionChecked);
-
-  }, [checkboxesState]);  
-
+  }, [checkboxesState]); */
+  
   useEffect(() => {
-    const test = []
-    currentUsersSignals.map((currentUserSignal) => {
-      
+    const itemsAndQuantitySelectedByUsers = [];
+
+    currentUsersSignals.map((currentUserSignal) => {    
       const items = {
         quantity: 0,
         items: currentUserSignal
       }
-      test.push(items);
+      itemsAndQuantitySelectedByUsers.push(items);
     })
-    setCurrentUsersSignalsItems(test);
+    setCurrentUsersSignalsItems(itemsAndQuantitySelectedByUsers);
   }, [currentUsersSignals])
-  
-
-  const exportRef = useRef();
 
   const components = [
     <ChooseTown 
@@ -73,8 +69,6 @@ const Wizzard = () => {
       themeColors={themeColors}
     />,
     <ChooseSignals 
-      checkboxesState={checkboxesState}
-      setCheckboxesState={setCheckboxesState}
       signals={signals} 
       setDefaultChecked={setDefaultChecked} 
     />,
@@ -98,14 +92,14 @@ const Wizzard = () => {
 
   return (
     <div className="container-components">
-      {components[currentIndex]}
+      {components[currentWizardStep]}
 
       <section className="container-navigation">
-        <Input label={"Précédent"} onClick={(onClick = () => updateIndex(currentIndex, 0, setCurrentIndex))} />
+        <Input label={"Précédent"} onClick={(onClick = () => updateIndex(currentWizardStep, 0, setCurrentWizardStep))} />
 
         <Input
           label={"Suivant"}
-          onClick={(onClick = () => updateIndex(currentIndex, components.length, setCurrentIndex))}
+          onClick={(onClick = () => updateIndex(currentWizardStep, components.length, setCurrentWizardStep))}
         />
       </section>
       <DynamicalPng text={townName} reference={exportRef} />

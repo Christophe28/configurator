@@ -1,10 +1,14 @@
 //React import
-import React from 'react';
+import React, {useState} from 'react';
 
 //Component import
 import Checkbox from '../buttons/checkbox';
 
-const ChooseSignals = ({ checkboxesState, setCheckboxesState, signals, setDefaultChecked }) => {  
+const ChooseSignals = ({ signals, setDefaultChecked }) => {  
+
+    const [checkboxesState, setCheckboxesState] = useState(
+        signals.map((signal) => false)
+      );
 
     return (
         <div className="container-signal-fonction">
