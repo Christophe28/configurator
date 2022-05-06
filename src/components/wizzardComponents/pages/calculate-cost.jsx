@@ -3,10 +3,10 @@ import React from 'react';
 import Dropdown from '../buttons/dropdown';
 import InputText from '../buttons/input-text';
 
-import setItems from '../../../functions/set-items';
+import { productQuantity } from '../../../config/config';
 
-const CalculateCost = ({ selectedSignageEquipment, options, setCurrentTotalItems, currentTotalItems }) => {
-    console.log(selectedSignageEquipment)
+const CalculateCost = ({ selectedSignageEquipment, selectedSignageEquipmentQuantity, onChangeAction }) => {
+
     return (
         <div>
             <h2>Quelles quantités de chaque élément ?</h2>
@@ -16,11 +16,9 @@ const CalculateCost = ({ selectedSignageEquipment, options, setCurrentTotalItems
                     <div key={signageEquipment.value} className="container-how-items">
                         <p>{signageEquipment.label}</p>
                         <Dropdown 
-                            items={options}
-                            defaultValue={currentTotalItems[index].quantity}
-                            onChange={(e) => {
-                            setItems(setCurrentTotalItems, index, e.target.value);
-                            }}
+                            items={productQuantity}
+                            defaultValue={selectedSignageEquipmentQuantity[signageEquipment.value]}
+                            onChange={(e) => onChangeAction(signageEquipment.value, e.target.value)}
                         />
                     </div>
                 ))

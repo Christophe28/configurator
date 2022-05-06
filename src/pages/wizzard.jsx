@@ -17,7 +17,6 @@ import {
   themeColors,
   signals,
   vectaryModels,
-  productQuantity,
 } from "../config/config";
 
 //Logic import
@@ -30,28 +29,26 @@ const Wizzard = () => {
   const [color, setColor] = useState("");
   const [image, setImage] = useState();
   const [selectedSignageEquipment, setSelectedSignageEquipment] = useState([]);
-  const [selectedSignageEquipmentItems, setCurrentUsersSignalsItems] = useState(
-    []
-  );
+  const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity] = useState({});
 
+  console.log(selectedSignageEquipmentQuantity)
   const exportRef = useRef();
+
+  useEffect(() => {
+    setSelectedSignageEquipmentQuantity((oldState) => {
+      const newState = {}
+      selectedSignageEquipment.forEach(
+        selectedItem => {
+          newState[selectedItem.value] =  oldState[selectedItem.value] ?? "1"
+        }
+      )
+      return newState
+    })
+  }, [selectedSignageEquipment])
 
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
-
-  useEffect(() => {
-    const itemsAndQuantitySelectedByUsers = [];
-
-    selectedSignageEquipment.map((currentUserSignal) => {
-      const items = {
-        quantity: 0,
-        items: currentUserSignal,
-      };
-      itemsAndQuantitySelectedByUsers.push(items);
-    });
-    setCurrentUsersSignalsItems(itemsAndQuantitySelectedByUsers);
-  }, [selectedSignageEquipment]);
 
   const wizardSteps = [
     <ChooseTown setTownName={setTownName} townName={townName} />,
@@ -73,14 +70,19 @@ const Wizzard = () => {
     />,
     <CalculateCost
       selectedSignageEquipment={selectedSignageEquipment}
-      options={productQuantity}
-      setCurrentTotalItems={setCurrentUsersSignalsItems}
-      currentTotalItems={selectedSignageEquipmentItems}
+      selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
+      onChangeAction={(itemValue, quantity) => setSelectedSignageEquipmentQuantity(
+        oldState => {
+          const newState = {...oldState}
+          newState[itemValue] = quantity
+          return newState
+        }
+      )}
     />,
     <TotalCost
       town={townName}
       color={color}
-      items={selectedSignageEquipmentItems}
+      items={selectedSignageEquipmentQuantity}
     />,
   ];
 

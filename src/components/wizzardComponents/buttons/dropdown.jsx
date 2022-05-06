@@ -9,9 +9,10 @@ const Dropdown = ({ items, onChange, defaultValue }) => {
                 defaultValue={defaultValue}
             >
                 {
-                    items.map((item) => (
-                        <option key={item}>{item}</option>
-                    ))
+                    items.map((item) => {
+                        return (
+                        <option key={item} value={item}>{item}</option>
+                    )})
                 } 
             </select>
         </>
