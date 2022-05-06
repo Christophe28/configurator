@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 //Component import
 import ChooseTown from "../components/wizzardComponents/pages/choose-town";
 import ChooseDominantColor from "../components/wizzardComponents/pages/choose-dominant-colors";
-import ChooseSignals from "../components/wizzardComponents/pages/choose-signals";
+import ChooseSignageEquipment from "../components/wizzardComponents/pages/choose-signage-equipment";
 import SignalSystem from "../components/wizzardComponents/pages/signal-system";
 import Input from "../components/wizzardComponents/buttons/input";
 import DynamicalPng from "../components/wizzardComponents/dynamical_png/dynamical_png";
@@ -13,10 +13,14 @@ import CalculateCost from "../components/wizzardComponents/pages/calculate-cost"
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
 //Config import
-import { themeColors, signals, vectaryModels, productQuantity } from "../config/config";
+import {
+  themeColors,
+  signals,
+  vectaryModels,
+  productQuantity,
+} from "../config/config";
 
 //Logic import
-import setDefaultChecked from "../functions/set-defaultChecked";
 import exportAsImage from "../functions/export-as-image";
 import updateIndex from "../functions/updateIndex";
 
@@ -25,8 +29,10 @@ const Wizzard = () => {
   const [townName, setTownName] = useState("");
   const [color, setColor] = useState("");
   const [image, setImage] = useState();
-  const [currentUsersSignals, setCurrentUsersSignals] = useState([]);
-  const [currentUsersSignalsItems, setCurrentUsersSignalsItems] = useState([]);
+  const [selectedSignageEquipment, setSelectedSignageEquipment] = useState([]);
+  const [selectedSignageEquipmentItems, setCurrentUsersSignalsItems] = useState(
+    []
+  );
 
   const exportRef = useRef();
 
@@ -34,60 +40,47 @@ const Wizzard = () => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
 
-/*   useEffect(() => {
-    const optionChecked = [];
-
-    checkboxesState.map((option, index) => {
-        if(option === true) {
-            optionChecked.push(signals[index].label);
-        }
-    })
-    setCurrentUsersSignals(optionChecked);
-  }, [checkboxesState]); */
-  
   useEffect(() => {
     const itemsAndQuantitySelectedByUsers = [];
 
-    currentUsersSignals.map((currentUserSignal) => {    
+    selectedSignageEquipment.map((currentUserSignal) => {
       const items = {
         quantity: 0,
-        items: currentUserSignal
-      }
+        items: currentUserSignal,
+      };
       itemsAndQuantitySelectedByUsers.push(items);
-    })
+    });
     setCurrentUsersSignalsItems(itemsAndQuantitySelectedByUsers);
-  }, [currentUsersSignals])
+  }, [selectedSignageEquipment]);
 
   const wizardSteps = [
-    <ChooseTown 
-      setTownName={setTownName} 
-      townName={townName}
-    />,
+    <ChooseTown setTownName={setTownName} townName={townName} />,
     <ChooseDominantColor
       color={color}
       setColor={setColor}
       themeColors={themeColors}
     />,
-    <ChooseSignals 
-      signals={signals} 
-      setDefaultChecked={setDefaultChecked} 
+    <ChooseSignageEquipment
+      onChangeAction={(selectedSignageEquipment) => {
+        setSelectedSignageEquipment(selectedSignageEquipment);
+      }}
     />,
-    <SignalSystem 
-      models={vectaryModels} 
-      currentColor={color} 
-      pictureSleeve={image} 
+    <SignalSystem
+      models={vectaryModels}
+      currentColor={color}
+      pictureSleeve={image}
     />,
-    <CalculateCost 
-      choiceOfUsersSignals={currentUsersSignals}
+    <CalculateCost
+      selectedSignageEquipment={selectedSignageEquipment}
       options={productQuantity}
       setCurrentTotalItems={setCurrentUsersSignalsItems}
-      currentTotalItems={currentUsersSignalsItems}
+      currentTotalItems={selectedSignageEquipmentItems}
     />,
-    <TotalCost 
+    <TotalCost
       town={townName}
       color={color}
-      items={currentUsersSignalsItems}
-    />
+      items={selectedSignageEquipmentItems}
+    />,
   ];
 
   return (
@@ -95,11 +88,24 @@ const Wizzard = () => {
       {wizardSteps[currentWizardStep]}
 
       <section className="container-navigation">
-        <Input label={"Précédent"} onClick={(onClick = () => updateIndex(currentWizardStep, 0, setCurrentWizardStep))} />
+        <Input
+          label={"Précédent"}
+          onClick={
+            (onClick = () =>
+              updateIndex(currentWizardStep, 0, setCurrentWizardStep))
+          }
+        />
 
         <Input
           label={"Suivant"}
-          onClick={(onClick = () => updateIndex(currentWizardStep, wizardSteps.length, setCurrentWizardStep))}
+          onClick={
+            (onClick = () =>
+              updateIndex(
+                currentWizardStep,
+                wizardSteps.length,
+                setCurrentWizardStep
+              ))
+          }
         />
       </section>
       <DynamicalPng text={townName} reference={exportRef} />

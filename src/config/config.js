@@ -59,56 +59,30 @@ export const themeColors = [
     }
 ]
 
-export const signals = [
+export const signageEquipment = [
     {
         value: "option1",
-        id: "box_1",
-        index: "0",
         label: "Effet de porte aux entrées de la commune",
-        target: "",
-        checked: ""
     },
     {
         value: "option2",
-        id: "box_2",
-        index: "1",
         label: "Orientation des véhicules vers les ressources",
-        target: "",
-        checked: ""
     },
     {
         value: "option3",
-        rank: "noArrow",
-        id: "box_3",
-        index: "2",
         label: "Identification des parkings",
-        target: "",
-        checked: ""
     },
     {
         value: "option4",
-        id: "box_4",
-        index: "3",
         label: "Information sur les ressources du centre-ville",
-        target: "",
-        checked: ""
     },
     {
         value: "option5",
-        rank: "multiArrow",
-        id: "box_5",
-        index: "4",
         label: "Orientation des piétons vers les ressources",
-        target: "",
-        checked: ""
     },
     {
         value: "option6",
-        id: "box_6",
-        index: "5",
         label: "Interprétation historique des ressources",
-        target: "",
-        checked: ""
     }
 ]
 

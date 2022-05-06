@@ -5,16 +5,16 @@ import InputText from '../buttons/input-text';
 
 import setItems from '../../../functions/set-items';
 
-const CalculateCost = ({ choiceOfUsersSignals, options, setCurrentTotalItems, currentTotalItems }) => {
-    
+const CalculateCost = ({ selectedSignageEquipment, options, setCurrentTotalItems, currentTotalItems }) => {
+    console.log(selectedSignageEquipment)
     return (
         <div>
             <h2>Quelles quantités de chaque élément ?</h2>
             <InputText placeholder={"Votre adresse mail"}/>
             {
-                choiceOfUsersSignals.map((choiceOfUserSignal, index) => (
-                    <div key={choiceOfUserSignal} className="container-how-items">
-                        <p>{choiceOfUserSignal}</p>
+                selectedSignageEquipment.map((signageEquipment, index) => (
+                    <div key={signageEquipment.value} className="container-how-items">
+                        <p>{signageEquipment.label}</p>
                         <Dropdown 
                             items={options}
                             defaultValue={currentTotalItems[index].quantity}
