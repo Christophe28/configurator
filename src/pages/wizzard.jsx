@@ -15,7 +15,6 @@ import TotalCost from "../components/wizzardComponents/pages/total-cost";
 //Config import
 import {
   themeColors,
-  signals,
   vectaryModels,
 } from "../config/config";
 
@@ -31,7 +30,6 @@ const Wizzard = () => {
   const [selectedSignageEquipment, setSelectedSignageEquipment] = useState([]);
   const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity] = useState({});
 
-  console.log(selectedSignageEquipmentQuantity)
   const exportRef = useRef();
 
   useEffect(() => {
