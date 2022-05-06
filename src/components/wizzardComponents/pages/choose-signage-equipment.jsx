@@ -5,7 +5,7 @@ import React from "react";
 import Checkboxes from "../buttons/checkboxes";
 import { signageEquipment } from "../../../config/config";
 
-const ChooseSignageEquipment = ({ onChangeAction }) => {
+const ChooseSignageEquipment = ({ onChangeAction, selectedSignageEquipment }) => {
 
   return (
     <div className="container-signal-fonction">
@@ -13,6 +13,7 @@ const ChooseSignageEquipment = ({ onChangeAction }) => {
       <Checkboxes
         items={signageEquipment}
         onChangeAction={onChangeAction}
+        selectedItems={selectedSignageEquipment}
       />
     </div>
   );

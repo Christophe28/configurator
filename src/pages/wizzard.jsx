@@ -64,6 +64,7 @@ const Wizzard = () => {
       onChangeAction={(selectedSignageEquipment) => {
         setSelectedSignageEquipment(selectedSignageEquipment);
       }}
+      selectedSignageEquipment={selectedSignageEquipment}
     />,
     <SignalSystem
       models={vectaryModels}

@@ -1,9 +1,20 @@
 //React import
 import React, { useState, useEffect } from "react";
 
-const Checkboxes = ({ items, onChangeAction }) => {
+const contains = (value, array) => {
+  let found = false
+  array.forEach((item) => {
+    if (item.value === value) {
+      found = true
+    }
+  })
+  return found
+}
+
+const Checkboxes = ({ items, onChangeAction, selectedItems = [] }) => {
+  console.log(selectedItems)
   const [checkboxesState, setCheckboxesState] = useState(
-    items.map((signal) => false)
+    items.map((item) => contains(item.value, selectedItems))
   );
 
   useEffect(() => {
