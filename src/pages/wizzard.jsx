@@ -58,7 +58,7 @@ const Wizzard = () => {
     setCurrentUsersSignalsItems(itemsAndQuantitySelectedByUsers);
   }, [currentUsersSignals])
 
-  const components = [
+  const wizardSteps = [
     <ChooseTown 
       setTownName={setTownName} 
       townName={townName}
@@ -92,14 +92,14 @@ const Wizzard = () => {
 
   return (
     <div className="container-components">
-      {components[currentWizardStep]}
+      {wizardSteps[currentWizardStep]}
 
       <section className="container-navigation">
         <Input label={"Précédent"} onClick={(onClick = () => updateIndex(currentWizardStep, 0, setCurrentWizardStep))} />
 
         <Input
           label={"Suivant"}
-          onClick={(onClick = () => updateIndex(currentWizardStep, components.length, setCurrentWizardStep))}
+          onClick={(onClick = () => updateIndex(currentWizardStep, wizardSteps.length, setCurrentWizardStep))}
         />
       </section>
       <DynamicalPng text={townName} reference={exportRef} />
