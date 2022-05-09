@@ -87,7 +87,7 @@ const Wizzard = () => {
   return (
     <div className="container-components">
       {wizardSteps[currentWizardStep]}
-
+      <h1>Test</h1>
       <section className="container-navigation">
         <Input
           label={"Précédent"}
