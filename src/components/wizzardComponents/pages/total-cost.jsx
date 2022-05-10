@@ -1,13 +1,15 @@
 import React from "react";
 
+// import reducer from "../../../functions/reducer";
+
 const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
   const cheatTotal = [];
   let total = 0;
-
-  const reducer = (cheatTotal, signagesEquipements, quantity) => {
-      cheatTotal.push(signagesEquipements * quantity);
-      const cheatReduce = cheatTotal.reduce((a, b) => a + b);
-      total = cheatReduce;
+  
+  const reducer = (array, value, quantity) => {
+    array.push(value * quantity);
+    const cheatReduce = array.reduce((a, b) => a + b);
+    total = cheatReduce;
   }
 
   return (
@@ -20,6 +22,7 @@ const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
         <thead>
           <tr>
             <th>Nom</th>
+            <th>picto</th>
             <th>Quantité</th>
             <th>Prix unitaire</th>
             <th>Sous-total</th>
@@ -31,6 +34,7 @@ const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
             return (
               <tr key={quantity[oneKey] + index}>
                 <td>{signagesEquipements[index].label}</td>
+                <td>picto à en devenir pris sur les modèles vectary</td>
                 <td>{quantity[oneKey]}</td>
                 <td>{signagesEquipements[index].price}</td>
                 <td>{cheatTotal[index]}</td>

@@ -32,7 +32,7 @@ const Wizzard = () => {
   const [emailUser, setEmailUser] = useState("");
 
   const exportRef = useRef();
-
+  
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
@@ -50,23 +50,23 @@ const Wizzard = () => {
   }, [selectedSignageEquipment])
 
   const wizardSteps = [
-    <ChooseTown setTownName={setTownName} townName={townName} />,
-    <ChooseDominantColor
-      color={color}
-      setColor={setColor}
-      themeColors={themeColors}
-    />,
+    // <ChooseTown setTownName={setTownName} townName={townName} />,
+    // <ChooseDominantColor
+    //   color={color}
+    //   setColor={setColor}
+    //   themeColors={themeColors}
+    // />,
     <ChooseSignageEquipment
       onChangeAction={(selectedSignageEquipment) => {
         setSelectedSignageEquipment(selectedSignageEquipment);
       }}
       selectedSignageEquipment={selectedSignageEquipment}
     />,
-    <SignalSystem
-      models={vectaryModels}
-      currentColor={color}
-      pictureSleeve={image}
-    />,
+    // <SignalSystem
+    //   models={vectaryModels}
+    //   currentColor={color}
+    //   pictureSleeve={image}
+    // />,
     <CalculateCost
       selectedSignageEquipment={selectedSignageEquipment}
       selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}

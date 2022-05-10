@@ -1,6 +1,6 @@
 //React import
 import React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 //Lib import
 import { VctrApi } from '../../../lib/api';
@@ -10,6 +10,7 @@ import Iframe from './iframe';
 
 //Logic import
 import updateMaterial from '../../../functions/update-material';
+import exportAsImage from '../../../functions/export-as-image';
 
 const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
@@ -26,15 +27,18 @@ const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
         }
         run();
     })
+    
     return (
         <div>
             {
-                models.map((model) => (
+                models.map((model) => {
+                    return(
                     <Iframe
                         id={model.id}
                         key={model.id}
                     />
-                ))
+                    )
+                })
             }
         </div>
     );
