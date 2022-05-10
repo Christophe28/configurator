@@ -2,6 +2,7 @@
 import React from "react";
 
 const ChooseDominantColor = ({ themeColors, setColor, color }) => {
+
   return (
     <div className="container-dominant-color">
       <h2>Couleur dominante</h2>

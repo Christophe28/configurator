@@ -5,20 +5,27 @@ import InputText from '../buttons/input-text';
 
 import { productQuantity } from '../../../config/config';
 
-const CalculateCost = ({ selectedSignageEquipment, selectedSignageEquipmentQuantity, onChangeAction }) => {
-
+const CalculateCost = ({ email, setEmail, selectedSignageEquipment, selectedSignageEquipmentQuantity, onChangeAction }) => {
+    
     return (
         <div>
             <h2>Quelles quantités de chaque élément ?</h2>
-            <InputText placeholder={"Votre adresse mail"}/>
+            <InputText 
+                type="text"
+                placeholder={"Votre adresse mail"}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
             {
-                selectedSignageEquipment.map((signageEquipment, index) => (
-                    <div key={signageEquipment.value} className="container-how-items">
-                        <p>{signageEquipment.label}</p>
+                selectedSignageEquipment.map((oneSelectedSignageEquipement, index) => (
+                    <div key={oneSelectedSignageEquipement.value} className="container-how-items">
+                        <p>{oneSelectedSignageEquipement.label}</p>
                         <Dropdown 
                             items={productQuantity}
-                            defaultValue={selectedSignageEquipmentQuantity[signageEquipment.value]}
-                            onChange={(e) => onChangeAction(signageEquipment.value, e.target.value)}
+                            defaultValue={selectedSignageEquipmentQuantity[oneSelectedSignageEquipement.value]}
+                            onChange={(e) => {
+                                onChangeAction(oneSelectedSignageEquipement.value, e.target.value)      
+                            }}
                         />
                     </div>
                 ))

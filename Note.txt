@@ -1,2 +1,10 @@
-Créer un composant qui calcule le coût des sélections faites par l'utilisateur
-Dans un premier temps stocker les informations dans un state et afficher les valeurs sur l'autre composant
+Voici un bout de code qui permet de ne pas modifier l'adresse de l'objet quand on veut la réutiliser.
+// for(let elem of signageEquipment) {
+//     if(oneSelectedSignageEquipement.value === elem.value){
+//         setSelectedSignageEquipment(oldState => {
+//             newState = oldState.map(item => Object.assign({}, item));
+//             newState[index].price = elem.price * parseInt(e.target.value);
+//             return newState;
+//         })
+//     }
+// }      

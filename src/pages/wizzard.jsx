@@ -29,8 +29,13 @@ const Wizzard = () => {
   const [image, setImage] = useState();
   const [selectedSignageEquipment, setSelectedSignageEquipment] = useState([]);
   const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity] = useState({});
+  const [emailUser, setEmailUser] = useState("");
 
   const exportRef = useRef();
+
+  useEffect(() => {
+    exportAsImage(exportRef.current, setImage);
+  }, [townName]);
 
   useEffect(() => {
     setSelectedSignageEquipmentQuantity((oldState) => {
@@ -43,10 +48,6 @@ const Wizzard = () => {
       return newState
     })
   }, [selectedSignageEquipment])
-
-  useEffect(() => {
-    exportAsImage(exportRef.current, setImage);
-  }, [townName]);
 
   const wizardSteps = [
     <ChooseTown setTownName={setTownName} townName={townName} />,
@@ -69,6 +70,8 @@ const Wizzard = () => {
     <CalculateCost
       selectedSignageEquipment={selectedSignageEquipment}
       selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
+      email={emailUser}
+      setEmail={setEmailUser}
       onChangeAction={(itemValue, quantity) => setSelectedSignageEquipmentQuantity(
         oldState => {
           const newState = {...oldState}
@@ -80,7 +83,9 @@ const Wizzard = () => {
     <TotalCost
       town={townName}
       color={color}
-      items={selectedSignageEquipmentQuantity}
+      email={emailUser}
+      quantity={selectedSignageEquipmentQuantity}
+      signagesEquipements={selectedSignageEquipment}
     />,
   ];
 
