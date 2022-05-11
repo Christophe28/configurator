@@ -30,7 +30,7 @@ const Wizzard = () => {
   const [selectedSignageEquipment, setSelectedSignageEquipment] = useState([]);
   const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity] = useState({});
   const [emailUser, setEmailUser] = useState("");
-
+  
   const exportRef = useRef();
   
   useEffect(() => {
@@ -50,23 +50,23 @@ const Wizzard = () => {
   }, [selectedSignageEquipment])
  
   const wizardSteps = [
-    <ChooseTown setTownName={setTownName} townName={townName} />,
-    <ChooseDominantColor
-      color={color}
-      setColor={setColor}
-      themeColors={themeColors}
-    />,
-    <ChooseSignageEquipment
-      onChangeAction={(selectedSignageEquipment) => {
-        setSelectedSignageEquipment(selectedSignageEquipment);
-      }}
-      selectedSignageEquipment={selectedSignageEquipment}
-    />,
-    <SignalSystem
-      models={selectedSignageEquipment}
-      currentColor={color}
-      pictureSleeve={image}
-    />,
+    // <ChooseTown setTownName={setTownName} townName={townName} />,
+    // <ChooseDominantColor
+    //   color={color}
+    //   setColor={setColor}
+    //   themeColors={themeColors}
+    // />,
+    // <ChooseSignageEquipment
+    //   onChangeAction={(selectedSignageEquipment) => {
+    //     setSelectedSignageEquipment(selectedSignageEquipment);
+    //   }}
+    //   selectedSignageEquipment={selectedSignageEquipment}
+    // />,
+    // <SignalSystem
+    //   models={selectedSignageEquipment}
+    //   currentColor={color}
+    //   pictureSleeve={image}
+    // />,
     <CalculateCost
       selectedSignageEquipment={selectedSignageEquipment}
       selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}

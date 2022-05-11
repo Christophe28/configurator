@@ -1,9 +1,14 @@
 import React from 'react';
 
-const Input = ({ label, onClick }) => {
+const Input = ({ label, name, onClick }) => {
     return (
         <div className="container-input">
-            <input type="button" value={label} onClick={onClick} />
+            <input 
+                type="button" 
+                value={label} 
+                name={name} 
+                onClick={onClick} 
+            />
         </div>
     );
 };
