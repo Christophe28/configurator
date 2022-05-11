@@ -6,8 +6,8 @@ const Checkboxes = ({ items, onChangeAction, selectedItems = [] }) => {
   const [checkboxesState, setCheckboxesState] = useState(
     items.map((item) => selectedItems.some(selectedItem => selectedItem.value === item.value))
   );
-
-  useEffect(() => {
+  
+  useEffect(() => { 
     onChangeAction(items.filter((item, index) => checkboxesState[index]));
   }, [checkboxesState]);
 

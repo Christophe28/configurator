@@ -63,32 +63,38 @@ export const signageEquipment = [
     {
         value: "option1",
         label: "Effet de porte aux entrées de la commune",
-        price: 2400
+        price: 2400,
+        modelId: "e23752d1-c5e8-4788-b719-8a913477dc6c"
     },
     {
         value: "option2",
         label: "Orientation des véhicules vers les ressources",
-        price: 980
+        price: 980,
+        modelId: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
     },
     {
         value: "option3",
         label: "Identification des parkings",
-        price: 1200
+        price: 1200,
+        modelId: "d7e90749-acb2-4861-bb20-08881e0777ce"
     },
     {
         value: "option4",
         label: "Information sur les ressources du centre-ville",
-        price: 4800
+        price: 4800,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
     },
     {
         value: "option5",
         label: "Orientation des piétons vers les ressources",
-        price: 3200
+        price: 3200,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
     },
     {
         value: "option6",
         label: "Interprétation historique des ressources",
-        price: 240
+        price: 240,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
     }
 ]
 

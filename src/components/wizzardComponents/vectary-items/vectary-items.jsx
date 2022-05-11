@@ -1,6 +1,6 @@
 //React import
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 //Lib import
 import { VctrApi } from '../../../lib/api';
@@ -12,13 +12,13 @@ import Iframe from './iframe';
 import updateMaterial from '../../../functions/update-material';
 import exportAsImage from '../../../functions/export-as-image';
 
-const VectaryItems = ({ reference, models, dominantColor, pictureSleeve }) => {
+const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
-    const [test, setTest] = useState([]);
+
     useEffect(() => {
         const run = async () => {
             models.map(async (model) => {
-                const viewerApi = new VctrApi("Model_" + model.id);
+                const viewerApi = new VctrApi("Model_" + model.modelId);
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
 
@@ -27,21 +27,19 @@ const VectaryItems = ({ reference, models, dominantColor, pictureSleeve }) => {
         }
         run();
     })
-
+    console.log("model : ", models)
     return (
         <div>
             {
-                models.map((model) => {
+                models.map((model, index) => {
                     return(
                     <Iframe
-                        reference={reference}
-                        id={model.id}
-                        key={model.id}
+                        id={model.modelId}
+                        key={"Model" + index + "_" + model.modelId}
                     />
                     )
                 })
             }
-            <img src={test} alt="" />
         </div>
     );
 };

@@ -48,14 +48,14 @@ const Wizzard = () => {
       return newState
     })
   }, [selectedSignageEquipment])
-
+ 
   const wizardSteps = [
-    // <ChooseTown setTownName={setTownName} townName={townName} />,
-    // <ChooseDominantColor
-    //   color={color}
-    //   setColor={setColor}
-    //   themeColors={themeColors}
-    // />,
+    <ChooseTown setTownName={setTownName} townName={townName} />,
+    <ChooseDominantColor
+      color={color}
+      setColor={setColor}
+      themeColors={themeColors}
+    />,
     <ChooseSignageEquipment
       onChangeAction={(selectedSignageEquipment) => {
         setSelectedSignageEquipment(selectedSignageEquipment);
@@ -63,8 +63,7 @@ const Wizzard = () => {
       selectedSignageEquipment={selectedSignageEquipment}
     />,
     <SignalSystem
-      reference={exportRef}
-      models={vectaryModels}
+      models={selectedSignageEquipment}
       currentColor={color}
       pictureSleeve={image}
     />,
