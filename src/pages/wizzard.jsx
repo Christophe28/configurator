@@ -62,11 +62,12 @@ const Wizzard = () => {
       }}
       selectedSignageEquipment={selectedSignageEquipment}
     />,
-    // <SignalSystem
-    //   models={vectaryModels}
-    //   currentColor={color}
-    //   pictureSleeve={image}
-    // />,
+    <SignalSystem
+      reference={exportRef}
+      models={vectaryModels}
+      currentColor={color}
+      pictureSleeve={image}
+    />,
     <CalculateCost
       selectedSignageEquipment={selectedSignageEquipment}
       selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}

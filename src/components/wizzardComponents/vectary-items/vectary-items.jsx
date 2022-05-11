@@ -12,9 +12,9 @@ import Iframe from './iframe';
 import updateMaterial from '../../../functions/update-material';
 import exportAsImage from '../../../functions/export-as-image';
 
-const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
+const VectaryItems = ({ reference, models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
-
+    const [test, setTest] = useState([]);
     useEffect(() => {
         const run = async () => {
             models.map(async (model) => {
@@ -27,19 +27,21 @@ const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
         }
         run();
     })
-    
+
     return (
         <div>
             {
                 models.map((model) => {
                     return(
                     <Iframe
+                        reference={reference}
                         id={model.id}
                         key={model.id}
                     />
                     )
                 })
             }
+            <img src={test} alt="" />
         </div>
     );
 };
