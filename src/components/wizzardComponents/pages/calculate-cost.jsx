@@ -5,9 +5,20 @@ import InputText from '../buttons/input-text';
 import Input from '../buttons/input';
 
 import { productQuantity } from '../../../config/config';
+import TotalCost from './total-cost';
 
 const CalculateCost = ({ email, setEmail, selectedSignageEquipment, selectedSignageEquipmentQuantity, onChangeAction }) => {
-    console.log(email);
+    
+    // fetch("https://formsubmit.co/ajax/" + {email}, {
+    //     method: "POST",
+    //     headers : {
+    //         'Content-Type' : 'application/json',
+    //         'Accept': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         name: 
+    //     })
+    // })
     return (
         <div>
             <h2>Quelles quantités de chaque élément ?</h2>
@@ -26,7 +37,7 @@ const CalculateCost = ({ email, setEmail, selectedSignageEquipment, selectedSign
                 ))
             }
             
-            <form action={"https://formsubmit.co/" + email} method="POST">
+            <form name="" method="POST">
                 <InputText 
                     type="email"
                     placeholder={"Votre adresse mail"}
@@ -34,12 +45,23 @@ const CalculateCost = ({ email, setEmail, selectedSignageEquipment, selectedSign
                     name={"email"}
                     onChange={(e) => setEmail(e.target.value)}
                 />
+                {/* form style */}
+                <input 
+                    type="hidden" 
+                    name="_template" 
+                    value="table" 
+                    required
+                />
+                <input 
+                    type="hidden" 
+                    name="message" 
+                    value={"Impossible de passer le composant total cost par là. Ni objet"} 
+                    required/>
                 <input 
                     type="submit" 
                     value="Calculer le prix" 
                 />
             </form>
-
         </div>
     );
 };
