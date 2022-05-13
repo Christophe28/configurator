@@ -4,8 +4,9 @@ import ReactDOM from "react-dom";
 import App from "./app";
 import "./style/style.scss";
 
+console.log(process.env.REACT_APP_BASENAME)
 ReactDOM.render(
-    <Router>
+    <Router basename={process.env.REACT_APP_BASENAME}>
         <App />
     </Router>,
     document.getElementById("root")
