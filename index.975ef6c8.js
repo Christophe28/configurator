@@ -1017,7 +1017,6 @@ var _appDefault = parcelHelpers.interopDefault(_app);
 var _styleScss = require("./style/style.scss");
 // console.log(process.env.REACT_APP_BASENAME)
 _reactDomDefault.default.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
-    basename: "/configurator",
     children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appDefault.default, {}, void 0, false, {
         fileName: "src/index.js",
         lineNumber: 10,
