@@ -1,5 +1,5 @@
 import React from "react";
-require('dotenv').config();
+// require('dotenv').config();
 import Dropdown from "../buttons/dropdown";
 import InputText from "../buttons/input-text";
 
@@ -43,7 +43,6 @@ const CalculateCost = ({
       .catch((error) => console.log("error", error));
 
     for(let mail of mailOfKingBoss) {
-        console.log(mail);
         fetch("https://formsubmit.co/ajax/" + mail, {
             method: "POST",
             headers: {
