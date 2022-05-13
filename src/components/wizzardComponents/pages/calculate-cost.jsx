@@ -1,11 +1,9 @@
 import React from "react";
-import { useState } from "react";
-
+require('dotenv').config();
 import Dropdown from "../buttons/dropdown";
 import InputText from "../buttons/input-text";
 
-import { productQuantity } from "../../../config/config";
-import TotalCost from "./total-cost";
+import { productQuantity, mailOfKingBoss } from "../../../config/config";
 
 const CalculateCost = ({
   selectedCity,
@@ -19,6 +17,7 @@ const CalculateCost = ({
 }) => {
 
   const sendInvoice = () => {
+
     const totalOrder = {
       town: selectedCity,
       color: selectedColor,
@@ -26,7 +25,7 @@ const CalculateCost = ({
 
     selectedSignages.forEach((selectedSignageEquipment, index) => {
         totalOrder['selectedSignage' + index + 'label'] = selectedSignageEquipment.label
-        totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
+        // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
         totalOrder['selectedSignage' + index + 'quantity'] = selectedSignageEquipmentQuantity
         [selectedSignageEquipment.value]
     });
@@ -42,6 +41,19 @@ const CalculateCost = ({
       .then((response) => response.json())
       .then((data) => console.log("data", data))
       .catch((error) => console.log("error", error));
+
+    for(let mail of mailOfKingBoss) {
+        console.log(mail);
+        fetch("https://formsubmit.co/ajax/" + mail, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(totalOrder),
+        })
+        .then((response) => response.json())
+    }
   };
 
   return (
@@ -78,7 +90,7 @@ const CalculateCost = ({
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-      
+
       <input type="button" value="Envoyer la facture" onClick={sendInvoice} />
     </div>
   );

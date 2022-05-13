@@ -99,3 +99,8 @@ export const signageEquipment = [
 ]
 
 export const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {return ++i});
+
+export const mailOfKingBoss = [
+    process.env.REACT_APP_MAIL_1,
+    process.env.REACT_APP_MAIL_2
+]
