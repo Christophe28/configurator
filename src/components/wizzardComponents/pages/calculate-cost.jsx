@@ -1,69 +1,87 @@
-import React from 'react';
+import React from "react";
+import { useState } from "react";
 
-import Dropdown from '../buttons/dropdown';
-import InputText from '../buttons/input-text';
-import Input from '../buttons/input';
+import Dropdown from "../buttons/dropdown";
+import InputText from "../buttons/input-text";
 
-import { productQuantity } from '../../../config/config';
-import TotalCost from './total-cost';
+import { productQuantity } from "../../../config/config";
+import TotalCost from "./total-cost";
 
-const CalculateCost = ({ email, setEmail, selectedSignageEquipment, selectedSignageEquipmentQuantity, onChangeAction }) => {
-    
-    // fetch("https://formsubmit.co/ajax/" + {email}, {
-    //     method: "POST",
-    //     headers : {
-    //         'Content-Type' : 'application/json',
-    //         'Accept': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         name: 
-    //     })
-    // })
-    return (
-        <div>
-            <h2>Quelles quantités de chaque élément ?</h2>
-            {
-                selectedSignageEquipment.map((oneSelectedSignageEquipement, index) => (
-                    <div key={oneSelectedSignageEquipement.value} className="container-how-items">
-                        <p>{oneSelectedSignageEquipement.label}</p>
-                        <Dropdown 
-                            items={productQuantity}
-                            defaultValue={selectedSignageEquipmentQuantity[oneSelectedSignageEquipement.value]}
-                            onChange={(e) => {
-                                onChangeAction(oneSelectedSignageEquipement.value, e.target.value)      
-                            }}
-                        />
-                    </div>
-                ))
+const CalculateCost = ({
+  selectedCity,
+  selectedColor,
+  selectedSignages,
+  email,
+  setEmail,
+  selectedSignageEquipment,
+  selectedSignageEquipmentQuantity,
+  onChangeAction,
+}) => {
+
+  const sendInvoice = () => {
+    const totalOrder = {
+      town: selectedCity,
+      color: selectedColor,
+    };
+
+    selectedSignages.forEach((selectedSignageEquipment, index) => {
+        totalOrder['selectedSignage' + index + 'label'] = selectedSignageEquipment.label
+        totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
+        totalOrder['selectedSignage' + index + 'quantity'] = selectedSignageEquipmentQuantity
+        [selectedSignageEquipment.value]
+    });
+
+    fetch("https://formsubmit.co/ajax/" + email, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(totalOrder),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("data", data))
+      .catch((error) => console.log("error", error));
+  };
+
+  return (
+    <div>
+      <h2>Quelles quantités de chaque élément ?</h2>
+      {selectedSignageEquipment.map((oneSelectedSignageEquipement, index) => (
+        <div
+          key={oneSelectedSignageEquipement.value}
+          className="container-how-items"
+        >
+          <p>{oneSelectedSignageEquipement.label}</p>
+          <Dropdown
+            items={productQuantity}
+            defaultValue={
+              selectedSignageEquipmentQuantity[
+                oneSelectedSignageEquipement.value
+              ]
             }
-            
-            <form name="" method="POST">
-                <InputText 
-                    type="email"
-                    placeholder={"Votre adresse mail"}
-                    value={email}
-                    name={"email"}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                {/* form style */}
-                <input 
-                    type="hidden" 
-                    name="_template" 
-                    value="table" 
-                    required
-                />
-                <input 
-                    type="hidden" 
-                    name="message" 
-                    value={"Impossible de passer le composant total cost par là. Ni objet"} 
-                    required/>
-                <input 
-                    type="submit" 
-                    value="Calculer le prix" 
-                />
-            </form>
+            onChange={(e) => {
+              onChangeAction(
+                oneSelectedSignageEquipement.value,
+                e.target.value
+              );
+            }}
+          />
         </div>
-    );
+      ))}
+
+      <InputText
+        type="email"
+        placeholder={"Votre adresse mail"}
+        value={email}
+        name={"email"}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      
+      <input type="button" value="Envoyer la facture" onClick={sendInvoice} />
+    </div>
+  );
 };
 
 export default CalculateCost;

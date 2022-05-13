@@ -50,24 +50,27 @@ const Wizzard = () => {
   }, [selectedSignageEquipment])
  
   const wizardSteps = [
-    // <ChooseTown setTownName={setTownName} townName={townName} />,
-    // <ChooseDominantColor
-    //   color={color}
-    //   setColor={setColor}
-    //   themeColors={themeColors}
-    // />,
-    // <ChooseSignageEquipment
-    //   onChangeAction={(selectedSignageEquipment) => {
-    //     setSelectedSignageEquipment(selectedSignageEquipment);
-    //   }}
-    //   selectedSignageEquipment={selectedSignageEquipment}
-    // />,
-    // <SignalSystem
-    //   models={selectedSignageEquipment}
-    //   currentColor={color}
-    //   pictureSleeve={image}
-    // />,
+    <ChooseTown setTownName={setTownName} townName={townName} />,
+    <ChooseDominantColor
+      color={color}
+      setColor={setColor}
+      themeColors={themeColors}
+    />,
+    <ChooseSignageEquipment
+      onChangeAction={(selectedSignageEquipment) => {
+        setSelectedSignageEquipment(selectedSignageEquipment);
+      }}
+      selectedSignageEquipment={selectedSignageEquipment}
+    />,
+    <SignalSystem
+      models={selectedSignageEquipment}
+      currentColor={color}
+      pictureSleeve={image}
+    />,
     <CalculateCost
+      selectedCity={townName}
+      selectedColor={color}
+      selectedSignages={selectedSignageEquipment}
       selectedSignageEquipment={selectedSignageEquipment}
       selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
       email={emailUser}
