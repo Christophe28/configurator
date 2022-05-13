@@ -6,7 +6,7 @@ import "./style/style.scss";
 
 // console.log(process.env.REACT_APP_BASENAME)
 ReactDOM.render(
-    <Router basename="/configurator">
+    <Router>
         <App />
     </Router>,
     document.getElementById("root")
