@@ -24542,6 +24542,7 @@ var _updateIndex = require("../functions/updateIndex");
 var _updateIndexDefault = parcelHelpers.interopDefault(_updateIndex);
 var _s = $RefreshSig$();
 console.log("/configurator");
+console.log("c'est le test actuel avec le .config.env sans le '/'");
 const Wizzard = ()=>{
     _s();
     const [currentWizardStep, setCurrentWizardStep] = _react.useState(0);
@@ -24574,7 +24575,7 @@ const Wizzard = ()=>{
             townName: townName
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 53,
+            lineNumber: 54,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
@@ -24583,7 +24584,7 @@ const Wizzard = ()=>{
             themeColors: _config.themeColors
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 54,
+            lineNumber: 55,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseSignageEquipmentDefault.default, {
@@ -24593,7 +24594,7 @@ const Wizzard = ()=>{
             selectedSignageEquipment: selectedSignageEquipment1
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 59,
+            lineNumber: 60,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_signalSystemDefault.default, {
@@ -24602,7 +24603,7 @@ const Wizzard = ()=>{
             pictureSleeve: image
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 65,
+            lineNumber: 66,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_calculateCostDefault.default, {
@@ -24622,7 +24623,7 @@ const Wizzard = ()=>{
                 })
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 70,
+            lineNumber: 71,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_totalCostDefault.default, {
@@ -24633,7 +24634,7 @@ const Wizzard = ()=>{
             signagesEquipements: selectedSignageEquipment1
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 86,
+            lineNumber: 87,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24649,7 +24650,7 @@ const Wizzard = ()=>{
                         onClick: onClick = ()=>_updateIndexDefault.default(currentWizardStep, 0, setCurrentWizardStep)
                     }, void 0, false, {
                         fileName: "src/pages/wizzard.jsx",
-                        lineNumber: 100,
+                        lineNumber: 101,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputDefault.default, {
@@ -24657,13 +24658,13 @@ const Wizzard = ()=>{
                         onClick: onClick = ()=>_updateIndexDefault.default(currentWizardStep, wizardSteps.length, setCurrentWizardStep)
                     }, void 0, false, {
                         fileName: "src/pages/wizzard.jsx",
-                        lineNumber: 108,
+                        lineNumber: 109,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 99,
+                lineNumber: 100,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dynamicalPngDefault.default, {
@@ -24671,13 +24672,13 @@ const Wizzard = ()=>{
                 reference: exportRef
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 120,
+                lineNumber: 121,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 96,
+        lineNumber: 97,
         columnNumber: 5
     }, undefined);
 };
