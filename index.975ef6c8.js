@@ -24541,7 +24541,7 @@ var _exportAsImageDefault = parcelHelpers.interopDefault(_exportAsImage);
 var _updateIndex = require("../functions/updateIndex");
 var _updateIndexDefault = parcelHelpers.interopDefault(_updateIndex);
 var _s = $RefreshSig$();
-console.log("nouveau test so testy");
+console.log("nouveau test so testyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 const Wizzard = ()=>{
     _s();
     const [currentWizardStep, setCurrentWizardStep] = _react.useState(0);
