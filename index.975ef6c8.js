@@ -1016,6 +1016,7 @@ var _app = require("./app");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _styleScss = require("./style/style.scss");
 _reactDomDefault.default.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
+    basename: "/configurator",
     children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appDefault.default, {}, void 0, false, {
         fileName: "src/index.js",
         lineNumber: 9,
@@ -24540,6 +24541,7 @@ var _exportAsImageDefault = parcelHelpers.interopDefault(_exportAsImage);
 var _updateIndex = require("../functions/updateIndex");
 var _updateIndexDefault = parcelHelpers.interopDefault(_updateIndex);
 var _s = $RefreshSig$();
+console.log("nouveau test so testy");
 const Wizzard = ()=>{
     _s();
     const [currentWizardStep, setCurrentWizardStep] = _react.useState(0);
@@ -34347,7 +34349,6 @@ var _dropdownDefault = parcelHelpers.interopDefault(_dropdown);
 var _inputText = require("../buttons/input-text");
 var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
 var _config = require("../../../config/config");
-console.log(_config.mailOfKingBoss);
 const CalculateCost = ({ selectedCity , selectedColor , selectedSignages , email , setEmail , selectedSignageEquipment: selectedSignageEquipment1 , selectedSignageEquipmentQuantity , onChangeAction ,  })=>{
     const sendInvoice = ()=>{
         const totalOrder = {
