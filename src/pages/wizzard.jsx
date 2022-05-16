@@ -11,8 +11,8 @@ import Input from "../components/wizzardComponents/buttons/input";
 import DynamicalPng from "../components/wizzardComponents/dynamical_png/dynamical_png";
 import CalculateCost from "../components/wizzardComponents/pages/calculate-cost";
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
-console.log(process.env.REACT_APP_BASENAME);
-console.log("c'est le test actuel avec le .config.env sans le '/'");
+
+console.log("nouveau test so testy");
 //Config import
 import {
   themeColors,
