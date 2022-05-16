@@ -5,7 +5,7 @@ import App from "./app";
 import "./style/style.scss";
 
 ReactDOM.render(
-    <Router basename="configurator">
+    <Router basename={process.env.REACT_APP_BASENAME}>
         <App />
     </Router>,
     document.getElementById("root")
