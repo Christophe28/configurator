@@ -1016,7 +1016,7 @@ var _app = require("./app");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _styleScss = require("./style/style.scss");
 _reactDomDefault.default.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
-    basename: "configurator",
+    basename: "/configurator",
     children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appDefault.default, {}, void 0, false, {
         fileName: "src/index.js",
         lineNumber: 9,
@@ -24541,6 +24541,7 @@ var _exportAsImageDefault = parcelHelpers.interopDefault(_exportAsImage);
 var _updateIndex = require("../functions/updateIndex");
 var _updateIndexDefault = parcelHelpers.interopDefault(_updateIndex);
 var _s = $RefreshSig$();
+console.log("/configurator");
 const Wizzard = ()=>{
     _s();
     const [currentWizardStep, setCurrentWizardStep] = _react.useState(0);
