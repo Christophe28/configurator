@@ -1016,17 +1016,11 @@ var _app = require("./app");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _styleScss = require("./style/style.scss");
 _reactDomDefault.default.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
-    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
-        basename: "configurator",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appDefault.default, {}, void 0, false, {
-            fileName: "src/index.js",
-            lineNumber: 10,
-            columnNumber: 9
-        }, undefined)
-    }, void 0, false, {
+    basename: "configurator",
+    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appDefault.default, {}, void 0, false, {
         fileName: "src/index.js",
         lineNumber: 9,
-        columnNumber: 5
+        columnNumber: 9
     }, undefined)
 }, void 0, false, {
     fileName: "src/index.js",
