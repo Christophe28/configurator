@@ -13,10 +13,7 @@ import CalculateCost from "../components/wizzardComponents/pages/calculate-cost"
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
 //Config import
-import {
-  themeColors,
-  vectaryModels,
-} from "../config/config";
+import { themeColors, vectaryModels } from "../config/config";
 
 //Logic import
 import exportAsImage from "../functions/export-as-image";
@@ -28,27 +25,28 @@ const Wizzard = () => {
   const [color, setColor] = useState("");
   const [image, setImage] = useState();
   const [selectedSignageEquipment, setSelectedSignageEquipment] = useState([]);
-  const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity] = useState({});
+  const [
+    selectedSignageEquipmentQuantity,
+    setSelectedSignageEquipmentQuantity,
+  ] = useState({});
   const [emailUser, setEmailUser] = useState("");
-  
+
   const exportRef = useRef();
-  
+
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
 
   useEffect(() => {
     setSelectedSignageEquipmentQuantity((oldState) => {
-      const newState = {}
-      selectedSignageEquipment.forEach(
-        selectedItem => {
-          newState[selectedItem.value] =  oldState[selectedItem.value] ?? "1"
-        }
-      )
-      return newState
-    })
-  }, [selectedSignageEquipment])
- 
+      const newState = {};
+      selectedSignageEquipment.forEach((selectedItem) => {
+        newState[selectedItem.value] = oldState[selectedItem.value] ?? "1";
+      });
+      return newState;
+    });
+  }, [selectedSignageEquipment]);
+
   const wizardSteps = [
     <ChooseTown setTownName={setTownName} townName={townName} />,
     <ChooseDominantColor
@@ -63,6 +61,7 @@ const Wizzard = () => {
       selectedSignageEquipment={selectedSignageEquipment}
     />,
     <SignalSystem
+      townName={townName}
       models={selectedSignageEquipment}
       currentColor={color}
       pictureSleeve={image}
@@ -75,13 +74,13 @@ const Wizzard = () => {
       selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
       email={emailUser}
       setEmail={setEmailUser}
-      onChangeAction={(itemValue, quantity) => setSelectedSignageEquipmentQuantity(
-        oldState => {
-          const newState = {...oldState}
-          newState[itemValue] = quantity
-          return newState
-        }
-      )}
+      onChangeAction={(itemValue, quantity) =>
+        setSelectedSignageEquipmentQuantity((oldState) => {
+          const newState = { ...oldState };
+          newState[itemValue] = quantity;
+          return newState;
+        })
+      }
     />,
     <TotalCost
       town={townName}
@@ -97,23 +96,28 @@ const Wizzard = () => {
       {wizardSteps[currentWizardStep]}
 
       <section className="container-navigation">
-        <Input
-          label={"Précédent"}
-          onClick={
-            (() =>
-              updateIndex(currentWizardStep, 0, setCurrentWizardStep))
-          }
-        />
+
+        {currentWizardStep > 0 ? (
+          <Input
+            inputClass={"previousInput"}
+            label={"Précédent"}
+            onClick={() => {
+              updateIndex(currentWizardStep, 0, setCurrentWizardStep);
+            }}
+          />
+        ) : (
+          ""
+        )}
 
         <Input
+          inputClass={"nextInput"}
           label={"Suivant"}
-          onClick={
-            (() =>
-              updateIndex(
-                currentWizardStep,
-                wizardSteps.length,
-                setCurrentWizardStep
-              ))
+          onClick={() =>
+            updateIndex(
+              currentWizardStep,
+              wizardSteps.length,
+              setCurrentWizardStep
+            )
           }
         />
       </section>

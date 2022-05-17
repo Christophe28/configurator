@@ -1,9 +1,12 @@
 body {
 
+    h2, label, input, p, th {
+        font-family: $font-1;
+    }
+
     .container-components {
-        
         text-align: center;
-        
+
         h2 {
             color: $color-1;
             font-weight: 600;
@@ -28,6 +31,17 @@ body {
                 border: 1px solid $color-1;
                 font-weight: bolder;
                 font-size: 1rem;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            
+            .nextInput {
+                background-color: $color-3;
+            }
+            .previousInput {
+                background-color: $color-4;
             }
         }
     }

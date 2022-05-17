@@ -8,6 +8,7 @@ const Iframe = ({ id }) => {
         key={id}
         id={"Model_" + id}
         src={"https://www.vectary.com/viewer/v1/?model=" + id}
+        frameBorder="0"
         width="20%"
         height="200"
       ></iframe>

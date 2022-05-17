@@ -43,19 +43,39 @@ export const colorsLightScheme =
 
 export const themeColors = [
     {
-        value: "blue",
-        hexadecimalColor: "#1E00FF",
-        label: "bleu"
+        value: "blueOfAzure",
+        hexadecimalColor: "#0082EA",
+        label: "bleu d'azure"
     },
     {
-        value: "red",
-        hexadecimalColor: "#DD2727",
-        label: "rouge"
+        value: "coblatBlue",
+        hexadecimalColor: "#44479F",
+        label: "blue cobalt"
     },
     {
-        value: "green",
-        hexadecimalColor: "#15D121",
-        label: "vert"
+        value: "slateGrey",
+        hexadecimalColor: "#646971",
+        label: "gris ardoise"
+    },
+    {
+        value: "pomegranateRed",
+        hexadecimalColor: "#F71F4C",
+        label: "rouge grenade"
+    },
+    {
+        value: "poppyRed",
+        hexadecimalColor: "#E00012",
+        label: "rouge coquelicot"
+    },
+    {
+        value: "reddishOrange",
+        hexadecimalColor: "#C14C25",
+        label: "orange roux"
+    },
+    {
+        value: "mustardYellow",
+        hexadecimalColor: "#EF850B",
+        label: "jaune moutarde"
     }
 ]
 

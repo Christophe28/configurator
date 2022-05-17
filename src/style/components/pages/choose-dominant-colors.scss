@@ -5,5 +5,9 @@
         height: 4rem;
         border-radius: 50%;
         border: 0px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
