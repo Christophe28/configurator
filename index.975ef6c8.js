@@ -1016,7 +1016,6 @@ var _app = require("./app");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _styleScss = require("./style/style.scss");
 _reactDomDefault.default.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
-    basename: "configurator",
     children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appDefault.default, {}, void 0, false, {
         fileName: "src/index.js",
         lineNumber: 9,
@@ -24646,7 +24645,7 @@ const Wizzard = ()=>{
                 children: [
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputDefault.default, {
                         label: "Précédent",
-                        onClick: onClick = ()=>_updateIndexDefault.default(currentWizardStep, 0, setCurrentWizardStep)
+                        onClick: ()=>_updateIndexDefault.default(currentWizardStep, 0, setCurrentWizardStep)
                     }, void 0, false, {
                         fileName: "src/pages/wizzard.jsx",
                         lineNumber: 101,
@@ -24654,7 +24653,7 @@ const Wizzard = ()=>{
                     }, undefined),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputDefault.default, {
                         label: "Suivant",
-                        onClick: onClick = ()=>_updateIndexDefault.default(currentWizardStep, wizardSteps.length, setCurrentWizardStep)
+                        onClick: ()=>_updateIndexDefault.default(currentWizardStep, wizardSteps.length, setCurrentWizardStep)
                     }, void 0, false, {
                         fileName: "src/pages/wizzard.jsx",
                         lineNumber: 109,
