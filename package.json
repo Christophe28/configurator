@@ -1,6 +1,6 @@
 {
   "name": "configurator",
-  "source": "./public/index.html",
+  "source": "public/index.html",
   "version": "1.0.0",
   "homepage": "https://christophe28.github.io/configurator/",
   "description": "",
