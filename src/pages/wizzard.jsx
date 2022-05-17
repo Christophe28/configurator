@@ -12,7 +12,6 @@ import DynamicalPng from "../components/wizzardComponents/dynamical_png/dynamica
 import CalculateCost from "../components/wizzardComponents/pages/calculate-cost";
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
-console.log("nouveau test so testyerrrrrrrrrrrrrrrrrrrrr");
 //Config import
 import {
   themeColors,
