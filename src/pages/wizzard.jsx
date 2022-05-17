@@ -101,7 +101,7 @@ const Wizzard = () => {
         <Input
           label={"Précédent"}
           onClick={
-            (onClick = () =>
+            (() =>
               updateIndex(currentWizardStep, 0, setCurrentWizardStep))
           }
         />
@@ -109,7 +109,7 @@ const Wizzard = () => {
         <Input
           label={"Suivant"}
           onClick={
-            (onClick = () =>
+            (() =>
               updateIndex(
                 currentWizardStep,
                 wizardSteps.length,
