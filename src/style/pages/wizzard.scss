@@ -1,16 +1,18 @@
 body {
 
     h2, label, input, p, th {
-        font-family: $font-1;
+        font-family: Roboto;
     }
-
+    
     .container-components {
+        margin-top: 50vh;
+        transform: translateY(-50%);
         text-align: center;
 
         h2 {
             color: $color-1;
-            font-weight: 600;
-            font-size: 4rem;
+            font-weight: bolder;
+            font-size: 3rem;
         }
         
         label {
@@ -25,12 +27,12 @@ body {
             input {
                 background-color: $color-3;
                 color: $color-2;
-                width: 10rem;
-                height: 1.4rem;
-                border-radius: 12px;
+                width: 11rem;
+                height: 3rem;
+                border-radius: 25;
                 border: 1px solid $color-1;
                 font-weight: bolder;
-                font-size: 1rem;
+                font-size: 1.5rem;
 
                 &:hover {
                     cursor: pointer;
