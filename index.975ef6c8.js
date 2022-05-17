@@ -24930,7 +24930,7 @@ const ChooseDominantColor = ({ themeColors , setColor , color  })=>{
                 children: "Quelle est la couleur dominante de votre charte graphique ?"
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                lineNumber: 8,
+                lineNumber: 7,
                 columnNumber: 7
             }, undefined),
             themeColors.map((themeColor)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
@@ -24946,14 +24946,14 @@ const ChooseDominantColor = ({ themeColors , setColor , color  })=>{
                     onClick: (e)=>setColor(themeColor.hexadecimalColor)
                 }, themeColor.value, false, {
                     fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                    lineNumber: 10,
+                    lineNumber: 9,
                     columnNumber: 9
                 }, undefined)
             )
         ]
     }, void 0, true, {
         fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-        lineNumber: 7,
+        lineNumber: 6,
         columnNumber: 5
     }, undefined);
 };

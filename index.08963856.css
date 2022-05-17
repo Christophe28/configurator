@@ -1,16 +1,18 @@
 @import "https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap";
 body h2, body label, body input, body p, body th {
-  font-family: Roboto, sans-serif;
+  font-family: Roboto;
 }
 
 body .container-components {
   text-align: center;
+  margin-top: 50vh;
+  transform: translateY(-50%);
 }
 
 body .container-components h2 {
   color: #707070;
-  font-size: 4rem;
-  font-weight: 600;
+  font-size: 3rem;
+  font-weight: bolder;
 }
 
 body .container-components label {
@@ -25,12 +27,12 @@ body .container-components .container-navigation {
 
 body .container-components .container-navigation input {
   color: #fff;
-  width: 10rem;
-  height: 1.4rem;
+  width: 11rem;
+  height: 3rem;
   background-color: #a0a0a0;
   border: 1px solid #707070;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: 25px;
+  font-size: 1.5rem;
   font-weight: bolder;
 }
 
@@ -61,10 +63,13 @@ body .container-components .container-navigation .previousInput {
 
 .container-input-text input {
   text-align: center;
-  height: 1.5rem;
+  height: 3.5rem;
   width: 30%;
+  color: #707070;
   border: 1px solid #707070;
-  border-radius: 20px;
+  border-radius: 30px;
+  font-size: 2rem;
+  font-weight: bolder;
 }
 
 .container-dominant-color input {
