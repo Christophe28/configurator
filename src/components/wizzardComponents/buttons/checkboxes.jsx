@@ -12,7 +12,7 @@ const Checkboxes = ({ items, onChangeAction, selectedItems = [] }) => {
   }, [checkboxesState]);
 
   return (
-    <div>
+    <div className="container-checkboxes">
       {items.map((item, index) => {
         return (
           <div key={item.value}>

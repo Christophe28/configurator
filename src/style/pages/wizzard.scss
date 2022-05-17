@@ -6,13 +6,13 @@ body {
     
     .container-components {
         margin-top: 50vh;
-        transform: translateY(-50%);
+        transform: translateY(-100%);
         text-align: center;
 
         h2 {
             color: $color-1;
             font-weight: bolder;
-            font-size: 3rem;
+            font-size: 2rem;
         }
         
         label {
