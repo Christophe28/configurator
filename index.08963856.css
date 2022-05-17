@@ -1,3 +1,8 @@
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap";
+body h2, body label, body input, body p, body th {
+  font-family: Roboto, sans-serif;
+}
+
 body .container-components {
   text-align: center;
 }
@@ -29,15 +34,29 @@ body .container-components .container-navigation input {
   font-weight: bolder;
 }
 
+body .container-components .container-navigation input:hover {
+  cursor: pointer;
+}
+
+body .container-components .container-navigation .nextInput {
+  background-color: #a0a0a0;
+}
+
+body .container-components .container-navigation .previousInput {
+  background-color: #c5c5c5;
+}
+
 .container-png {
   padding: 100px;
   position: absolute;
-  left: -2000px;
-  transform: rotate(90deg);
+  left: -20000px;
+  transform: rotate(270deg);
 }
 
-.container-png h2 {
+.container-png h3 {
+  font-family: Roboto, sans-serif;
   font-size: 150px;
+  font-weight: bolder;
 }
 
 .container-input-text input {
@@ -53,6 +72,11 @@ body .container-components .container-navigation input {
   height: 4rem;
   border: none;
   border-radius: 50%;
+  margin-right: 2rem;
+}
+
+.container-dominant-color input:hover {
+  cursor: pointer;
 }
 
 .container-how-items {

@@ -24541,7 +24541,6 @@ var _exportAsImageDefault = parcelHelpers.interopDefault(_exportAsImage);
 var _updateIndex = require("../functions/updateIndex");
 var _updateIndexDefault = parcelHelpers.interopDefault(_updateIndex);
 var _s = $RefreshSig$();
-console.log("nouveau test so testyerrrrrrrrrrrrrrrrrrrrr");
 const Wizzard = ()=>{
     _s();
     const [currentWizardStep, setCurrentWizardStep] = _react.useState(0);
@@ -24549,7 +24548,7 @@ const Wizzard = ()=>{
     const [color, setColor] = _react.useState("");
     const [image, setImage] = _react.useState();
     const [selectedSignageEquipment1, setSelectedSignageEquipment] = _react.useState([]);
-    const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity] = _react.useState({});
+    const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity, ] = _react.useState({});
     const [emailUser, setEmailUser] = _react.useState("");
     const exportRef = _react.useRef();
     _react.useEffect(()=>{
@@ -24574,7 +24573,7 @@ const Wizzard = ()=>{
             townName: townName
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 54,
+            lineNumber: 51,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
@@ -24583,7 +24582,7 @@ const Wizzard = ()=>{
             themeColors: _config.themeColors
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 55,
+            lineNumber: 52,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseSignageEquipmentDefault.default, {
@@ -24593,16 +24592,17 @@ const Wizzard = ()=>{
             selectedSignageEquipment: selectedSignageEquipment1
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 60,
+            lineNumber: 57,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_signalSystemDefault.default, {
+            townName: townName,
             models: selectedSignageEquipment1,
             currentColor: color,
             pictureSleeve: image
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 66,
+            lineNumber: 63,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_calculateCostDefault.default, {
@@ -24622,7 +24622,7 @@ const Wizzard = ()=>{
                 })
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 71,
+            lineNumber: 69,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_totalCostDefault.default, {
@@ -24633,7 +24633,7 @@ const Wizzard = ()=>{
             signagesEquipements: selectedSignageEquipment1
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 87,
+            lineNumber: 85,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24644,26 +24644,30 @@ const Wizzard = ()=>{
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
                 className: "container-navigation",
                 children: [
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputDefault.default, {
+                    currentWizardStep > 0 ? /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputDefault.default, {
+                        inputClass: "previousInput",
                         label: "Précédent",
-                        onClick: ()=>_updateIndexDefault.default(currentWizardStep, 0, setCurrentWizardStep)
+                        onClick: ()=>{
+                            _updateIndexDefault.default(currentWizardStep, 0, setCurrentWizardStep);
+                        }
                     }, void 0, false, {
                         fileName: "src/pages/wizzard.jsx",
                         lineNumber: 101,
-                        columnNumber: 9
-                    }, undefined),
+                        columnNumber: 11
+                    }, undefined) : "",
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputDefault.default, {
+                        inputClass: "nextInput",
                         label: "Suivant",
                         onClick: ()=>_updateIndexDefault.default(currentWizardStep, wizardSteps.length, setCurrentWizardStep)
                     }, void 0, false, {
                         fileName: "src/pages/wizzard.jsx",
-                        lineNumber: 109,
+                        lineNumber: 112,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 100,
+                lineNumber: 98,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dynamicalPngDefault.default, {
@@ -24671,17 +24675,17 @@ const Wizzard = ()=>{
                 reference: exportRef
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 121,
+                lineNumber: 124,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 97,
+        lineNumber: 95,
         columnNumber: 5
     }, undefined);
 };
-_s(Wizzard, "k9vXXmHJqvaib/HR/7W+tL32ZIw=");
+_s(Wizzard, "ONJQmODu4NdRMGY4l9PbImTzQHQ=");
 _c = Wizzard;
 exports.default = Wizzard;
 var _c;
@@ -24923,7 +24927,7 @@ const ChooseDominantColor = ({ themeColors , setColor , color  })=>{
         className: "container-dominant-color",
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Couleur dominante"
+                children: "Quelle est la couleur dominante de votre charte graphique ?"
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
                 lineNumber: 8,
@@ -24931,10 +24935,14 @@ const ChooseDominantColor = ({ themeColors , setColor , color  })=>{
             }, undefined),
             themeColors.map((themeColor)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
                     type: "button",
-                    style: {
-                        background: themeColor.hexadecimalColor
+                    style: themeColor.hexadecimalColor === color ? {
+                        background: themeColor.hexadecimalColor,
+                        height: "5rem",
+                        width: "5rem"
+                    } : {
+                        background: themeColor.hexadecimalColor,
+                        opacity: 0.45
                     },
-                    value: themeColor.hexadecimalColor === color ? 'X' : '',
                     onClick: (e)=>setColor(themeColor.hexadecimalColor)
                 }, themeColor.value, false, {
                     fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
@@ -25149,19 +25157,39 @@ const colorsLightScheme = {
 };
 const themeColors = [
     {
-        value: "blue",
-        hexadecimalColor: "#1E00FF",
-        label: "bleu"
+        value: "blueOfAzure",
+        hexadecimalColor: "#0082EA",
+        label: "bleu d'azure"
     },
     {
-        value: "red",
-        hexadecimalColor: "#DD2727",
-        label: "rouge"
+        value: "coblatBlue",
+        hexadecimalColor: "#44479F",
+        label: "blue cobalt"
     },
     {
-        value: "green",
-        hexadecimalColor: "#15D121",
-        label: "vert"
+        value: "slateGrey",
+        hexadecimalColor: "#646971",
+        label: "gris ardoise"
+    },
+    {
+        value: "pomegranateRed",
+        hexadecimalColor: "#F71F4C",
+        label: "rouge grenade"
+    },
+    {
+        value: "poppyRed",
+        hexadecimalColor: "#E00012",
+        label: "rouge coquelicot"
+    },
+    {
+        value: "reddishOrange",
+        hexadecimalColor: "#C14C25",
+        label: "orange roux"
+    },
+    {
+        value: "mustardYellow",
+        hexadecimalColor: "#EF850B",
+        label: "jaune moutarde"
     }
 ];
 const signageEquipment = [
@@ -25206,8 +25234,8 @@ const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {
     return ++i;
 });
 const mailOfKingBoss = [
-    "damien@quidam.be",
-    "valerian@quidam.be"
+    "buffe-christophe28@outlook.fr",
+    undefined
 ];
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f56lm":[function(require,module,exports) {
@@ -25224,13 +25252,16 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _vectaryItems = require("../vectary-items/vectary-items");
 var _vectaryItemsDefault = parcelHelpers.interopDefault(_vectaryItems);
-const SignalSystem = ({ models , currentColor , pictureSleeve  })=>{
+const SignalSystem = ({ townName , models , currentColor , pictureSleeve  })=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-signal-system",
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Votre syst\xe8me signal\xe9tique"
-            }, void 0, false, {
+                children: [
+                    "Le nouveau syst\xe8me signal\xe9tique de ",
+                    townName
+                ]
+            }, void 0, true, {
                 fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
                 lineNumber: 8,
                 columnNumber: 13
@@ -26403,6 +26434,7 @@ const Iframe = ({ id  })=>{
         children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("iframe", {
             id: "Model_" + id,
             src: "https://www.vectary.com/viewer/v1/?model=" + id,
+            frameBorder: "0",
             width: "20%",
             height: "200"
         }, id, false, {
@@ -34263,10 +34295,11 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-const Input = ({ label , name , onClick  })=>{
+const Input = ({ inputClass , label , name , onClick  })=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-input",
         children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+            className: inputClass,
             type: "button",
             value: label,
             name: name,
@@ -34308,7 +34341,7 @@ const DynamicalPng = ({ reference , text  })=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         ref: reference,
         className: "container-png",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h3", {
             children: text
         }, void 0, false, {
             fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
