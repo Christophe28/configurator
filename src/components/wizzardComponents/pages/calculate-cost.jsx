@@ -6,9 +6,6 @@ import InputText from "../buttons/input-text";
 import { productQuantity, mailOfKingBoss } from "../../../config/config";
 
 const CalculateCost = ({
-  selectedCity,
-  selectedColor,
-  selectedSignages,
   email,
   setEmail,
   selectedSignageEquipment,

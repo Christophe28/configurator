@@ -13,11 +13,17 @@ import CalculateCost from "../components/wizzardComponents/pages/calculate-cost"
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
 //Config import
-import { themeColors, vectaryModels, mailOfKingBoss, valueInputNext } from "../config/config";
+import {
+  themeColors,
+  vectaryModels,
+  mailOfKingBoss,
+  valueInputNext,
+} from "../config/config";
 
 //Logic import
 import exportAsImage from "../functions/export-as-image";
 import updateIndex from "../functions/updateIndex";
+import ViewWrapper from "../components/layout/view-wrapper";
 
 const Wizzard = () => {
   const [currentWizardStep, setCurrentWizardStep] = useState(0);
@@ -30,8 +36,7 @@ const Wizzard = () => {
     setSelectedSignageEquipmentQuantity,
   ] = useState({});
   const [emailUser, setEmailUser] = useState("");
-  const [currentValueInputNext, setCurrentValueInputNext] = useState(valueInputNext[0]);
-  console.log(currentWizardStep);
+
   const exportRef = useRef();
 
   useEffect(() => {
@@ -48,57 +53,81 @@ const Wizzard = () => {
     });
   }, [selectedSignageEquipment]);
 
-  useEffect(() => {
-    if(currentWizardStep === 3) {
-      setCurrentValueInputNext(valueInputNext[1])
-    }
-    if(currentWizardStep === 4) {
-      setCurrentValueInputNext(valueInputNext[2])
-    }
-  }, [currentWizardStep])
-
   const wizardSteps = [
-    <ChooseTown setTownName={setTownName} townName={townName} />,
-    <ChooseDominantColor
-      color={color}
-      setColor={setColor}
-      themeColors={themeColors}
-    />,
-    <ChooseSignageEquipment
-      onChangeAction={(selectedSignageEquipment) => {
-        setSelectedSignageEquipment(selectedSignageEquipment);
+    <ViewWrapper 
+      previous={false} 
+      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    >
+      <ChooseTown setTownName={setTownName} townName={townName} />
+    </ViewWrapper>,
+    <ViewWrapper
+      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    >
+      <ChooseDominantColor
+        color={color}
+        setColor={setColor}
+        themeColors={themeColors}
+      />
+    </ViewWrapper>,
+    <ViewWrapper
+      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    >
+      <ChooseSignageEquipment
+        onChangeAction={(selectedSignageEquipment) => {
+          setSelectedSignageEquipment(selectedSignageEquipment);
+        }}
+        selectedSignageEquipment={selectedSignageEquipment}
+      />
+    </ViewWrapper>,
+    <ViewWrapper
+      next={"Calculer le coût"}
+      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    >
+      <SignalSystem
+        townName={townName}
+        models={selectedSignageEquipment}
+        currentColor={color}
+        pictureSleeve={image}
+      />
+    </ViewWrapper>,
+    <ViewWrapper
+      next={"Recevoir un devis"}
+      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      nextAction={() => {
+        sendInvoice();
+        setCurrentWizardStep(currentWizardStep + 1);
       }}
-      selectedSignageEquipment={selectedSignageEquipment}
-    />,
-    <SignalSystem
-      townName={townName}
-      models={selectedSignageEquipment}
-      currentColor={color}
-      pictureSleeve={image}
-    />,
-    <CalculateCost
-      selectedCity={townName}
-      selectedColor={color}
-      selectedSignages={selectedSignageEquipment}
-      selectedSignageEquipment={selectedSignageEquipment}
-      selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
-      email={emailUser}
-      setEmail={setEmailUser}
-      onChangeAction={(itemValue, quantity) =>
-        setSelectedSignageEquipmentQuantity((oldState) => {
-          const newState = { ...oldState };
-          newState[itemValue] = quantity;
-          return newState;
-        })
-      }
-    />,
-    <TotalCost
-      town={townName}
-      color={color}
-      email={emailUser}
-      quantity={selectedSignageEquipmentQuantity}
-      signagesEquipements={selectedSignageEquipment}
-    />,
+    >
+      <CalculateCost
+        selectedSignageEquipment={selectedSignageEquipment}
+        selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
+        email={emailUser}
+        setEmail={setEmailUser}
+        onChangeAction={(itemValue, quantity) =>
+          setSelectedSignageEquipmentQuantity((oldState) => {
+            const newState = { ...oldState };
+            newState[itemValue] = quantity;
+            return newState;
+          })
+        }
+      />
+    </ViewWrapper>,
+    <ViewWrapper
+      next={false}
+      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    >
+      <TotalCost
+        town={townName}
+        color={color}
+        email={emailUser}
+        quantity={selectedSignageEquipmentQuantity}
+        signagesEquipements={selectedSignageEquipment}
+      />
+    </ViewWrapper>
   ];
 
   const sendInvoice = () => {
@@ -108,10 +137,10 @@ const Wizzard = () => {
     };
 
     selectedSignageEquipment.forEach((selectedSignage, index) => {
-        totalOrder['selectedSignage' + index + 'label'] = selectedSignage.label
-        // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
-        totalOrder['selectedSignage' + index + 'quantity'] = selectedSignageEquipmentQuantity
-        [selectedSignage.value]
+      totalOrder["selectedSignage" + index + "label"] = selectedSignage.label;
+      // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
+      totalOrder["selectedSignage" + index + "quantity"] =
+        selectedSignageEquipmentQuantity[selectedSignage.value];
     });
 
     fetch("https://formsubmit.co/ajax/" + emailUser, {
@@ -126,16 +155,15 @@ const Wizzard = () => {
       .then((data) => console.log("data", data))
       .catch((error) => console.log("error", error));
 
-    for(let mail of mailOfKingBoss) {
-        fetch("https://formsubmit.co/ajax/" + mail, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify(totalOrder),
-        })
-        .then((response) => response.json())
+    for (let mail of mailOfKingBoss) {
+      fetch("https://formsubmit.co/ajax/" + mail, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(totalOrder),
+      }).then((response) => response.json());
     }
   };
 
@@ -143,42 +171,7 @@ const Wizzard = () => {
     <div className="container-components">
       {wizardSteps[currentWizardStep]}
 
-      <section className="container-navigation">
-
-        {currentWizardStep > 0 ? (
-          <Input
-            inputClass={"previousInput"}
-            label={"Précédent"}
-            onClick={() => {
-              updateIndex(currentWizardStep, 0, setCurrentWizardStep);
-            }}
-          />
-        ) : (
-          ""
-        )}
-
-        {
-          currentWizardStep === wizardSteps.length - 1 ? "" : (
-            <Input
-              inputClass={"nextInput"}
-              label={currentValueInputNext}
-              onClick={() => {
-                currentWizardStep === 4 ? (
-                  sendInvoice()
-                ) : (
-                  ""
-                )
-                updateIndex(
-                  currentWizardStep,
-                  wizardSteps.length,
-                  setCurrentWizardStep
-                )
-              }}
-            />
-          )
-        }
-          
-      </section>
+      
       <DynamicalPng text={townName} reference={exportRef} />
     </div>
   );

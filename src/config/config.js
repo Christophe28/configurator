@@ -118,12 +118,6 @@ export const signageEquipment = [
     }
 ]
 
-export const valueInputNext = [
-    "Suivant",
-    "Calculer le coût",
-    "Recevoir un devis"
-];
-
 export const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {return ++i});
 
 export const mailOfKingBoss = [

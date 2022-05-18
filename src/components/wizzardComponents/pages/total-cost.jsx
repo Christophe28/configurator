@@ -10,7 +10,7 @@ const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
 
   return (
     <div className="container-total-cost">
-      <h2>Coût total</h2>
+      <h2>Merci nous revenons vers vous avec une offre </h2>
       <p>Nom de la commune : {town}</p>
       <p>Couleur dominante : {color}</p>
       <p>Adresse email de contact : {email}</p>
