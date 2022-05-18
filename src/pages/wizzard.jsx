@@ -92,7 +92,6 @@ const Wizzard = () => {
   ];
 
   const sendInvoice = () => {
-
     const totalOrder = {
       town: townName,
       color: color,
@@ -161,7 +160,7 @@ const Wizzard = () => {
                 )
               }
             />
-          ) : (
+          ) : currentWizardStep === 4 ? (
             <input 
               type="button" 
               value="Recevoir un devis" 
@@ -170,7 +169,7 @@ const Wizzard = () => {
                 updateIndex(currentWizardStep, wizardSteps.length, setCurrentWizardStep);
               }} 
             />
-          )
+          ) : ""
         }
       </section>
       <DynamicalPng text={townName} reference={exportRef} />
