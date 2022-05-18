@@ -109,17 +109,24 @@ const Wizzard = () => {
           ""
         )}
 
-        <Input
-          inputClass={"nextInput"}
-          label={"Suivant"}
-          onClick={() =>
-            updateIndex(
-              currentWizardStep,
-              wizardSteps.length,
-              setCurrentWizardStep
-            )
-          }
-        />
+        {
+          currentWizardStep < 4 ? (
+            <Input
+              inputClass={"nextInput"}
+              label={"Suivant"}
+              onClick={() =>
+                updateIndex(
+                  currentWizardStep,
+                  wizardSteps.length,
+                  setCurrentWizardStep
+                )
+              }
+            />
+          ) : (
+            ""
+          )
+        }
+
       </section>
       <DynamicalPng text={townName} reference={exportRef} />
     </div>

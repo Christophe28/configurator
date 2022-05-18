@@ -1,12 +1,12 @@
 body {
 
     h2, label, input, p, th {
-        font-family: Roboto;
+        font-family: $font-1;
     }
     
     .container-components {
-        margin-top: 50vh;
-        transform: translateY(-100%);
+        margin-top: 25rem;
+        transform: translateY(-50%);
         text-align: center;
 
         h2 {
@@ -27,7 +27,7 @@ body {
             input {
                 background-color: $color-3;
                 color: $color-2;
-                width: 11rem;
+                width: 12rem;
                 height: 3rem;
                 border-radius: 25;
                 border: 1px solid $color-1;

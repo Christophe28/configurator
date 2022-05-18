@@ -1,8 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@font-face {
+    font-family: "Roboto";
+    src: local("Roboto"),
+        url("../fonts/Roboto-Light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "RobotoBlack";
+    src: local("RobotoBlack"),
+        url("../fonts/Roboto-Black.ttf") format("truetype");
+}
+
+$font-1: 'Roboto', sans-serif;
+$font-2: 'RobotoBlack', sans-serif;
 
 $color-1: #707070;
 $color-2: white;
 $color-3: #a0a0a0;
 $color-4: #c5c5c5;
-
-$font-1: 'Roboto', sans-serif;

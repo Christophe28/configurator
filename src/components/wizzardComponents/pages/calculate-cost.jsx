@@ -91,6 +91,7 @@ const CalculateCost = ({
       />
 
       <input type="button" value="Envoyer la facture" onClick={sendInvoice} />
+      
     </div>
   );
 };
