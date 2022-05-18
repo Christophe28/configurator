@@ -13,7 +13,7 @@ import CalculateCost from "../components/wizzardComponents/pages/calculate-cost"
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
 //Config import
-import { themeColors, vectaryModels, mailOfKingBoss } from "../config/config";
+import { themeColors, vectaryModels, mailOfKingBoss, valueInputNext } from "../config/config";
 
 //Logic import
 import exportAsImage from "../functions/export-as-image";
@@ -30,7 +30,8 @@ const Wizzard = () => {
     setSelectedSignageEquipmentQuantity,
   ] = useState({});
   const [emailUser, setEmailUser] = useState("");
-
+  const [currentValueInputNext, setCurrentValueInputNext] = useState(valueInputNext[0]);
+  console.log(currentWizardStep);
   const exportRef = useRef();
 
   useEffect(() => {
@@ -46,6 +47,15 @@ const Wizzard = () => {
       return newState;
     });
   }, [selectedSignageEquipment]);
+
+  useEffect(() => {
+    if(currentWizardStep === 3) {
+      setCurrentValueInputNext(valueInputNext[1])
+    }
+    if(currentWizardStep === 4) {
+      setCurrentValueInputNext(valueInputNext[2])
+    }
+  }, [currentWizardStep])
 
   const wizardSteps = [
     <ChooseTown setTownName={setTownName} townName={townName} />,
@@ -148,29 +158,26 @@ const Wizzard = () => {
         )}
 
         {
-          currentWizardStep < 4 ? (
+          currentWizardStep === wizardSteps.length - 1 ? "" : (
             <Input
               inputClass={"nextInput"}
-              label={"Suivant"}
-              onClick={() =>
+              label={currentValueInputNext}
+              onClick={() => {
+                currentWizardStep === 4 ? (
+                  sendInvoice()
+                ) : (
+                  ""
+                )
                 updateIndex(
                   currentWizardStep,
                   wizardSteps.length,
                   setCurrentWizardStep
                 )
-              }
+              }}
             />
-          ) : currentWizardStep === 4 ? (
-            <input 
-              type="button" 
-              value="Recevoir un devis" 
-              onClick={() => {
-                sendInvoice();
-                updateIndex(currentWizardStep, wizardSteps.length, setCurrentWizardStep);
-              }} 
-            />
-          ) : ""
+          )
         }
+          
       </section>
       <DynamicalPng text={townName} reference={exportRef} />
     </div>
