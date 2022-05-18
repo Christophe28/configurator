@@ -13,7 +13,7 @@ import CalculateCost from "../components/wizzardComponents/pages/calculate-cost"
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
 
 //Config import
-import { themeColors, vectaryModels } from "../config/config";
+import { themeColors, vectaryModels, mailOfKingBoss } from "../config/config";
 
 //Logic import
 import exportAsImage from "../functions/export-as-image";
@@ -91,6 +91,45 @@ const Wizzard = () => {
     />,
   ];
 
+  const sendInvoice = () => {
+
+    const totalOrder = {
+      town: townName,
+      color: color,
+    };
+
+    selectedSignageEquipment.forEach((selectedSignage, index) => {
+        totalOrder['selectedSignage' + index + 'label'] = selectedSignage.label
+        // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
+        totalOrder['selectedSignage' + index + 'quantity'] = selectedSignageEquipmentQuantity
+        [selectedSignage.value]
+    });
+
+    fetch("https://formsubmit.co/ajax/" + emailUser, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(totalOrder),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("data", data))
+      .catch((error) => console.log("error", error));
+
+    for(let mail of mailOfKingBoss) {
+        fetch("https://formsubmit.co/ajax/" + mail, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(totalOrder),
+        })
+        .then((response) => response.json())
+    }
+  };
+
   return (
     <div className="container-components">
       {wizardSteps[currentWizardStep]}
@@ -123,10 +162,16 @@ const Wizzard = () => {
               }
             />
           ) : (
-            ""
+            <input 
+              type="button" 
+              value="Recevoir un devis" 
+              onClick={() => {
+                sendInvoice();
+                updateIndex(currentWizardStep, wizardSteps.length, setCurrentWizardStep);
+              }} 
+            />
           )
         }
-
       </section>
       <DynamicalPng text={townName} reference={exportRef} />
     </div>

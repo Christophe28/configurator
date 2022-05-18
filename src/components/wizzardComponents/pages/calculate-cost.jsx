@@ -15,50 +15,11 @@ const CalculateCost = ({
   selectedSignageEquipmentQuantity,
   onChangeAction,
 }) => {
-
-  const sendInvoice = () => {
-
-    const totalOrder = {
-      town: selectedCity,
-      color: selectedColor,
-    };
-
-    selectedSignages.forEach((selectedSignageEquipment, index) => {
-        totalOrder['selectedSignage' + index + 'label'] = selectedSignageEquipment.label
-        // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
-        totalOrder['selectedSignage' + index + 'quantity'] = selectedSignageEquipmentQuantity
-        [selectedSignageEquipment.value]
-    });
-
-    fetch("https://formsubmit.co/ajax/" + email, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(totalOrder),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("data", data))
-      .catch((error) => console.log("error", error));
-
-    for(let mail of mailOfKingBoss) {
-        fetch("https://formsubmit.co/ajax/" + mail, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify(totalOrder),
-        })
-        .then((response) => response.json())
-    }
-  };
-
   return (
     <div>
       <h2>Quelles quantités de chaque élément ?</h2>
-      {selectedSignageEquipment.map((oneSelectedSignageEquipement, index) => (
+      {selectedSignageEquipment.map((oneSelectedSignageEquipement, index) => {
+        {console.log("oneSelectedSignageEquipement", oneSelectedSignageEquipement)}
         <div
           key={oneSelectedSignageEquipement.value}
           className="container-how-items"
@@ -79,7 +40,7 @@ const CalculateCost = ({
             }}
           />
         </div>
-      ))}
+      })}
 
       <InputText
         type="email"
@@ -89,8 +50,6 @@ const CalculateCost = ({
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-
-      <input type="button" value="Envoyer la facture" onClick={sendInvoice} />
       
     </div>
   );
