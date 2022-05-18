@@ -1,17 +1,26 @@
-@import "https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap";
-body h2, body label, body input, body p, body th {
+@font-face {
   font-family: Roboto;
+  src: local(Roboto), url("Roboto-Light.af01702d.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: RobotoBlack;
+  src: local(RobotoBlack), url("Roboto-Black.103194fc.ttf") format("truetype");
+}
+
+body h2, body label, body input, body p, body th {
+  font-family: Roboto, sans-serif;
 }
 
 body .container-components {
   text-align: center;
-  margin-top: 50vh;
+  margin-top: 25rem;
   transform: translateY(-50%);
 }
 
 body .container-components h2 {
   color: #707070;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bolder;
 }
 
@@ -27,7 +36,7 @@ body .container-components .container-navigation {
 
 body .container-components .container-navigation input {
   color: #fff;
-  width: 11rem;
+  width: 12rem;
   height: 3rem;
   background-color: #a0a0a0;
   border: 1px solid #707070;
@@ -51,25 +60,31 @@ body .container-components .container-navigation .previousInput {
 .container-png {
   padding: 100px;
   position: absolute;
+  top: -2000px;
   left: -20000px;
   transform: rotate(270deg);
 }
 
 .container-png h3 {
-  font-family: Roboto, sans-serif;
+  font-family: RobotoBlack, sans-serif;
   font-size: 150px;
   font-weight: bolder;
 }
 
 .container-input-text input {
   text-align: center;
-  height: 3.5rem;
-  width: 30%;
+  height: 3.85rem;
+  width: 33rem;
   color: #707070;
   border: 1px solid #707070;
   border-radius: 30px;
   font-size: 2rem;
   font-weight: bolder;
+}
+
+.container-checkboxes div input {
+  width: 2rem;
+  height: 2rem;
 }
 
 .container-dominant-color input {

@@ -1015,16 +1015,20 @@ var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 var _app = require("./app");
 var _appDefault = parcelHelpers.interopDefault(_app);
 var _styleScss = require("./style/style.scss");
+var _robotoLightTtf = require("url:./fonts/Roboto-Light.ttf");
+var _robotoLightTtfDefault = parcelHelpers.interopDefault(_robotoLightTtf);
+var _robotoBlackTtf = require("url:./fonts/Roboto-Black.ttf");
+var _robotoBlackTtfDefault = parcelHelpers.interopDefault(_robotoBlackTtf);
 _reactDomDefault.default.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouterDom.BrowserRouter, {
     basename: undefined,
     children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appDefault.default, {}, void 0, false, {
         fileName: "src/index.js",
-        lineNumber: 9,
+        lineNumber: 11,
         columnNumber: 9
     }, undefined)
 }, void 0, false, {
     fileName: "src/index.js",
-    lineNumber: 8,
+    lineNumber: 10,
     columnNumber: 5
 }, undefined), document.getElementById("root"));
 
@@ -1033,7 +1037,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactRouter
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"fdOAw","react-dom":"j6uA9","./app":"bNKaB","./style/style.scss":"fOVVj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"fdOAw","react-dom":"j6uA9","./app":"bNKaB","./style/style.scss":"fOVVj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","url:./fonts/Roboto-Light.ttf":"kEgDc","url:./fonts/Roboto-Black.ttf":"aTm38"}],"iTorj":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-dev-runtime.development.js');
 
@@ -24525,8 +24529,6 @@ var _chooseSignageEquipment = require("../components/wizzardComponents/pages/cho
 var _chooseSignageEquipmentDefault = parcelHelpers.interopDefault(_chooseSignageEquipment);
 var _signalSystem = require("../components/wizzardComponents/pages/signal-system");
 var _signalSystemDefault = parcelHelpers.interopDefault(_signalSystem);
-var _input = require("../components/wizzardComponents/buttons/input");
-var _inputDefault = parcelHelpers.interopDefault(_input);
 var _dynamicalPng = require("../components/wizzardComponents/dynamical_png/dynamical_png");
 var _dynamicalPngDefault = parcelHelpers.interopDefault(_dynamicalPng);
 var _calculateCost = require("../components/wizzardComponents/pages/calculate-cost");
@@ -24538,8 +24540,8 @@ var _config = require("../config/config");
 //Logic import
 var _exportAsImage = require("../functions/export-as-image");
 var _exportAsImageDefault = parcelHelpers.interopDefault(_exportAsImage);
-var _updateIndex = require("../functions/updateIndex");
-var _updateIndexDefault = parcelHelpers.interopDefault(_updateIndex);
+var _viewWrapper = require("../components/layout/view-wrapper");
+var _viewWrapperDefault = parcelHelpers.interopDefault(_viewWrapper);
 var _s = $RefreshSig$();
 const Wizzard = ()=>{
     _s();
@@ -24568,120 +24570,181 @@ const Wizzard = ()=>{
         selectedSignageEquipment1
     ]);
     const wizardSteps = [
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseTownDefault.default, {
-            setTownName: setTownName,
-            townName: townName
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            previous: false,
+            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
+            ,
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseTownDefault.default, {
+                setTownName: setTownName,
+                townName: townName
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 58,
+                columnNumber: 7
+            }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 51,
+            lineNumber: 54,
             columnNumber: 5
         }, undefined),
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
-            color: color,
-            setColor: setColor,
-            themeColors: _config.themeColors
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
+            ,
+            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
+            ,
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
+                color: color,
+                setColor: setColor,
+                themeColors: _config.themeColors
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 64,
+                columnNumber: 7
+            }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 52,
+            lineNumber: 60,
             columnNumber: 5
         }, undefined),
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseSignageEquipmentDefault.default, {
-            onChangeAction: (selectedSignageEquipment)=>{
-                setSelectedSignageEquipment(selectedSignageEquipment);
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
+            ,
+            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
+            ,
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseSignageEquipmentDefault.default, {
+                onChangeAction: (selectedSignageEquipment)=>{
+                    setSelectedSignageEquipment(selectedSignageEquipment);
+                },
+                selectedSignageEquipment: selectedSignageEquipment1
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 74,
+                columnNumber: 7
+            }, undefined)
+        }, void 0, false, {
+            fileName: "src/pages/wizzard.jsx",
+            lineNumber: 70,
+            columnNumber: 5
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            next: "Calculer le coût",
+            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
+            ,
+            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
+            ,
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_signalSystemDefault.default, {
+                townName: townName,
+                models: selectedSignageEquipment1,
+                currentColor: color,
+                pictureSleeve: image
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 86,
+                columnNumber: 7
+            }, undefined)
+        }, void 0, false, {
+            fileName: "src/pages/wizzard.jsx",
+            lineNumber: 81,
+            columnNumber: 5
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            next: "Recevoir un devis",
+            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
+            ,
+            nextAction: ()=>{
+                sendInvoice();
+                setCurrentWizardStep(currentWizardStep + 1);
             },
-            selectedSignageEquipment: selectedSignageEquipment1
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_calculateCostDefault.default, {
+                selectedSignageEquipment: selectedSignageEquipment1,
+                selectedSignageEquipmentQuantity: selectedSignageEquipmentQuantity,
+                onChangeAction: (itemValue, quantity)=>setSelectedSignageEquipmentQuantity((oldState)=>{
+                        const newState = {
+                            ...oldState
+                        };
+                        newState[itemValue] = quantity;
+                        return newState;
+                    })
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 101,
+                columnNumber: 7
+            }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 57,
+            lineNumber: 93,
             columnNumber: 5
         }, undefined),
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_signalSystemDefault.default, {
-            townName: townName,
-            models: selectedSignageEquipment1,
-            currentColor: color,
-            pictureSleeve: image
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            next: false,
+            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
+            ,
+            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
+            ,
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_totalCostDefault.default, {
+                town: townName,
+                color: color,
+                email: emailUser,
+                quantity: selectedSignageEquipmentQuantity,
+                signagesEquipements: selectedSignageEquipment1
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 118,
+                columnNumber: 7
+            }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 63,
-            columnNumber: 5
-        }, undefined),
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_calculateCostDefault.default, {
-            selectedCity: townName,
-            selectedColor: color,
-            selectedSignages: selectedSignageEquipment1,
-            selectedSignageEquipment: selectedSignageEquipment1,
-            selectedSignageEquipmentQuantity: selectedSignageEquipmentQuantity,
-            email: emailUser,
-            setEmail: setEmailUser,
-            onChangeAction: (itemValue, quantity)=>setSelectedSignageEquipmentQuantity((oldState)=>{
-                    const newState = {
-                        ...oldState
-                    };
-                    newState[itemValue] = quantity;
-                    return newState;
-                })
-        }, void 0, false, {
-            fileName: "src/pages/wizzard.jsx",
-            lineNumber: 69,
-            columnNumber: 5
-        }, undefined),
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_totalCostDefault.default, {
-            town: townName,
-            color: color,
-            email: emailUser,
-            quantity: selectedSignageEquipmentQuantity,
-            signagesEquipements: selectedSignageEquipment1
-        }, void 0, false, {
-            fileName: "src/pages/wizzard.jsx",
-            lineNumber: 85,
+            lineNumber: 113,
             columnNumber: 5
         }, undefined), 
     ];
+    const sendInvoice = ()=>{
+        const totalOrder = {
+            town: townName,
+            color: color
+        };
+        selectedSignageEquipment1.forEach((selectedSignage, index)=>{
+            totalOrder["selectedSignage" + index + "label"] = selectedSignage.label;
+            // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
+            totalOrder["selectedSignage" + index + "quantity"] = selectedSignageEquipmentQuantity[selectedSignage.value];
+        });
+        fetch("https://formsubmit.co/ajax/" + emailUser, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify(totalOrder)
+        }).then((response)=>response.json()
+        ).then((data)=>console.log("data", data)
+        ).catch((error)=>console.log("error", error)
+        );
+        for (let mail of _config.mailOfKingBoss)fetch("https://formsubmit.co/ajax/" + mail, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify(totalOrder)
+        }).then((response)=>response.json()
+        );
+    };
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-components",
         children: [
             wizardSteps[currentWizardStep],
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
-                className: "container-navigation",
-                children: [
-                    currentWizardStep > 0 ? /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputDefault.default, {
-                        inputClass: "previousInput",
-                        label: "Précédent",
-                        onClick: ()=>{
-                            _updateIndexDefault.default(currentWizardStep, 0, setCurrentWizardStep);
-                        }
-                    }, void 0, false, {
-                        fileName: "src/pages/wizzard.jsx",
-                        lineNumber: 101,
-                        columnNumber: 11
-                    }, undefined) : "",
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputDefault.default, {
-                        inputClass: "nextInput",
-                        label: "Suivant",
-                        onClick: ()=>_updateIndexDefault.default(currentWizardStep, wizardSteps.length, setCurrentWizardStep)
-                    }, void 0, false, {
-                        fileName: "src/pages/wizzard.jsx",
-                        lineNumber: 112,
-                        columnNumber: 9
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/pages/wizzard.jsx",
-                lineNumber: 98,
-                columnNumber: 7
-            }, undefined),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dynamicalPngDefault.default, {
                 text: townName,
                 reference: exportRef
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 124,
+                lineNumber: 169,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 95,
+        lineNumber: 166,
         columnNumber: 5
     }, undefined);
 };
@@ -24696,7 +24759,7 @@ $RefreshReg$(_c, "Wizzard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/buttons/input":"f0P93","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../config/config":"a6ccA","../functions/export-as-image":"9VZDV","../functions/updateIndex":"4czFE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"89ycD":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../config/config":"a6ccA","../functions/export-as-image":"9VZDV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../components/layout/view-wrapper":"2NQC3"}],"89ycD":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$eb26 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -24727,7 +24790,7 @@ const ChooseTown = ({ townName , setTownName  })=>{
                 onChange: (e)=>setTownName(e.target.value)
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-                lineNumber: 9,
+                lineNumber: 10,
                 columnNumber: 13
             }, undefined)
         ]
@@ -25047,6 +25110,7 @@ const Checkboxes = ({ items , onChangeAction , selectedItems =[]  })=>{
         checkboxesState
     ]);
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-checkboxes",
         children: items.map((item, index)=>{
             return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                 children: [
@@ -25233,10 +25297,7 @@ const signageEquipment = [
 const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {
     return ++i;
 });
-const mailOfKingBoss = [
-    "buffe-christophe28@outlook.fr",
-    undefined
-];
+const mailOfKingBoss = [];
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f56lm":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$7930 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
@@ -25330,7 +25391,6 @@ const VectaryItems = ({ models , dominantColor , pictureSleeve  })=>{
         };
         run();
     });
-    console.log("model : ", models);
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         children: models.map((model, index)=>{
             return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
@@ -34283,49 +34343,7 @@ exports.default = exportAsImage;
     return html2canvas;
 });
 
-},{}],"f0P93":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$0952 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$0952.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const Input = ({ inputClass , label , name , onClick  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-input",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-            className: inputClass,
-            type: "button",
-            value: label,
-            name: name,
-            onClick: onClick
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/buttons/input.jsx",
-            lineNumber: 6,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/buttons/input.jsx",
-        lineNumber: 5,
-        columnNumber: 9
-    }, undefined);
-};
-_c = Input;
-exports.default = Input;
-var _c;
-$RefreshReg$(_c, "Input");
-
-  $parcel$ReactRefreshHelpers$0952.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"273co":[function(require,module,exports) {
+},{}],"273co":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$701e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -34382,55 +34400,25 @@ var _dropdownDefault = parcelHelpers.interopDefault(_dropdown);
 var _inputText = require("../buttons/input-text");
 var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
 var _config = require("../../../config/config");
-const CalculateCost = ({ selectedCity , selectedColor , selectedSignages , email , setEmail , selectedSignageEquipment: selectedSignageEquipment1 , selectedSignageEquipmentQuantity , onChangeAction ,  })=>{
-    const sendInvoice = ()=>{
-        const totalOrder = {
-            town: selectedCity,
-            color: selectedColor
-        };
-        selectedSignages.forEach((selectedSignageEquipment, index)=>{
-            totalOrder['selectedSignage' + index + 'label'] = selectedSignageEquipment.label;
-            // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
-            totalOrder['selectedSignage' + index + 'quantity'] = selectedSignageEquipmentQuantity[selectedSignageEquipment.value];
-        });
-        fetch("https://formsubmit.co/ajax/" + email, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json"
-            },
-            body: JSON.stringify(totalOrder)
-        }).then((response)=>response.json()
-        ).then((data)=>console.log("data", data)
-        ).catch((error)=>console.log("error", error)
-        );
-        for (let mail of _config.mailOfKingBoss)fetch("https://formsubmit.co/ajax/" + mail, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json"
-            },
-            body: JSON.stringify(totalOrder)
-        }).then((response)=>response.json()
-        );
-    };
+const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedSignageEquipmentQuantity , onChangeAction ,  })=>{
+    console.log("selectedSignageEquipment", selectedSignageEquipment);
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
                 children: "Quelles quantit\xe9s de chaque \xe9l\xe9ment ?"
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                lineNumber: 60,
+                lineNumber: 19,
                 columnNumber: 7
             }, undefined),
-            selectedSignageEquipment1.map((oneSelectedSignageEquipement, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            selectedSignageEquipment.map((oneSelectedSignageEquipement, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                     className: "container-how-items",
                     children: [
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
                             children: oneSelectedSignageEquipement.label
                         }, void 0, false, {
                             fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                            lineNumber: 66,
+                            lineNumber: 25,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dropdownDefault.default, {
@@ -34441,13 +34429,13 @@ const CalculateCost = ({ selectedCity , selectedColor , selectedSignages , email
                             }
                         }, void 0, false, {
                             fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                            lineNumber: 67,
+                            lineNumber: 26,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, oneSelectedSignageEquipement.value, true, {
                     fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                    lineNumber: 62,
+                    lineNumber: 21,
                     columnNumber: 9
                 }, undefined)
             ),
@@ -34461,22 +34449,13 @@ const CalculateCost = ({ selectedCity , selectedColor , selectedSignages , email
                 required: true
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                lineNumber: 84,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                type: "button",
-                value: "Envoyer la facture",
-                onClick: sendInvoice
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                lineNumber: 93,
+                lineNumber: 43,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-        lineNumber: 59,
+        lineNumber: 18,
         columnNumber: 5
     }, undefined);
 };
@@ -34557,40 +34536,10 @@ const TotalCost = ({ town , color , email , quantity , signagesEquipements  })=>
         className: "container-total-cost",
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Co\xfbt total"
+                children: "Merci nous revenons vers vous avec une offre "
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
                 lineNumber: 13,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: [
-                    "Nom de la commune : ",
-                    town
-                ]
-            }, void 0, true, {
-                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 14,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: [
-                    "Couleur dominante : ",
-                    color
-                ]
-            }, void 0, true, {
-                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 15,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: [
-                    "Adresse email de contact : ",
-                    email
-                ]
-            }, void 0, true, {
-                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 16,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("table", {
@@ -34603,46 +34552,32 @@ const TotalCost = ({ town , color , email , quantity , signagesEquipements  })=>
                                     children: "Nom"
                                 }, void 0, false, {
                                     fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 20,
+                                    lineNumber: 17,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                     children: "picto"
                                 }, void 0, false, {
                                     fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 21,
+                                    lineNumber: 18,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
                                     children: "Quantit\xe9"
                                 }, void 0, false, {
                                     fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 22,
-                                    columnNumber: 13
-                                }, undefined),
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
-                                    children: "Prix unitaire"
-                                }, void 0, false, {
-                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 23,
-                                    columnNumber: 13
-                                }, undefined),
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("th", {
-                                    children: "Sous-total"
-                                }, void 0, false, {
-                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 24,
+                                    lineNumber: 19,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                            lineNumber: 19,
+                            lineNumber: 16,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                        lineNumber: 18,
+                        lineNumber: 15,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
@@ -34656,53 +34591,42 @@ const TotalCost = ({ town , color , email , quantity , signagesEquipements  })=>
                                         children: signagesEquipements[index].label
                                     }, void 0, false, {
                                         fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                        lineNumber: 34,
+                                        lineNumber: 29,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
                                         children: "picto \xe0 en devenir pris sur les mod\xe8les vectary"
                                     }, void 0, false, {
                                         fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                        lineNumber: 35,
+                                        lineNumber: 30,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                        children: quantity[oneKey]
-                                    }, void 0, false, {
+                                        children: [
+                                            "X ",
+                                            quantity[oneKey]
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                        lineNumber: 36,
-                                        columnNumber: 17
-                                    }, undefined),
-                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                        children: signagesEquipements[index].price
-                                    }, void 0, false, {
-                                        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                        lineNumber: 37,
-                                        columnNumber: 17
-                                    }, undefined),
-                                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                        children: signagesEquipements[index].price * quantity[oneKey]
-                                    }, void 0, false, {
-                                        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                        lineNumber: 38,
+                                        lineNumber: 31,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, quantity[oneKey] + index, true, {
                                 fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                lineNumber: 33,
+                                lineNumber: 28,
                                 columnNumber: 15
                             }, undefined);
                         })
                     }, void 0, false, {
                         fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                        lineNumber: 27,
+                        lineNumber: 22,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 17,
+                lineNumber: 14,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
@@ -34712,7 +34636,7 @@ const TotalCost = ({ town , color , email , quantity , signagesEquipements  })=>
                 ]
             }, void 0, true, {
                 fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 44,
+                lineNumber: 37,
                 columnNumber: 7
             }, undefined)
         ]
@@ -34744,15 +34668,108 @@ const reducer = (array, value, quantity, setState)=>{
 };
 exports.default = reducer;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4czFE":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2NQC3":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$b0d0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$b0d0.prelude(module);
+
+try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-const updateIndex = (currentIndex, value, setCurrentIndex)=>{
-    if (currentIndex < value - 1) setCurrentIndex(currentIndex + 1);
-    else if (currentIndex > value) setCurrentIndex(currentIndex - 1);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const ViewWrapper = ({ children , previous ="Précédent" , next ="Suivant" , previousAction , nextAction ,  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            children,
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
+                className: "container-navigation",
+                children: [
+                    previous !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                        className: "previousInput",
+                        type: "button",
+                        value: previous,
+                        onClick: previousAction
+                    }, void 0, false, {
+                        fileName: "src/components/layout/view-wrapper.jsx",
+                        lineNumber: 16,
+                        columnNumber: 11
+                    }, undefined),
+                    next !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                        className: "nextInput",
+                        type: "button",
+                        value: next,
+                        onClick: nextAction
+                    }, void 0, false, {
+                        fileName: "src/components/layout/view-wrapper.jsx",
+                        lineNumber: 24,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/layout/view-wrapper.jsx",
+                lineNumber: 14,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/layout/view-wrapper.jsx",
+        lineNumber: 11,
+        columnNumber: 5
+    }, undefined);
 };
-exports.default = updateIndex;
+_c = ViewWrapper;
+exports.default = ViewWrapper;
+var _c;
+$RefreshReg$(_c, "ViewWrapper");
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fOVVj":[function() {},{}]},["kn9T2","7fmqN","8lqZg"], "8lqZg", "parcelRequireef40")
+  $parcel$ReactRefreshHelpers$b0d0.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fOVVj":[function() {},{}],"kEgDc":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "Roboto-Light.df813467.ttf" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"aTm38":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "Roboto-Black.73a444fe.ttf" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}]},["kn9T2","7fmqN","8lqZg"], "8lqZg", "parcelRequireef40")
 
 //# sourceMappingURL=index.975ef6c8.js.map
