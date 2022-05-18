@@ -27,7 +27,7 @@ const VectaryItems = ({ models, dominantColor, pictureSleeve }) => {
         }
         run();
     })
-    console.log("model : ", models)
+
     return (
         <div>
             {

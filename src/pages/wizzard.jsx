@@ -7,7 +7,6 @@ import ChooseTown from "../components/wizzardComponents/pages/choose-town";
 import ChooseDominantColor from "../components/wizzardComponents/pages/choose-dominant-colors";
 import ChooseSignageEquipment from "../components/wizzardComponents/pages/choose-signage-equipment";
 import SignalSystem from "../components/wizzardComponents/pages/signal-system";
-import Input from "../components/wizzardComponents/buttons/input";
 import DynamicalPng from "../components/wizzardComponents/dynamical_png/dynamical_png";
 import CalculateCost from "../components/wizzardComponents/pages/calculate-cost";
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
@@ -17,12 +16,10 @@ import {
   themeColors,
   vectaryModels,
   mailOfKingBoss,
-  valueInputNext,
 } from "../config/config";
 
 //Logic import
 import exportAsImage from "../functions/export-as-image";
-import updateIndex from "../functions/updateIndex";
 import ViewWrapper from "../components/layout/view-wrapper";
 
 const Wizzard = () => {
@@ -104,8 +101,6 @@ const Wizzard = () => {
       <CalculateCost
         selectedSignageEquipment={selectedSignageEquipment}
         selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
-        email={emailUser}
-        setEmail={setEmailUser}
         onChangeAction={(itemValue, quantity) =>
           setSelectedSignageEquipmentQuantity((oldState) => {
             const newState = { ...oldState };
@@ -127,7 +122,7 @@ const Wizzard = () => {
         quantity={selectedSignageEquipmentQuantity}
         signagesEquipements={selectedSignageEquipment}
       />
-    </ViewWrapper>
+    </ViewWrapper>,
   ];
 
   const sendInvoice = () => {
@@ -171,7 +166,6 @@ const Wizzard = () => {
     <div className="container-components">
       {wizardSteps[currentWizardStep]}
 
-      
       <DynamicalPng text={townName} reference={exportRef} />
     </div>
   );

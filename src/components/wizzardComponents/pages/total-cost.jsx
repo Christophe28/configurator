@@ -11,17 +11,12 @@ const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
   return (
     <div className="container-total-cost">
       <h2>Merci nous revenons vers vous avec une offre </h2>
-      <p>Nom de la commune : {town}</p>
-      <p>Couleur dominante : {color}</p>
-      <p>Adresse email de contact : {email}</p>
       <table border="1">
         <thead>
           <tr>
             <th>Nom</th>
             <th>picto</th>
             <th>Quantité</th>
-            <th>Prix unitaire</th>
-            <th>Sous-total</th>
           </tr>
         </thead>
         <tbody>
@@ -33,9 +28,7 @@ const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
               <tr key={quantity[oneKey] + index}>
                 <td>{signagesEquipements[index].label}</td>
                 <td>picto à en devenir pris sur les modèles vectary</td>
-                <td>{quantity[oneKey]}</td>
-                <td>{signagesEquipements[index].price}</td>
-                <td>{signagesEquipements[index].price * quantity[oneKey]}</td>
+                <td>X {quantity[oneKey]}</td>
               </tr>
             );
           })}

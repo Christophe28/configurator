@@ -12,11 +12,12 @@ const CalculateCost = ({
   selectedSignageEquipmentQuantity,
   onChangeAction,
 }) => {
+  console.log("selectedSignageEquipment", selectedSignageEquipment)
   return (
+
     <div>
       <h2>Quelles quantités de chaque élément ?</h2>
-      {selectedSignageEquipment.map((oneSelectedSignageEquipement, index) => {
-        {console.log("oneSelectedSignageEquipement", oneSelectedSignageEquipement)}
+      {selectedSignageEquipment.map((oneSelectedSignageEquipement, index) => (
         <div
           key={oneSelectedSignageEquipement.value}
           className="container-how-items"
@@ -37,7 +38,7 @@ const CalculateCost = ({
             }}
           />
         </div>
-      })}
+      ))}
 
       <InputText
         type="email"
