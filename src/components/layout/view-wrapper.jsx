@@ -5,27 +5,30 @@ const ViewWrapper = ({
   previous = "Précédent",
   next = "Suivant",
   previousAction,
-  nextAction
+  nextAction,
 }) => {
   return (
-    <div className="container-input">
+    <div>
       {children}
-      {previous !== false && (
-        <input
-          className={"previousInput"}
-          type="button"
-          value={previous}
-          onClick={previousAction}
-        />
-      )}
-      {next !== false && (
-        <input
-          className={"nextInput"}
-          type="button"
-          value={next}
-          onClick={nextAction}
-        />
-      )}
+
+      <section className="container-navigation">
+        {previous !== false && (
+          <input
+            className={"previousInput"}
+            type="button"
+            value={previous}
+            onClick={previousAction}
+          />
+        )}
+        {next !== false && (
+          <input
+            className={"nextInput"}
+            type="button"
+            value={next}
+            onClick={nextAction}
+          />
+        )}
+      </section>
     </div>
   );
 };
