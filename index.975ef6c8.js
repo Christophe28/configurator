@@ -24535,13 +24535,15 @@ var _calculateCost = require("../components/wizzardComponents/pages/calculate-co
 var _calculateCostDefault = parcelHelpers.interopDefault(_calculateCost);
 var _totalCost = require("../components/wizzardComponents/pages/total-cost");
 var _totalCostDefault = parcelHelpers.interopDefault(_totalCost);
+var _viewWrapper = require("../components/layout/view-wrapper");
+var _viewWrapperDefault = parcelHelpers.interopDefault(_viewWrapper);
 //Config import
 var _config = require("../config/config");
 //Logic import
 var _exportAsImage = require("../functions/export-as-image");
 var _exportAsImageDefault = parcelHelpers.interopDefault(_exportAsImage);
-var _viewWrapper = require("../components/layout/view-wrapper");
-var _viewWrapperDefault = parcelHelpers.interopDefault(_viewWrapper);
+var _showInput = require("../functions/show-input");
+var _showInputDefault = parcelHelpers.interopDefault(_showInput);
 var _s = $RefreshSig$();
 const Wizzard = ()=>{
     _s();
@@ -24553,6 +24555,7 @@ const Wizzard = ()=>{
     const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity, ] = _react.useState({});
     const [emailUser, setEmailUser] = _react.useState("");
     const exportRef = _react.useRef();
+    const next = "Suivant";
     _react.useEffect(()=>{
         _exportAsImageDefault.default(exportRef.current, setImage);
     }, [
@@ -24570,40 +24573,64 @@ const Wizzard = ()=>{
         selectedSignageEquipment1
     ]);
     const wizardSteps = [
-        // <ViewWrapper 
-        //   previous={false} 
-        //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
-        // >
-        //   <ChooseTown setTownName={setTownName} townName={townName} />
-        // </ViewWrapper>,
-        // <ViewWrapper
-        //   previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
-        //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
-        // >
-        //   <ChooseDominantColor
-        //     color={color}
-        //     setColor={setColor}
-        //     themeColors={themeColors}
-        //   />
-        // </ViewWrapper>,
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            previous: false,
+            next: _showInputDefault.default(townName),
+            nextAction: ()=>{
+                setCurrentWizardStep(currentWizardStep + 1);
+            },
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseTownDefault.default, {
+                setTownName: setTownName,
+                townName: townName
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 63,
+                columnNumber: 7
+            }, undefined)
+        }, void 0, false, {
+            fileName: "src/pages/wizzard.jsx",
+            lineNumber: 55,
+            columnNumber: 5
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            next: _showInputDefault.default(color),
+            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
+            ,
+            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
+            ,
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
+                color: color,
+                setColor: setColor,
+                themeColors: _config.themeColors
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 70,
+                columnNumber: 7
+            }, undefined)
+        }, void 0, false, {
+            fileName: "src/pages/wizzard.jsx",
+            lineNumber: 65,
+            columnNumber: 5
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            next: _showInputDefault.default(selectedSignageEquipment1),
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
             nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
             ,
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseSignageEquipmentDefault.default, {
-                onChangeAction: (selectedSignageEquipment)=>{
+                onChangeAction: (selectedSignageEquipment, next)=>{
                     setSelectedSignageEquipment(selectedSignageEquipment);
                 },
                 selectedSignageEquipment: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 74,
+                lineNumber: 81,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 70,
+            lineNumber: 76,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24619,16 +24646,17 @@ const Wizzard = ()=>{
                 pictureSleeve: image
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 86,
+                lineNumber: 93,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 81,
+            lineNumber: 88,
             columnNumber: 5
         }, undefined),
+        //Ici pour recevoir le devis
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
-            next: "Recevoir un devis",
+            next: _showInputDefault.default(emailUser, next),
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
             nextAction: ()=>{
@@ -24638,6 +24666,8 @@ const Wizzard = ()=>{
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_calculateCostDefault.default, {
                 selectedSignageEquipment: selectedSignageEquipment1,
                 selectedSignageEquipmentQuantity: selectedSignageEquipmentQuantity,
+                setEmail: setEmailUser,
+                email: emailUser,
                 onChangeAction: (itemValue, quantity)=>setSelectedSignageEquipmentQuantity((oldState)=>{
                         const newState = {
                             ...oldState
@@ -24647,12 +24677,12 @@ const Wizzard = ()=>{
                     })
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 101,
+                lineNumber: 109,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 93,
+            lineNumber: 101,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24669,12 +24699,12 @@ const Wizzard = ()=>{
                 signagesEquipements: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 118,
+                lineNumber: 128,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 113,
+            lineNumber: 123,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24718,13 +24748,13 @@ const Wizzard = ()=>{
                 reference: exportRef
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 169,
+                lineNumber: 179,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 166,
+        lineNumber: 176,
         columnNumber: 5
     }, undefined);
 };
@@ -24739,7 +24769,7 @@ $RefreshReg$(_c, "Wizzard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../config/config":"a6ccA","../functions/export-as-image":"9VZDV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../components/layout/view-wrapper":"2NQC3"}],"89ycD":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../config/config":"a6ccA","../functions/export-as-image":"9VZDV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../components/layout/view-wrapper":"2NQC3","../functions/show-input":"jnUkf"}],"89ycD":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$eb26 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -24767,7 +24797,9 @@ const ChooseTown = ({ townName , setTownName  })=>{
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
                 type: "text",
                 value: townName,
-                onChange: (e)=>setTownName(e.target.value)
+                onChange: (e)=>{
+                    setTownName(e.target.value);
+                }
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
                 lineNumber: 10,
@@ -34700,7 +34732,18 @@ $RefreshReg$(_c, "ViewWrapper");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fOVVj":[function() {},{}],"kEgDc":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jnUkf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const showInput = (myState, nameInput)=>{
+    let valueInput = false;
+    if (Array.isArray(myState) === true) myState.length !== 0 && (valueInput = nameInput);
+    else myState !== "" && (valueInput = nameInput);
+    return valueInput;
+};
+exports.default = showInput;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fOVVj":[function() {},{}],"kEgDc":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "Roboto-Light.df813467.ttf" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
