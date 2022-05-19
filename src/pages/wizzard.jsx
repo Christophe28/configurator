@@ -38,6 +38,26 @@ const Wizzard = () => {
 
   const exportRef = useRef();
 
+  // useEffect(() => {
+  //   // townName !== "" ? setShowInputNext("Suivant") : setShowInputNext(false);
+  //   if(townName !== "" || color !== "") {
+  //     setShowInputNext("Suivant");
+  //     console.log("townName", townName, "Color", color);
+  //   }
+  //   else {
+  //     setShowInputNext(false);
+  //     console.log("false");
+  //   }
+  // }, [townName, color])
+
+  const showInputNext2 = (myState) => {
+    showInput = false;
+    if(myState !== "") {
+      showInput = "Suivant";
+    }
+    return showInput
+  }
+
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
@@ -52,26 +72,19 @@ const Wizzard = () => {
     });
   }, [selectedSignageEquipment]);
 
-  useEffect(() => {
-    if(townName !== "") {
-      setShowInputNext("Suivant");
-    }
-  }, [townName])
-
   const wizardSteps = [
     <ViewWrapper 
       previous={false} 
-      next={showInputNext}
+      next={showInputNext2(townName)}
       nextAction={() => {
           setCurrentWizardStep(currentWizardStep + 1);
-            
         }
       }
     >
       <ChooseTown setTownName={setTownName} townName={townName} />
     </ViewWrapper>,
     <ViewWrapper
-      next={showInputNext}
+      next={showInputNext2(color)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
