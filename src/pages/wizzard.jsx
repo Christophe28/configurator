@@ -21,7 +21,7 @@ import {
 
 //Logic import
 import exportAsImage from "../functions/export-as-image";
-import hideInput from "../functions/hide-input";
+import showInput from "../functions/show-input";
 
 const Wizzard = () => {
   const [currentWizardStep, setCurrentWizardStep] = useState(0);
@@ -34,30 +34,9 @@ const Wizzard = () => {
     setSelectedSignageEquipmentQuantity,
   ] = useState({});
   const [emailUser, setEmailUser] = useState("");
-  const [showInputNext, setShowInputNext] = useState(false);
 
   const exportRef = useRef();
-
-  // useEffect(() => {
-  //   // townName !== "" ? setShowInputNext("Suivant") : setShowInputNext(false);
-  //   if(townName !== "" || color !== "") {
-  //     setShowInputNext("Suivant");
-  //     console.log("townName", townName, "Color", color);
-  //   }
-  //   else {
-  //     setShowInputNext(false);
-  //     console.log("false");
-  //   }
-  // }, [townName, color])
-
-  const showInputNext2 = (myState) => {
-    showInput = false;
-    if(myState !== "") {
-      showInput = "Suivant";
-    }
-    return showInput
-  }
-
+  const next = "Suivant";
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
@@ -75,7 +54,7 @@ const Wizzard = () => {
   const wizardSteps = [
     <ViewWrapper 
       previous={false} 
-      next={showInputNext2(townName)}
+      next={showInput(townName)}
       nextAction={() => {
           setCurrentWizardStep(currentWizardStep + 1);
         }
@@ -84,7 +63,7 @@ const Wizzard = () => {
       <ChooseTown setTownName={setTownName} townName={townName} />
     </ViewWrapper>,
     <ViewWrapper
-      next={showInputNext2(color)}
+      next={showInput(color)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
@@ -95,11 +74,12 @@ const Wizzard = () => {
       />
     </ViewWrapper>,
     <ViewWrapper
+      next={showInput(selectedSignageEquipment)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
       <ChooseSignageEquipment
-        onChangeAction={(selectedSignageEquipment) => {
+        onChangeAction={(selectedSignageEquipment, next) => {
           setSelectedSignageEquipment(selectedSignageEquipment);
         }}
         selectedSignageEquipment={selectedSignageEquipment}
@@ -117,8 +97,9 @@ const Wizzard = () => {
         pictureSleeve={image}
       />
     </ViewWrapper>,
+    //Ici pour recevoir le devis
     <ViewWrapper
-      next={"Recevoir un devis"}
+      next={showInput(emailUser, next)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => {
         sendInvoice();
@@ -128,6 +109,8 @@ const Wizzard = () => {
       <CalculateCost
         selectedSignageEquipment={selectedSignageEquipment}
         selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
+        setEmail={setEmailUser}
+        email={emailUser}
         onChangeAction={(itemValue, quantity) =>
           setSelectedSignageEquipmentQuantity((oldState) => {
             const newState = { ...oldState };
