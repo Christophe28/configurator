@@ -34,7 +34,6 @@ const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
           })}
         </tbody>
       </table>
-      <p>total : {currentTotal}</p>
     </div>
   );
 };

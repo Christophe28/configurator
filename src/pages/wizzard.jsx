@@ -51,22 +51,22 @@ const Wizzard = () => {
   }, [selectedSignageEquipment]);
 
   const wizardSteps = [
-    <ViewWrapper 
-      previous={false} 
-      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
-    >
-      <ChooseTown setTownName={setTownName} townName={townName} />
-    </ViewWrapper>,
-    <ViewWrapper
-      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
-      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
-    >
-      <ChooseDominantColor
-        color={color}
-        setColor={setColor}
-        themeColors={themeColors}
-      />
-    </ViewWrapper>,
+    // <ViewWrapper 
+    //   previous={false} 
+    //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    // >
+    //   <ChooseTown setTownName={setTownName} townName={townName} />
+    // </ViewWrapper>,
+    // <ViewWrapper
+    //   previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+    //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    // >
+    //   <ChooseDominantColor
+    //     color={color}
+    //     setColor={setColor}
+    //     themeColors={themeColors}
+    //   />
+    // </ViewWrapper>,
     <ViewWrapper
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
