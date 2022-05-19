@@ -10,6 +10,7 @@ import SignalSystem from "../components/wizzardComponents/pages/signal-system";
 import DynamicalPng from "../components/wizzardComponents/dynamical_png/dynamical_png";
 import CalculateCost from "../components/wizzardComponents/pages/calculate-cost";
 import TotalCost from "../components/wizzardComponents/pages/total-cost";
+import ViewWrapper from "../components/layout/view-wrapper";
 
 //Config import
 import {
@@ -20,7 +21,7 @@ import {
 
 //Logic import
 import exportAsImage from "../functions/export-as-image";
-import ViewWrapper from "../components/layout/view-wrapper";
+import hideInput from "../functions/hide-input";
 
 const Wizzard = () => {
   const [currentWizardStep, setCurrentWizardStep] = useState(0);
@@ -33,6 +34,7 @@ const Wizzard = () => {
     setSelectedSignageEquipmentQuantity,
   ] = useState({});
   const [emailUser, setEmailUser] = useState("");
+  const [showInputNext, setShowInputNext] = useState(false);
 
   const exportRef = useRef();
 
@@ -50,23 +52,35 @@ const Wizzard = () => {
     });
   }, [selectedSignageEquipment]);
 
+  useEffect(() => {
+    if(townName !== "") {
+      setShowInputNext("Suivant");
+    }
+  }, [townName])
+
   const wizardSteps = [
-    // <ViewWrapper 
-    //   previous={false} 
-    //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
-    // >
-    //   <ChooseTown setTownName={setTownName} townName={townName} />
-    // </ViewWrapper>,
-    // <ViewWrapper
-    //   previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
-    //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
-    // >
-    //   <ChooseDominantColor
-    //     color={color}
-    //     setColor={setColor}
-    //     themeColors={themeColors}
-    //   />
-    // </ViewWrapper>,
+    <ViewWrapper 
+      previous={false} 
+      next={showInputNext}
+      nextAction={() => {
+          setCurrentWizardStep(currentWizardStep + 1);
+            
+        }
+      }
+    >
+      <ChooseTown setTownName={setTownName} townName={townName} />
+    </ViewWrapper>,
+    <ViewWrapper
+      next={showInputNext}
+      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    >
+      <ChooseDominantColor
+        color={color}
+        setColor={setColor}
+        themeColors={themeColors}
+      />
+    </ViewWrapper>,
     <ViewWrapper
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
