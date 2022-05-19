@@ -36,7 +36,8 @@ const Wizzard = () => {
   const [emailUser, setEmailUser] = useState("");
 
   const exportRef = useRef();
-  const next = "Suivant";
+  const textInputNext = "Recevoir un devis";
+  console.log(textInputNext)
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
@@ -79,7 +80,7 @@ const Wizzard = () => {
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
       <ChooseSignageEquipment
-        onChangeAction={(selectedSignageEquipment, next) => {
+        onChangeAction={(selectedSignageEquipment) => {
           setSelectedSignageEquipment(selectedSignageEquipment);
         }}
         selectedSignageEquipment={selectedSignageEquipment}
@@ -97,9 +98,8 @@ const Wizzard = () => {
         pictureSleeve={image}
       />
     </ViewWrapper>,
-    //Ici pour recevoir le devis
     <ViewWrapper
-      next={showInput(emailUser, next)}
+      next={showInput(emailUser, textInputNext)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => {
         sendInvoice();
