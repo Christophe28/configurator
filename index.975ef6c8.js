@@ -24555,7 +24555,8 @@ const Wizzard = ()=>{
     const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity, ] = _react.useState({});
     const [emailUser, setEmailUser] = _react.useState("");
     const exportRef = _react.useRef();
-    const next = "Suivant";
+    const textInputNext = "Recevoir un devis";
+    console.log(textInputNext);
     _react.useEffect(()=>{
         _exportAsImageDefault.default(exportRef.current, setImage);
     }, [
@@ -24584,12 +24585,12 @@ const Wizzard = ()=>{
                 townName: townName
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 63,
+                lineNumber: 64,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 55,
+            lineNumber: 56,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24604,12 +24605,12 @@ const Wizzard = ()=>{
                 themeColors: _config.themeColors
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 70,
+                lineNumber: 71,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 65,
+            lineNumber: 66,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24619,18 +24620,18 @@ const Wizzard = ()=>{
             nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
             ,
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseSignageEquipmentDefault.default, {
-                onChangeAction: (selectedSignageEquipment, next)=>{
+                onChangeAction: (selectedSignageEquipment)=>{
                     setSelectedSignageEquipment(selectedSignageEquipment);
                 },
                 selectedSignageEquipment: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 81,
+                lineNumber: 82,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 76,
+            lineNumber: 77,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24646,17 +24647,16 @@ const Wizzard = ()=>{
                 pictureSleeve: image
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 93,
+                lineNumber: 94,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 88,
+            lineNumber: 89,
             columnNumber: 5
         }, undefined),
-        //Ici pour recevoir le devis
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
-            next: _showInputDefault.default(emailUser, next),
+            next: _showInputDefault.default(emailUser, textInputNext),
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
             nextAction: ()=>{
