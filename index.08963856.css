@@ -83,8 +83,24 @@ body .container-components .container-navigation .previousInput {
 }
 
 .container-checkboxes div input {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  vertical-align: bottom;
+  position: relative;
+}
+
+.container-checkboxes div input:hover {
+  cursor: pointer;
+}
+
+.container-checkboxes div label {
+  white-space: nowrap;
+  width: 49rem;
+  text-align: left;
+  padding: 10px;
+  font-size: 1.25rem;
+  font-weight: bolder;
+  display: inline-block;
 }
 
 .container-dominant-color input {

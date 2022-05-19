@@ -24570,42 +24570,22 @@ const Wizzard = ()=>{
         selectedSignageEquipment1
     ]);
     const wizardSteps = [
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
-            previous: false,
-            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
-            ,
-            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseTownDefault.default, {
-                setTownName: setTownName,
-                townName: townName
-            }, void 0, false, {
-                fileName: "src/pages/wizzard.jsx",
-                lineNumber: 58,
-                columnNumber: 7
-            }, undefined)
-        }, void 0, false, {
-            fileName: "src/pages/wizzard.jsx",
-            lineNumber: 54,
-            columnNumber: 5
-        }, undefined),
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
-            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
-            ,
-            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
-            ,
-            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
-                color: color,
-                setColor: setColor,
-                themeColors: _config.themeColors
-            }, void 0, false, {
-                fileName: "src/pages/wizzard.jsx",
-                lineNumber: 64,
-                columnNumber: 7
-            }, undefined)
-        }, void 0, false, {
-            fileName: "src/pages/wizzard.jsx",
-            lineNumber: 60,
-            columnNumber: 5
-        }, undefined),
+        // <ViewWrapper 
+        //   previous={false} 
+        //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+        // >
+        //   <ChooseTown setTownName={setTownName} townName={townName} />
+        // </ViewWrapper>,
+        // <ViewWrapper
+        //   previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+        //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+        // >
+        //   <ChooseDominantColor
+        //     color={color}
+        //     setColor={setColor}
+        //     themeColors={themeColors}
+        //   />
+        // </ViewWrapper>,
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
@@ -34627,16 +34607,6 @@ const TotalCost = ({ town , color , email , quantity , signagesEquipements  })=>
             }, void 0, true, {
                 fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
                 lineNumber: 14,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: [
-                    "total : ",
-                    currentTotal
-                ]
-            }, void 0, true, {
-                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 37,
                 columnNumber: 7
             }, undefined)
         ]
