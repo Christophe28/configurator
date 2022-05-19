@@ -37,7 +37,7 @@ const Wizzard = () => {
 
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
-  console.log(textInputNext)
+
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
@@ -92,6 +92,7 @@ const Wizzard = () => {
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
       <SignalSystem
+        reference={exportRef}
         townName={townName}
         models={selectedSignageEquipment}
         currentColor={color}

@@ -12,13 +12,6 @@ const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
     <div className="container-total-cost">
       <h2>Merci nous revenons vers vous avec une offre </h2>
       <table border="1">
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>picto</th>
-            <th>Quantité</th>
-          </tr>
-        </thead>
         <tbody>
           {Object.keys(quantity).map((oneKey, index) => {
             useEffect(() => {

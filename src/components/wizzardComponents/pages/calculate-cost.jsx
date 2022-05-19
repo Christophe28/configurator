@@ -12,7 +12,6 @@ const CalculateCost = ({
   selectedSignageEquipmentQuantity,
   onChangeAction,
 }) => {
-  console.log("selectedSignageEquipment", selectedSignageEquipment)
   return (
 
     <div>
