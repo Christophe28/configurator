@@ -25395,6 +25395,7 @@ var _s = $RefreshSig$();
 const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor , pictureSleeve  })=>{
     _s();
     const viewerModels = [];
+    console.log("picto", picto);
     _react.useEffect(()=>{
         const run = async ()=>{
             setPicto([]);
@@ -25406,14 +25407,20 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                 _updateMaterialDefault.default(dominantColor, viewerApi, pictureSleeve);
                 if (viewerApi.isReady === true) {
                     setIsLoaded("Calculer le coût");
-                    const screenshot = await viewerApi.takeScreenshot();
-                    setPicto((oldScreen)=>{
-                        const newScreen = [
-                            ...oldScreen
-                        ];
-                        newScreen[index] = screenshot;
-                        return newScreen;
-                    });
+                    const waitForScreen = async ()=>{
+                        const screenshot = await viewerApi.takeScreenshot();
+                        setPicto((oldScreen)=>{
+                            const newScreen = [
+                                ...oldScreen
+                            ];
+                            newScreen[index] = screenshot;
+                            return newScreen;
+                        });
+                    };
+                    const timeForScreen = ()=>{
+                        setTimeout(waitForScreen, 5000);
+                    };
+                    timeForScreen();
                 }
             });
         };
@@ -25425,13 +25432,13 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                 id: model.modelId
             }, model.modelId + index, false, {
                 fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                lineNumber: 49,
+                lineNumber: 58,
                 columnNumber: 25
             }, undefined);
         })
     }, void 0, false, {
         fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-        lineNumber: 45,
+        lineNumber: 54,
         columnNumber: 9
     }, undefined);
 };
