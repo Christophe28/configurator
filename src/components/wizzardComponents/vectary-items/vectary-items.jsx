@@ -13,7 +13,7 @@ import updateMaterial from '../../../functions/update-material';
 
 const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
-
+    console.log("picto", picto);
     useEffect(() => {
         const run = async () => {
             setPicto([]);
@@ -28,12 +28,20 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 
                 if(viewerApi.isReady === true) {
                     setIsLoaded("Calculer le coût")
-                    const screenshot = await viewerApi.takeScreenshot();
-                    setPicto((oldScreen) => {
-                        const newScreen = [...oldScreen];
-                        newScreen[index] = screenshot;
-                        return newScreen
-                    });
+
+                    const waitForScreen = async () => {
+                        const screenshot = await viewerApi.takeScreenshot();
+                        setPicto((oldScreen) => {
+                            const newScreen = [...oldScreen];
+                            newScreen[index] = screenshot;
+                            return newScreen
+                        });
+                    }
+
+                    const timeForScreen = () => {
+                        setTimeout(waitForScreen, 5000)
+                    }
+                    timeForScreen();
                 }
 
             })
@@ -41,6 +49,7 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
         run();
     }, [])
 
+    
     return (
         <div>
             {
