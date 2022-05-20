@@ -27,23 +27,21 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 
                 if(viewerApi.isReady === true) {
-                    setIsLoaded("Calculer le coût")
-
+                    
                     const waitForScreen = async () => {
                         const screenshot = await viewerApi.takeScreenshot();
+                        setIsLoaded("Calculer le coût")
                         setPicto((oldScreen) => {
                             const newScreen = [...oldScreen];
                             newScreen[index] = screenshot;
                             return newScreen
                         });
                     }
-
                     const timeForScreen = () => {
-                        setTimeout(waitForScreen, 5000)
+                        setTimeout(waitForScreen, 500)
                     }
                     timeForScreen();
                 }
-
             })
         }
         run();
