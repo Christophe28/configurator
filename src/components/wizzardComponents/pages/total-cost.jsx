@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import reducer from "../../../functions/reducer";
 
-const TotalCost = ({ town, color, email, image, quantity, signagesEquipements }) => {
+const TotalCost = ({ quantity, signagesEquipements, image }) => {
   const [currentTotal, setCurrentTotal] = useState(0);
 
   const cheatTotal = [];

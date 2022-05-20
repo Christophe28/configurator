@@ -39,7 +39,7 @@ const Wizzard = () => {
 
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
-  console.log(vectaryModelIsLoaded);
+
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
