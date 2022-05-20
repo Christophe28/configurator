@@ -125,8 +125,17 @@ body .container-components .container-navigation .previousInput {
   height: 20px;
 }
 
+.container-total-cost {
+  padding-top: 5%;
+}
+
 .container-total-cost table {
   margin: auto;
+}
+
+.container-total-cost table img {
+  width: 50%;
+  height: 50%;
 }
 
 /*# sourceMappingURL=index.08963856.css.map */
