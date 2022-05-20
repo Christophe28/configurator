@@ -35,10 +35,11 @@ const Wizzard = () => {
   ] = useState({});
   const [emailUser, setEmailUser] = useState("");
   const [pictoVectaryModel, setPictoVectaryModel] = useState([]);
+  const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = useState("");
 
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
-  
+  console.log(vectaryModelIsLoaded);
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
@@ -88,11 +89,12 @@ const Wizzard = () => {
       />
     </ViewWrapper>,
     <ViewWrapper
-      next={"Calculer le coût"}
+      next={showInput(vectaryModelIsLoaded, vectaryModelIsLoaded)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
       <SignalSystem
+        setIsLoaded={setVectaryModelIsLoaded}
         myPicto={pictoVectaryModel}
         setMyPicto={setPictoVectaryModel}
         townName={townName}
@@ -130,9 +132,6 @@ const Wizzard = () => {
     >
       <TotalCost
         image={pictoVectaryModel}
-        town={townName}
-        color={color}
-        email={emailUser}
         quantity={selectedSignageEquipmentQuantity}
         signagesEquipements={selectedSignageEquipment}
       />

@@ -11,13 +11,13 @@ import Iframe from './iframe';
 //Logic import
 import updateMaterial from '../../../functions/update-material';
 
-const VectaryItems = ({ picto, setPicto, models, dominantColor, pictureSleeve }) => {
-    console.log("juste pour test");
+const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
 
     useEffect(() => {
         const run = async () => {
             setPicto([]);
+            setIsLoaded("");
             models.map(async (model, index) => {
                 
                 const viewerApi = new VctrApi("Model_" + model.modelId);
@@ -27,7 +27,7 @@ const VectaryItems = ({ picto, setPicto, models, dominantColor, pictureSleeve })
                 updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 
                 if(viewerApi.isReady === true) {
-                    console.log(viewerApi.isReady)
+                    setIsLoaded("Calculer le coût")
                     const screenshot = await viewerApi.takeScreenshot();
                     setPicto((oldScreen) => {
                         const newScreen = [...oldScreen];

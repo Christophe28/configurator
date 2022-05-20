@@ -20,7 +20,7 @@ const TotalCost = ({ town, color, email, image, quantity, signagesEquipements })
             return (
               <tr key={quantity[oneKey] + index}>
                 <td>{signagesEquipements[index].label}</td>
-                <td><img src={image[index]} alt="" /></td>
+                <td><img src={image[index]} alt={"Image du modèle " + signagesEquipements[index].label} /></td>
                 <td>X {quantity[oneKey]}</td>
               </tr>
             );
