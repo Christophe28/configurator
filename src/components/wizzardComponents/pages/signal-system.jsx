@@ -1,13 +1,14 @@
 import React from 'react';
 import VectaryItems from '../vectary-items/vectary-items';
 
-const SignalSystem = ({ reference ,townName ,models, currentColor, pictureSleeve }) => {
+const SignalSystem = ({ myPicto, setMyPicto, townName ,models, currentColor, pictureSleeve }) => {
 
     return (
         <div className="container-signal-system">
             <h2>Le nouveau système signalétique de {townName}</h2>
             <VectaryItems 
-                reference={reference}
+                picto={myPicto}
+                setPicto={setMyPicto}
                 models={models}
                 dominantColor={currentColor}
                 pictureSleeve={pictureSleeve}

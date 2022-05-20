@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import reducer from "../../../functions/reducer";
 
-const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
+const TotalCost = ({ town, color, email, image, quantity, signagesEquipements }) => {
   const [currentTotal, setCurrentTotal] = useState(0);
 
   const cheatTotal = [];
@@ -20,7 +20,7 @@ const TotalCost = ({ town, color, email, quantity, signagesEquipements }) => {
             return (
               <tr key={quantity[oneKey] + index}>
                 <td>{signagesEquipements[index].label}</td>
-                <td>picto à en devenir pris sur les modèles vectary</td>
+                <td><img src={image[index]} alt="" /></td>
                 <td>X {quantity[oneKey]}</td>
               </tr>
             );

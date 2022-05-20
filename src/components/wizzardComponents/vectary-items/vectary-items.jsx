@@ -10,53 +10,48 @@ import Iframe from './iframe';
 
 //Logic import
 import updateMaterial from '../../../functions/update-material';
-import exportAsImage from '../../../functions/export-as-image';
 
-const VectaryItems = ({ reference, models, dominantColor, pictureSleeve }) => {
-    const [picto, setPicto] = useState();
-    console.log(picto);
+const VectaryItems = ({ picto, setPicto, models, dominantColor, pictureSleeve }) => {
+    console.log("juste pour test");
     const viewerModels = [];
 
     useEffect(() => {
         const run = async () => {
-            models.map(async (model) => {
+            setPicto([]);
+            models.map(async (model, index) => {
+                
                 const viewerApi = new VctrApi("Model_" + model.modelId);
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
-                if(viewerApi.isReady === true) {
-                    exportAsImage(reference.current, setPicto);
-                }
 
                 updateMaterial(dominantColor, viewerApi, pictureSleeve);
+                
+                if(viewerApi.isReady === true) {
+                    console.log(viewerApi.isReady)
+                    const screenshot = await viewerApi.takeScreenshot();
+                    setPicto((oldScreen) => {
+                        const newScreen = [...oldScreen];
+                        newScreen[index] = screenshot;
+                        return newScreen
+                    });
+                }
+
             })
         }
         run();
-    })
+    }, [])
 
     return (
         <div>
             {
                 models.map((model, index) => {
-                    return(
-                        <>
-                            {/* <Iframe
-                                // reference={reference}
-                                id={model.modelId}
-                                key={"Model" + index + "_" + model.modelId}
-                                /> */}
-
-                            <iframe   
-                                ref={reference}  
-                                key={model.modelId}
-                                id={"Model_" + model.modelId}
-                                src={"https://www.vectary.com/viewer/v1/?model=" + model.modelId}
-                                frameBorder="0"
-                                width="20%"
-                                height="200">
-                            </iframe>
-                        </>
+                    return(                      
+                        <Iframe
+                            key={model.modelId + index}
+                            id={model.modelId}
+                        />
                     )
-                })
+                }) 
             }
         </div>
     );

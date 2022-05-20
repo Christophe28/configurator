@@ -34,10 +34,11 @@ const Wizzard = () => {
     setSelectedSignageEquipmentQuantity,
   ] = useState({});
   const [emailUser, setEmailUser] = useState("");
+  const [pictoVectaryModel, setPictoVectaryModel] = useState([]);
 
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
-
+  
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
   }, [townName]);
@@ -92,7 +93,8 @@ const Wizzard = () => {
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
       <SignalSystem
-        reference={exportRef}
+        myPicto={pictoVectaryModel}
+        setMyPicto={setPictoVectaryModel}
         townName={townName}
         models={selectedSignageEquipment}
         currentColor={color}
@@ -127,6 +129,7 @@ const Wizzard = () => {
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
       <TotalCost
+        image={pictoVectaryModel}
         town={townName}
         color={color}
         email={emailUser}
