@@ -66,6 +66,7 @@ body .container-components .container-navigation .previousInput {
 }
 
 .container-png h3 {
+  color: #fff;
   font-family: RobotoBlack, sans-serif;
   font-size: 150px;
   font-weight: bolder;

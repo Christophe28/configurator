@@ -24561,7 +24561,7 @@ const Wizzard = ()=>{
     _react.useEffect(()=>{
         _exportAsImageDefault.default(exportRef.current, setImage);
     }, [
-        townName
+        color
     ]);
     _react.useEffect(()=>{
         setSelectedSignageEquipmentQuantity((oldState)=>{
@@ -24744,13 +24744,21 @@ const Wizzard = ()=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-components",
         children: [
-            wizardSteps[currentWizardStep],
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dynamicalPngDefault.default, {
-                text: townName,
-                reference: exportRef
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
+                children: "Deploy"
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 182,
+                lineNumber: 180,
+                columnNumber: 7
+            }, undefined),
+            wizardSteps[currentWizardStep],
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dynamicalPngDefault.default, {
+                reference: exportRef,
+                text: townName,
+                color: color
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 183,
                 columnNumber: 7
             }, undefined)
         ]
@@ -33219,6 +33227,8 @@ var _iframeDefault = parcelHelpers.interopDefault(_iframe);
 //Logic import
 var _updateMaterial = require("../../../functions/update-material");
 var _updateMaterialDefault = parcelHelpers.interopDefault(_updateMaterial);
+var _updateColor2 = require("../../../functions/update-color-2");
+var _updateColor2Default = parcelHelpers.interopDefault(_updateColor2);
 var _s = $RefreshSig$();
 const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor , pictureSleeve  })=>{
     _s();
@@ -33232,7 +33242,8 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                 const viewerApi = new _api.VctrApi("Model_" + model.modelId);
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
-                _updateMaterialDefault.default(dominantColor, viewerApi, pictureSleeve);
+                // updateMaterial(dominantColor, viewerApi, pictureSleeve);
+                _updateColor2Default.default(viewerApi, pictureSleeve);
                 if (viewerApi.isReady === true) {
                     const waitForScreen = async ()=>{
                         const screenshot = await viewerApi.takeScreenshot();
@@ -33246,7 +33257,7 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                         });
                     };
                     const timeForScreen = ()=>{
-                        setTimeout(waitForScreen, 500);
+                        setTimeout(waitForScreen, 1000);
                     };
                     timeForScreen();
                 }
@@ -33281,7 +33292,7 @@ $RefreshReg$(_c, "VectaryItems");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../lib/api":"6mCQj","./iframe":"3y0ds","../../../functions/update-material":"da8K6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mCQj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../lib/api":"6mCQj","./iframe":"3y0ds","../../../functions/update-material":"da8K6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../functions/update-color-2":"3DSfZ"}],"6mCQj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "VctrApi", ()=>_Vectary$VctrApi
@@ -34389,6 +34400,17 @@ const updateMaterial = async (dominantColor, viewerApi, pictureSleeve)=>{
 };
 exports.default = updateMaterial;
 
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3DSfZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const updateMaterial2 = async (viewerApi, pictureSleeve)=>{
+    const updateColor2 = {
+        map: pictureSleeve
+    };
+    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor2);
+};
+exports.default = updateMaterial2;
+
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"273co":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$701e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
@@ -34401,20 +34423,24 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-const DynamicalPng = ({ reference , text  })=>{
+const DynamicalPng = ({ reference , text , color  })=>{
+    const style = {
+        background: color
+    };
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         ref: reference,
         className: "container-png",
+        style: style,
         children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h3", {
             children: text
         }, void 0, false, {
             fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
-            lineNumber: 7,
+            lineNumber: 9,
             columnNumber: 13
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
-        lineNumber: 6,
+        lineNumber: 8,
         columnNumber: 9
     }, undefined);
 };
