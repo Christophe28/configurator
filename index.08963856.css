@@ -116,6 +116,20 @@ body .container-components .container-navigation .previousInput {
   cursor: pointer;
 }
 
+.container-iframe {
+  flex-flow: wrap;
+  justify-content: center;
+  display: flex;
+}
+
+.container-iframe div {
+  margin: 1.5rem;
+}
+
+.container-iframe div iframe {
+  width: 100%;
+}
+
 .container-how-items {
   justify-content: center;
   align-items: center;

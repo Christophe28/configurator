@@ -24744,13 +24744,6 @@ const Wizzard = ()=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-components",
         children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
-                children: "Deploy"
-            }, void 0, false, {
-                fileName: "src/pages/wizzard.jsx",
-                lineNumber: 180,
-                columnNumber: 7
-            }, undefined),
             wizardSteps[currentWizardStep],
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dynamicalPngDefault.default, {
                 reference: exportRef,
@@ -24758,7 +24751,7 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 183,
+                lineNumber: 182,
                 columnNumber: 7
             }, undefined)
         ]
@@ -33247,7 +33240,6 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                 if (viewerApi.isReady === true) {
                     const waitForScreen = async ()=>{
                         const screenshot = await viewerApi.takeScreenshot();
-                        setIsLoaded("Calculer le coût");
                         setPicto((oldScreen)=>{
                             const newScreen = [
                                 ...oldScreen
@@ -33258,6 +33250,7 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                     };
                     const timeForScreen = ()=>{
                         setTimeout(waitForScreen, 1000);
+                        setTimeout(setIsLoaded("Calculer le coût"), 2000);
                     };
                     timeForScreen();
                 }
@@ -33266,14 +33259,18 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
         run();
     }, []);
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-iframe",
         children: models.map((model, index)=>{
-            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
-                id: model.modelId
-            }, model.modelId + index, false, {
-                fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                lineNumber: 56,
-                columnNumber: 25
-            }, undefined);
+            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
+                    id: model.modelId,
+                    nameModel: model.label
+                }, model.modelId + index, false, {
+                    fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
+                    lineNumber: 57,
+                    columnNumber: 29
+                }, undefined)
+            }, void 0, false);
         })
     }, void 0, false, {
         fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
@@ -34363,20 +34360,33 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-const Iframe = ({ id  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("iframe", {
-            id: "Model_" + id,
-            src: "https://www.vectary.com/viewer/v1/?model=" + id,
-            frameBorder: "0",
-            width: "20%",
-            height: "200"
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-            lineNumber: 6,
-            columnNumber: 7
-        }, undefined)
-    }, void 0, false);
+const Iframe = ({ id , nameModel  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("iframe", {
+                id: "Model_" + id,
+                src: "https://www.vectary.com/viewer/v1/?model=" + id,
+                frameBorder: "0",
+                width: "20%",
+                height: "200"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+                lineNumber: 6,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                children: nameModel
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+                lineNumber: 14,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+        lineNumber: 5,
+        columnNumber: 5
+    }, undefined);
 };
 _c = Iframe;
 exports.default = Iframe;
