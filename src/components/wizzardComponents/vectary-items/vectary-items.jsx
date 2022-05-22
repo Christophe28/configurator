@@ -10,7 +10,7 @@ import Iframe from './iframe';
 
 //Logic import
 import updateMaterial from '../../../functions/update-material';
-
+import updateMaterial2 from '../../../functions/update-color-2';
 const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
     console.log("picto", picto);
@@ -24,21 +24,21 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
 
-                updateMaterial(dominantColor, viewerApi, pictureSleeve);
+                // updateMaterial(dominantColor, viewerApi, pictureSleeve);
+                updateMaterial2(viewerApi, pictureSleeve);
                 
                 if(viewerApi.isReady === true) {
-                    
                     const waitForScreen = async () => {
                         const screenshot = await viewerApi.takeScreenshot();
-                        setIsLoaded("Calculer le coût")
                         setPicto((oldScreen) => {
                             const newScreen = [...oldScreen];
                             newScreen[index] = screenshot;
                             return newScreen
-                        });
+                        });                    
                     }
                     const timeForScreen = () => {
-                        setTimeout(waitForScreen, 500)
+                        setTimeout(waitForScreen, 1000)
+                        setTimeout(setIsLoaded("Calculer le coût"), 2000)
                     }
                     timeForScreen();
                 }
@@ -49,14 +49,17 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
 
     
     return (
-        <div>
+        <div className="container-iframe">
             {
                 models.map((model, index) => {
-                    return(                      
-                        <Iframe
-                            key={model.modelId + index}
-                            id={model.modelId}
-                        />
+                    return(    
+                        <>
+                            <Iframe
+                                key={model.modelId + index}
+                                id={model.modelId}
+                                nameModel={model.label}
+                            />    
+                        </>                  
                     )
                 }) 
             }

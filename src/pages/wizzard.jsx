@@ -42,7 +42,7 @@ const Wizzard = () => {
 
   useEffect(() => {
     exportAsImage(exportRef.current, setImage);
-  }, [townName]);
+  }, [color]);
 
   useEffect(() => {
     setSelectedSignageEquipmentQuantity((oldState) => {
@@ -178,8 +178,8 @@ const Wizzard = () => {
   return (
     <div className="container-components">
       {wizardSteps[currentWizardStep]}
-
-      <DynamicalPng text={townName} reference={exportRef} />
+      
+      <DynamicalPng reference={exportRef} text={townName} color={color}/>
     </div>
   );
 };
