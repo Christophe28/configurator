@@ -24,17 +24,8 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
                 
-                await viewerApi.setPositionAbsolute("Camera", [0, 4, 8.5]);
-                const cameraPosition = await viewerApi.getPosition("Camera");
-                // const moveCamera = await viewerApi.moveView([0, 0, 2])
-                // const rotateCamera = await viewerApi.rotateView([1, 0])
-                console.log("cameraPosition : ", viewerApi.id, ": ", cameraPosition);
-                // await viewerApi.moveView([])
-                
-               
-                
-                
-  
+                await viewerApi.setPositionAbsolute("Camera", [4, 0, 10]);
+
                 // updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 updateMaterial2(viewerApi, pictureSleeve);
                 
