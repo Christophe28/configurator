@@ -13,7 +13,7 @@ import updateMaterial from '../../../functions/update-material';
 import updateMaterial2 from '../../../functions/update-color-2';
 const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
-    console.log("picto", picto);
+
     useEffect(() => {
         const run = async () => {
             setPicto([]);
@@ -23,7 +23,18 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 const viewerApi = new VctrApi("Model_" + model.modelId);
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
-
+                
+                await viewerApi.setPositionAbsolute("Camera", [0, 4, 8.5]);
+                const cameraPosition = await viewerApi.getPosition("Camera");
+                // const moveCamera = await viewerApi.moveView([0, 0, 2])
+                // const rotateCamera = await viewerApi.rotateView([1, 0])
+                console.log("cameraPosition : ", viewerApi.id, ": ", cameraPosition);
+                // await viewerApi.moveView([])
+                
+               
+                
+                
+  
                 // updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 updateMaterial2(viewerApi, pictureSleeve);
                 
@@ -53,13 +64,13 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
             {
                 models.map((model, index) => {
                     return(    
-                        <>
+                        <React.Fragment key={model.modelId + index}>
                             <Iframe
                                 key={model.modelId + index}
                                 id={model.modelId}
                                 nameModel={model.label}
                             />    
-                        </>                  
+                        </React.Fragment>                  
                     )
                 }) 
             }

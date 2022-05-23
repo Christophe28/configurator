@@ -3,6 +3,7 @@ const updateMaterial2 = async (viewerApi, pictureSleeve) => {
         map: pictureSleeve
     }
     await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor2);
+    
 }
 
 export default updateMaterial2

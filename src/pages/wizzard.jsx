@@ -55,27 +55,27 @@ const Wizzard = () => {
   }, [selectedSignageEquipment]);
 
   const wizardSteps = [
-    <ViewWrapper 
-      previous={false} 
-      next={showInput(townName)}
-      nextAction={() => {
-          setCurrentWizardStep(currentWizardStep + 1);
-        }
-      }
-    >
-      <ChooseTown setTownName={setTownName} townName={townName} />
-    </ViewWrapper>,
-    <ViewWrapper
-      next={showInput(color)}
-      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
-      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
-    >
-      <ChooseDominantColor
-        color={color}
-        setColor={setColor}
-        themeColors={themeColors}
-      />
-    </ViewWrapper>,
+    // <ViewWrapper 
+    //   previous={false} 
+    //   next={showInput(townName)}
+    //   nextAction={() => {
+    //       setCurrentWizardStep(currentWizardStep + 1);
+    //     }
+    //   }
+    // >
+    //   <ChooseTown setTownName={setTownName} townName={townName} />
+    // </ViewWrapper>,
+    // <ViewWrapper
+    //   next={showInput(color)}
+    //   previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+    //   nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+    // >
+    //   <ChooseDominantColor
+    //     color={color}
+    //     setColor={setColor}
+    //     themeColors={themeColors}
+    //   />
+    // </ViewWrapper>,
     <ViewWrapper
       next={showInput(selectedSignageEquipment)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
