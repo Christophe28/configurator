@@ -24,7 +24,7 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
                 
-                await viewerApi.setPositionAbsolute("Camera", [4, 0, 10]);
+                await viewerApi.setPositionAbsolute("Camera", [4, 2, 7.8]);
 
                 // updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 updateMaterial2(viewerApi, pictureSleeve);
