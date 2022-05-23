@@ -24,8 +24,16 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
                 
-                await viewerApi.setPositionAbsolute("Camera", [4, 2, 7.8]);
-
+                //===============================================================================================//
+                //Ne fonctionne pas comme prévu. Je pensais qu'en utilsant setPositionAbsolute cela mettrait tout à la même position ce qui n'est pas le cas. De plus les dimensions des div iframe ne sont pas les mêmes (300 à 314px) peut être chercher de ce côté.
+                await viewerApi.setPositionAbsolute("Camera", [4, 2, 6]);
+                const getObject = await viewerApi.getObjects();
+                console.log(getObject);
+                for(let elem of getObject) {
+                    console.log(elem.name);
+                    elem.name !== "Camera" ? await viewerApi.setPositionAbsolute(elem.name, [-0.2, 0, 0]) : "";     
+                }
+                //===============================================================================================//
                 // updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 updateMaterial2(viewerApi, pictureSleeve);
                 
