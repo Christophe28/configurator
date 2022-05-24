@@ -60,7 +60,10 @@ const Wizzard = () => {
         }
       }
     >
-      <ChooseTown setTownName={setTownName} townName={townName} />
+      <ChooseTown 
+        setTownName={setTownName} 
+        townName={townName} 
+      />
     </ViewWrapper>,
     <ViewWrapper
       next={showInput(color)}

@@ -1,10 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
 import InputText from '../buttons/input-text';
 
 const ChooseTown = ({ townName, setTownName }) => {
     return (
-        <div className="container-town-name">
+        <div className="container-town-name" >
             <h2>Quel est le nom de votre commune ?</h2>
             
             <InputText 
