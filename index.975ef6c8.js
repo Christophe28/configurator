@@ -33226,7 +33226,6 @@ var _s = $RefreshSig$();
 const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor , pictureSleeve  })=>{
     _s();
     const viewerModels = [];
-    console.log("picto", picto);
     _react.useEffect(()=>{
         const run = async ()=>{
             setPicto([]);
@@ -33235,6 +33234,16 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                 const viewerApi = new _api.VctrApi("Model_" + model.modelId);
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
+                //===============================================================================================//
+                //Ne fonctionne pas comme prévu. Je pensais qu'en utilsant setPositionAbsolute cela mettrait tout à la même position ce qui n'est pas le cas. De plus les dimensions des div iframe ne sont pas les mêmes (300 à 314px) peut être chercher de ce côté.
+                await viewerApi.setPositionAbsolute("Camera", [
+                    4,
+                    2,
+                    7
+                ]);
+                const getObject = await viewerApi.getObjects();
+                const getViewState = await viewerApi.getViewState();
+                console.log(getViewState);
                 // updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 _updateColor2Default.default(viewerApi, pictureSleeve);
                 if (viewerApi.isReady === true) {
@@ -33261,20 +33270,24 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-iframe",
         children: models.map((model, index)=>{
-            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactDefault.default.Fragment, {
                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
                     id: model.modelId,
                     nameModel: model.label
                 }, model.modelId + index, false, {
                     fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                    lineNumber: 57,
+                    lineNumber: 65,
                     columnNumber: 29
                 }, undefined)
-            }, void 0, false);
+            }, model.modelId + index, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
+                lineNumber: 64,
+                columnNumber: 25
+            }, undefined);
         })
     }, void 0, false, {
         fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-        lineNumber: 52,
+        lineNumber: 60,
         columnNumber: 9
     }, undefined);
 };
