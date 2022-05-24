@@ -2,7 +2,7 @@
 import React from "react";
 import ColorsPickerWrapper from "../../layout/colors-picker-wrapper";
 
-const ChooseDominantColor = ({ themeColors, setColor, color }) => {
+const ChooseDominantColor = ({ themeColors, setColor, color, colorsPickerValue, setColorsPickerValue }) => {
   
   return (
     <div className="container-dominant-color">
@@ -24,7 +24,7 @@ const ChooseDominantColor = ({ themeColors, setColor, color }) => {
           onClick={(e) => setColor(themeColor.hexadecimalColor)}
         />
       ))}
-      <ColorsPickerWrapper setColor={setColor} color={color}/>
+      <ColorsPickerWrapper setColor={setColor} color={color} colorsPickerValue={colorsPickerValue} setColorsPickerValue={setColorsPickerValue}/>
       </section>
     </div>
   );

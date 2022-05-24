@@ -27,6 +27,7 @@ const Wizzard = () => {
   const [currentWizardStep, setCurrentWizardStep] = useState(0);
   const [townName, setTownName] = useState("");
   const [color, setColor] = useState("");
+  const [colorsPickerValue, setColorsPickerValue] = useState("");
   const [image, setImage] = useState();
   const [selectedSignageEquipment, setSelectedSignageEquipment] = useState([]);
   const [
@@ -39,10 +40,8 @@ const Wizzard = () => {
 
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
-
-  // useEffect(() => {
-  //   exportAsImage(exportRef.current, setImage);
-  // }, [color]);
+  
+  console.log(color);
 
   useEffect(() => {
     setSelectedSignageEquipmentQuantity((oldState) => {
@@ -75,6 +74,8 @@ const Wizzard = () => {
     >
       <ChooseDominantColor
         color={color}
+        colorsPickerValue={colorsPickerValue}
+        setColorsPickerValue={setColorsPickerValue}
         setColor={setColor}
         themeColors={themeColors}
       />
