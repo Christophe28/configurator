@@ -103,11 +103,6 @@ body .container-components .container-navigation .previousInput {
   display: inline-block;
 }
 
-.button-to-colors-picker {
-  border: none;
-  font-size: 3rem;
-}
-
 .colors-picker {
   visibility: hidden;
   border: none;

@@ -24550,6 +24550,7 @@ const Wizzard = ()=>{
     const [currentWizardStep, setCurrentWizardStep] = _react.useState(0);
     const [townName, setTownName] = _react.useState("");
     const [color, setColor] = _react.useState("");
+    const [colorsPickerValue, setColorsPickerValue] = _react.useState("");
     const [image, setImage] = _react.useState();
     const [selectedSignageEquipment1, setSelectedSignageEquipment] = _react.useState([]);
     const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity, ] = _react.useState({});
@@ -24558,9 +24559,6 @@ const Wizzard = ()=>{
     const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = _react.useState("");
     const exportRef = _react.useRef();
     const textInputNext = "Recevoir un devis";
-    // useEffect(() => {
-    //   exportAsImage(exportRef.current, setImage);
-    // }, [color]);
     _react.useEffect(()=>{
         setSelectedSignageEquipmentQuantity((oldState)=>{
             const newState = {};
@@ -24573,47 +24571,32 @@ const Wizzard = ()=>{
         selectedSignageEquipment1
     ]);
     const wizardSteps = [
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
-            previous: false,
-            next: _showInputDefault.default(townName),
-            nextAction: ()=>{
-                setCurrentWizardStep(currentWizardStep + 1);
-            },
-            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseTownDefault.default, {
-                setTownName: setTownName,
-                townName: townName
-            }, void 0, false, {
-                fileName: "src/pages/wizzard.jsx",
-                lineNumber: 66,
-                columnNumber: 7
-            }, undefined)
-        }, void 0, false, {
-            fileName: "src/pages/wizzard.jsx",
-            lineNumber: 58,
-            columnNumber: 5
-        }, undefined),
-        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
-            next: _showInputDefault.default(color),
-            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
-            ,
-            nextAction: ()=>{
-                setCurrentWizardStep(currentWizardStep + 1);
-                _exportAsImageDefault.default(exportRef.current, setImage);
-            },
-            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
-                color: color,
-                setColor: setColor,
-                themeColors: _config.themeColors
-            }, void 0, false, {
-                fileName: "src/pages/wizzard.jsx",
-                lineNumber: 76,
-                columnNumber: 7
-            }, undefined)
-        }, void 0, false, {
-            fileName: "src/pages/wizzard.jsx",
-            lineNumber: 68,
-            columnNumber: 5
-        }, undefined),
+        // <ViewWrapper 
+        //   previous={false} 
+        //   next={showInput(townName)}
+        //   nextAction={() => {
+        //       setCurrentWizardStep(currentWizardStep + 1);
+        //     }
+        //   }
+        // >
+        //   <ChooseTown setTownName={setTownName} townName={townName} />
+        // </ViewWrapper>,
+        // <ViewWrapper
+        //   next={showInput(color)}
+        //   previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+        //   nextAction={() => {
+        //     setCurrentWizardStep(currentWizardStep + 1);
+        //     exportAsImage(exportRef.current, setImage);
+        //   }}
+        // >
+        //   <ChooseDominantColor
+        //     color={color}
+        //     colorsPickerValue={colorsPickerValue}
+        //     setColorsPickerValue={setColorsPickerValue}
+        //     setColor={setColor}
+        //     themeColors={themeColors}
+        //   />
+        // </ViewWrapper>,
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             next: _showInputDefault.default(selectedSignageEquipment1),
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
@@ -24627,12 +24610,12 @@ const Wizzard = ()=>{
                 selectedSignageEquipment: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 87,
+                lineNumber: 86,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 82,
+            lineNumber: 81,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24651,12 +24634,12 @@ const Wizzard = ()=>{
                 pictureSleeve: image
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 99,
+                lineNumber: 98,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 94,
+            lineNumber: 93,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24681,12 +24664,12 @@ const Wizzard = ()=>{
                     })
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 117,
+                lineNumber: 116,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 109,
+            lineNumber: 108,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24701,12 +24684,12 @@ const Wizzard = ()=>{
                 signagesEquipements: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 136,
+                lineNumber: 135,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 131,
+            lineNumber: 130,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24717,7 +24700,6 @@ const Wizzard = ()=>{
         };
         selectedSignageEquipment1.forEach((selectedSignage, index)=>{
             totalOrder["selectedSignage" + index + "label"] = selectedSignage.label;
-            // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
             totalOrder["selectedSignage" + index + "quantity"] = selectedSignageEquipmentQuantity[selectedSignage.value];
         });
         fetch("https://formsubmit.co/ajax/" + emailUser, {
@@ -24751,17 +24733,17 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 185,
+                lineNumber: 183,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 182,
+        lineNumber: 180,
         columnNumber: 5
     }, undefined);
 };
-_s(Wizzard, "6CSaqLHp53kWrOUQ6TNzsLEh6ZM=");
+_s(Wizzard, "WmjVUViuYiQBzTqCuGXpjaO0rbM=");
 _c = Wizzard;
 exports.default = Wizzard;
 var _c;
@@ -32830,7 +32812,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _colorsPickerWrapper = require("../../layout/colors-picker-wrapper");
 var _colorsPickerWrapperDefault = parcelHelpers.interopDefault(_colorsPickerWrapper);
-const ChooseDominantColor = ({ themeColors , setColor , color  })=>{
+const ChooseDominantColor = ({ themeColors , setColor , color , colorsPickerValue , setColorsPickerValue  })=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-dominant-color",
         children: [
@@ -32863,7 +32845,9 @@ const ChooseDominantColor = ({ themeColors , setColor , color  })=>{
                     ),
                     /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colorsPickerWrapperDefault.default, {
                         setColor: setColor,
-                        color: color
+                        color: color,
+                        colorsPickerValue: colorsPickerValue,
+                        setColorsPickerValue: setColorsPickerValue
                     }, void 0, false, {
                         fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
                         lineNumber: 27,
@@ -32904,23 +32888,9 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
-var _s = $RefreshSig$();
-const ColorsPickerWrapper = ({ setColor , color  })=>{
-    _s();
-    const [picker, setPicker] = _react.useState(false);
-    const [colorsPickerValue, setColorsPickerValue] = _react.useState();
-    const displayColorPicker = ()=>{
-        if (picker === false) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-            type: "button",
-            className: "button-to-colors-picker",
-            defaultValue: "+",
-            onClick: (e)=>setPicker(true)
-        }, void 0, false, {
-            fileName: "src/components/layout/colors-picker-wrapper.jsx",
-            lineNumber: 11,
-            columnNumber: 17
-        }, undefined);
-        if (picker === true) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+const ColorsPickerWrapper = ({ color , setColor , colorsPickerValue , setColorsPickerValue  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
             type: "color",
             className: "colors-picker",
             style: color === colorsPickerValue ? {
@@ -32929,22 +32899,18 @@ const ColorsPickerWrapper = ({ setColor , color  })=>{
                 color: colorsPickerValue,
                 opacity: 0.45
             },
-            defaultValue: "#e66465",
+            value: colorsPickerValue,
             onChange: (e)=>{
                 setColor(e.target.value);
                 setColorsPickerValue(e.target.value);
             }
         }, void 0, false, {
             fileName: "src/components/layout/colors-picker-wrapper.jsx",
-            lineNumber: 21,
-            columnNumber: 17
-        }, undefined);
-    };
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
-        children: displayColorPicker()
+            lineNumber: 6,
+            columnNumber: 13
+        }, undefined)
     }, void 0, false);
 };
-_s(ColorsPickerWrapper, "AlQNAeehcnaBPiLXwPCjVVBpHqw=");
 _c = ColorsPickerWrapper;
 exports.default = ColorsPickerWrapper;
 var _c;
@@ -33353,18 +33319,18 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                     nameModel: model.label
                 }, model.modelId + index, false, {
                     fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                    lineNumber: 61,
+                    lineNumber: 62,
                     columnNumber: 29
                 }, undefined)
             }, model.modelId + index, false, {
                 fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                lineNumber: 60,
+                lineNumber: 61,
                 columnNumber: 25
             }, undefined);
         })
     }, void 0, false, {
         fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-        lineNumber: 56,
+        lineNumber: 57,
         columnNumber: 9
     }, undefined);
 };
@@ -34450,31 +34416,34 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _faviconPng = require("./favicon.png");
+var _faviconPngDefault = parcelHelpers.interopDefault(_faviconPng);
 const Iframe = ({ id , nameModel  })=>{
+    console.log(_faviconPngDefault.default);
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("iframe", {
                 id: "Model_" + id,
-                src: "https://www.vectary.com/viewer/v1/?model=" + id,
+                src: "https://www.vectary.com/viewer/v1/?model=" + id + "&arIcon=" + _faviconPngDefault.default,
                 frameBorder: "0",
                 width: "20%",
                 height: "200"
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-                lineNumber: 6,
+                lineNumber: 8,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
                 children: nameModel
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-                lineNumber: 14,
+                lineNumber: 16,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-        lineNumber: 5,
+        lineNumber: 7,
         columnNumber: 5
     }, undefined);
 };
@@ -34488,7 +34457,44 @@ $RefreshReg$(_c, "Iframe");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"da8K6":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./favicon.png":"5jBaB"}],"5jBaB":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "favicon.3cfdc964.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"da8K6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const updateMaterial = async (dominantColor, viewerApi, pictureSleeve)=>{
@@ -34864,41 +34870,7 @@ $RefreshReg$(_c, "ViewWrapper");
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fOVVj":[function() {},{}],"kEgDc":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "Roboto-Light.df813467.ttf" + "?" + Date.now();
 
-},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"aTm38":[function(require,module,exports) {
+},{"./helpers/bundle-url":"lgJ39"}],"aTm38":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "Roboto-Black.73a444fe.ttf" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}]},["kn9T2","7fmqN","8lqZg"], "8lqZg", "parcelRequireef40")
