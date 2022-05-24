@@ -24571,32 +24571,49 @@ const Wizzard = ()=>{
         selectedSignageEquipment1
     ]);
     const wizardSteps = [
-        // <ViewWrapper 
-        //   previous={false} 
-        //   next={showInput(townName)}
-        //   nextAction={() => {
-        //       setCurrentWizardStep(currentWizardStep + 1);
-        //     }
-        //   }
-        // >
-        //   <ChooseTown setTownName={setTownName} townName={townName} />
-        // </ViewWrapper>,
-        // <ViewWrapper
-        //   next={showInput(color)}
-        //   previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
-        //   nextAction={() => {
-        //     setCurrentWizardStep(currentWizardStep + 1);
-        //     exportAsImage(exportRef.current, setImage);
-        //   }}
-        // >
-        //   <ChooseDominantColor
-        //     color={color}
-        //     colorsPickerValue={colorsPickerValue}
-        //     setColorsPickerValue={setColorsPickerValue}
-        //     setColor={setColor}
-        //     themeColors={themeColors}
-        //   />
-        // </ViewWrapper>,
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            previous: false,
+            next: _showInputDefault.default(townName),
+            nextAction: ()=>{
+                setCurrentWizardStep(currentWizardStep + 1);
+            },
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseTownDefault.default, {
+                setTownName: setTownName,
+                townName: townName
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 63,
+                columnNumber: 7
+            }, undefined)
+        }, void 0, false, {
+            fileName: "src/pages/wizzard.jsx",
+            lineNumber: 55,
+            columnNumber: 5
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            next: _showInputDefault.default(color),
+            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
+            ,
+            nextAction: ()=>{
+                setCurrentWizardStep(currentWizardStep + 1);
+                _exportAsImageDefault.default(exportRef.current, setImage);
+            },
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
+                color: color,
+                colorsPickerValue: colorsPickerValue,
+                setColorsPickerValue: setColorsPickerValue,
+                setColor: setColor,
+                themeColors: _config.themeColors
+            }, void 0, false, {
+                fileName: "src/pages/wizzard.jsx",
+                lineNumber: 73,
+                columnNumber: 7
+            }, undefined)
+        }, void 0, false, {
+            fileName: "src/pages/wizzard.jsx",
+            lineNumber: 65,
+            columnNumber: 5
+        }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             next: _showInputDefault.default(selectedSignageEquipment1),
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
@@ -24754,7 +24771,2291 @@ $RefreshReg$(_c, "Wizzard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","../functions/export-as-image":"9VZDV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../functions/show-input":"jnUkf","react":"21dqq","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../components/layout/view-wrapper":"2NQC3","../config/config":"a6ccA"}],"9VZDV":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","react/jsx-dev-runtime":"iTorj","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../components/layout/view-wrapper":"2NQC3","../config/config":"a6ccA","../functions/export-as-image":"9VZDV","../functions/show-input":"jnUkf"}],"km3Ru":[function(require,module,exports) {
+"use strict";
+var Refresh = require('react-refresh/runtime');
+function debounce(func, delay) {
+    var args1;
+    var timeout = undefined;
+    return function(args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            timeout = undefined;
+            func.call(null, args);
+        }, delay);
+    };
+}
+var enqueueUpdate = debounce(function() {
+    Refresh.performReactRefresh();
+}, 30); // Everthing below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function(module) {
+    window.$RefreshReg$ = function(type, id) {
+        Refresh.register(type, module.id + ' ' + id);
+    };
+    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+};
+module.exports.postlude = function(module) {
+    if (isReactRefreshBoundary(module.exports)) {
+        registerExportsForReactRefresh(module);
+        if (module.hot) {
+            module.hot.dispose(function(data) {
+                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
+                data.prevExports = module.exports;
+            });
+            module.hot.accept(function(getParents) {
+                var prevExports = module.hot.data.prevExports;
+                var nextExports = module.exports; // Since we just executed the code for it, it's possible
+                // that the new exports make it ineligible for being a boundary.
+                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports); // It can also become ineligible if its exports are incompatible
+                // with the previous exports.
+                // For example, if you add/remove/change exports, we'll want
+                // to re-execute the importing modules, and force those components
+                // to re-render. Similarly, if you convert a class component
+                // to a function, we want to invalidate the boundary.
+                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+                if (isNoLongerABoundary || didInvalidate) {
+                    // We'll be conservative. The only case in which we won't do a full
+                    // reload is if all parent modules are also refresh boundaries.
+                    // In that case we'll add them to the current queue.
+                    var parents = getParents();
+                    if (parents.length === 0) {
+                        // Looks like we bubbled to the root. Can't recover from that.
+                        window.location.reload();
+                        return;
+                    }
+                    return parents;
+                }
+                enqueueUpdate();
+            });
+        }
+    }
+};
+function isReactRefreshBoundary(exports) {
+    if (Refresh.isLikelyComponentType(exports)) return true;
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    return false;
+    var hasExports = false;
+    var areAllExportsComponents = true;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        hasExports = true;
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
+        return false;
+        var exportValue = exports[key];
+        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
+    }
+    return hasExports && areAllExportsComponents;
+}
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+    var prevSignature = getRefreshBoundarySignature(prevExports);
+    var nextSignature = getRefreshBoundarySignature(nextExports);
+    if (prevSignature.length !== nextSignature.length) return true;
+    for(var i = 0; i < nextSignature.length; i++){
+        if (prevSignature[i] !== nextSignature[i]) return true;
+    }
+    return false;
+} // When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+    var signature = [];
+    signature.push(Refresh.getFamilyByType(exports));
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        signature.push(key);
+        signature.push(Refresh.getFamilyByType(exportValue));
+    }
+    return signature;
+}
+function registerExportsForReactRefresh(module) {
+    var exports = module.exports, id = module.id;
+    Refresh.register(exports, id + ' %exports%');
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        Refresh.register(exportValue, id + ' %exports% ' + key);
+    }
+}
+
+},{"react-refresh/runtime":"786KC"}],"89ycD":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$eb26 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$eb26.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _inputText = require("../buttons/input-text");
+var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
+const ChooseTown = ({ townName , setTownName  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-town-name",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quel est le nom de votre commune ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+                lineNumber: 8,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
+                type: "text",
+                value: townName,
+                onChange: (e)=>{
+                    setTownName(e.target.value);
+                }
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+                lineNumber: 10,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+        lineNumber: 7,
+        columnNumber: 9
+    }, undefined);
+};
+_c = ChooseTown;
+exports.default = ChooseTown;
+var _c;
+$RefreshReg$(_c, "ChooseTown");
+
+  $parcel$ReactRefreshHelpers$eb26.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/input-text":"cEoUW","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cEoUW":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$eac1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$eac1.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const InputText = ({ type , value , name , placeholder , onChange  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-input-text",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+            type: type,
+            value: value,
+            name: name,
+            placeholder: placeholder,
+            onChange: onChange
+        }, void 0, false, {
+            fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
+            lineNumber: 6,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
+        lineNumber: 5,
+        columnNumber: 9
+    }, undefined);
+};
+_c = InputText;
+exports.default = InputText;
+var _c;
+$RefreshReg$(_c, "InputText");
+
+  $parcel$ReactRefreshHelpers$eac1.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8MgvR":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$a15d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$a15d.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+//React import
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _colorsPickerWrapper = require("../../layout/colors-picker-wrapper");
+var _colorsPickerWrapperDefault = parcelHelpers.interopDefault(_colorsPickerWrapper);
+const ChooseDominantColor = ({ themeColors , setColor , color , colorsPickerValue , setColorsPickerValue  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-dominant-color",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quelle est la couleur dominante de votre charte graphique ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                lineNumber: 9,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
+                className: "colors",
+                children: [
+                    themeColors.map((themeColor)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "button",
+                            style: themeColor.hexadecimalColor === color ? {
+                                background: themeColor.hexadecimalColor,
+                                height: "4.3rem",
+                                width: "4.3rem"
+                            } : {
+                                background: themeColor.hexadecimalColor,
+                                opacity: 0.45
+                            },
+                            onClick: (e)=>setColor(themeColor.hexadecimalColor)
+                        }, themeColor.value, false, {
+                            fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                            lineNumber: 12,
+                            columnNumber: 9
+                        }, undefined)
+                    ),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colorsPickerWrapperDefault.default, {
+                        setColor: setColor,
+                        color: color,
+                        colorsPickerValue: colorsPickerValue,
+                        setColorsPickerValue: setColorsPickerValue
+                    }, void 0, false, {
+                        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                        lineNumber: 27,
+                        columnNumber: 7
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                lineNumber: 10,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+        lineNumber: 8,
+        columnNumber: 5
+    }, undefined);
+};
+_c = ChooseDominantColor;
+exports.default = ChooseDominantColor;
+var _c;
+$RefreshReg$(_c, "ChooseDominantColor");
+
+  $parcel$ReactRefreshHelpers$a15d.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../layout/colors-picker-wrapper":"iMl4K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iMl4K":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$8333 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$8333.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const ColorsPickerWrapper = ({ color , setColor , colorsPickerValue , setColorsPickerValue  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+            type: "color",
+            className: "colors-picker",
+            style: color === colorsPickerValue ? {
+                color: color
+            } : {
+                color: colorsPickerValue,
+                opacity: 0.45
+            },
+            value: colorsPickerValue,
+            onChange: (e)=>{
+                setColor(e.target.value);
+                setColorsPickerValue(e.target.value);
+            }
+        }, void 0, false, {
+            fileName: "src/components/layout/colors-picker-wrapper.jsx",
+            lineNumber: 6,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false);
+};
+_c = ColorsPickerWrapper;
+exports.default = ColorsPickerWrapper;
+var _c;
+$RefreshReg$(_c, "ColorsPickerWrapper");
+
+  $parcel$ReactRefreshHelpers$8333.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hKyDF":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$3164 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$3164.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+//React import
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+//Component import
+var _checkboxes = require("../buttons/checkboxes");
+var _checkboxesDefault = parcelHelpers.interopDefault(_checkboxes);
+var _config = require("../../../config/config");
+const ChooseSignageEquipment = ({ onChangeAction , selectedSignageEquipment  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-signal-fonction",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quelles fonctions de signal\xe9tique souhaitez-vous implanter ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
+                lineNumber: 12,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_checkboxesDefault.default, {
+                items: _config.signageEquipment,
+                onChangeAction: onChangeAction,
+                selectedItems: selectedSignageEquipment
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
+                lineNumber: 13,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
+        lineNumber: 11,
+        columnNumber: 5
+    }, undefined);
+};
+_c = ChooseSignageEquipment;
+exports.default = ChooseSignageEquipment;
+var _c;
+$RefreshReg$(_c, "ChooseSignageEquipment");
+
+  $parcel$ReactRefreshHelpers$3164.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/checkboxes":"exstm","../../../config/config":"a6ccA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"exstm":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$3156 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$3156.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+//React import
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _s = $RefreshSig$();
+const Checkboxes = ({ items , onChangeAction , selectedItems =[]  })=>{
+    _s();
+    const [checkboxesState, setCheckboxesState] = _react.useState(items.map((item)=>selectedItems.some((selectedItem)=>selectedItem.value === item.value
+        )
+    ));
+    _react.useEffect(()=>{
+        onChangeAction(items.filter((item, index)=>checkboxesState[index]
+        ));
+    }, [
+        checkboxesState
+    ]);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-checkboxes",
+        children: items.map((item, index)=>{
+            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                children: [
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                        type: "checkbox",
+                        id: item.value,
+                        name: item.value,
+                        value: item.value,
+                        defaultChecked: checkboxesState[index],
+                        onChange: (e)=>{
+                            setCheckboxesState((oldCheckboxesState)=>{
+                                const newCheckboxesState = [
+                                    ...oldCheckboxesState
+                                ];
+                                newCheckboxesState[index] = e.target.checked;
+                                return newCheckboxesState;
+                            });
+                        }
+                    }, void 0, false, {
+                        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
+                        lineNumber: 19,
+                        columnNumber: 13
+                    }, undefined),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                        htmlFor: item.value,
+                        children: item.label
+                    }, void 0, false, {
+                        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
+                        lineNumber: 33,
+                        columnNumber: 13
+                    }, undefined)
+                ]
+            }, item.value, true, {
+                fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
+                lineNumber: 18,
+                columnNumber: 11
+            }, undefined);
+        })
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
+        lineNumber: 15,
+        columnNumber: 5
+    }, undefined);
+};
+_s(Checkboxes, "65DaY5cYwuy5KulZ/KInE7BYeH4=");
+_c = Checkboxes;
+exports.default = Checkboxes;
+var _c;
+$RefreshReg$(_c, "Checkboxes");
+
+  $parcel$ReactRefreshHelpers$3156.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"a6ccA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "vectaryModels", ()=>vectaryModels
+);
+parcelHelpers.export(exports, "colorsDarkScheme", ()=>colorsDarkScheme
+);
+parcelHelpers.export(exports, "colorsLightScheme", ()=>colorsLightScheme
+);
+parcelHelpers.export(exports, "themeColors", ()=>themeColors
+);
+parcelHelpers.export(exports, "signageEquipment", ()=>signageEquipment
+);
+parcelHelpers.export(exports, "productQuantity", ()=>productQuantity
+);
+parcelHelpers.export(exports, "mailOfKingBoss", ()=>mailOfKingBoss
+);
+const vectaryModels = [
+    {
+        label: "Panneau directionnel",
+        name: "directionnalSign",
+        value: "directionnalSign",
+        id: "e23752d1-c5e8-4788-b719-8a913477dc6c"
+    },
+    {
+        label: "Panneau 2000",
+        name: "panel2000",
+        value: "panel2000",
+        id: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
+    },
+    {
+        label: "Panneau 3000",
+        name: "panel3000",
+        value: "panel3000",
+        id: "d7e90749-acb2-4861-bb20-08881e0777ce"
+    },
+    {
+        label: "Manchon text",
+        name: "sleeveText",
+        value: "sleeveText",
+        id: "57cf45e9-d355-4463-af66-f08c72993784"
+    }
+];
+const colorsDarkScheme = {
+    COULEUR_SECONDAIRE0000: "#3E844A",
+    COULEUR_PANNEAU: "#000000",
+    COULEUR_DOMINANTE: "#787878"
+};
+const colorsLightScheme = {
+    COULEUR_SECONDAIRE0000: "#FF1A1A",
+    COULEUR_PANNEAU: "#FFFFFF",
+    COULEUR_DOMINANTE: "#FFFFFF"
+};
+const themeColors = [
+    {
+        value: "blueOfAzure",
+        hexadecimalColor: "#0082EA",
+        label: "bleu d'azure"
+    },
+    {
+        value: "coblatBlue",
+        hexadecimalColor: "#44479F",
+        label: "blue cobalt"
+    },
+    {
+        value: "slateGrey",
+        hexadecimalColor: "#646971",
+        label: "gris ardoise"
+    },
+    {
+        value: "pomegranateRed",
+        hexadecimalColor: "#F71F4C",
+        label: "rouge grenade"
+    },
+    {
+        value: "poppyRed",
+        hexadecimalColor: "#E00012",
+        label: "rouge coquelicot"
+    },
+    {
+        value: "reddishOrange",
+        hexadecimalColor: "#C14C25",
+        label: "orange roux"
+    },
+    {
+        value: "mustardYellow",
+        hexadecimalColor: "#EF850B",
+        label: "jaune moutarde"
+    }
+];
+const signageEquipment = [
+    {
+        value: "option1",
+        label: "Effet de porte aux entrées de la commune",
+        price: 2400,
+        modelId: "e23752d1-c5e8-4788-b719-8a913477dc6c"
+    },
+    {
+        value: "option2",
+        label: "Orientation des véhicules vers les ressources",
+        price: 980,
+        modelId: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
+    },
+    {
+        value: "option3",
+        label: "Identification des parkings",
+        price: 1200,
+        modelId: "d7e90749-acb2-4861-bb20-08881e0777ce"
+    },
+    {
+        value: "option4",
+        label: "Information sur les ressources du centre-ville",
+        price: 4800,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+    },
+    {
+        value: "option5",
+        label: "Orientation des piétons vers les ressources",
+        price: 3200,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+    },
+    {
+        value: "option6",
+        label: "Interprétation historique des ressources",
+        price: 240,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+    }
+];
+const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {
+    return ++i;
+});
+const mailOfKingBoss = [];
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f56lm":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$7930 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$7930.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _vectaryItems = require("../vectary-items/vectary-items");
+var _vectaryItemsDefault = parcelHelpers.interopDefault(_vectaryItems);
+const SignalSystem = ({ myPicto , setMyPicto , setIsLoaded , townName , models , currentColor , pictureSleeve  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-signal-system",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: [
+                    "Le nouveau syst\xe8me signal\xe9tique de ",
+                    townName
+                ]
+            }, void 0, true, {
+                fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
+                lineNumber: 8,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_vectaryItemsDefault.default, {
+                picto: myPicto,
+                setPicto: setMyPicto,
+                setIsLoaded: setIsLoaded,
+                models: models,
+                dominantColor: currentColor,
+                pictureSleeve: pictureSleeve
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
+                lineNumber: 9,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
+        lineNumber: 7,
+        columnNumber: 9
+    }, undefined);
+};
+_c = SignalSystem;
+exports.default = SignalSystem;
+var _c;
+$RefreshReg$(_c, "SignalSystem");
+
+  $parcel$ReactRefreshHelpers$7930.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../vectary-items/vectary-items":"3CApp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3CApp":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$9dc5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$9dc5.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+//React import
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+//Lib import
+var _api = require("../../../lib/api");
+//Component import
+var _iframe = require("./iframe");
+var _iframeDefault = parcelHelpers.interopDefault(_iframe);
+//Logic import
+var _updateMaterial = require("../../../functions/update-material");
+var _updateMaterialDefault = parcelHelpers.interopDefault(_updateMaterial);
+var _updateColor2 = require("../../../functions/update-color-2");
+var _updateColor2Default = parcelHelpers.interopDefault(_updateColor2);
+var _s = $RefreshSig$();
+const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor , pictureSleeve  })=>{
+    _s();
+    const viewerModels = [];
+    _react.useEffect(()=>{
+        const run = async ()=>{
+            setPicto([]);
+            setIsLoaded("");
+            models.map(async (model, index)=>{
+                const viewerApi = new _api.VctrApi("Model_" + model.modelId);
+                viewerModels.push(viewerApi);
+                await viewerApi.init();
+                await viewerApi.setPositionAbsolute("Camera", [
+                    4,
+                    2,
+                    7
+                ]);
+                // updateMaterial(dominantColor, viewerApi, pictureSleeve);
+                _updateColor2Default.default(viewerApi, pictureSleeve);
+                if (viewerApi.isReady === true) {
+                    const waitForScreen = async ()=>{
+                        const screenshot = await viewerApi.takeScreenshot();
+                        setPicto((oldScreen)=>{
+                            const newScreen = [
+                                ...oldScreen
+                            ];
+                            newScreen[index] = screenshot;
+                            return newScreen;
+                        });
+                    };
+                    const timeForScreen = ()=>{
+                        setTimeout(waitForScreen, 1000);
+                        setTimeout(setIsLoaded("Calculer le coût"), 2000);
+                    };
+                    timeForScreen();
+                }
+            });
+        };
+        run();
+    }, []);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-iframe",
+        children: models.map((model, index)=>{
+            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactDefault.default.Fragment, {
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
+                    id: model.modelId,
+                    nameModel: model.label
+                }, model.modelId + index, false, {
+                    fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
+                    lineNumber: 62,
+                    columnNumber: 29
+                }, undefined)
+            }, model.modelId + index, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
+                lineNumber: 61,
+                columnNumber: 25
+            }, undefined);
+        })
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
+        lineNumber: 57,
+        columnNumber: 9
+    }, undefined);
+};
+_s(VectaryItems, "OD7bBpZva5O2jO+Puf00hKivP7c=");
+_c = VectaryItems;
+exports.default = VectaryItems;
+var _c;
+$RefreshReg$(_c, "VectaryItems");
+
+  $parcel$ReactRefreshHelpers$9dc5.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../lib/api":"6mCQj","./iframe":"3y0ds","../../../functions/update-material":"da8K6","../../../functions/update-color-2":"3DSfZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mCQj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "VctrApi", ()=>_Vectary$VctrApi
+);
+/*!
+ * Copyright (c) 2022 by Vectary. All rights reserved.
+ * Rev 13d1a4d8a9f360c894690e4d6df396af2f33ed23
+ * @copyright
+ */ var Vectary = function(e1) {
+    var t1 = {};
+    function a(i) {
+        if (t1[i]) return t1[i].exports;
+        var E = t1[i] = {
+            i: i,
+            l: !1,
+            exports: {}
+        };
+        return e1[i].call(E.exports, E, E.exports, a), E.l = !0, E.exports;
+    }
+    return a.m = e1, a.c = t1, a.d = function(e, t, i) {
+        a.o(e, t) || Object.defineProperty(e, t, {
+            enumerable: !0,
+            get: i
+        });
+    }, a.r = function(e) {
+        "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+            value: "Module"
+        }), Object.defineProperty(e, "__esModule", {
+            value: !0
+        });
+    }, a.t = function(e, t2) {
+        if (1 & t2 && (e = a(e)), 8 & t2) return e;
+        if (4 & t2 && "object" === typeof e && e && e.__esModule) return e;
+        var i = Object.create(null);
+        if (a.r(i), Object.defineProperty(i, "default", {
+            enumerable: !0,
+            value: e
+        }), 2 & t2 && "string" != typeof e) for(var E in e)a.d(i, E, (function(t) {
+            return e[t];
+        }).bind(null, E));
+        return i;
+    }, a.n = function(e) {
+        var t = e && e.__esModule ? function t() {
+            return e["default"];
+        } : function t() {
+            return e;
+        };
+        return a.d(t, "a", t), t;
+    }, a.o = function(e, t) {
+        return Object.prototype.hasOwnProperty.call(e, t);
+    }, a.p = "/", a(a.s = "./src/viewer-api/scripts/vctr-api.ts");
+}({
+    "./src/_common_/types.ts": function(e2, t, a) {
+        "use strict";
+        var i, E, s, n;
+        a.d(t, "b", function() {
+            return i;
+        }), a.d(t, "a", function() {
+            return E;
+        }), a.d(t, "d", function() {
+            return s;
+        }), a.d(t, "c", function() {
+            return n;
+        }), function(e) {
+            e[e["ERROR"] = 0] = "ERROR", e[e["READY"] = 1] = "READY", e[e["GET_OBJECTS"] = 2] = "GET_OBJECTS", e[e["GET_OBJECT_BY_NAME"] = 3] = "GET_OBJECT_BY_NAME", e[e["GET_OBJECTS_BY_NAME"] = 4] = "GET_OBJECTS_BY_NAME", e[e["GET_MESHES"] = 5] = "GET_MESHES", e[e["GET_MESH_BY_NAME"] = 6] = "GET_MESH_BY_NAME", e[e["GET_MESHES_BY_NAME"] = 7] = "GET_MESHES_BY_NAME", e[e["GET_HIT_OBJECTS"] = 8] = "GET_HIT_OBJECTS", e[e["GET_VISIBILITY"] = 9] = "GET_VISIBILITY", e[e["SET_VISIBILITY"] = 10] = "SET_VISIBILITY", e[e["GET_POSITION"] = 11] = "GET_POSITION", e[e["SET_POSITION_REL"] = 12] = "SET_POSITION_REL", e[e["SET_POSITION_ABS"] = 13] = "SET_POSITION_ABS", e[e["GET_ROTATION"] = 14] = "GET_ROTATION", e[e["SET_ROTATION_REL"] = 15] = "SET_ROTATION_REL", e[e["SET_ROTATION_ABS"] = 16] = "SET_ROTATION_ABS", e[e["GET_SCALE"] = 17] = "GET_SCALE", e[e["SET_SCALE_REL"] = 18] = "SET_SCALE_REL", e[e["SET_SCALE_ABS"] = 19] = "SET_SCALE_ABS", e[e["GET_MATERIALS"] = 20] = "GET_MATERIALS", e[e["SET_MATERIAL"] = 21] = "SET_MATERIAL", e[e["GET_MATERIALS_BY_NAME"] = 22] = "GET_MATERIALS_BY_NAME", e[e["GET_MATERIAL_BY_NAME"] = 23] = "GET_MATERIAL_BY_NAME", e[e["GET_MATERIAL_PROPS"] = 24] = "GET_MATERIAL_PROPS", e[e["CREATE_MATERIAL"] = 25] = "CREATE_MATERIAL", e[e["UPDATE_MATERIAL"] = 26] = "UPDATE_MATERIAL", e[e["GET_BACKGROUND"] = 27] = "GET_BACKGROUND", e[e["SET_BACKGROUND"] = 28] = "SET_BACKGROUND", e[e["GET_EXPOSURE"] = 29] = "GET_EXPOSURE", e[e["SET_EXPOSURE"] = 30] = "SET_EXPOSURE", e[e["GET_ENVIRONMENT_MAP"] = 31] = "GET_ENVIRONMENT_MAP", e[e["SET_ENVIRONMENT_MAP"] = 32] = "SET_ENVIRONMENT_MAP", e[e["ROTATE_ENVIRONMENT_MAP"] = 33] = "ROTATE_ENVIRONMENT_MAP", e[e["GET_CAMERAS"] = 34] = "GET_CAMERAS", e[e["GET_CAMERAS_BY_NAME"] = 35] = "GET_CAMERAS_BY_NAME", e[e["GET_CAMERA_BY_NAME"] = 36] = "GET_CAMERA_BY_NAME", e[e["SWITCH_VIEW"] = 37] = "SWITCH_VIEW", e[e["SWITCH_VIEW_ASYNC"] = 38] = "SWITCH_VIEW_ASYNC", e[e["MOVE_VIEW"] = 39] = "MOVE_VIEW", e[e["ROTATE_VIEW"] = 40] = "ROTATE_VIEW", e[e["ZOOM_VIEW"] = 41] = "ZOOM_VIEW", e[e["GET_FOV"] = 42] = "GET_FOV", e[e["SET_FOV"] = 43] = "SET_FOV", e[e["TAKE_SCREENSHOT"] = 44] = "TAKE_SCREENSHOT", e[e["ENABLE_ANNOTATIONS"] = 45] = "ENABLE_ANNOTATIONS", e[e["GET_ANNOTATIONS"] = 46] = "GET_ANNOTATIONS", e[e["GET_ANNOTATION_BY_ID"] = 47] = "GET_ANNOTATION_BY_ID", e[e["ADD_ANNOTATION"] = 48] = "ADD_ANNOTATION", e[e["REMOVE_ANNOTATION_BY_ID"] = 49] = "REMOVE_ANNOTATION_BY_ID", e[e["EXPAND_ANNOTATIONS_BY_ID"] = 50] = "EXPAND_ANNOTATIONS_BY_ID", e[e["HIGHLIGHT_MESHES_BY_NAME"] = 51] = "HIGHLIGHT_MESHES_BY_NAME", e[e["UNHIGHLIGHT_MESHES_BY_NAME"] = 52] = "UNHIGHLIGHT_MESHES_BY_NAME", e[e["SET_CANVAS_STATE"] = 53] = "SET_CANVAS_STATE", e[e["GET_VIEW_STATE"] = 54] = "GET_VIEW_STATE", e[e["APPLY_VIEW_STATE"] = 55] = "APPLY_VIEW_STATE", e[e["SEND_EVENT"] = 56] = "SEND_EVENT", e[e["PLAY"] = 57] = "PLAY", e[e["LOAD"] = 58] = "LOAD", e[e["SET_UUID_AR"] = 59] = "SET_UUID_AR", e[e["TRIGGER_AR_CLICK"] = 60] = "TRIGGER_AR_CLICK", e[e["GET_2D_COORDINATES"] = 61] = "GET_2D_COORDINATES", e[e["GET_CURRENT_USER"] = 62] = "GET_CURRENT_USER", e[e["DID_RENDER_LAST_FRAME"] = 63] = "DID_RENDER_LAST_FRAME", e[e["ADD_EVENT_LISTENER"] = 64] = "ADD_EVENT_LISTENER", e[e["REMOVE_EVENT_LISTENER"] = 65] = "REMOVE_EVENT_LISTENER", e[e["UPDATE_EVENT"] = 66] = "UPDATE_EVENT", e[e["TAKE_FIXED_SIZE_SCREENSHOT"] = 67] = "TAKE_FIXED_SIZE_SCREENSHOT", e[e["ADD_COMPLEX_ANNOTATION"] = 68] = "ADD_COMPLEX_ANNOTATION", e[e["SET_ANNOTATION_VISIBILITY"] = 69] = "SET_ANNOTATION_VISIBILITY";
+        }(i || (i = {})), function(e) {
+            e["ORBIT_CONTROLS_STATE_CHANGE"] = "ORBIT_CONTROLS_STATE_CHANGE", e["MOUSE_MOVE"] = "MOUSE_MOVE", e["MOUSE_CLICK"] = "MOUSE_CLICK", e["MOUSE_DOWN"] = "MOUSE_DOWN";
+        }(E || (E = {})), function(e) {
+            e["NONE"] = "NONE", e["ROTATE"] = "ROTATE", e["DOLLY"] = "DOLLY", e["PAN"] = "PAN", e["TOUCH_ROTATE"] = "TOUCH_ROTATE", e["TOUCH_PAN"] = "TOUCH_PAN", e["TOUCH_DOLLY_PAN"] = "TOUCH_DOLLY_PAN", e["TOUCH_DOLLY_ROTATE"] = "TOUCH_DOLLY_ROTATE";
+        }(s || (s = {})), function(e) {
+            e["AUTO"] = "auto", e["ENGLISH"] = "en", e["SPANISH"] = "es", e["GERMAN"] = "de", e["FRENCH"] = "fr", e["ITALIAN"] = "it", e["RUSSIAN"] = "ru";
+        }(n || (n = {}));
+    },
+    "./src/viewer-api/scripts/vctr-api.ts": function(e3, t3, a1) {
+        "use strict";
+        a1.r(t3), a1.d(t3, "VctrApi", function() {
+            return s1;
+        });
+        var i1 = a1("./src/_common_/types.ts"), E1 = function(e4, t4, a2, i) {
+            function E(e) {
+                return e instanceof a2 ? e : new a2(function(t) {
+                    t(e);
+                });
+            }
+            return new (a2 || (a2 = Promise))(function(a, s) {
+                function n(e) {
+                    try {
+                        _(i.next(e));
+                    } catch (e5) {
+                        s(e5);
+                    }
+                }
+                function r(e) {
+                    try {
+                        _(i["throw"](e));
+                    } catch (e6) {
+                        s(e6);
+                    }
+                }
+                function _(e) {
+                    e.done ? a(e.value) : E(e.value).then(n, r);
+                }
+                _((i = i.apply(e4, t4 || [])).next());
+            });
+        };
+        class s1 {
+            constructor(e, t){
+                this.isReady = !1, this.iframeMsgMap = new Map, this.eventsCallbackMap = new Map, this.id = e, this.globalErrCb = t, s1.Utils = new n1(this);
+            }
+            init() {
+                return new Promise((e, t)=>E1(this, void 0, void 0, function*() {
+                        if (this.elem = document.getElementById(this.id), !this.elem) {
+                            const a = `Element with id "${this.id}" does not exist`;
+                            return this.globalErrCb ? this.globalErrCb(a) : t(a), e();
+                        }
+                        if (this.type = "IFRAME" === this.elem.nodeName ? "iframe" : "VCTR-VIEWER" === this.elem.nodeName ? "webcomponent" : null, !this.type) {
+                            const a = `Element with id "${this.id}" is not of an appropriate type`;
+                            return this.globalErrCb ? this.globalErrCb(a) : t(a), e();
+                        }
+                        switch(this.type){
+                            case "iframe":
+                                this.initIframeMessenger();
+                            default:
+                                yield this.getReady(), e();
+                        }
+                    })
+                );
+            }
+            getReady() {
+                return new Promise((e7, t)=>{
+                    const a = this.getRandomNum(), E = self.setInterval(()=>{
+                        if ("iframe" === this.type) this.iframeMsgMap.set(a, {
+                            err: null,
+                            succ: null
+                        }), this.elem.contentWindow.postMessage({
+                            id: this.id,
+                            msgId: a,
+                            method: i1["b"].READY
+                        }, "*");
+                        else {
+                            const e = !!this.elem.isReady && this.elem.isReady();
+                            e && (this.isReady = !0);
+                        }
+                        this.isReady && (self.clearInterval(E), e7());
+                    }, 500);
+                });
+            }
+            getObjects() {
+                return this.apiCallInternal(i1["b"].GET_OBJECTS);
+            }
+            getMeshes() {
+                return this.apiCallInternal(i1["b"].GET_MESHES);
+            }
+            getObjectsByName(e) {
+                return this.apiCallInternal(i1["b"].GET_OBJECTS_BY_NAME, {
+                    name: e
+                });
+            }
+            getObjectByName(e) {
+                return this.apiCallInternal(i1["b"].GET_OBJECT_BY_NAME, {
+                    name: e
+                });
+            }
+            getMeshesByName(e) {
+                return this.apiCallInternal(i1["b"].GET_MESHES_BY_NAME, {
+                    name: e
+                });
+            }
+            getMeshByName(e) {
+                return this.apiCallInternal(i1["b"].GET_MESH_BY_NAME, {
+                    name: e
+                });
+            }
+            getHitObjects(e = !1) {
+                return this.apiCallInternal(i1["b"].GET_HIT_OBJECTS, {
+                    firstHitOnly: e
+                });
+            }
+            get2DCoordinates(e) {
+                return this.apiCallInternal(i1["b"].GET_2D_COORDINATES, {
+                    name: e
+                });
+            }
+            getCameras() {
+                return this.apiCallInternal(i1["b"].GET_CAMERAS);
+            }
+            getCamerasByName(e) {
+                return this.apiCallInternal(i1["b"].GET_CAMERAS_BY_NAME, {
+                    name: e
+                });
+            }
+            getCameraByName(e) {
+                return this.apiCallInternal(i1["b"].GET_CAMERA_BY_NAME, {
+                    name: e
+                });
+            }
+            switchView(e) {
+                return this.apiCallInternal(i1["b"].SWITCH_VIEW, {
+                    name: e
+                });
+            }
+            switchViewAsync(e) {
+                return this.apiCallInternal(i1["b"].SWITCH_VIEW_ASYNC, {
+                    name: e
+                });
+            }
+            moveView(e) {
+                return this.apiCallInternal(i1["b"].MOVE_VIEW, {
+                    position: e
+                });
+            }
+            rotateView(e) {
+                return this.apiCallInternal(i1["b"].ROTATE_VIEW, {
+                    rotation: e
+                });
+            }
+            zoomView(e) {
+                return this.apiCallInternal(i1["b"].ZOOM_VIEW, {
+                    zoom: e
+                });
+            }
+            getVisibility(e) {
+                return this.apiCallInternal(i1["b"].GET_VISIBILITY, {
+                    name: e
+                });
+            }
+            setVisibility(e, t = !0, a = !1) {
+                return this.apiCallInternal(i1["b"].SET_VISIBILITY, {
+                    names: e,
+                    visible: t,
+                    isExclusive: a
+                });
+            }
+            getMaterials() {
+                return this.apiCallInternal(i1["b"].GET_MATERIALS);
+            }
+            createMaterial(e, t) {
+                return this.apiCallInternal(i1["b"].CREATE_MATERIAL, {
+                    material: e,
+                    cloneFromMatName: t
+                });
+            }
+            updateMaterial(e, t, a = !0) {
+                return this.apiCallInternal(i1["b"].UPDATE_MATERIAL, {
+                    name: e,
+                    props: t,
+                    withPrefetch: a
+                });
+            }
+            setMaterial(e, t) {
+                return this.apiCallInternal(i1["b"].SET_MATERIAL, {
+                    objectName: e,
+                    materialName: t
+                });
+            }
+            getMaterialsByName(e) {
+                return this.apiCallInternal(i1["b"].GET_MATERIALS_BY_NAME, {
+                    name: e
+                });
+            }
+            getMaterialByName(e) {
+                return this.apiCallInternal(i1["b"].GET_MATERIAL_BY_NAME, {
+                    name: e
+                });
+            }
+            getMaterialProperties(e) {
+                return this.apiCallInternal(i1["b"].GET_MATERIAL_PROPS, {
+                    name: e
+                });
+            }
+            getBackground() {
+                return this.apiCallInternal(i1["b"].GET_BACKGROUND);
+            }
+            setBackground(e) {
+                return this.apiCallInternal(i1["b"].SET_BACKGROUND, {
+                    background: e
+                });
+            }
+            enableAnnotations(e = !0) {
+                return this.apiCallInternal(i1["b"].ENABLE_ANNOTATIONS, {
+                    enable: e
+                });
+            }
+            getAnnotations() {
+                return this.apiCallInternal(i1["b"].GET_ANNOTATIONS);
+            }
+            getAnnotationById(e) {
+                return this.apiCallInternal(i1["b"].GET_ANNOTATION_BY_ID, {
+                    id: e
+                });
+            }
+            addAnnotation(e) {
+                return this.apiCallInternal(i1["b"].ADD_ANNOTATION, {
+                    annotationConf: e
+                });
+            }
+            addComplexAnnotation(e) {
+                return this.apiCallInternal(i1["b"].ADD_COMPLEX_ANNOTATION, {
+                    annotationConf: e
+                });
+            }
+            removeAnnotationById(e) {
+                return this.apiCallInternal(i1["b"].REMOVE_ANNOTATION_BY_ID, {
+                    id: e
+                });
+            }
+            setAnnotationVisibility(e, t) {
+                return this.apiCallInternal(i1["b"].SET_ANNOTATION_VISIBILITY, {
+                    id: e,
+                    visibility: t
+                });
+            }
+            expandAnnotationsById(e, t, a = !0) {
+                return this.apiCallInternal(i1["b"].EXPAND_ANNOTATIONS_BY_ID, {
+                    ids: e,
+                    expand: t,
+                    isExclusive: a
+                });
+            }
+            getPosition(e) {
+                return this.apiCallInternal(i1["b"].GET_POSITION, {
+                    name: e
+                });
+            }
+            setPositionRelative(e, t) {
+                return this.apiCallInternal(i1["b"].SET_POSITION_REL, {
+                    name: e,
+                    position: t
+                });
+            }
+            setPositionAbsolute(e, t) {
+                return this.apiCallInternal(i1["b"].SET_POSITION_ABS, {
+                    name: e,
+                    position: t
+                });
+            }
+            getRotation(e) {
+                return this.apiCallInternal(i1["b"].GET_ROTATION, {
+                    name: e
+                });
+            }
+            setRotationRelative(e, t, a = "XYZ") {
+                return this.apiCallInternal(i1["b"].SET_ROTATION_REL, {
+                    name: e,
+                    rotation: t,
+                    order: a
+                });
+            }
+            setRotationAbsolute(e, t, a = "XYZ") {
+                return this.apiCallInternal(i1["b"].SET_ROTATION_ABS, {
+                    name: e,
+                    rotation: t,
+                    order: a
+                });
+            }
+            getScale(e) {
+                return this.apiCallInternal(i1["b"].GET_SCALE, {
+                    name: e
+                });
+            }
+            setScaleRelative(e, t) {
+                return this.apiCallInternal(i1["b"].SET_SCALE_REL, {
+                    name: e,
+                    scale: t
+                });
+            }
+            setScaleAbsolute(e, t) {
+                return this.apiCallInternal(i1["b"].SET_SCALE_ABS, {
+                    name: e,
+                    scale: t
+                });
+            }
+            highlightMeshesByName(e, t = "#ffff00", a = 1, E = !1) {
+                return this.apiCallInternal(i1["b"].HIGHLIGHT_MESHES_BY_NAME, {
+                    names: e,
+                    color: t,
+                    intensity: a,
+                    isExclusive: E
+                });
+            }
+            unhighlightMeshesByName(e) {
+                return this.apiCallInternal(i1["b"].UNHIGHLIGHT_MESHES_BY_NAME, {
+                    names: e
+                });
+            }
+            takeScreenshot(e = 1, t) {
+                return this.apiCallInternal(i1["b"].TAKE_SCREENSHOT, {
+                    scale: e,
+                    scissor: t
+                });
+            }
+            takeFixedSizedScreenshot(e) {
+                return this.apiCallInternal(i1["b"].TAKE_FIXED_SIZE_SCREENSHOT, {
+                    dimension: e
+                });
+            }
+            getViewState() {
+                return this.apiCallInternal(i1["b"].GET_VIEW_STATE);
+            }
+            applyViewState(e) {
+                return this.apiCallInternal(i1["b"].APPLY_VIEW_STATE, {
+                    state: e
+                });
+            }
+            getExposure() {
+                return this.apiCallInternal(i1["b"].GET_EXPOSURE);
+            }
+            setExposure(e) {
+                return this.apiCallInternal(i1["b"].SET_EXPOSURE, {
+                    exposure: e
+                });
+            }
+            getEnvironmentMap() {
+                return this.apiCallInternal(i1["b"].GET_ENVIRONMENT_MAP);
+            }
+            setEnvironmentMap(e) {
+                return this.apiCallInternal(i1["b"].SET_ENVIRONMENT_MAP, {
+                    envMap: e
+                });
+            }
+            rotateEnvironmentMap(e) {
+                return this.apiCallInternal(i1["b"].ROTATE_ENVIRONMENT_MAP, {
+                    rotation: e
+                });
+            }
+            getFOV() {
+                return this.apiCallInternal(i1["b"].GET_FOV);
+            }
+            setFOV(e) {
+                return this.apiCallInternal(i1["b"].SET_FOV, {
+                    fov: e
+                });
+            }
+            sendEvent(e, t, a, E, s) {
+                return this.apiCallInternal(i1["b"].SEND_EVENT, {
+                    event: e,
+                    x: t,
+                    y: a,
+                    maxX: E,
+                    maxY: s
+                });
+            }
+            play(e, t) {
+                return this.apiCallInternal(i1["b"].PLAY, {
+                    animIdx: e,
+                    timeScale: t
+                });
+            }
+            load() {
+                return this.apiCallInternal(i1["b"].LOAD);
+            }
+            setUUIDAr(e) {
+                return this.apiCallInternal(i1["b"].SET_UUID_AR, {
+                    uuid: e
+                });
+            }
+            triggerARClick() {
+                return this.apiCallInternal(i1["b"].TRIGGER_AR_CLICK);
+            }
+            setCanvasState(e, t) {
+                return this.apiCallInternal(i1["b"].SET_CANVAS_STATE, {
+                    className: e,
+                    state: t
+                });
+            }
+            getCurrentUser() {
+                return this.apiCallInternal(i1["b"].GET_CURRENT_USER);
+            }
+            didRenderLastFrame() {
+                return this.apiCallInternal(i1["b"].DID_RENDER_LAST_FRAME);
+            }
+            addEventListener(e, t) {
+                return this.eventsCallbackMap.set(e, t), this.apiCallInternal(i1["b"].ADD_EVENT_LISTENER, {
+                    eventType: e
+                });
+            }
+            removeEventListener(e) {
+                return this.eventsCallbackMap.delete(e), this.apiCallInternal(i1["b"].REMOVE_EVENT_LISTENER, {
+                    eventType: e
+                });
+            }
+            apiCallInternal(e8, t) {
+                return new Promise((a, s)=>E1(this, void 0, void 0, function*() {
+                        try {
+                            if ("iframe" === this.type) {
+                                const i = this.getRandomNum();
+                                this.iframeMsgMap.set(i, {
+                                    err: this.globalErrCb ? this.globalErrCb : s,
+                                    succ: a
+                                }), this.elem.contentWindow.postMessage({
+                                    id: this.id,
+                                    msgId: i,
+                                    method: e8,
+                                    data: t ? JSON.stringify(t) : void 0
+                                }, "*");
+                            } else {
+                                let E;
+                                switch(e8){
+                                    case i1["b"].GET_OBJECTS:
+                                        E = this.elem.getObjects();
+                                        break;
+                                    case i1["b"].GET_MESHES:
+                                        E = this.elem.getMeshes();
+                                        break;
+                                    case i1["b"].GET_OBJECTS_BY_NAME:
+                                        E = this.elem.getObjectsByName(t.name);
+                                        break;
+                                    case i1["b"].GET_OBJECT_BY_NAME:
+                                        E = this.elem.getObjectByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MESHES_BY_NAME:
+                                        E = this.elem.getMeshesByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MESH_BY_NAME:
+                                        E = this.elem.getMeshByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MATERIALS:
+                                        E = this.elem.getMaterials();
+                                        break;
+                                    case i1["b"].CREATE_MATERIAL:
+                                        E = this.elem.createMaterial(t.material, t.cloneFromMatName);
+                                        break;
+                                    case i1["b"].UPDATE_MATERIAL:
+                                        E = this.elem.updateMaterial(t.name, t.props, t.withPrefetch);
+                                        break;
+                                    case i1["b"].SET_MATERIAL:
+                                        E = this.elem.setMaterial(t.objectName, t.materialName);
+                                        break;
+                                    case i1["b"].GET_MATERIALS_BY_NAME:
+                                        E = this.elem.getMaterialsByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MATERIAL_BY_NAME:
+                                        E = this.elem.getMaterialByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MATERIAL_PROPS:
+                                        E = this.elem.getMaterialProperties(t.name);
+                                        break;
+                                    case i1["b"].GET_HIT_OBJECTS:
+                                        E = this.elem.getHitObjects(t.firstHitOnly);
+                                        break;
+                                    case i1["b"].GET_2D_COORDINATES:
+                                        E = this.elem.get2DCoordinates(t.name);
+                                        break;
+                                    case i1["b"].GET_CAMERAS:
+                                        E = this.elem.getCameras();
+                                        break;
+                                    case i1["b"].GET_CAMERAS_BY_NAME:
+                                        E = this.elem.getCamerasByName(t.name);
+                                        break;
+                                    case i1["b"].GET_CAMERA_BY_NAME:
+                                        E = this.elem.getCameraByName(t.name);
+                                        break;
+                                    case i1["b"].SWITCH_VIEW:
+                                        E = this.elem.switchView(t.name);
+                                        break;
+                                    case i1["b"].SWITCH_VIEW_ASYNC:
+                                        E = this.elem.switchViewAsync(t.name);
+                                        break;
+                                    case i1["b"].MOVE_VIEW:
+                                        E = this.elem.moveView(t.position);
+                                        break;
+                                    case i1["b"].ROTATE_VIEW:
+                                        E = this.elem.rotateView(t.rotation);
+                                        break;
+                                    case i1["b"].ZOOM_VIEW:
+                                        E = this.elem.zoomView(t.zoom);
+                                        break;
+                                    case i1["b"].GET_VISIBILITY:
+                                        E = this.elem.getVisibility(t.name);
+                                        break;
+                                    case i1["b"].SET_VISIBILITY:
+                                        E = this.elem.setVisibility(t.names, t.visible, t.isExclusive);
+                                        break;
+                                    case i1["b"].GET_BACKGROUND:
+                                        E = this.elem.getBackground();
+                                        break;
+                                    case i1["b"].SET_BACKGROUND:
+                                        E = yield this.elem.setBackground(t.background);
+                                        break;
+                                    case i1["b"].ENABLE_ANNOTATIONS:
+                                        E = yield this.elem.enableAnnotations(t.enable);
+                                        break;
+                                    case i1["b"].GET_ANNOTATIONS:
+                                        E = yield this.elem.getAnnotations();
+                                        break;
+                                    case i1["b"].GET_ANNOTATION_BY_ID:
+                                        E = yield this.elem.getAnnotationById(t.id);
+                                        break;
+                                    case i1["b"].ADD_ANNOTATION:
+                                        E = yield this.elem.addAnnotation(t.annotationConf);
+                                        break;
+                                    case i1["b"].ADD_COMPLEX_ANNOTATION:
+                                        E = yield this.elem.addComplexAnnotation(t.annotationConf);
+                                        break;
+                                    case i1["b"].SET_ANNOTATION_VISIBILITY:
+                                        E = yield this.elem.setAnnotationVisibility(t.id, t.visibility);
+                                        break;
+                                    case i1["b"].REMOVE_ANNOTATION_BY_ID:
+                                        E = yield this.elem.removeAnnotationById(t.id);
+                                        break;
+                                    case i1["b"].EXPAND_ANNOTATIONS_BY_ID:
+                                        E = yield this.elem.expandAnnotationsById(t.ids, t.expand, t.isExclusive);
+                                        break;
+                                    case i1["b"].GET_POSITION:
+                                        E = this.elem.getPosition(t.name);
+                                        break;
+                                    case i1["b"].SET_POSITION_REL:
+                                        E = yield this.elem.setPositionRelative(t.name, t.position);
+                                        break;
+                                    case i1["b"].SET_POSITION_ABS:
+                                        E = yield this.elem.setPositionAbsolute(t.name, t.position);
+                                        break;
+                                    case i1["b"].GET_ROTATION:
+                                        E = this.elem.getRotation(t.name);
+                                        break;
+                                    case i1["b"].SET_ROTATION_REL:
+                                        E = yield this.elem.setRotationRelative(t.name, t.rotation, t.order);
+                                        break;
+                                    case i1["b"].SET_ROTATION_ABS:
+                                        E = yield this.elem.setRotationAbsolute(t.name, t.rotation, t.order);
+                                        break;
+                                    case i1["b"].GET_SCALE:
+                                        E = this.elem.getScale(t.name);
+                                        break;
+                                    case i1["b"].SET_SCALE_REL:
+                                        E = yield this.elem.setScaleRelative(t.name, t.scale);
+                                        break;
+                                    case i1["b"].SET_SCALE_ABS:
+                                        E = yield this.elem.setScaleAbsolute(t.name, t.scale);
+                                        break;
+                                    case i1["b"].HIGHLIGHT_MESHES_BY_NAME:
+                                        E = yield this.elem.highlightMeshesByName(t.names, t.color, t.intensity, t.isExclusive);
+                                        break;
+                                    case i1["b"].UNHIGHLIGHT_MESHES_BY_NAME:
+                                        E = yield this.elem.unhighlightMeshesByName(t.names);
+                                        break;
+                                    case i1["b"].TAKE_SCREENSHOT:
+                                        E = yield this.elem.takeScreenshot(t.scale, t.scissor);
+                                        break;
+                                    case i1["b"].TAKE_FIXED_SIZE_SCREENSHOT:
+                                        E = yield this.elem.takeFixedSizedScreenshot(t.dimension);
+                                        break;
+                                    case i1["b"].GET_VIEW_STATE:
+                                        E = yield this.elem.getViewState();
+                                        break;
+                                    case i1["b"].APPLY_VIEW_STATE:
+                                        E = yield this.elem.applyViewState(t.state);
+                                        break;
+                                    case i1["b"].GET_EXPOSURE:
+                                        E = yield this.elem.getExposure();
+                                        break;
+                                    case i1["b"].SET_EXPOSURE:
+                                        E = yield this.elem.setExposure(t.exposure);
+                                        break;
+                                    case i1["b"].GET_ENVIRONMENT_MAP:
+                                        E = yield this.elem.getEnvironmentMap();
+                                        break;
+                                    case i1["b"].SET_ENVIRONMENT_MAP:
+                                        E = yield this.elem.setEnvironmentMap(t.envMap);
+                                        break;
+                                    case i1["b"].ROTATE_ENVIRONMENT_MAP:
+                                        E = yield this.elem.setEnvironmentMap(t.rotation);
+                                        break;
+                                    case i1["b"].GET_FOV:
+                                        E = yield this.elem.getFOV();
+                                        break;
+                                    case i1["b"].SET_FOV:
+                                        E = yield this.elem.setFOV(t.fov);
+                                        break;
+                                    case i1["b"].SEND_EVENT:
+                                        E = yield this.elem.sendEvent(t.event, t.x, t.y, t.maxX, t.maxY);
+                                        break;
+                                    case i1["b"].PLAY:
+                                        E = yield this.elem.play(t.animIdx, t.timeScale);
+                                        break;
+                                    case i1["b"].LOAD:
+                                        E = yield this.elem.load();
+                                        break;
+                                    case i1["b"].SET_UUID_AR:
+                                        E = yield this.elem.setUUIDAr(t.uuid);
+                                        break;
+                                    case i1["b"].TRIGGER_AR_CLICK:
+                                        E = yield this.elem.triggerARClick();
+                                        break;
+                                    case i1["b"].SET_CANVAS_STATE:
+                                        E = yield this.elem.setCanvasState(t.className, t.state);
+                                        break;
+                                    case i1["b"].GET_CURRENT_USER:
+                                        E = this.elem.getCurrentUser();
+                                        break;
+                                    case i1["b"].DID_RENDER_LAST_FRAME:
+                                        E = this.elem.didRenderLastFrame();
+                                        break;
+                                    case i1["b"].ADD_EVENT_LISTENER:
+                                        E = this.elem.addApiEventListner(t.eventType, this.eventsCallbackMap.get(t.eventType));
+                                        break;
+                                    case i1["b"].REMOVE_EVENT_LISTENER:
+                                        E = this.elem.removeApiEventListener(t.eventType);
+                                        break;
+                                }
+                                a(E);
+                            }
+                        } catch (e) {
+                            this.globalErrCb ? this.globalErrCb(e) : s(e), a();
+                        }
+                    })
+                );
+            }
+            initIframeMessenger() {
+                self.addEventListener("message", (e)=>{
+                    const t = e.data, a = this.iframeMsgMap.get(t.msgId);
+                    if (a) {
+                        switch(t.method){
+                            case i1["b"].READY:
+                                "true" === t.data && (this.isReady = !0);
+                                break;
+                            case i1["b"].ERROR:
+                                a.err(t.data);
+                                break;
+                            case i1["b"].GET_OBJECTS_BY_NAME:
+                            case i1["b"].GET_OBJECT_BY_NAME:
+                            case i1["b"].GET_CAMERAS_BY_NAME:
+                            case i1["b"].GET_CAMERA_BY_NAME:
+                            case i1["b"].GET_MESHES_BY_NAME:
+                            case i1["b"].GET_MESH_BY_NAME:
+                            case i1["b"].GET_MATERIALS_BY_NAME:
+                            case i1["b"].GET_MATERIAL_BY_NAME:
+                            case i1["b"].GET_MATERIAL_PROPS:
+                            case i1["b"].CREATE_MATERIAL:
+                            case i1["b"].UPDATE_MATERIAL:
+                            case i1["b"].GET_VIEW_STATE:
+                            case i1["b"].APPLY_VIEW_STATE:
+                            case i1["b"].GET_ANNOTATIONS:
+                            case i1["b"].GET_ANNOTATION_BY_ID:
+                            case i1["b"].ADD_ANNOTATION:
+                            case i1["b"].ADD_COMPLEX_ANNOTATION:
+                            case i1["b"].SET_ANNOTATION_VISIBILITY:
+                            case i1["b"].GET_CURRENT_USER:
+                            case i1["b"].DID_RENDER_LAST_FRAME:
+                                try {
+                                    const e = JSON.parse(t.data);
+                                    a.succ(e);
+                                } catch (e9) {
+                                    a.err(e9);
+                                }
+                                break;
+                            case i1["b"].SET_BACKGROUND:
+                                a.succ(!0);
+                                break;
+                            case i1["b"].SWITCH_VIEW:
+                            case i1["b"].SWITCH_VIEW_ASYNC:
+                            case i1["b"].MOVE_VIEW:
+                            case i1["b"].ROTATE_VIEW:
+                            case i1["b"].ZOOM_VIEW:
+                            case i1["b"].ENABLE_ANNOTATIONS:
+                            case i1["b"].REMOVE_ANNOTATION_BY_ID:
+                            case i1["b"].EXPAND_ANNOTATIONS_BY_ID:
+                            case i1["b"].SET_EXPOSURE:
+                            case i1["b"].SET_ENVIRONMENT_MAP:
+                            case i1["b"].ROTATE_ENVIRONMENT_MAP:
+                            case i1["b"].SEND_EVENT:
+                            case i1["b"].PLAY:
+                            case i1["b"].SET_UUID_AR:
+                            case i1["b"].TRIGGER_AR_CLICK:
+                            case i1["b"].SET_CANVAS_STATE:
+                            case i1["b"].ADD_EVENT_LISTENER:
+                            case i1["b"].REMOVE_EVENT_LISTENER:
+                                "true" === t.data ? a.succ(!0) : a.err("Something went wrong. API call result is false");
+                                break;
+                            case i1["b"].HIGHLIGHT_MESHES_BY_NAME:
+                            case i1["b"].UNHIGHLIGHT_MESHES_BY_NAME:
+                            case i1["b"].GET_VISIBILITY:
+                            case i1["b"].SET_VISIBILITY:
+                            case i1["b"].SET_POSITION_ABS:
+                            case i1["b"].SET_POSITION_REL:
+                            case i1["b"].SET_ROTATION_ABS:
+                            case i1["b"].SET_ROTATION_REL:
+                            case i1["b"].SET_SCALE_ABS:
+                            case i1["b"].SET_SCALE_REL:
+                            case i1["b"].SET_FOV:
+                                "true" === t.data ? a.succ(!0) : a.succ(!1);
+                                break;
+                            case i1["b"].GET_BACKGROUND:
+                            case i1["b"].GET_POSITION:
+                            case i1["b"].GET_ROTATION:
+                            case i1["b"].GET_SCALE:
+                            case i1["b"].GET_MATERIALS:
+                            case i1["b"].GET_EXPOSURE:
+                            case i1["b"].GET_FOV:
+                            case i1["b"].GET_OBJECTS:
+                            case i1["b"].GET_MESHES:
+                            case i1["b"].GET_HIT_OBJECTS:
+                            case i1["b"].GET_2D_COORDINATES:
+                            case i1["b"].GET_CAMERAS:
+                                try {
+                                    const e = JSON.parse(t.data);
+                                    a.succ(e);
+                                } catch (e10) {
+                                    a.err(e10);
+                                }
+                                break;
+                            case i1["b"].TAKE_SCREENSHOT:
+                            case i1["b"].TAKE_FIXED_SIZE_SCREENSHOT:
+                            case i1["b"].GET_ENVIRONMENT_MAP:
+                            case i1["b"].LOAD:
+                                try {
+                                    a.succ(t.data);
+                                } catch (e11) {
+                                    a.err(e11);
+                                }
+                                break;
+                            default:
+                                const e = `Unknown API event "${t.method}"`;
+                                this.globalErrCb && this.globalErrCb(e);
+                                break;
+                        }
+                        this.iframeMsgMap.delete(t.msgId);
+                    } else if (t.method == i1["b"].UPDATE_EVENT) {
+                        let e = JSON.parse(t.data);
+                        if (this.eventsCallbackMap.has(e.eventType)) this.eventsCallbackMap.get(e.eventType)(e.eventData);
+                        else {
+                            const t = `Missing callback for event: "${e.eventType}"`;
+                            this.globalErrCb && this.globalErrCb(t);
+                        }
+                    }
+                });
+            }
+            getRandomNum() {
+                const e = new Uint8Array(4);
+                return self.crypto.getRandomValues(e), `${e[0]}-${e[1]}-${e[2]}-${e[3]}`;
+            }
+        }
+        s1.ApiEvents = i1["a"];
+        class n1 {
+            constructor(e){
+                this.api = e;
+            }
+            animate(e, t5, a, i = ()=>{}) {
+                const E = performance.now();
+                let s, n = 0;
+                if ("string" === typeof t5) switch(t5){
+                    case "linear":
+                        s = this.linear;
+                        break;
+                    case "easeInQuad":
+                        s = this.easeInQuad;
+                        break;
+                    case "easeOutQuad":
+                        s = this.easeOutQuad;
+                        break;
+                    case "easeInOutQuad":
+                        s = this.easeInOutQuad;
+                        break;
+                    case "easeInCubic":
+                        s = this.easeInCubic;
+                        break;
+                    case "easeOutCubic":
+                        s = this.easeOutCubic;
+                        break;
+                    case "easeInOutCubic":
+                        s = this.easeInOutCubic;
+                        break;
+                    case "easeInQuart":
+                        s = this.easeInQuart;
+                        break;
+                    case "easeOutQuart":
+                        s = this.easeOutQuart;
+                        break;
+                    case "easeInOutQuart":
+                        s = this.easeInOutQuart;
+                        break;
+                    case "easeInOutExpo":
+                        s = this.easeInOutExpo;
+                        break;
+                    default:
+                        s = this.linear;
+                        break;
+                }
+                else s = t5;
+                function r() {
+                    if (n = performance.now() - E, n >= e) return a(s(1)), i(), void 0;
+                    let t = n / e;
+                    const _ = s(t);
+                    a(_), requestAnimationFrame(r);
+                }
+                r();
+            }
+            lerp(e, t, a) {
+                let i = e.slice();
+                return i[0] += (t[0] - e[0]) * a, i[1] += (t[1] - e[1]) * a, i[2] += (t[2] - e[2]) * a, i;
+            }
+            linear(e) {
+                return e;
+            }
+            easeInQuad(e) {
+                return e * e;
+            }
+            easeOutQuad(e) {
+                return e * (2 - e);
+            }
+            easeInOutQuad(e) {
+                return e < .5 ? 2 * e * e : -1 + (4 - 2 * e) * e;
+            }
+            easeInCubic(e) {
+                return e * e * e;
+            }
+            easeOutCubic(e) {
+                return --e * e * e + 1;
+            }
+            easeInOutCubic(e) {
+                return e < .5 ? 4 * e * e * e : (e - 1) * (2 * e - 2) * (2 * e - 2) + 1;
+            }
+            easeInQuart(e) {
+                return e * e * e * e;
+            }
+            easeOutQuart(e) {
+                return 1 - --e * e * e * e;
+            }
+            easeInOutQuart(e) {
+                return e < .5 ? 8 * e * e * e * e : 1 - 8 * --e * e * e * e;
+            }
+            easeInOutExpo(e) {
+                return e < .5 ? Math.pow(2, 20 * e - 10) / 2 : (2 - Math.pow(2, -20 * e + 10)) / 2;
+            }
+            fadeOut(e12, t6) {
+                return E1(this, void 0, void 0, function*() {
+                    const a = yield this.api.getMeshByName(e12);
+                    this.animate(t6, this.easeOutQuad, (e)=>{
+                        const t = this.lerp([
+                            1,
+                            0,
+                            0
+                        ], [
+                            0,
+                            0,
+                            0
+                        ], e), i = {
+                            opacity: `${t[0]}`
+                        };
+                        this.api.updateMaterial(a.material, i);
+                    }, ()=>{
+                        this.api.setVisibility([
+                            a.name
+                        ], !1);
+                    });
+                });
+            }
+            fadeIn(e13, t7) {
+                return E1(this, void 0, void 0, function*() {
+                    const a = yield this.api.getMeshByName(e13);
+                    this.api.updateMaterial(a.material, {
+                        opacity: "0.0"
+                    }), this.api.setVisibility([
+                        a.name
+                    ], !0), this.animate(t7, this.easeInQuad, (e)=>{
+                        const t = this.lerp([
+                            0,
+                            0,
+                            0
+                        ], [
+                            1,
+                            0,
+                            0
+                        ], e), i = {
+                            opacity: `${t[0]}`
+                        };
+                        this.api.updateMaterial(a.material, i);
+                    });
+                });
+            }
+            moveObjectsIncrementally(e14, t, a3) {
+                return E1(this, void 0, void 0, function*() {
+                    for(let i = 0; i < e14.length; i++){
+                        const E = e14[i], s = yield this.api.getPosition(E);
+                        setTimeout(()=>{
+                            this.animate(a3, this.easeOutQuad, (e)=>{
+                                const a = this.lerp(s, [
+                                    s[0] + t[0],
+                                    s[1] + t[1],
+                                    s[2] + t[2]
+                                ], e);
+                                this.api.setPositionAbsolute(E, a);
+                            });
+                        }, i * a3);
+                    }
+                });
+            }
+            swipeObject(e15, t, a4, i) {
+                return E1(this, void 0, void 0, function*() {
+                    const E = yield this.api.getMeshByName(e15), s = yield this.api.getPosition(E.name);
+                    "in" === i ? (this.fadeIn(E.name, a4), setTimeout(()=>{
+                        this.animate(a4, this.easeOutQuad, (e)=>{
+                            const a = this.lerp(s, [
+                                s[0] + t[0],
+                                s[1] + t[1],
+                                s[2] + t[2]
+                            ], e);
+                            this.api.setPositionAbsolute(E.name, a);
+                        });
+                    }, a4 / 2)) : (this.animate(a4, this.easeInQuad, (e)=>{
+                        const a = this.lerp(s, [
+                            s[0] + t[0],
+                            s[1] + t[1],
+                            s[2] + t[2]
+                        ], e);
+                        this.api.setPositionAbsolute(E.name, a);
+                    }), setTimeout(()=>{
+                        this.fadeOut(E.name, a4);
+                    }, a4 / 2));
+                });
+            }
+            animateRotation(e16, t, a5) {
+                return new Promise((i2, s)=>E1(this, void 0, void 0, function*() {
+                        try {
+                            const E = yield this.api.getRotation(e16);
+                            null === E && i2(), this.animate(a5, "linear", (a)=>{
+                                const i = [
+                                    E[0] + t[0] * a,
+                                    E[1] + t[1] * a,
+                                    E[2] + t[2] * a
+                                ];
+                                this.api.setRotationAbsolute(e16, i);
+                            }, ()=>{
+                                this.api.setRotationAbsolute(e16, [
+                                    E[0],
+                                    E[1],
+                                    E[2]
+                                ]), i2();
+                            });
+                        } catch (e) {
+                            s(e);
+                        }
+                    })
+                );
+            }
+            getElementVisible(e, t) {
+                const a = e.top >= 0 && t - e.top > 0, i = e.bottom >= 0 && t - e.bottom > 0;
+                if (!a && !i) return [
+                    0,
+                    0
+                ];
+                const E = e.top + e.height / 2, s = t - E, n = s < 0 || s > t ? 0 : Math.round(E / t * 100);
+                return a && i ? [
+                    100,
+                    n
+                ] : a ? [
+                    Math.round((t - e.top) / e.height * 100),
+                    n
+                ] : [
+                    Math.round((e.height - -1 * e.top) / e.height * 100),
+                    n
+                ];
+            }
+        }
+    }
+});
+const _Vectary$VctrApi = Vectary["VctrApi"];
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3y0ds":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$5048 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$5048.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _faviconPng = require("./favicon.png");
+var _faviconPngDefault = parcelHelpers.interopDefault(_faviconPng);
+const Iframe = ({ id , nameModel  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("iframe", {
+                id: "Model_" + id,
+                src: "https://www.vectary.com/viewer/v1/?model=" + id + "&arIcon=" + _faviconPngDefault.default,
+                frameBorder: "0",
+                width: "20%",
+                height: "200"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+                lineNumber: 8,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                children: nameModel
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+                lineNumber: 16,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+        lineNumber: 7,
+        columnNumber: 5
+    }, undefined);
+};
+_c = Iframe;
+exports.default = Iframe;
+var _c;
+$RefreshReg$(_c, "Iframe");
+
+  $parcel$ReactRefreshHelpers$5048.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./favicon.png":"5jBaB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"5jBaB":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "favicon.3cfdc964.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"da8K6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const updateMaterial = async (dominantColor, viewerApi, pictureSleeve)=>{
+    const updateColor = {
+        color: dominantColor,
+        map: pictureSleeve
+    };
+    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor);
+};
+exports.default = updateMaterial;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3DSfZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const updateMaterial2 = async (viewerApi, pictureSleeve)=>{
+    const updateColor2 = {
+        map: pictureSleeve
+    };
+    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor2);
+};
+exports.default = updateMaterial2;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"273co":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$701e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$701e.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const DynamicalPng = ({ reference , text , color  })=>{
+    const style = {
+        background: color
+    };
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        ref: reference,
+        className: "container-png",
+        style: style,
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h3", {
+            children: text
+        }, void 0, false, {
+            fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
+            lineNumber: 9,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
+        lineNumber: 8,
+        columnNumber: 9
+    }, undefined);
+};
+_c = DynamicalPng;
+exports.default = DynamicalPng;
+var _c;
+$RefreshReg$(_c, "DynamicalPng");
+
+  $parcel$ReactRefreshHelpers$701e.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dyrfq":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$2af8 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$2af8.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+// require('dotenv').config();
+var _dropdown = require("../buttons/dropdown");
+var _dropdownDefault = parcelHelpers.interopDefault(_dropdown);
+var _inputText = require("../buttons/input-text");
+var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
+var _config = require("../../../config/config");
+const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedSignageEquipmentQuantity , onChangeAction ,  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quelles quantit\xe9s de chaque \xe9l\xe9ment ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                lineNumber: 18,
+                columnNumber: 7
+            }, undefined),
+            selectedSignageEquipment.map((oneSelectedSignageEquipement, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                    className: "container-how-items",
+                    children: [
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                            children: oneSelectedSignageEquipement.label
+                        }, void 0, false, {
+                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                            lineNumber: 24,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dropdownDefault.default, {
+                            items: _config.productQuantity,
+                            defaultValue: selectedSignageEquipmentQuantity[oneSelectedSignageEquipement.value],
+                            onChange: (e)=>{
+                                onChangeAction(oneSelectedSignageEquipement.value, e.target.value);
+                            }
+                        }, void 0, false, {
+                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                            lineNumber: 25,
+                            columnNumber: 11
+                        }, undefined)
+                    ]
+                }, oneSelectedSignageEquipement.value, true, {
+                    fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                    lineNumber: 20,
+                    columnNumber: 9
+                }, undefined)
+            ),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
+                type: "email",
+                placeholder: "Votre adresse mail",
+                value: email,
+                name: "email",
+                onChange: (e)=>setEmail(e.target.value)
+                ,
+                required: true
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                lineNumber: 42,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+        lineNumber: 17,
+        columnNumber: 5
+    }, undefined);
+};
+_c = CalculateCost;
+exports.default = CalculateCost;
+var _c;
+$RefreshReg$(_c, "CalculateCost");
+
+  $parcel$ReactRefreshHelpers$2af8.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/dropdown":"2LfkA","../buttons/input-text":"cEoUW","../../../config/config":"a6ccA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2LfkA":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$bc8c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$bc8c.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const Dropdown = ({ items , onChange , defaultValue  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("select", {
+            onChange: onChange,
+            defaultValue: defaultValue,
+            children: items.map((item)=>{
+                return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("option", {
+                    value: item,
+                    children: item
+                }, item, false, {
+                    fileName: "src/components/wizzardComponents/buttons/dropdown.jsx",
+                    lineNumber: 14,
+                    columnNumber: 25
+                }, undefined);
+            })
+        }, void 0, false, {
+            fileName: "src/components/wizzardComponents/buttons/dropdown.jsx",
+            lineNumber: 7,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false);
+};
+_c = Dropdown;
+exports.default = Dropdown;
+var _c;
+$RefreshReg$(_c, "Dropdown");
+
+  $parcel$ReactRefreshHelpers$bc8c.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1rqbK":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$caea = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$caea.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reducer = require("../../../functions/reducer");
+var _reducerDefault = parcelHelpers.interopDefault(_reducer);
+var _s = $RefreshSig$();
+const TotalCost = ({ quantity , signagesEquipements , image  })=>{
+    _s();
+    const [currentTotal, setCurrentTotal] = _react.useState(0);
+    const cheatTotal = [];
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-total-cost",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Merci nous revenons vers vous avec une offre "
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                lineNumber: 13,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("table", {
+                border: "1",
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
+                    children: Object.keys(quantity).map((oneKey, index)=>{
+                        _react.useEffect(()=>{
+                            _reducerDefault.default(cheatTotal, signagesEquipements[index].price, quantity[oneKey], setCurrentTotal);
+                        }, []);
+                        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
+                            children: [
+                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                    children: signagesEquipements[index].label
+                                }, void 0, false, {
+                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                    lineNumber: 22,
+                                    columnNumber: 17
+                                }, undefined),
+                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
+                                        src: image[index],
+                                        alt: "Image du modèle " + signagesEquipements[index].label
+                                    }, void 0, false, {
+                                        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                        lineNumber: 23,
+                                        columnNumber: 21
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                    lineNumber: 23,
+                                    columnNumber: 17
+                                }, undefined),
+                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                    children: [
+                                        "X ",
+                                        quantity[oneKey]
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                    lineNumber: 24,
+                                    columnNumber: 17
+                                }, undefined)
+                            ]
+                        }, quantity[oneKey] + index, true, {
+                            fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                            lineNumber: 21,
+                            columnNumber: 15
+                        }, undefined);
+                    })
+                }, void 0, false, {
+                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                    lineNumber: 15,
+                    columnNumber: 9
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                lineNumber: 14,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+        lineNumber: 12,
+        columnNumber: 5
+    }, undefined);
+};
+_s(TotalCost, "SqGtFWzUHjJyPA/X9/+yEEYuAP4=");
+_c = TotalCost;
+exports.default = TotalCost;
+var _c;
+$RefreshReg$(_c, "TotalCost");
+
+  $parcel$ReactRefreshHelpers$caea.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../functions/reducer":"P8RCA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"P8RCA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const reducer = (array, value, quantity, setState)=>{
+    array.push(value * quantity);
+    const cheatReduce = array.reduce((a, b)=>a + b
+    );
+    setState(cheatReduce);
+};
+exports.default = reducer;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2NQC3":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$b0d0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$b0d0.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const ViewWrapper = ({ children , previous ="Précédent" , next ="Suivant" , previousAction , nextAction ,  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            children,
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
+                className: "container-navigation",
+                children: [
+                    previous !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                        className: "previousInput",
+                        type: "button",
+                        value: previous,
+                        onClick: previousAction
+                    }, void 0, false, {
+                        fileName: "src/components/layout/view-wrapper.jsx",
+                        lineNumber: 16,
+                        columnNumber: 11
+                    }, undefined),
+                    next !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                        className: "nextInput",
+                        type: "button",
+                        value: next,
+                        onClick: nextAction
+                    }, void 0, false, {
+                        fileName: "src/components/layout/view-wrapper.jsx",
+                        lineNumber: 24,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/layout/view-wrapper.jsx",
+                lineNumber: 14,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/layout/view-wrapper.jsx",
+        lineNumber: 11,
+        columnNumber: 5
+    }, undefined);
+};
+_c = ViewWrapper;
+exports.default = ViewWrapper;
+var _c;
+$RefreshReg$(_c, "ViewWrapper");
+
+  $parcel$ReactRefreshHelpers$b0d0.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9VZDV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _html2Canvas = require("html2canvas");
@@ -32571,127 +34872,7 @@ exports.default = exportAsImage;
     return html2canvas;
 });
 
-},{}],"km3Ru":[function(require,module,exports) {
-"use strict";
-var Refresh = require('react-refresh/runtime');
-function debounce(func, delay) {
-    var args1;
-    var timeout = undefined;
-    return function(args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            timeout = undefined;
-            func.call(null, args);
-        }, delay);
-    };
-}
-var enqueueUpdate = debounce(function() {
-    Refresh.performReactRefresh();
-}, 30); // Everthing below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function(module) {
-    window.$RefreshReg$ = function(type, id) {
-        Refresh.register(type, module.id + ' ' + id);
-    };
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function(module) {
-    if (isReactRefreshBoundary(module.exports)) {
-        registerExportsForReactRefresh(module);
-        if (module.hot) {
-            module.hot.dispose(function(data) {
-                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
-                data.prevExports = module.exports;
-            });
-            module.hot.accept(function(getParents) {
-                var prevExports = module.hot.data.prevExports;
-                var nextExports = module.exports; // Since we just executed the code for it, it's possible
-                // that the new exports make it ineligible for being a boundary.
-                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports); // It can also become ineligible if its exports are incompatible
-                // with the previous exports.
-                // For example, if you add/remove/change exports, we'll want
-                // to re-execute the importing modules, and force those components
-                // to re-render. Similarly, if you convert a class component
-                // to a function, we want to invalidate the boundary.
-                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-                if (isNoLongerABoundary || didInvalidate) {
-                    // We'll be conservative. The only case in which we won't do a full
-                    // reload is if all parent modules are also refresh boundaries.
-                    // In that case we'll add them to the current queue.
-                    var parents = getParents();
-                    if (parents.length === 0) {
-                        // Looks like we bubbled to the root. Can't recover from that.
-                        window.location.reload();
-                        return;
-                    }
-                    return parents;
-                }
-                enqueueUpdate();
-            });
-        }
-    }
-};
-function isReactRefreshBoundary(exports) {
-    if (Refresh.isLikelyComponentType(exports)) return true;
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    return false;
-    var hasExports = false;
-    var areAllExportsComponents = true;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        hasExports = true;
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
-        return false;
-        var exportValue = exports[key];
-        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
-    }
-    return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-    var prevSignature = getRefreshBoundarySignature(prevExports);
-    var nextSignature = getRefreshBoundarySignature(nextExports);
-    if (prevSignature.length !== nextSignature.length) return true;
-    for(var i = 0; i < nextSignature.length; i++){
-        if (prevSignature[i] !== nextSignature[i]) return true;
-    }
-    return false;
-} // When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-    var signature = [];
-    signature.push(Refresh.getFamilyByType(exports));
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        signature.push(key);
-        signature.push(Refresh.getFamilyByType(exportValue));
-    }
-    return signature;
-}
-function registerExportsForReactRefresh(module) {
-    var exports = module.exports, id = module.id;
-    Refresh.register(exports, id + ' %exports%');
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        Refresh.register(exportValue, id + ' %exports% ' + key);
-    }
-}
-
-},{"react-refresh/runtime":"786KC"}],"jnUkf":[function(require,module,exports) {
+},{}],"jnUkf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const showInput = (myState, nameInput)=>{
@@ -32702,2172 +34883,7 @@ const showInput = (myState, nameInput)=>{
 };
 exports.default = showInput;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"89ycD":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$eb26 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$eb26.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _inputText = require("../buttons/input-text");
-var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
-const ChooseTown = ({ townName , setTownName  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-town-name",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quel est le nom de votre commune ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-                lineNumber: 8,
-                columnNumber: 13
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
-                type: "text",
-                value: townName,
-                onChange: (e)=>{
-                    setTownName(e.target.value);
-                }
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-                lineNumber: 10,
-                columnNumber: 13
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-        lineNumber: 7,
-        columnNumber: 9
-    }, undefined);
-};
-_c = ChooseTown;
-exports.default = ChooseTown;
-var _c;
-$RefreshReg$(_c, "ChooseTown");
-
-  $parcel$ReactRefreshHelpers$eb26.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/input-text":"cEoUW","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cEoUW":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$eac1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$eac1.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const InputText = ({ type , value , name , placeholder , onChange  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-input-text",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-            type: type,
-            value: value,
-            name: name,
-            placeholder: placeholder,
-            onChange: onChange
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
-            lineNumber: 6,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
-        lineNumber: 5,
-        columnNumber: 9
-    }, undefined);
-};
-_c = InputText;
-exports.default = InputText;
-var _c;
-$RefreshReg$(_c, "InputText");
-
-  $parcel$ReactRefreshHelpers$eac1.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8MgvR":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$a15d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$a15d.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-//React import
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _colorsPickerWrapper = require("../../layout/colors-picker-wrapper");
-var _colorsPickerWrapperDefault = parcelHelpers.interopDefault(_colorsPickerWrapper);
-const ChooseDominantColor = ({ themeColors , setColor , color , colorsPickerValue , setColorsPickerValue  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-dominant-color",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quelle est la couleur dominante de votre charte graphique ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                lineNumber: 9,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
-                className: "colors",
-                children: [
-                    themeColors.map((themeColor)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                            type: "button",
-                            style: themeColor.hexadecimalColor === color ? {
-                                background: themeColor.hexadecimalColor,
-                                height: "4.3rem",
-                                width: "4.3rem"
-                            } : {
-                                background: themeColor.hexadecimalColor,
-                                opacity: 0.45
-                            },
-                            onClick: (e)=>setColor(themeColor.hexadecimalColor)
-                        }, themeColor.value, false, {
-                            fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                            lineNumber: 12,
-                            columnNumber: 9
-                        }, undefined)
-                    ),
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colorsPickerWrapperDefault.default, {
-                        setColor: setColor,
-                        color: color,
-                        colorsPickerValue: colorsPickerValue,
-                        setColorsPickerValue: setColorsPickerValue
-                    }, void 0, false, {
-                        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                        lineNumber: 27,
-                        columnNumber: 7
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                lineNumber: 10,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-        lineNumber: 8,
-        columnNumber: 5
-    }, undefined);
-};
-_c = ChooseDominantColor;
-exports.default = ChooseDominantColor;
-var _c;
-$RefreshReg$(_c, "ChooseDominantColor");
-
-  $parcel$ReactRefreshHelpers$a15d.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../layout/colors-picker-wrapper":"iMl4K"}],"iMl4K":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$8333 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$8333.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const ColorsPickerWrapper = ({ color , setColor , colorsPickerValue , setColorsPickerValue  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-            type: "color",
-            className: "colors-picker",
-            style: color === colorsPickerValue ? {
-                color: color
-            } : {
-                color: colorsPickerValue,
-                opacity: 0.45
-            },
-            value: colorsPickerValue,
-            onChange: (e)=>{
-                setColor(e.target.value);
-                setColorsPickerValue(e.target.value);
-            }
-        }, void 0, false, {
-            fileName: "src/components/layout/colors-picker-wrapper.jsx",
-            lineNumber: 6,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false);
-};
-_c = ColorsPickerWrapper;
-exports.default = ColorsPickerWrapper;
-var _c;
-$RefreshReg$(_c, "ColorsPickerWrapper");
-
-  $parcel$ReactRefreshHelpers$8333.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hKyDF":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$3164 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$3164.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-//React import
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-//Component import
-var _checkboxes = require("../buttons/checkboxes");
-var _checkboxesDefault = parcelHelpers.interopDefault(_checkboxes);
-var _config = require("../../../config/config");
-const ChooseSignageEquipment = ({ onChangeAction , selectedSignageEquipment  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-signal-fonction",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quelles fonctions de signal\xe9tique souhaitez-vous implanter ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
-                lineNumber: 12,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_checkboxesDefault.default, {
-                items: _config.signageEquipment,
-                onChangeAction: onChangeAction,
-                selectedItems: selectedSignageEquipment
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
-                lineNumber: 13,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
-        lineNumber: 11,
-        columnNumber: 5
-    }, undefined);
-};
-_c = ChooseSignageEquipment;
-exports.default = ChooseSignageEquipment;
-var _c;
-$RefreshReg$(_c, "ChooseSignageEquipment");
-
-  $parcel$ReactRefreshHelpers$3164.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/checkboxes":"exstm","../../../config/config":"a6ccA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"exstm":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$3156 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$3156.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-//React import
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _s = $RefreshSig$();
-const Checkboxes = ({ items , onChangeAction , selectedItems =[]  })=>{
-    _s();
-    const [checkboxesState, setCheckboxesState] = _react.useState(items.map((item)=>selectedItems.some((selectedItem)=>selectedItem.value === item.value
-        )
-    ));
-    _react.useEffect(()=>{
-        onChangeAction(items.filter((item, index)=>checkboxesState[index]
-        ));
-    }, [
-        checkboxesState
-    ]);
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-checkboxes",
-        children: items.map((item, index)=>{
-            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                children: [
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                        type: "checkbox",
-                        id: item.value,
-                        name: item.value,
-                        value: item.value,
-                        defaultChecked: checkboxesState[index],
-                        onChange: (e)=>{
-                            setCheckboxesState((oldCheckboxesState)=>{
-                                const newCheckboxesState = [
-                                    ...oldCheckboxesState
-                                ];
-                                newCheckboxesState[index] = e.target.checked;
-                                return newCheckboxesState;
-                            });
-                        }
-                    }, void 0, false, {
-                        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
-                        lineNumber: 19,
-                        columnNumber: 13
-                    }, undefined),
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                        htmlFor: item.value,
-                        children: item.label
-                    }, void 0, false, {
-                        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
-                        lineNumber: 33,
-                        columnNumber: 13
-                    }, undefined)
-                ]
-            }, item.value, true, {
-                fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
-                lineNumber: 18,
-                columnNumber: 11
-            }, undefined);
-        })
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
-        lineNumber: 15,
-        columnNumber: 5
-    }, undefined);
-};
-_s(Checkboxes, "65DaY5cYwuy5KulZ/KInE7BYeH4=");
-_c = Checkboxes;
-exports.default = Checkboxes;
-var _c;
-$RefreshReg$(_c, "Checkboxes");
-
-  $parcel$ReactRefreshHelpers$3156.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"a6ccA":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "vectaryModels", ()=>vectaryModels
-);
-parcelHelpers.export(exports, "colorsDarkScheme", ()=>colorsDarkScheme
-);
-parcelHelpers.export(exports, "colorsLightScheme", ()=>colorsLightScheme
-);
-parcelHelpers.export(exports, "themeColors", ()=>themeColors
-);
-parcelHelpers.export(exports, "signageEquipment", ()=>signageEquipment
-);
-parcelHelpers.export(exports, "productQuantity", ()=>productQuantity
-);
-parcelHelpers.export(exports, "mailOfKingBoss", ()=>mailOfKingBoss
-);
-const vectaryModels = [
-    {
-        label: "Panneau directionnel",
-        name: "directionnalSign",
-        value: "directionnalSign",
-        id: "e23752d1-c5e8-4788-b719-8a913477dc6c"
-    },
-    {
-        label: "Panneau 2000",
-        name: "panel2000",
-        value: "panel2000",
-        id: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
-    },
-    {
-        label: "Panneau 3000",
-        name: "panel3000",
-        value: "panel3000",
-        id: "d7e90749-acb2-4861-bb20-08881e0777ce"
-    },
-    {
-        label: "Manchon text",
-        name: "sleeveText",
-        value: "sleeveText",
-        id: "57cf45e9-d355-4463-af66-f08c72993784"
-    }
-];
-const colorsDarkScheme = {
-    COULEUR_SECONDAIRE0000: "#3E844A",
-    COULEUR_PANNEAU: "#000000",
-    COULEUR_DOMINANTE: "#787878"
-};
-const colorsLightScheme = {
-    COULEUR_SECONDAIRE0000: "#FF1A1A",
-    COULEUR_PANNEAU: "#FFFFFF",
-    COULEUR_DOMINANTE: "#FFFFFF"
-};
-const themeColors = [
-    {
-        value: "blueOfAzure",
-        hexadecimalColor: "#0082EA",
-        label: "bleu d'azure"
-    },
-    {
-        value: "coblatBlue",
-        hexadecimalColor: "#44479F",
-        label: "blue cobalt"
-    },
-    {
-        value: "slateGrey",
-        hexadecimalColor: "#646971",
-        label: "gris ardoise"
-    },
-    {
-        value: "pomegranateRed",
-        hexadecimalColor: "#F71F4C",
-        label: "rouge grenade"
-    },
-    {
-        value: "poppyRed",
-        hexadecimalColor: "#E00012",
-        label: "rouge coquelicot"
-    },
-    {
-        value: "reddishOrange",
-        hexadecimalColor: "#C14C25",
-        label: "orange roux"
-    },
-    {
-        value: "mustardYellow",
-        hexadecimalColor: "#EF850B",
-        label: "jaune moutarde"
-    }
-];
-const signageEquipment = [
-    {
-        value: "option1",
-        label: "Effet de porte aux entrées de la commune",
-        price: 2400,
-        modelId: "e23752d1-c5e8-4788-b719-8a913477dc6c"
-    },
-    {
-        value: "option2",
-        label: "Orientation des véhicules vers les ressources",
-        price: 980,
-        modelId: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
-    },
-    {
-        value: "option3",
-        label: "Identification des parkings",
-        price: 1200,
-        modelId: "d7e90749-acb2-4861-bb20-08881e0777ce"
-    },
-    {
-        value: "option4",
-        label: "Information sur les ressources du centre-ville",
-        price: 4800,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
-    },
-    {
-        value: "option5",
-        label: "Orientation des piétons vers les ressources",
-        price: 3200,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
-    },
-    {
-        value: "option6",
-        label: "Interprétation historique des ressources",
-        price: 240,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
-    }
-];
-const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {
-    return ++i;
-});
-const mailOfKingBoss = [];
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f56lm":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$7930 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$7930.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _vectaryItems = require("../vectary-items/vectary-items");
-var _vectaryItemsDefault = parcelHelpers.interopDefault(_vectaryItems);
-const SignalSystem = ({ myPicto , setMyPicto , setIsLoaded , townName , models , currentColor , pictureSleeve  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-signal-system",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: [
-                    "Le nouveau syst\xe8me signal\xe9tique de ",
-                    townName
-                ]
-            }, void 0, true, {
-                fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
-                lineNumber: 8,
-                columnNumber: 13
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_vectaryItemsDefault.default, {
-                picto: myPicto,
-                setPicto: setMyPicto,
-                setIsLoaded: setIsLoaded,
-                models: models,
-                dominantColor: currentColor,
-                pictureSleeve: pictureSleeve
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
-                lineNumber: 9,
-                columnNumber: 13
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
-        lineNumber: 7,
-        columnNumber: 9
-    }, undefined);
-};
-_c = SignalSystem;
-exports.default = SignalSystem;
-var _c;
-$RefreshReg$(_c, "SignalSystem");
-
-  $parcel$ReactRefreshHelpers$7930.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../vectary-items/vectary-items":"3CApp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3CApp":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$9dc5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$9dc5.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-//React import
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-//Lib import
-var _api = require("../../../lib/api");
-//Component import
-var _iframe = require("./iframe");
-var _iframeDefault = parcelHelpers.interopDefault(_iframe);
-//Logic import
-var _updateMaterial = require("../../../functions/update-material");
-var _updateMaterialDefault = parcelHelpers.interopDefault(_updateMaterial);
-var _updateColor2 = require("../../../functions/update-color-2");
-var _updateColor2Default = parcelHelpers.interopDefault(_updateColor2);
-var _s = $RefreshSig$();
-const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor , pictureSleeve  })=>{
-    _s();
-    const viewerModels = [];
-    _react.useEffect(()=>{
-        const run = async ()=>{
-            setPicto([]);
-            setIsLoaded("");
-            models.map(async (model, index)=>{
-                const viewerApi = new _api.VctrApi("Model_" + model.modelId);
-                viewerModels.push(viewerApi);
-                await viewerApi.init();
-                await viewerApi.setPositionAbsolute("Camera", [
-                    4,
-                    2,
-                    7
-                ]);
-                // updateMaterial(dominantColor, viewerApi, pictureSleeve);
-                _updateColor2Default.default(viewerApi, pictureSleeve);
-                if (viewerApi.isReady === true) {
-                    const waitForScreen = async ()=>{
-                        const screenshot = await viewerApi.takeScreenshot();
-                        setPicto((oldScreen)=>{
-                            const newScreen = [
-                                ...oldScreen
-                            ];
-                            newScreen[index] = screenshot;
-                            return newScreen;
-                        });
-                    };
-                    const timeForScreen = ()=>{
-                        setTimeout(waitForScreen, 1000);
-                        setTimeout(setIsLoaded("Calculer le coût"), 2000);
-                    };
-                    timeForScreen();
-                }
-            });
-        };
-        run();
-    }, []);
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-iframe",
-        children: models.map((model, index)=>{
-            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactDefault.default.Fragment, {
-                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
-                    id: model.modelId,
-                    nameModel: model.label
-                }, model.modelId + index, false, {
-                    fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                    lineNumber: 62,
-                    columnNumber: 29
-                }, undefined)
-            }, model.modelId + index, false, {
-                fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                lineNumber: 61,
-                columnNumber: 25
-            }, undefined);
-        })
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-        lineNumber: 57,
-        columnNumber: 9
-    }, undefined);
-};
-_s(VectaryItems, "OD7bBpZva5O2jO+Puf00hKivP7c=");
-_c = VectaryItems;
-exports.default = VectaryItems;
-var _c;
-$RefreshReg$(_c, "VectaryItems");
-
-  $parcel$ReactRefreshHelpers$9dc5.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../lib/api":"6mCQj","./iframe":"3y0ds","../../../functions/update-material":"da8K6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../functions/update-color-2":"3DSfZ"}],"6mCQj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "VctrApi", ()=>_Vectary$VctrApi
-);
-/*!
- * Copyright (c) 2022 by Vectary. All rights reserved.
- * Rev 13d1a4d8a9f360c894690e4d6df396af2f33ed23
- * @copyright
- */ var Vectary = function(e1) {
-    var t1 = {};
-    function a(i) {
-        if (t1[i]) return t1[i].exports;
-        var E = t1[i] = {
-            i: i,
-            l: !1,
-            exports: {}
-        };
-        return e1[i].call(E.exports, E, E.exports, a), E.l = !0, E.exports;
-    }
-    return a.m = e1, a.c = t1, a.d = function(e, t, i) {
-        a.o(e, t) || Object.defineProperty(e, t, {
-            enumerable: !0,
-            get: i
-        });
-    }, a.r = function(e) {
-        "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-            value: "Module"
-        }), Object.defineProperty(e, "__esModule", {
-            value: !0
-        });
-    }, a.t = function(e, t2) {
-        if (1 & t2 && (e = a(e)), 8 & t2) return e;
-        if (4 & t2 && "object" === typeof e && e && e.__esModule) return e;
-        var i = Object.create(null);
-        if (a.r(i), Object.defineProperty(i, "default", {
-            enumerable: !0,
-            value: e
-        }), 2 & t2 && "string" != typeof e) for(var E in e)a.d(i, E, (function(t) {
-            return e[t];
-        }).bind(null, E));
-        return i;
-    }, a.n = function(e) {
-        var t = e && e.__esModule ? function t() {
-            return e["default"];
-        } : function t() {
-            return e;
-        };
-        return a.d(t, "a", t), t;
-    }, a.o = function(e, t) {
-        return Object.prototype.hasOwnProperty.call(e, t);
-    }, a.p = "/", a(a.s = "./src/viewer-api/scripts/vctr-api.ts");
-}({
-    "./src/_common_/types.ts": function(e2, t, a) {
-        "use strict";
-        var i, E, s, n;
-        a.d(t, "b", function() {
-            return i;
-        }), a.d(t, "a", function() {
-            return E;
-        }), a.d(t, "d", function() {
-            return s;
-        }), a.d(t, "c", function() {
-            return n;
-        }), function(e) {
-            e[e["ERROR"] = 0] = "ERROR", e[e["READY"] = 1] = "READY", e[e["GET_OBJECTS"] = 2] = "GET_OBJECTS", e[e["GET_OBJECT_BY_NAME"] = 3] = "GET_OBJECT_BY_NAME", e[e["GET_OBJECTS_BY_NAME"] = 4] = "GET_OBJECTS_BY_NAME", e[e["GET_MESHES"] = 5] = "GET_MESHES", e[e["GET_MESH_BY_NAME"] = 6] = "GET_MESH_BY_NAME", e[e["GET_MESHES_BY_NAME"] = 7] = "GET_MESHES_BY_NAME", e[e["GET_HIT_OBJECTS"] = 8] = "GET_HIT_OBJECTS", e[e["GET_VISIBILITY"] = 9] = "GET_VISIBILITY", e[e["SET_VISIBILITY"] = 10] = "SET_VISIBILITY", e[e["GET_POSITION"] = 11] = "GET_POSITION", e[e["SET_POSITION_REL"] = 12] = "SET_POSITION_REL", e[e["SET_POSITION_ABS"] = 13] = "SET_POSITION_ABS", e[e["GET_ROTATION"] = 14] = "GET_ROTATION", e[e["SET_ROTATION_REL"] = 15] = "SET_ROTATION_REL", e[e["SET_ROTATION_ABS"] = 16] = "SET_ROTATION_ABS", e[e["GET_SCALE"] = 17] = "GET_SCALE", e[e["SET_SCALE_REL"] = 18] = "SET_SCALE_REL", e[e["SET_SCALE_ABS"] = 19] = "SET_SCALE_ABS", e[e["GET_MATERIALS"] = 20] = "GET_MATERIALS", e[e["SET_MATERIAL"] = 21] = "SET_MATERIAL", e[e["GET_MATERIALS_BY_NAME"] = 22] = "GET_MATERIALS_BY_NAME", e[e["GET_MATERIAL_BY_NAME"] = 23] = "GET_MATERIAL_BY_NAME", e[e["GET_MATERIAL_PROPS"] = 24] = "GET_MATERIAL_PROPS", e[e["CREATE_MATERIAL"] = 25] = "CREATE_MATERIAL", e[e["UPDATE_MATERIAL"] = 26] = "UPDATE_MATERIAL", e[e["GET_BACKGROUND"] = 27] = "GET_BACKGROUND", e[e["SET_BACKGROUND"] = 28] = "SET_BACKGROUND", e[e["GET_EXPOSURE"] = 29] = "GET_EXPOSURE", e[e["SET_EXPOSURE"] = 30] = "SET_EXPOSURE", e[e["GET_ENVIRONMENT_MAP"] = 31] = "GET_ENVIRONMENT_MAP", e[e["SET_ENVIRONMENT_MAP"] = 32] = "SET_ENVIRONMENT_MAP", e[e["ROTATE_ENVIRONMENT_MAP"] = 33] = "ROTATE_ENVIRONMENT_MAP", e[e["GET_CAMERAS"] = 34] = "GET_CAMERAS", e[e["GET_CAMERAS_BY_NAME"] = 35] = "GET_CAMERAS_BY_NAME", e[e["GET_CAMERA_BY_NAME"] = 36] = "GET_CAMERA_BY_NAME", e[e["SWITCH_VIEW"] = 37] = "SWITCH_VIEW", e[e["SWITCH_VIEW_ASYNC"] = 38] = "SWITCH_VIEW_ASYNC", e[e["MOVE_VIEW"] = 39] = "MOVE_VIEW", e[e["ROTATE_VIEW"] = 40] = "ROTATE_VIEW", e[e["ZOOM_VIEW"] = 41] = "ZOOM_VIEW", e[e["GET_FOV"] = 42] = "GET_FOV", e[e["SET_FOV"] = 43] = "SET_FOV", e[e["TAKE_SCREENSHOT"] = 44] = "TAKE_SCREENSHOT", e[e["ENABLE_ANNOTATIONS"] = 45] = "ENABLE_ANNOTATIONS", e[e["GET_ANNOTATIONS"] = 46] = "GET_ANNOTATIONS", e[e["GET_ANNOTATION_BY_ID"] = 47] = "GET_ANNOTATION_BY_ID", e[e["ADD_ANNOTATION"] = 48] = "ADD_ANNOTATION", e[e["REMOVE_ANNOTATION_BY_ID"] = 49] = "REMOVE_ANNOTATION_BY_ID", e[e["EXPAND_ANNOTATIONS_BY_ID"] = 50] = "EXPAND_ANNOTATIONS_BY_ID", e[e["HIGHLIGHT_MESHES_BY_NAME"] = 51] = "HIGHLIGHT_MESHES_BY_NAME", e[e["UNHIGHLIGHT_MESHES_BY_NAME"] = 52] = "UNHIGHLIGHT_MESHES_BY_NAME", e[e["SET_CANVAS_STATE"] = 53] = "SET_CANVAS_STATE", e[e["GET_VIEW_STATE"] = 54] = "GET_VIEW_STATE", e[e["APPLY_VIEW_STATE"] = 55] = "APPLY_VIEW_STATE", e[e["SEND_EVENT"] = 56] = "SEND_EVENT", e[e["PLAY"] = 57] = "PLAY", e[e["LOAD"] = 58] = "LOAD", e[e["SET_UUID_AR"] = 59] = "SET_UUID_AR", e[e["TRIGGER_AR_CLICK"] = 60] = "TRIGGER_AR_CLICK", e[e["GET_2D_COORDINATES"] = 61] = "GET_2D_COORDINATES", e[e["GET_CURRENT_USER"] = 62] = "GET_CURRENT_USER", e[e["DID_RENDER_LAST_FRAME"] = 63] = "DID_RENDER_LAST_FRAME", e[e["ADD_EVENT_LISTENER"] = 64] = "ADD_EVENT_LISTENER", e[e["REMOVE_EVENT_LISTENER"] = 65] = "REMOVE_EVENT_LISTENER", e[e["UPDATE_EVENT"] = 66] = "UPDATE_EVENT", e[e["TAKE_FIXED_SIZE_SCREENSHOT"] = 67] = "TAKE_FIXED_SIZE_SCREENSHOT", e[e["ADD_COMPLEX_ANNOTATION"] = 68] = "ADD_COMPLEX_ANNOTATION", e[e["SET_ANNOTATION_VISIBILITY"] = 69] = "SET_ANNOTATION_VISIBILITY";
-        }(i || (i = {})), function(e) {
-            e["ORBIT_CONTROLS_STATE_CHANGE"] = "ORBIT_CONTROLS_STATE_CHANGE", e["MOUSE_MOVE"] = "MOUSE_MOVE", e["MOUSE_CLICK"] = "MOUSE_CLICK", e["MOUSE_DOWN"] = "MOUSE_DOWN";
-        }(E || (E = {})), function(e) {
-            e["NONE"] = "NONE", e["ROTATE"] = "ROTATE", e["DOLLY"] = "DOLLY", e["PAN"] = "PAN", e["TOUCH_ROTATE"] = "TOUCH_ROTATE", e["TOUCH_PAN"] = "TOUCH_PAN", e["TOUCH_DOLLY_PAN"] = "TOUCH_DOLLY_PAN", e["TOUCH_DOLLY_ROTATE"] = "TOUCH_DOLLY_ROTATE";
-        }(s || (s = {})), function(e) {
-            e["AUTO"] = "auto", e["ENGLISH"] = "en", e["SPANISH"] = "es", e["GERMAN"] = "de", e["FRENCH"] = "fr", e["ITALIAN"] = "it", e["RUSSIAN"] = "ru";
-        }(n || (n = {}));
-    },
-    "./src/viewer-api/scripts/vctr-api.ts": function(e3, t3, a1) {
-        "use strict";
-        a1.r(t3), a1.d(t3, "VctrApi", function() {
-            return s1;
-        });
-        var i1 = a1("./src/_common_/types.ts"), E1 = function(e4, t4, a2, i) {
-            function E(e) {
-                return e instanceof a2 ? e : new a2(function(t) {
-                    t(e);
-                });
-            }
-            return new (a2 || (a2 = Promise))(function(a, s) {
-                function n(e) {
-                    try {
-                        _(i.next(e));
-                    } catch (e5) {
-                        s(e5);
-                    }
-                }
-                function r(e) {
-                    try {
-                        _(i["throw"](e));
-                    } catch (e6) {
-                        s(e6);
-                    }
-                }
-                function _(e) {
-                    e.done ? a(e.value) : E(e.value).then(n, r);
-                }
-                _((i = i.apply(e4, t4 || [])).next());
-            });
-        };
-        class s1 {
-            constructor(e, t){
-                this.isReady = !1, this.iframeMsgMap = new Map, this.eventsCallbackMap = new Map, this.id = e, this.globalErrCb = t, s1.Utils = new n1(this);
-            }
-            init() {
-                return new Promise((e, t)=>E1(this, void 0, void 0, function*() {
-                        if (this.elem = document.getElementById(this.id), !this.elem) {
-                            const a = `Element with id "${this.id}" does not exist`;
-                            return this.globalErrCb ? this.globalErrCb(a) : t(a), e();
-                        }
-                        if (this.type = "IFRAME" === this.elem.nodeName ? "iframe" : "VCTR-VIEWER" === this.elem.nodeName ? "webcomponent" : null, !this.type) {
-                            const a = `Element with id "${this.id}" is not of an appropriate type`;
-                            return this.globalErrCb ? this.globalErrCb(a) : t(a), e();
-                        }
-                        switch(this.type){
-                            case "iframe":
-                                this.initIframeMessenger();
-                            default:
-                                yield this.getReady(), e();
-                        }
-                    })
-                );
-            }
-            getReady() {
-                return new Promise((e7, t)=>{
-                    const a = this.getRandomNum(), E = self.setInterval(()=>{
-                        if ("iframe" === this.type) this.iframeMsgMap.set(a, {
-                            err: null,
-                            succ: null
-                        }), this.elem.contentWindow.postMessage({
-                            id: this.id,
-                            msgId: a,
-                            method: i1["b"].READY
-                        }, "*");
-                        else {
-                            const e = !!this.elem.isReady && this.elem.isReady();
-                            e && (this.isReady = !0);
-                        }
-                        this.isReady && (self.clearInterval(E), e7());
-                    }, 500);
-                });
-            }
-            getObjects() {
-                return this.apiCallInternal(i1["b"].GET_OBJECTS);
-            }
-            getMeshes() {
-                return this.apiCallInternal(i1["b"].GET_MESHES);
-            }
-            getObjectsByName(e) {
-                return this.apiCallInternal(i1["b"].GET_OBJECTS_BY_NAME, {
-                    name: e
-                });
-            }
-            getObjectByName(e) {
-                return this.apiCallInternal(i1["b"].GET_OBJECT_BY_NAME, {
-                    name: e
-                });
-            }
-            getMeshesByName(e) {
-                return this.apiCallInternal(i1["b"].GET_MESHES_BY_NAME, {
-                    name: e
-                });
-            }
-            getMeshByName(e) {
-                return this.apiCallInternal(i1["b"].GET_MESH_BY_NAME, {
-                    name: e
-                });
-            }
-            getHitObjects(e = !1) {
-                return this.apiCallInternal(i1["b"].GET_HIT_OBJECTS, {
-                    firstHitOnly: e
-                });
-            }
-            get2DCoordinates(e) {
-                return this.apiCallInternal(i1["b"].GET_2D_COORDINATES, {
-                    name: e
-                });
-            }
-            getCameras() {
-                return this.apiCallInternal(i1["b"].GET_CAMERAS);
-            }
-            getCamerasByName(e) {
-                return this.apiCallInternal(i1["b"].GET_CAMERAS_BY_NAME, {
-                    name: e
-                });
-            }
-            getCameraByName(e) {
-                return this.apiCallInternal(i1["b"].GET_CAMERA_BY_NAME, {
-                    name: e
-                });
-            }
-            switchView(e) {
-                return this.apiCallInternal(i1["b"].SWITCH_VIEW, {
-                    name: e
-                });
-            }
-            switchViewAsync(e) {
-                return this.apiCallInternal(i1["b"].SWITCH_VIEW_ASYNC, {
-                    name: e
-                });
-            }
-            moveView(e) {
-                return this.apiCallInternal(i1["b"].MOVE_VIEW, {
-                    position: e
-                });
-            }
-            rotateView(e) {
-                return this.apiCallInternal(i1["b"].ROTATE_VIEW, {
-                    rotation: e
-                });
-            }
-            zoomView(e) {
-                return this.apiCallInternal(i1["b"].ZOOM_VIEW, {
-                    zoom: e
-                });
-            }
-            getVisibility(e) {
-                return this.apiCallInternal(i1["b"].GET_VISIBILITY, {
-                    name: e
-                });
-            }
-            setVisibility(e, t = !0, a = !1) {
-                return this.apiCallInternal(i1["b"].SET_VISIBILITY, {
-                    names: e,
-                    visible: t,
-                    isExclusive: a
-                });
-            }
-            getMaterials() {
-                return this.apiCallInternal(i1["b"].GET_MATERIALS);
-            }
-            createMaterial(e, t) {
-                return this.apiCallInternal(i1["b"].CREATE_MATERIAL, {
-                    material: e,
-                    cloneFromMatName: t
-                });
-            }
-            updateMaterial(e, t, a = !0) {
-                return this.apiCallInternal(i1["b"].UPDATE_MATERIAL, {
-                    name: e,
-                    props: t,
-                    withPrefetch: a
-                });
-            }
-            setMaterial(e, t) {
-                return this.apiCallInternal(i1["b"].SET_MATERIAL, {
-                    objectName: e,
-                    materialName: t
-                });
-            }
-            getMaterialsByName(e) {
-                return this.apiCallInternal(i1["b"].GET_MATERIALS_BY_NAME, {
-                    name: e
-                });
-            }
-            getMaterialByName(e) {
-                return this.apiCallInternal(i1["b"].GET_MATERIAL_BY_NAME, {
-                    name: e
-                });
-            }
-            getMaterialProperties(e) {
-                return this.apiCallInternal(i1["b"].GET_MATERIAL_PROPS, {
-                    name: e
-                });
-            }
-            getBackground() {
-                return this.apiCallInternal(i1["b"].GET_BACKGROUND);
-            }
-            setBackground(e) {
-                return this.apiCallInternal(i1["b"].SET_BACKGROUND, {
-                    background: e
-                });
-            }
-            enableAnnotations(e = !0) {
-                return this.apiCallInternal(i1["b"].ENABLE_ANNOTATIONS, {
-                    enable: e
-                });
-            }
-            getAnnotations() {
-                return this.apiCallInternal(i1["b"].GET_ANNOTATIONS);
-            }
-            getAnnotationById(e) {
-                return this.apiCallInternal(i1["b"].GET_ANNOTATION_BY_ID, {
-                    id: e
-                });
-            }
-            addAnnotation(e) {
-                return this.apiCallInternal(i1["b"].ADD_ANNOTATION, {
-                    annotationConf: e
-                });
-            }
-            addComplexAnnotation(e) {
-                return this.apiCallInternal(i1["b"].ADD_COMPLEX_ANNOTATION, {
-                    annotationConf: e
-                });
-            }
-            removeAnnotationById(e) {
-                return this.apiCallInternal(i1["b"].REMOVE_ANNOTATION_BY_ID, {
-                    id: e
-                });
-            }
-            setAnnotationVisibility(e, t) {
-                return this.apiCallInternal(i1["b"].SET_ANNOTATION_VISIBILITY, {
-                    id: e,
-                    visibility: t
-                });
-            }
-            expandAnnotationsById(e, t, a = !0) {
-                return this.apiCallInternal(i1["b"].EXPAND_ANNOTATIONS_BY_ID, {
-                    ids: e,
-                    expand: t,
-                    isExclusive: a
-                });
-            }
-            getPosition(e) {
-                return this.apiCallInternal(i1["b"].GET_POSITION, {
-                    name: e
-                });
-            }
-            setPositionRelative(e, t) {
-                return this.apiCallInternal(i1["b"].SET_POSITION_REL, {
-                    name: e,
-                    position: t
-                });
-            }
-            setPositionAbsolute(e, t) {
-                return this.apiCallInternal(i1["b"].SET_POSITION_ABS, {
-                    name: e,
-                    position: t
-                });
-            }
-            getRotation(e) {
-                return this.apiCallInternal(i1["b"].GET_ROTATION, {
-                    name: e
-                });
-            }
-            setRotationRelative(e, t, a = "XYZ") {
-                return this.apiCallInternal(i1["b"].SET_ROTATION_REL, {
-                    name: e,
-                    rotation: t,
-                    order: a
-                });
-            }
-            setRotationAbsolute(e, t, a = "XYZ") {
-                return this.apiCallInternal(i1["b"].SET_ROTATION_ABS, {
-                    name: e,
-                    rotation: t,
-                    order: a
-                });
-            }
-            getScale(e) {
-                return this.apiCallInternal(i1["b"].GET_SCALE, {
-                    name: e
-                });
-            }
-            setScaleRelative(e, t) {
-                return this.apiCallInternal(i1["b"].SET_SCALE_REL, {
-                    name: e,
-                    scale: t
-                });
-            }
-            setScaleAbsolute(e, t) {
-                return this.apiCallInternal(i1["b"].SET_SCALE_ABS, {
-                    name: e,
-                    scale: t
-                });
-            }
-            highlightMeshesByName(e, t = "#ffff00", a = 1, E = !1) {
-                return this.apiCallInternal(i1["b"].HIGHLIGHT_MESHES_BY_NAME, {
-                    names: e,
-                    color: t,
-                    intensity: a,
-                    isExclusive: E
-                });
-            }
-            unhighlightMeshesByName(e) {
-                return this.apiCallInternal(i1["b"].UNHIGHLIGHT_MESHES_BY_NAME, {
-                    names: e
-                });
-            }
-            takeScreenshot(e = 1, t) {
-                return this.apiCallInternal(i1["b"].TAKE_SCREENSHOT, {
-                    scale: e,
-                    scissor: t
-                });
-            }
-            takeFixedSizedScreenshot(e) {
-                return this.apiCallInternal(i1["b"].TAKE_FIXED_SIZE_SCREENSHOT, {
-                    dimension: e
-                });
-            }
-            getViewState() {
-                return this.apiCallInternal(i1["b"].GET_VIEW_STATE);
-            }
-            applyViewState(e) {
-                return this.apiCallInternal(i1["b"].APPLY_VIEW_STATE, {
-                    state: e
-                });
-            }
-            getExposure() {
-                return this.apiCallInternal(i1["b"].GET_EXPOSURE);
-            }
-            setExposure(e) {
-                return this.apiCallInternal(i1["b"].SET_EXPOSURE, {
-                    exposure: e
-                });
-            }
-            getEnvironmentMap() {
-                return this.apiCallInternal(i1["b"].GET_ENVIRONMENT_MAP);
-            }
-            setEnvironmentMap(e) {
-                return this.apiCallInternal(i1["b"].SET_ENVIRONMENT_MAP, {
-                    envMap: e
-                });
-            }
-            rotateEnvironmentMap(e) {
-                return this.apiCallInternal(i1["b"].ROTATE_ENVIRONMENT_MAP, {
-                    rotation: e
-                });
-            }
-            getFOV() {
-                return this.apiCallInternal(i1["b"].GET_FOV);
-            }
-            setFOV(e) {
-                return this.apiCallInternal(i1["b"].SET_FOV, {
-                    fov: e
-                });
-            }
-            sendEvent(e, t, a, E, s) {
-                return this.apiCallInternal(i1["b"].SEND_EVENT, {
-                    event: e,
-                    x: t,
-                    y: a,
-                    maxX: E,
-                    maxY: s
-                });
-            }
-            play(e, t) {
-                return this.apiCallInternal(i1["b"].PLAY, {
-                    animIdx: e,
-                    timeScale: t
-                });
-            }
-            load() {
-                return this.apiCallInternal(i1["b"].LOAD);
-            }
-            setUUIDAr(e) {
-                return this.apiCallInternal(i1["b"].SET_UUID_AR, {
-                    uuid: e
-                });
-            }
-            triggerARClick() {
-                return this.apiCallInternal(i1["b"].TRIGGER_AR_CLICK);
-            }
-            setCanvasState(e, t) {
-                return this.apiCallInternal(i1["b"].SET_CANVAS_STATE, {
-                    className: e,
-                    state: t
-                });
-            }
-            getCurrentUser() {
-                return this.apiCallInternal(i1["b"].GET_CURRENT_USER);
-            }
-            didRenderLastFrame() {
-                return this.apiCallInternal(i1["b"].DID_RENDER_LAST_FRAME);
-            }
-            addEventListener(e, t) {
-                return this.eventsCallbackMap.set(e, t), this.apiCallInternal(i1["b"].ADD_EVENT_LISTENER, {
-                    eventType: e
-                });
-            }
-            removeEventListener(e) {
-                return this.eventsCallbackMap.delete(e), this.apiCallInternal(i1["b"].REMOVE_EVENT_LISTENER, {
-                    eventType: e
-                });
-            }
-            apiCallInternal(e8, t) {
-                return new Promise((a, s)=>E1(this, void 0, void 0, function*() {
-                        try {
-                            if ("iframe" === this.type) {
-                                const i = this.getRandomNum();
-                                this.iframeMsgMap.set(i, {
-                                    err: this.globalErrCb ? this.globalErrCb : s,
-                                    succ: a
-                                }), this.elem.contentWindow.postMessage({
-                                    id: this.id,
-                                    msgId: i,
-                                    method: e8,
-                                    data: t ? JSON.stringify(t) : void 0
-                                }, "*");
-                            } else {
-                                let E;
-                                switch(e8){
-                                    case i1["b"].GET_OBJECTS:
-                                        E = this.elem.getObjects();
-                                        break;
-                                    case i1["b"].GET_MESHES:
-                                        E = this.elem.getMeshes();
-                                        break;
-                                    case i1["b"].GET_OBJECTS_BY_NAME:
-                                        E = this.elem.getObjectsByName(t.name);
-                                        break;
-                                    case i1["b"].GET_OBJECT_BY_NAME:
-                                        E = this.elem.getObjectByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MESHES_BY_NAME:
-                                        E = this.elem.getMeshesByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MESH_BY_NAME:
-                                        E = this.elem.getMeshByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MATERIALS:
-                                        E = this.elem.getMaterials();
-                                        break;
-                                    case i1["b"].CREATE_MATERIAL:
-                                        E = this.elem.createMaterial(t.material, t.cloneFromMatName);
-                                        break;
-                                    case i1["b"].UPDATE_MATERIAL:
-                                        E = this.elem.updateMaterial(t.name, t.props, t.withPrefetch);
-                                        break;
-                                    case i1["b"].SET_MATERIAL:
-                                        E = this.elem.setMaterial(t.objectName, t.materialName);
-                                        break;
-                                    case i1["b"].GET_MATERIALS_BY_NAME:
-                                        E = this.elem.getMaterialsByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MATERIAL_BY_NAME:
-                                        E = this.elem.getMaterialByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MATERIAL_PROPS:
-                                        E = this.elem.getMaterialProperties(t.name);
-                                        break;
-                                    case i1["b"].GET_HIT_OBJECTS:
-                                        E = this.elem.getHitObjects(t.firstHitOnly);
-                                        break;
-                                    case i1["b"].GET_2D_COORDINATES:
-                                        E = this.elem.get2DCoordinates(t.name);
-                                        break;
-                                    case i1["b"].GET_CAMERAS:
-                                        E = this.elem.getCameras();
-                                        break;
-                                    case i1["b"].GET_CAMERAS_BY_NAME:
-                                        E = this.elem.getCamerasByName(t.name);
-                                        break;
-                                    case i1["b"].GET_CAMERA_BY_NAME:
-                                        E = this.elem.getCameraByName(t.name);
-                                        break;
-                                    case i1["b"].SWITCH_VIEW:
-                                        E = this.elem.switchView(t.name);
-                                        break;
-                                    case i1["b"].SWITCH_VIEW_ASYNC:
-                                        E = this.elem.switchViewAsync(t.name);
-                                        break;
-                                    case i1["b"].MOVE_VIEW:
-                                        E = this.elem.moveView(t.position);
-                                        break;
-                                    case i1["b"].ROTATE_VIEW:
-                                        E = this.elem.rotateView(t.rotation);
-                                        break;
-                                    case i1["b"].ZOOM_VIEW:
-                                        E = this.elem.zoomView(t.zoom);
-                                        break;
-                                    case i1["b"].GET_VISIBILITY:
-                                        E = this.elem.getVisibility(t.name);
-                                        break;
-                                    case i1["b"].SET_VISIBILITY:
-                                        E = this.elem.setVisibility(t.names, t.visible, t.isExclusive);
-                                        break;
-                                    case i1["b"].GET_BACKGROUND:
-                                        E = this.elem.getBackground();
-                                        break;
-                                    case i1["b"].SET_BACKGROUND:
-                                        E = yield this.elem.setBackground(t.background);
-                                        break;
-                                    case i1["b"].ENABLE_ANNOTATIONS:
-                                        E = yield this.elem.enableAnnotations(t.enable);
-                                        break;
-                                    case i1["b"].GET_ANNOTATIONS:
-                                        E = yield this.elem.getAnnotations();
-                                        break;
-                                    case i1["b"].GET_ANNOTATION_BY_ID:
-                                        E = yield this.elem.getAnnotationById(t.id);
-                                        break;
-                                    case i1["b"].ADD_ANNOTATION:
-                                        E = yield this.elem.addAnnotation(t.annotationConf);
-                                        break;
-                                    case i1["b"].ADD_COMPLEX_ANNOTATION:
-                                        E = yield this.elem.addComplexAnnotation(t.annotationConf);
-                                        break;
-                                    case i1["b"].SET_ANNOTATION_VISIBILITY:
-                                        E = yield this.elem.setAnnotationVisibility(t.id, t.visibility);
-                                        break;
-                                    case i1["b"].REMOVE_ANNOTATION_BY_ID:
-                                        E = yield this.elem.removeAnnotationById(t.id);
-                                        break;
-                                    case i1["b"].EXPAND_ANNOTATIONS_BY_ID:
-                                        E = yield this.elem.expandAnnotationsById(t.ids, t.expand, t.isExclusive);
-                                        break;
-                                    case i1["b"].GET_POSITION:
-                                        E = this.elem.getPosition(t.name);
-                                        break;
-                                    case i1["b"].SET_POSITION_REL:
-                                        E = yield this.elem.setPositionRelative(t.name, t.position);
-                                        break;
-                                    case i1["b"].SET_POSITION_ABS:
-                                        E = yield this.elem.setPositionAbsolute(t.name, t.position);
-                                        break;
-                                    case i1["b"].GET_ROTATION:
-                                        E = this.elem.getRotation(t.name);
-                                        break;
-                                    case i1["b"].SET_ROTATION_REL:
-                                        E = yield this.elem.setRotationRelative(t.name, t.rotation, t.order);
-                                        break;
-                                    case i1["b"].SET_ROTATION_ABS:
-                                        E = yield this.elem.setRotationAbsolute(t.name, t.rotation, t.order);
-                                        break;
-                                    case i1["b"].GET_SCALE:
-                                        E = this.elem.getScale(t.name);
-                                        break;
-                                    case i1["b"].SET_SCALE_REL:
-                                        E = yield this.elem.setScaleRelative(t.name, t.scale);
-                                        break;
-                                    case i1["b"].SET_SCALE_ABS:
-                                        E = yield this.elem.setScaleAbsolute(t.name, t.scale);
-                                        break;
-                                    case i1["b"].HIGHLIGHT_MESHES_BY_NAME:
-                                        E = yield this.elem.highlightMeshesByName(t.names, t.color, t.intensity, t.isExclusive);
-                                        break;
-                                    case i1["b"].UNHIGHLIGHT_MESHES_BY_NAME:
-                                        E = yield this.elem.unhighlightMeshesByName(t.names);
-                                        break;
-                                    case i1["b"].TAKE_SCREENSHOT:
-                                        E = yield this.elem.takeScreenshot(t.scale, t.scissor);
-                                        break;
-                                    case i1["b"].TAKE_FIXED_SIZE_SCREENSHOT:
-                                        E = yield this.elem.takeFixedSizedScreenshot(t.dimension);
-                                        break;
-                                    case i1["b"].GET_VIEW_STATE:
-                                        E = yield this.elem.getViewState();
-                                        break;
-                                    case i1["b"].APPLY_VIEW_STATE:
-                                        E = yield this.elem.applyViewState(t.state);
-                                        break;
-                                    case i1["b"].GET_EXPOSURE:
-                                        E = yield this.elem.getExposure();
-                                        break;
-                                    case i1["b"].SET_EXPOSURE:
-                                        E = yield this.elem.setExposure(t.exposure);
-                                        break;
-                                    case i1["b"].GET_ENVIRONMENT_MAP:
-                                        E = yield this.elem.getEnvironmentMap();
-                                        break;
-                                    case i1["b"].SET_ENVIRONMENT_MAP:
-                                        E = yield this.elem.setEnvironmentMap(t.envMap);
-                                        break;
-                                    case i1["b"].ROTATE_ENVIRONMENT_MAP:
-                                        E = yield this.elem.setEnvironmentMap(t.rotation);
-                                        break;
-                                    case i1["b"].GET_FOV:
-                                        E = yield this.elem.getFOV();
-                                        break;
-                                    case i1["b"].SET_FOV:
-                                        E = yield this.elem.setFOV(t.fov);
-                                        break;
-                                    case i1["b"].SEND_EVENT:
-                                        E = yield this.elem.sendEvent(t.event, t.x, t.y, t.maxX, t.maxY);
-                                        break;
-                                    case i1["b"].PLAY:
-                                        E = yield this.elem.play(t.animIdx, t.timeScale);
-                                        break;
-                                    case i1["b"].LOAD:
-                                        E = yield this.elem.load();
-                                        break;
-                                    case i1["b"].SET_UUID_AR:
-                                        E = yield this.elem.setUUIDAr(t.uuid);
-                                        break;
-                                    case i1["b"].TRIGGER_AR_CLICK:
-                                        E = yield this.elem.triggerARClick();
-                                        break;
-                                    case i1["b"].SET_CANVAS_STATE:
-                                        E = yield this.elem.setCanvasState(t.className, t.state);
-                                        break;
-                                    case i1["b"].GET_CURRENT_USER:
-                                        E = this.elem.getCurrentUser();
-                                        break;
-                                    case i1["b"].DID_RENDER_LAST_FRAME:
-                                        E = this.elem.didRenderLastFrame();
-                                        break;
-                                    case i1["b"].ADD_EVENT_LISTENER:
-                                        E = this.elem.addApiEventListner(t.eventType, this.eventsCallbackMap.get(t.eventType));
-                                        break;
-                                    case i1["b"].REMOVE_EVENT_LISTENER:
-                                        E = this.elem.removeApiEventListener(t.eventType);
-                                        break;
-                                }
-                                a(E);
-                            }
-                        } catch (e) {
-                            this.globalErrCb ? this.globalErrCb(e) : s(e), a();
-                        }
-                    })
-                );
-            }
-            initIframeMessenger() {
-                self.addEventListener("message", (e)=>{
-                    const t = e.data, a = this.iframeMsgMap.get(t.msgId);
-                    if (a) {
-                        switch(t.method){
-                            case i1["b"].READY:
-                                "true" === t.data && (this.isReady = !0);
-                                break;
-                            case i1["b"].ERROR:
-                                a.err(t.data);
-                                break;
-                            case i1["b"].GET_OBJECTS_BY_NAME:
-                            case i1["b"].GET_OBJECT_BY_NAME:
-                            case i1["b"].GET_CAMERAS_BY_NAME:
-                            case i1["b"].GET_CAMERA_BY_NAME:
-                            case i1["b"].GET_MESHES_BY_NAME:
-                            case i1["b"].GET_MESH_BY_NAME:
-                            case i1["b"].GET_MATERIALS_BY_NAME:
-                            case i1["b"].GET_MATERIAL_BY_NAME:
-                            case i1["b"].GET_MATERIAL_PROPS:
-                            case i1["b"].CREATE_MATERIAL:
-                            case i1["b"].UPDATE_MATERIAL:
-                            case i1["b"].GET_VIEW_STATE:
-                            case i1["b"].APPLY_VIEW_STATE:
-                            case i1["b"].GET_ANNOTATIONS:
-                            case i1["b"].GET_ANNOTATION_BY_ID:
-                            case i1["b"].ADD_ANNOTATION:
-                            case i1["b"].ADD_COMPLEX_ANNOTATION:
-                            case i1["b"].SET_ANNOTATION_VISIBILITY:
-                            case i1["b"].GET_CURRENT_USER:
-                            case i1["b"].DID_RENDER_LAST_FRAME:
-                                try {
-                                    const e = JSON.parse(t.data);
-                                    a.succ(e);
-                                } catch (e9) {
-                                    a.err(e9);
-                                }
-                                break;
-                            case i1["b"].SET_BACKGROUND:
-                                a.succ(!0);
-                                break;
-                            case i1["b"].SWITCH_VIEW:
-                            case i1["b"].SWITCH_VIEW_ASYNC:
-                            case i1["b"].MOVE_VIEW:
-                            case i1["b"].ROTATE_VIEW:
-                            case i1["b"].ZOOM_VIEW:
-                            case i1["b"].ENABLE_ANNOTATIONS:
-                            case i1["b"].REMOVE_ANNOTATION_BY_ID:
-                            case i1["b"].EXPAND_ANNOTATIONS_BY_ID:
-                            case i1["b"].SET_EXPOSURE:
-                            case i1["b"].SET_ENVIRONMENT_MAP:
-                            case i1["b"].ROTATE_ENVIRONMENT_MAP:
-                            case i1["b"].SEND_EVENT:
-                            case i1["b"].PLAY:
-                            case i1["b"].SET_UUID_AR:
-                            case i1["b"].TRIGGER_AR_CLICK:
-                            case i1["b"].SET_CANVAS_STATE:
-                            case i1["b"].ADD_EVENT_LISTENER:
-                            case i1["b"].REMOVE_EVENT_LISTENER:
-                                "true" === t.data ? a.succ(!0) : a.err("Something went wrong. API call result is false");
-                                break;
-                            case i1["b"].HIGHLIGHT_MESHES_BY_NAME:
-                            case i1["b"].UNHIGHLIGHT_MESHES_BY_NAME:
-                            case i1["b"].GET_VISIBILITY:
-                            case i1["b"].SET_VISIBILITY:
-                            case i1["b"].SET_POSITION_ABS:
-                            case i1["b"].SET_POSITION_REL:
-                            case i1["b"].SET_ROTATION_ABS:
-                            case i1["b"].SET_ROTATION_REL:
-                            case i1["b"].SET_SCALE_ABS:
-                            case i1["b"].SET_SCALE_REL:
-                            case i1["b"].SET_FOV:
-                                "true" === t.data ? a.succ(!0) : a.succ(!1);
-                                break;
-                            case i1["b"].GET_BACKGROUND:
-                            case i1["b"].GET_POSITION:
-                            case i1["b"].GET_ROTATION:
-                            case i1["b"].GET_SCALE:
-                            case i1["b"].GET_MATERIALS:
-                            case i1["b"].GET_EXPOSURE:
-                            case i1["b"].GET_FOV:
-                            case i1["b"].GET_OBJECTS:
-                            case i1["b"].GET_MESHES:
-                            case i1["b"].GET_HIT_OBJECTS:
-                            case i1["b"].GET_2D_COORDINATES:
-                            case i1["b"].GET_CAMERAS:
-                                try {
-                                    const e = JSON.parse(t.data);
-                                    a.succ(e);
-                                } catch (e10) {
-                                    a.err(e10);
-                                }
-                                break;
-                            case i1["b"].TAKE_SCREENSHOT:
-                            case i1["b"].TAKE_FIXED_SIZE_SCREENSHOT:
-                            case i1["b"].GET_ENVIRONMENT_MAP:
-                            case i1["b"].LOAD:
-                                try {
-                                    a.succ(t.data);
-                                } catch (e11) {
-                                    a.err(e11);
-                                }
-                                break;
-                            default:
-                                const e = `Unknown API event "${t.method}"`;
-                                this.globalErrCb && this.globalErrCb(e);
-                                break;
-                        }
-                        this.iframeMsgMap.delete(t.msgId);
-                    } else if (t.method == i1["b"].UPDATE_EVENT) {
-                        let e = JSON.parse(t.data);
-                        if (this.eventsCallbackMap.has(e.eventType)) this.eventsCallbackMap.get(e.eventType)(e.eventData);
-                        else {
-                            const t = `Missing callback for event: "${e.eventType}"`;
-                            this.globalErrCb && this.globalErrCb(t);
-                        }
-                    }
-                });
-            }
-            getRandomNum() {
-                const e = new Uint8Array(4);
-                return self.crypto.getRandomValues(e), `${e[0]}-${e[1]}-${e[2]}-${e[3]}`;
-            }
-        }
-        s1.ApiEvents = i1["a"];
-        class n1 {
-            constructor(e){
-                this.api = e;
-            }
-            animate(e, t5, a, i = ()=>{}) {
-                const E = performance.now();
-                let s, n = 0;
-                if ("string" === typeof t5) switch(t5){
-                    case "linear":
-                        s = this.linear;
-                        break;
-                    case "easeInQuad":
-                        s = this.easeInQuad;
-                        break;
-                    case "easeOutQuad":
-                        s = this.easeOutQuad;
-                        break;
-                    case "easeInOutQuad":
-                        s = this.easeInOutQuad;
-                        break;
-                    case "easeInCubic":
-                        s = this.easeInCubic;
-                        break;
-                    case "easeOutCubic":
-                        s = this.easeOutCubic;
-                        break;
-                    case "easeInOutCubic":
-                        s = this.easeInOutCubic;
-                        break;
-                    case "easeInQuart":
-                        s = this.easeInQuart;
-                        break;
-                    case "easeOutQuart":
-                        s = this.easeOutQuart;
-                        break;
-                    case "easeInOutQuart":
-                        s = this.easeInOutQuart;
-                        break;
-                    case "easeInOutExpo":
-                        s = this.easeInOutExpo;
-                        break;
-                    default:
-                        s = this.linear;
-                        break;
-                }
-                else s = t5;
-                function r() {
-                    if (n = performance.now() - E, n >= e) return a(s(1)), i(), void 0;
-                    let t = n / e;
-                    const _ = s(t);
-                    a(_), requestAnimationFrame(r);
-                }
-                r();
-            }
-            lerp(e, t, a) {
-                let i = e.slice();
-                return i[0] += (t[0] - e[0]) * a, i[1] += (t[1] - e[1]) * a, i[2] += (t[2] - e[2]) * a, i;
-            }
-            linear(e) {
-                return e;
-            }
-            easeInQuad(e) {
-                return e * e;
-            }
-            easeOutQuad(e) {
-                return e * (2 - e);
-            }
-            easeInOutQuad(e) {
-                return e < .5 ? 2 * e * e : -1 + (4 - 2 * e) * e;
-            }
-            easeInCubic(e) {
-                return e * e * e;
-            }
-            easeOutCubic(e) {
-                return --e * e * e + 1;
-            }
-            easeInOutCubic(e) {
-                return e < .5 ? 4 * e * e * e : (e - 1) * (2 * e - 2) * (2 * e - 2) + 1;
-            }
-            easeInQuart(e) {
-                return e * e * e * e;
-            }
-            easeOutQuart(e) {
-                return 1 - --e * e * e * e;
-            }
-            easeInOutQuart(e) {
-                return e < .5 ? 8 * e * e * e * e : 1 - 8 * --e * e * e * e;
-            }
-            easeInOutExpo(e) {
-                return e < .5 ? Math.pow(2, 20 * e - 10) / 2 : (2 - Math.pow(2, -20 * e + 10)) / 2;
-            }
-            fadeOut(e12, t6) {
-                return E1(this, void 0, void 0, function*() {
-                    const a = yield this.api.getMeshByName(e12);
-                    this.animate(t6, this.easeOutQuad, (e)=>{
-                        const t = this.lerp([
-                            1,
-                            0,
-                            0
-                        ], [
-                            0,
-                            0,
-                            0
-                        ], e), i = {
-                            opacity: `${t[0]}`
-                        };
-                        this.api.updateMaterial(a.material, i);
-                    }, ()=>{
-                        this.api.setVisibility([
-                            a.name
-                        ], !1);
-                    });
-                });
-            }
-            fadeIn(e13, t7) {
-                return E1(this, void 0, void 0, function*() {
-                    const a = yield this.api.getMeshByName(e13);
-                    this.api.updateMaterial(a.material, {
-                        opacity: "0.0"
-                    }), this.api.setVisibility([
-                        a.name
-                    ], !0), this.animate(t7, this.easeInQuad, (e)=>{
-                        const t = this.lerp([
-                            0,
-                            0,
-                            0
-                        ], [
-                            1,
-                            0,
-                            0
-                        ], e), i = {
-                            opacity: `${t[0]}`
-                        };
-                        this.api.updateMaterial(a.material, i);
-                    });
-                });
-            }
-            moveObjectsIncrementally(e14, t, a3) {
-                return E1(this, void 0, void 0, function*() {
-                    for(let i = 0; i < e14.length; i++){
-                        const E = e14[i], s = yield this.api.getPosition(E);
-                        setTimeout(()=>{
-                            this.animate(a3, this.easeOutQuad, (e)=>{
-                                const a = this.lerp(s, [
-                                    s[0] + t[0],
-                                    s[1] + t[1],
-                                    s[2] + t[2]
-                                ], e);
-                                this.api.setPositionAbsolute(E, a);
-                            });
-                        }, i * a3);
-                    }
-                });
-            }
-            swipeObject(e15, t, a4, i) {
-                return E1(this, void 0, void 0, function*() {
-                    const E = yield this.api.getMeshByName(e15), s = yield this.api.getPosition(E.name);
-                    "in" === i ? (this.fadeIn(E.name, a4), setTimeout(()=>{
-                        this.animate(a4, this.easeOutQuad, (e)=>{
-                            const a = this.lerp(s, [
-                                s[0] + t[0],
-                                s[1] + t[1],
-                                s[2] + t[2]
-                            ], e);
-                            this.api.setPositionAbsolute(E.name, a);
-                        });
-                    }, a4 / 2)) : (this.animate(a4, this.easeInQuad, (e)=>{
-                        const a = this.lerp(s, [
-                            s[0] + t[0],
-                            s[1] + t[1],
-                            s[2] + t[2]
-                        ], e);
-                        this.api.setPositionAbsolute(E.name, a);
-                    }), setTimeout(()=>{
-                        this.fadeOut(E.name, a4);
-                    }, a4 / 2));
-                });
-            }
-            animateRotation(e16, t, a5) {
-                return new Promise((i2, s)=>E1(this, void 0, void 0, function*() {
-                        try {
-                            const E = yield this.api.getRotation(e16);
-                            null === E && i2(), this.animate(a5, "linear", (a)=>{
-                                const i = [
-                                    E[0] + t[0] * a,
-                                    E[1] + t[1] * a,
-                                    E[2] + t[2] * a
-                                ];
-                                this.api.setRotationAbsolute(e16, i);
-                            }, ()=>{
-                                this.api.setRotationAbsolute(e16, [
-                                    E[0],
-                                    E[1],
-                                    E[2]
-                                ]), i2();
-                            });
-                        } catch (e) {
-                            s(e);
-                        }
-                    })
-                );
-            }
-            getElementVisible(e, t) {
-                const a = e.top >= 0 && t - e.top > 0, i = e.bottom >= 0 && t - e.bottom > 0;
-                if (!a && !i) return [
-                    0,
-                    0
-                ];
-                const E = e.top + e.height / 2, s = t - E, n = s < 0 || s > t ? 0 : Math.round(E / t * 100);
-                return a && i ? [
-                    100,
-                    n
-                ] : a ? [
-                    Math.round((t - e.top) / e.height * 100),
-                    n
-                ] : [
-                    Math.round((e.height - -1 * e.top) / e.height * 100),
-                    n
-                ];
-            }
-        }
-    }
-});
-const _Vectary$VctrApi = Vectary["VctrApi"];
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3y0ds":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$5048 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$5048.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _faviconPng = require("./favicon.png");
-var _faviconPngDefault = parcelHelpers.interopDefault(_faviconPng);
-const Iframe = ({ id , nameModel  })=>{
-    console.log(_faviconPngDefault.default);
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("iframe", {
-                id: "Model_" + id,
-                src: "https://www.vectary.com/viewer/v1/?model=" + id + "&arIcon=" + _faviconPngDefault.default,
-                frameBorder: "0",
-                width: "20%",
-                height: "200"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-                lineNumber: 8,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: nameModel
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-                lineNumber: 16,
-                columnNumber: 9
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-        lineNumber: 7,
-        columnNumber: 5
-    }, undefined);
-};
-_c = Iframe;
-exports.default = Iframe;
-var _c;
-$RefreshReg$(_c, "Iframe");
-
-  $parcel$ReactRefreshHelpers$5048.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./favicon.png":"5jBaB"}],"5jBaB":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "favicon.3cfdc964.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"da8K6":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const updateMaterial = async (dominantColor, viewerApi, pictureSleeve)=>{
-    const updateColor = {
-        color: dominantColor,
-        map: pictureSleeve
-    };
-    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor);
-};
-exports.default = updateMaterial;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3DSfZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const updateMaterial2 = async (viewerApi, pictureSleeve)=>{
-    const updateColor2 = {
-        map: pictureSleeve
-    };
-    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor2);
-};
-exports.default = updateMaterial2;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"273co":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$701e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$701e.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const DynamicalPng = ({ reference , text , color  })=>{
-    const style = {
-        background: color
-    };
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        ref: reference,
-        className: "container-png",
-        style: style,
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h3", {
-            children: text
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
-            lineNumber: 9,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
-        lineNumber: 8,
-        columnNumber: 9
-    }, undefined);
-};
-_c = DynamicalPng;
-exports.default = DynamicalPng;
-var _c;
-$RefreshReg$(_c, "DynamicalPng");
-
-  $parcel$ReactRefreshHelpers$701e.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dyrfq":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$2af8 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$2af8.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-// require('dotenv').config();
-var _dropdown = require("../buttons/dropdown");
-var _dropdownDefault = parcelHelpers.interopDefault(_dropdown);
-var _inputText = require("../buttons/input-text");
-var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
-var _config = require("../../../config/config");
-const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedSignageEquipmentQuantity , onChangeAction ,  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quelles quantit\xe9s de chaque \xe9l\xe9ment ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                lineNumber: 18,
-                columnNumber: 7
-            }, undefined),
-            selectedSignageEquipment.map((oneSelectedSignageEquipement, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                    className: "container-how-items",
-                    children: [
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                            children: oneSelectedSignageEquipement.label
-                        }, void 0, false, {
-                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                            lineNumber: 24,
-                            columnNumber: 11
-                        }, undefined),
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dropdownDefault.default, {
-                            items: _config.productQuantity,
-                            defaultValue: selectedSignageEquipmentQuantity[oneSelectedSignageEquipement.value],
-                            onChange: (e)=>{
-                                onChangeAction(oneSelectedSignageEquipement.value, e.target.value);
-                            }
-                        }, void 0, false, {
-                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                            lineNumber: 25,
-                            columnNumber: 11
-                        }, undefined)
-                    ]
-                }, oneSelectedSignageEquipement.value, true, {
-                    fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                    lineNumber: 20,
-                    columnNumber: 9
-                }, undefined)
-            ),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
-                type: "email",
-                placeholder: "Votre adresse mail",
-                value: email,
-                name: "email",
-                onChange: (e)=>setEmail(e.target.value)
-                ,
-                required: true
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                lineNumber: 42,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-        lineNumber: 17,
-        columnNumber: 5
-    }, undefined);
-};
-_c = CalculateCost;
-exports.default = CalculateCost;
-var _c;
-$RefreshReg$(_c, "CalculateCost");
-
-  $parcel$ReactRefreshHelpers$2af8.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/dropdown":"2LfkA","../buttons/input-text":"cEoUW","../../../config/config":"a6ccA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2LfkA":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$bc8c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$bc8c.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const Dropdown = ({ items , onChange , defaultValue  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("select", {
-            onChange: onChange,
-            defaultValue: defaultValue,
-            children: items.map((item)=>{
-                return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("option", {
-                    value: item,
-                    children: item
-                }, item, false, {
-                    fileName: "src/components/wizzardComponents/buttons/dropdown.jsx",
-                    lineNumber: 14,
-                    columnNumber: 25
-                }, undefined);
-            })
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/buttons/dropdown.jsx",
-            lineNumber: 7,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false);
-};
-_c = Dropdown;
-exports.default = Dropdown;
-var _c;
-$RefreshReg$(_c, "Dropdown");
-
-  $parcel$ReactRefreshHelpers$bc8c.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1rqbK":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$caea = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$caea.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reducer = require("../../../functions/reducer");
-var _reducerDefault = parcelHelpers.interopDefault(_reducer);
-var _s = $RefreshSig$();
-const TotalCost = ({ quantity , signagesEquipements , image  })=>{
-    _s();
-    const [currentTotal, setCurrentTotal] = _react.useState(0);
-    const cheatTotal = [];
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-total-cost",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Merci nous revenons vers vous avec une offre "
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 13,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("table", {
-                border: "1",
-                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
-                    children: Object.keys(quantity).map((oneKey, index)=>{
-                        _react.useEffect(()=>{
-                            _reducerDefault.default(cheatTotal, signagesEquipements[index].price, quantity[oneKey], setCurrentTotal);
-                        }, []);
-                        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
-                            children: [
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                    children: signagesEquipements[index].label
-                                }, void 0, false, {
-                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 22,
-                                    columnNumber: 17
-                                }, undefined),
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
-                                        src: image[index],
-                                        alt: "Image du modèle " + signagesEquipements[index].label
-                                    }, void 0, false, {
-                                        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                        lineNumber: 23,
-                                        columnNumber: 21
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 23,
-                                    columnNumber: 17
-                                }, undefined),
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                    children: [
-                                        "X ",
-                                        quantity[oneKey]
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 24,
-                                    columnNumber: 17
-                                }, undefined)
-                            ]
-                        }, quantity[oneKey] + index, true, {
-                            fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                            lineNumber: 21,
-                            columnNumber: 15
-                        }, undefined);
-                    })
-                }, void 0, false, {
-                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                    lineNumber: 15,
-                    columnNumber: 9
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 14,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-        lineNumber: 12,
-        columnNumber: 5
-    }, undefined);
-};
-_s(TotalCost, "SqGtFWzUHjJyPA/X9/+yEEYuAP4=");
-_c = TotalCost;
-exports.default = TotalCost;
-var _c;
-$RefreshReg$(_c, "TotalCost");
-
-  $parcel$ReactRefreshHelpers$caea.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../functions/reducer":"P8RCA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"P8RCA":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const reducer = (array, value, quantity, setState)=>{
-    array.push(value * quantity);
-    const cheatReduce = array.reduce((a, b)=>a + b
-    );
-    setState(cheatReduce);
-};
-exports.default = reducer;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2NQC3":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$b0d0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$b0d0.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const ViewWrapper = ({ children , previous ="Précédent" , next ="Suivant" , previousAction , nextAction ,  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            children,
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
-                className: "container-navigation",
-                children: [
-                    previous !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                        className: "previousInput",
-                        type: "button",
-                        value: previous,
-                        onClick: previousAction
-                    }, void 0, false, {
-                        fileName: "src/components/layout/view-wrapper.jsx",
-                        lineNumber: 16,
-                        columnNumber: 11
-                    }, undefined),
-                    next !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                        className: "nextInput",
-                        type: "button",
-                        value: next,
-                        onClick: nextAction
-                    }, void 0, false, {
-                        fileName: "src/components/layout/view-wrapper.jsx",
-                        lineNumber: 24,
-                        columnNumber: 11
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/layout/view-wrapper.jsx",
-                lineNumber: 14,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/layout/view-wrapper.jsx",
-        lineNumber: 11,
-        columnNumber: 5
-    }, undefined);
-};
-_c = ViewWrapper;
-exports.default = ViewWrapper;
-var _c;
-$RefreshReg$(_c, "ViewWrapper");
-
-  $parcel$ReactRefreshHelpers$b0d0.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fOVVj":[function() {},{}],"kEgDc":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fOVVj":[function() {},{}],"kEgDc":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "Roboto-Light.df813467.ttf" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"aTm38":[function(require,module,exports) {
