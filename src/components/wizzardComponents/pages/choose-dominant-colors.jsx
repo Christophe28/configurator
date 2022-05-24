@@ -1,10 +1,13 @@
 //React import
 import React from "react";
+import ColorsPickerWrapper from "../../layout/colors-picker-wrapper";
 
 const ChooseDominantColor = ({ themeColors, setColor, color }) => {
+  
   return (
     <div className="container-dominant-color">
       <h2>Quelle est la couleur dominante de votre charte graphique ?</h2>
+      <section className="colors">
       {themeColors.map((themeColor) => (
         <input
           type="button"
@@ -13,14 +16,16 @@ const ChooseDominantColor = ({ themeColors, setColor, color }) => {
             themeColor.hexadecimalColor === color
               ? {
                   background: themeColor.hexadecimalColor,
-                  height: "5rem",
-                  width: "5rem",
+                  height: "4.3rem",
+                  width: "4.3rem",
                 }
               : { background: themeColor.hexadecimalColor, opacity: 0.45 }
           }
           onClick={(e) => setColor(themeColor.hexadecimalColor)}
         />
       ))}
+      <ColorsPickerWrapper setColor={setColor} color={color}/>
+      </section>
     </div>
   );
 };

@@ -14,6 +14,8 @@ import updateMaterial2 from '../../../functions/update-color-2';
 const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
 
+
+
     useEffect(() => {
         const run = async () => {
             setPicto([]);
@@ -24,23 +26,13 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
                 
-                const getAllScene = await viewerApi.getObjects();
-                console.log(getAllScene);
-                //===============================================================================================//
-                //Ne fonctionne pas comme prévu. Je pensais qu'en utilsant setPositionAbsolute cela mettrait tout à la même position ce qui n'est pas le cas. De plus les dimensions des div iframe ne sont pas les mêmes (300 à 314px) peut être chercher de ce côté.
                 await viewerApi.setPositionAbsolute("Camera", [4, 2, 7]);
-                const getObject = await viewerApi.getObjects();
 
-                for(let elem of getObject) {
-                    console.log(elem.name);
-                    elem.name !== "Camera" ? await viewerApi.setPositionAbsolute(elem.name, [0, 0, 0]) : "";     
-                }
-                //===============================================================================================//
                 // updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 updateMaterial2(viewerApi, pictureSleeve);
-                
+
                 if(viewerApi.isReady === true) {
-                    const waitForScreen = async () => {
+                    const waitForScreen = async () => { 
                         const screenshot = await viewerApi.takeScreenshot();
                         setPicto((oldScreen) => {
                             const newScreen = [...oldScreen];
