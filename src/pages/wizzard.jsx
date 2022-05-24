@@ -38,6 +38,11 @@ const Wizzard = () => {
   const [pictoVectaryModel, setPictoVectaryModel] = useState([]);
   const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = useState("");
 
+  //=============================================================
+  const [currentTest, setCurrentTest] = useState(0);
+  const tableTest = [1, 2, 3, 4, 5, 6];
+
+  //=============================================================
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
 
@@ -182,7 +187,18 @@ const Wizzard = () => {
   return (
     <div className="container-components">
       {wizardSteps[currentWizardStep]}
-      
+      <h1 
+        className="container-test"
+      >
+        {tableTest[currentTest]}
+      </h1>
+      <input 
+        type="button" 
+        className="button-animation"
+        onClick={() => {
+          setCurrentTest(currentTest + 1);
+        }}
+      />
       <DynamicalPng reference={exportRef} text={townName} color={color}/>
     </div>
   );
