@@ -24558,11 +24558,9 @@ const Wizzard = ()=>{
     const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = _react.useState("");
     const exportRef = _react.useRef();
     const textInputNext = "Recevoir un devis";
-    _react.useEffect(()=>{
-        _exportAsImageDefault.default(exportRef.current, setImage);
-    }, [
-        color
-    ]);
+    // useEffect(() => {
+    //   exportAsImage(exportRef.current, setImage);
+    // }, [color]);
     _react.useEffect(()=>{
         setSelectedSignageEquipmentQuantity((oldState)=>{
             const newState = {};
@@ -24598,15 +24596,17 @@ const Wizzard = ()=>{
             next: _showInputDefault.default(color),
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
-            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
-            ,
+            nextAction: ()=>{
+                setCurrentWizardStep(currentWizardStep + 1);
+                _exportAsImageDefault.default(exportRef.current, setImage);
+            },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
                 color: color,
                 setColor: setColor,
                 themeColors: _config.themeColors
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 73,
+                lineNumber: 76,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
@@ -24627,12 +24627,12 @@ const Wizzard = ()=>{
                 selectedSignageEquipment: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 84,
+                lineNumber: 87,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 79,
+            lineNumber: 82,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24651,12 +24651,12 @@ const Wizzard = ()=>{
                 pictureSleeve: image
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 96,
+                lineNumber: 99,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 91,
+            lineNumber: 94,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24681,12 +24681,12 @@ const Wizzard = ()=>{
                     })
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 114,
+                lineNumber: 117,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 106,
+            lineNumber: 109,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24701,12 +24701,12 @@ const Wizzard = ()=>{
                 signagesEquipements: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 133,
+                lineNumber: 136,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 128,
+            lineNumber: 131,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24751,17 +24751,17 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 182,
+                lineNumber: 185,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 179,
+        lineNumber: 182,
         columnNumber: 5
     }, undefined);
 };
-_s(Wizzard, "1cCvJ3oaxR72UqhbAvpVNe2fLTA=");
+_s(Wizzard, "6CSaqLHp53kWrOUQ6TNzsLEh6ZM=");
 _c = Wizzard;
 exports.default = Wizzard;
 var _c;
@@ -32828,6 +32828,8 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 //React import
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _colorsPickerWrapper = require("../../layout/colors-picker-wrapper");
+var _colorsPickerWrapperDefault = parcelHelpers.interopDefault(_colorsPickerWrapper);
 const ChooseDominantColor = ({ themeColors , setColor , color  })=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-dominant-color",
@@ -32836,30 +32838,47 @@ const ChooseDominantColor = ({ themeColors , setColor , color  })=>{
                 children: "Quelle est la couleur dominante de votre charte graphique ?"
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                lineNumber: 7,
+                lineNumber: 9,
                 columnNumber: 7
             }, undefined),
-            themeColors.map((themeColor)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                    type: "button",
-                    style: themeColor.hexadecimalColor === color ? {
-                        background: themeColor.hexadecimalColor,
-                        height: "5rem",
-                        width: "5rem"
-                    } : {
-                        background: themeColor.hexadecimalColor,
-                        opacity: 0.45
-                    },
-                    onClick: (e)=>setColor(themeColor.hexadecimalColor)
-                }, themeColor.value, false, {
-                    fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                    lineNumber: 9,
-                    columnNumber: 9
-                }, undefined)
-            )
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
+                className: "colors",
+                children: [
+                    themeColors.map((themeColor)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "button",
+                            style: themeColor.hexadecimalColor === color ? {
+                                background: themeColor.hexadecimalColor,
+                                height: "4.3rem",
+                                width: "4.3rem"
+                            } : {
+                                background: themeColor.hexadecimalColor,
+                                opacity: 0.45
+                            },
+                            onClick: (e)=>setColor(themeColor.hexadecimalColor)
+                        }, themeColor.value, false, {
+                            fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                            lineNumber: 12,
+                            columnNumber: 9
+                        }, undefined)
+                    ),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colorsPickerWrapperDefault.default, {
+                        setColor: setColor,
+                        color: color
+                    }, void 0, false, {
+                        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                        lineNumber: 27,
+                        columnNumber: 7
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                lineNumber: 10,
+                columnNumber: 7
+            }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-        lineNumber: 6,
+        lineNumber: 8,
         columnNumber: 5
     }, undefined);
 };
@@ -32869,6 +32888,69 @@ var _c;
 $RefreshReg$(_c, "ChooseDominantColor");
 
   $parcel$ReactRefreshHelpers$a15d.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../layout/colors-picker-wrapper":"iMl4K"}],"iMl4K":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$8333 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$8333.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _s = $RefreshSig$();
+const ColorsPickerWrapper = ({ setColor , color  })=>{
+    _s();
+    const [picker, setPicker] = _react.useState(false);
+    const [colorsPickerValue, setColorsPickerValue] = _react.useState();
+    const displayColorPicker = ()=>{
+        if (picker === false) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+            type: "button",
+            className: "button-to-colors-picker",
+            defaultValue: "+",
+            onClick: (e)=>setPicker(true)
+        }, void 0, false, {
+            fileName: "src/components/layout/colors-picker-wrapper.jsx",
+            lineNumber: 11,
+            columnNumber: 17
+        }, undefined);
+        if (picker === true) return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+            type: "color",
+            className: "colors-picker",
+            style: color === colorsPickerValue ? {
+                color: color
+            } : {
+                color: colorsPickerValue,
+                opacity: 0.45
+            },
+            defaultValue: "#e66465",
+            onChange: (e)=>{
+                setColor(e.target.value);
+                setColorsPickerValue(e.target.value);
+            }
+        }, void 0, false, {
+            fileName: "src/components/layout/colors-picker-wrapper.jsx",
+            lineNumber: 21,
+            columnNumber: 17
+        }, undefined);
+    };
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+        children: displayColorPicker()
+    }, void 0, false);
+};
+_s(ColorsPickerWrapper, "AlQNAeehcnaBPiLXwPCjVVBpHqw=");
+_c = ColorsPickerWrapper;
+exports.default = ColorsPickerWrapper;
+var _c;
+$RefreshReg$(_c, "ColorsPickerWrapper");
+
+  $parcel$ReactRefreshHelpers$8333.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
@@ -33234,16 +33316,11 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                 const viewerApi = new _api.VctrApi("Model_" + model.modelId);
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
-                //===============================================================================================//
-                //Ne fonctionne pas comme prévu. Je pensais qu'en utilsant setPositionAbsolute cela mettrait tout à la même position ce qui n'est pas le cas. De plus les dimensions des div iframe ne sont pas les mêmes (300 à 314px) peut être chercher de ce côté.
                 await viewerApi.setPositionAbsolute("Camera", [
                     4,
                     2,
                     7
                 ]);
-                const getObject = await viewerApi.getObjects();
-                const getViewState = await viewerApi.getViewState();
-                console.log(getViewState);
                 // updateMaterial(dominantColor, viewerApi, pictureSleeve);
                 _updateColor2Default.default(viewerApi, pictureSleeve);
                 if (viewerApi.isReady === true) {
@@ -33276,18 +33353,18 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
                     nameModel: model.label
                 }, model.modelId + index, false, {
                     fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                    lineNumber: 65,
+                    lineNumber: 61,
                     columnNumber: 29
                 }, undefined)
             }, model.modelId + index, false, {
                 fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                lineNumber: 64,
+                lineNumber: 60,
                 columnNumber: 25
             }, undefined);
         })
     }, void 0, false, {
         fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-        lineNumber: 60,
+        lineNumber: 56,
         columnNumber: 9
     }, undefined);
 };
