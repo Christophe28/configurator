@@ -1,7 +1,6 @@
 import React from 'react';
-import {useState} from 'react';
 
-const ColorsPickerWrapper = ({ setColor, color, colorsPickerValue, setColorsPickerValue }) => {
+const ColorsPickerWrapper = ({ color, setColor, colorsPickerValue, setColorsPickerValue }) => {
     return (
         <>
             <input 

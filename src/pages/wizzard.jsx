@@ -40,8 +40,6 @@ const Wizzard = () => {
 
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
-  
-  console.log(color);
 
   useEffect(() => {
     setSelectedSignageEquipmentQuantity((oldState) => {
@@ -54,32 +52,32 @@ const Wizzard = () => {
   }, [selectedSignageEquipment]);
 
   const wizardSteps = [
-    <ViewWrapper 
-      previous={false} 
-      next={showInput(townName)}
-      nextAction={() => {
-          setCurrentWizardStep(currentWizardStep + 1);
-        }
-      }
-    >
-      <ChooseTown setTownName={setTownName} townName={townName} />
-    </ViewWrapper>,
-    <ViewWrapper
-      next={showInput(color)}
-      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
-      nextAction={() => {
-        setCurrentWizardStep(currentWizardStep + 1);
-        exportAsImage(exportRef.current, setImage);
-      }}
-    >
-      <ChooseDominantColor
-        color={color}
-        colorsPickerValue={colorsPickerValue}
-        setColorsPickerValue={setColorsPickerValue}
-        setColor={setColor}
-        themeColors={themeColors}
-      />
-    </ViewWrapper>,
+    // <ViewWrapper 
+    //   previous={false} 
+    //   next={showInput(townName)}
+    //   nextAction={() => {
+    //       setCurrentWizardStep(currentWizardStep + 1);
+    //     }
+    //   }
+    // >
+    //   <ChooseTown setTownName={setTownName} townName={townName} />
+    // </ViewWrapper>,
+    // <ViewWrapper
+    //   next={showInput(color)}
+    //   previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+    //   nextAction={() => {
+    //     setCurrentWizardStep(currentWizardStep + 1);
+    //     exportAsImage(exportRef.current, setImage);
+    //   }}
+    // >
+    //   <ChooseDominantColor
+    //     color={color}
+    //     colorsPickerValue={colorsPickerValue}
+    //     setColorsPickerValue={setColorsPickerValue}
+    //     setColor={setColor}
+    //     themeColors={themeColors}
+    //   />
+    // </ViewWrapper>,
     <ViewWrapper
       next={showInput(selectedSignageEquipment)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
@@ -150,7 +148,6 @@ const Wizzard = () => {
 
     selectedSignageEquipment.forEach((selectedSignage, index) => {
       totalOrder["selectedSignage" + index + "label"] = selectedSignage.label;
-      // totalOrder['selectedSignage' + index + 'price'] = selectedSignageEquipment.price
       totalOrder["selectedSignage" + index + "quantity"] =
         selectedSignageEquipmentQuantity[selectedSignage.value];
     });

@@ -24,7 +24,12 @@ const ChooseDominantColor = ({ themeColors, setColor, color, colorsPickerValue, 
           onClick={(e) => setColor(themeColor.hexadecimalColor)}
         />
       ))}
-      <ColorsPickerWrapper setColor={setColor} color={color} colorsPickerValue={colorsPickerValue} setColorsPickerValue={setColorsPickerValue}/>
+      <ColorsPickerWrapper 
+        setColor={setColor} 
+        color={color} 
+        colorsPickerValue={colorsPickerValue}
+        setColorsPickerValue={setColorsPickerValue}
+      />
       </section>
     </div>
   );
