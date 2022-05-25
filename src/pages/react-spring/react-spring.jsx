@@ -2,36 +2,45 @@ import React, { useState } from 'react';
 import { Spring, useSpring, animated, config } from 'react-spring';
 
 import TitleTest from './components/titletest';
+import DrawSvg from './components/draw-svg';
 
 const ReactSpring = () => {
-    const [flip, setFlip] = useState(false);
+    const [draw, setDraw] = useState(false);
 
     //Pour faire l'annimation sur les composants
     const AnimatedDonut = animated("Donut");
     
-    const app = () => {
-        const props = useSpring({ to: {opacity: 1}, from: { opacity: 0} });
-        return <animated.div style={props}>Je vais m'effacer</animated.div>
-    }
-
-    const text = () => {
-        
-        const myAnim = useSpring({
-            to: { opacity: 1},
-            from: { opacity: 0},
+    const drawing = () => {
+        const { x } = useSpring({
             reset: true,
             reverse: flip,
+            from: { x: 0},
+            x: 1,
             delay: 200,
             config: config.molasses,
-            onReset: () => setFlip(!flip),
+            onReset: () => setDraw(!draw),
         })
-        return <animated.h1 style={myAnim}>hello</animated.h1>
+        return (
+            <animated.svg
+                style={{ margin: 20, width: 80, height: 80 }}
+                viewBox= "0 0 45 44"
+                strokerWidth="2"
+                fill="white"
+                stroke="rgb(45, 55, 71)"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeDasharray={156}
+                strokeDashoffset={x.to(x => (1 - x) * 156)}
+            >
+                <polygon points={POINTS} />
+            </animated.svg>
+        )
     }
+
     return (
         <div>
             <TitleTest />
-            {app()}
-            {text()}
+            <DrawSvg />
         </div>
     );
 };
