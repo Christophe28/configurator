@@ -4,6 +4,7 @@ import { useSpring, animated, config } from 'react-spring';
 import TitleTest from './components/titletest';
 import DrawSvg from './components/draw-svg';
 import LeftToRight from './components/left-to-right';
+import ArrayAnimation from './components/array-animation';
 
 const ReactSpring = () => {
     const [draw, setDraw] = useState(false);
@@ -44,6 +45,7 @@ const ReactSpring = () => {
             <TitleTest />
             <DrawSvg />
             <LeftToRight />
+            <ArrayAnimation />
         </div>
     );
 };

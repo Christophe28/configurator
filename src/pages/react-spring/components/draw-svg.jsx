@@ -31,7 +31,7 @@ const DrawSvg = () => {
             <animated.svg
                 style={{ margin: 20, width: 400, height: 400}}
                 viewBox="0 0 45 44"
-                strokeWidth="2"
+                strokeWidth="1"
                 fill="rgb(45, 55, 58)"
                 stroke="rgb(170, 58, 58)"
                 strokeLinecap="round"
