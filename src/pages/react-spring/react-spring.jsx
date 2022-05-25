@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Spring, useSpring, animated, config } from 'react-spring';
+import { useSpring, animated, config } from 'react-spring';
 
 import TitleTest from './components/titletest';
 import DrawSvg from './components/draw-svg';
+import LeftToRight from './components/left-to-right';
 
 const ReactSpring = () => {
     const [draw, setDraw] = useState(false);
@@ -20,6 +21,7 @@ const ReactSpring = () => {
             config: config.molasses,
             onReset: () => setDraw(!draw),
         })
+
         return (
             <animated.svg
                 style={{ margin: 20, width: 80, height: 80 }}
@@ -41,6 +43,7 @@ const ReactSpring = () => {
         <div>
             <TitleTest />
             <DrawSvg />
+            <LeftToRight />
         </div>
     );
 };
