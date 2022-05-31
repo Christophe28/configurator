@@ -24479,6 +24479,8 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRouterDom = require("react-router-dom");
+var _reactSpring = require("./pages/react-spring/react-spring");
+var _reactSpringDefault = parcelHelpers.interopDefault(_reactSpring);
 var _wizzard = require("./pages/wizzard");
 var _wizzardDefault = parcelHelpers.interopDefault(_wizzard);
 const App = ()=>{
@@ -24488,12 +24490,12 @@ const App = ()=>{
             element: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_wizzardDefault.default, {}, void 0, false, void 0, void 0)
         }, void 0, false, {
             fileName: "src/app.js",
-            lineNumber: 8,
+            lineNumber: 9,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/app.js",
-        lineNumber: 7,
+        lineNumber: 8,
         columnNumber: 5
     }, undefined);
 };
@@ -24507,7 +24509,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"fdOAw","./pages/wizzard":"1njHZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1njHZ":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"fdOAw","./pages/wizzard":"1njHZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./pages/react-spring/react-spring":"jaez3"}],"1njHZ":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$8288 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -24520,6 +24522,7 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 //React import
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactSpring = require("react-spring");
 //Component import
 var _chooseTown = require("../components/wizzardComponents/pages/choose-town");
 var _chooseTownDefault = parcelHelpers.interopDefault(_chooseTown);
@@ -24557,8 +24560,64 @@ const Wizzard = ()=>{
     const [emailUser, setEmailUser] = _react.useState("");
     const [pictoVectaryModel, setPictoVectaryModel] = _react.useState([]);
     const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = _react.useState("");
+    const [currentAnim, setCurrentAnim] = _react.useState();
     const exportRef = _react.useRef();
     const textInputNext = "Recevoir un devis";
+    //=============Animation=============//
+    const welcomAnim = _reactSpring.useSpring({
+        reset: true,
+        config: {
+            duration: 1500
+        },
+        from: {
+            opacity: 0,
+            y: 600
+        },
+        to: {
+            opacity: 1,
+            y: 0
+        }
+    });
+    const comeBack = _reactSpring.useSpring({
+        reset: true,
+        config: {
+            duration: 1000
+        },
+        from: {
+            opacity: 0,
+            x: -600
+        },
+        to: {
+            opacity: 1,
+            x: 0
+        }
+    });
+    const leavePage = _reactSpring.useSpring({
+        reset: true,
+        config: {
+            duration: 1500
+        },
+        from: {
+            opacity: 1,
+            x: 0
+        },
+        to: {
+            opacity: 0,
+            x: -600
+        }
+    });
+    console.log("currentAnim : ", currentAnim);
+    const changePage = ()=>{
+        setCurrentWizardStep(currentWizardStep + 1);
+        setCurrentAnim(welcomAnim);
+    };
+    const waitForRefreshAnim = ()=>{
+        setCurrentAnim();
+    };
+    const waitEndOfAnnim = ()=>{
+        setTimeout(changePage, 2000);
+        setTimeout(waitForRefreshAnim, 4000);
+    };
     _react.useEffect(()=>{
         setSelectedSignageEquipmentQuantity((oldState)=>{
             const newState = {};
@@ -24574,28 +24633,32 @@ const Wizzard = ()=>{
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             previous: false,
             next: _showInputDefault.default(townName),
+            currentAnim: currentAnim,
             nextAction: ()=>{
-                setCurrentWizardStep(currentWizardStep + 1);
+                setCurrentAnim(leavePage);
+                waitEndOfAnnim();
             },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseTownDefault.default, {
                 setTownName: setTownName,
                 townName: townName
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 63,
+                lineNumber: 100,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 55,
+            lineNumber: 90,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             next: _showInputDefault.default(color),
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
+            currentAnim: currentAnim,
             nextAction: ()=>{
-                setCurrentWizardStep(currentWizardStep + 1);
+                setCurrentAnim(leavePage);
+                waitEndOfAnnim();
                 _exportAsImageDefault.default(exportRef.current, setImage);
             },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseDominantColorsDefault.default, {
@@ -24606,20 +24669,23 @@ const Wizzard = ()=>{
                 themeColors: _config.themeColors
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 73,
+                lineNumber: 115,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 65,
+            lineNumber: 105,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             next: _showInputDefault.default(selectedSignageEquipment1),
+            currentAnim: currentAnim,
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
-            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
-            ,
+            nextAction: ()=>{
+                setCurrentAnim(leavePage);
+                waitEndOfAnnim();
+            },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseSignageEquipmentDefault.default, {
                 onChangeAction: (selectedSignageEquipment)=>{
                     setSelectedSignageEquipment(selectedSignageEquipment);
@@ -24627,20 +24693,24 @@ const Wizzard = ()=>{
                 selectedSignageEquipment: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 86,
+                lineNumber: 133,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 81,
+            lineNumber: 123,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            currentAnim: currentAnim,
             next: _showInputDefault.default(vectaryModelIsLoaded, vectaryModelIsLoaded),
-            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
-            ,
-            nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
-            ,
+            previousAction: ()=>{
+                setCurrentWizardStep(currentWizardStep - 1);
+            },
+            nextAction: ()=>{
+                setCurrentAnim(leavePage);
+                waitEndOfAnnim();
+            },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_signalSystemDefault.default, {
                 setIsLoaded: setVectaryModelIsLoaded,
                 myPicto: pictoVectaryModel,
@@ -24651,25 +24721,28 @@ const Wizzard = ()=>{
                 pictureSleeve: image
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 98,
+                lineNumber: 152,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 93,
+            lineNumber: 140,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            currentAnim: currentAnim,
             next: _showInputDefault.default(emailUser, textInputNext),
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
             nextAction: ()=>{
                 sendInvoice();
-                setCurrentWizardStep(currentWizardStep + 1);
+                setCurrentAnim(leavePage);
+                waitEndOfAnnim();
             },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_calculateCostDefault.default, {
                 selectedSignageEquipment: selectedSignageEquipment1,
                 selectedSignageEquipmentQuantity: selectedSignageEquipmentQuantity,
+                currentAnim: currentAnim,
                 setEmail: setEmailUser,
                 email: emailUser,
                 onChangeAction: (itemValue, quantity)=>setSelectedSignageEquipmentQuantity((oldState)=>{
@@ -24681,32 +24754,34 @@ const Wizzard = ()=>{
                     })
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 116,
+                lineNumber: 172,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 108,
+            lineNumber: 162,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
+            currentAnim: currentAnim,
             next: false,
             previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
             ,
             nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
             ,
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_totalCostDefault.default, {
+                currentAnim: currentAnim,
                 image: pictoVectaryModel,
                 quantity: selectedSignageEquipmentQuantity,
                 signagesEquipements: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 135,
+                lineNumber: 193,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 130,
+            lineNumber: 187,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24750,17 +24825,23 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 183,
+                lineNumber: 241,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 180,
+        lineNumber: 239,
         columnNumber: 5
     }, undefined);
 };
-_s(Wizzard, "WmjVUViuYiQBzTqCuGXpjaO0rbM=");
+_s(Wizzard, "ysmIqW18/98bT1g092XOMQ6/pSs=", false, function() {
+    return [
+        _reactSpring.useSpring,
+        _reactSpring.useSpring,
+        _reactSpring.useSpring
+    ];
+});
 _c = Wizzard;
 exports.default = Wizzard;
 var _c;
@@ -24771,2291 +24852,7 @@ $RefreshReg$(_c, "Wizzard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq","react/jsx-dev-runtime":"iTorj","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../components/layout/view-wrapper":"2NQC3","../config/config":"a6ccA","../functions/export-as-image":"9VZDV","../functions/show-input":"jnUkf"}],"km3Ru":[function(require,module,exports) {
-"use strict";
-var Refresh = require('react-refresh/runtime');
-function debounce(func, delay) {
-    var args1;
-    var timeout = undefined;
-    return function(args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            timeout = undefined;
-            func.call(null, args);
-        }, delay);
-    };
-}
-var enqueueUpdate = debounce(function() {
-    Refresh.performReactRefresh();
-}, 30); // Everthing below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function(module) {
-    window.$RefreshReg$ = function(type, id) {
-        Refresh.register(type, module.id + ' ' + id);
-    };
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function(module) {
-    if (isReactRefreshBoundary(module.exports)) {
-        registerExportsForReactRefresh(module);
-        if (module.hot) {
-            module.hot.dispose(function(data) {
-                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
-                data.prevExports = module.exports;
-            });
-            module.hot.accept(function(getParents) {
-                var prevExports = module.hot.data.prevExports;
-                var nextExports = module.exports; // Since we just executed the code for it, it's possible
-                // that the new exports make it ineligible for being a boundary.
-                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports); // It can also become ineligible if its exports are incompatible
-                // with the previous exports.
-                // For example, if you add/remove/change exports, we'll want
-                // to re-execute the importing modules, and force those components
-                // to re-render. Similarly, if you convert a class component
-                // to a function, we want to invalidate the boundary.
-                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-                if (isNoLongerABoundary || didInvalidate) {
-                    // We'll be conservative. The only case in which we won't do a full
-                    // reload is if all parent modules are also refresh boundaries.
-                    // In that case we'll add them to the current queue.
-                    var parents = getParents();
-                    if (parents.length === 0) {
-                        // Looks like we bubbled to the root. Can't recover from that.
-                        window.location.reload();
-                        return;
-                    }
-                    return parents;
-                }
-                enqueueUpdate();
-            });
-        }
-    }
-};
-function isReactRefreshBoundary(exports) {
-    if (Refresh.isLikelyComponentType(exports)) return true;
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    return false;
-    var hasExports = false;
-    var areAllExportsComponents = true;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        hasExports = true;
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
-        return false;
-        var exportValue = exports[key];
-        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
-    }
-    return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-    var prevSignature = getRefreshBoundarySignature(prevExports);
-    var nextSignature = getRefreshBoundarySignature(nextExports);
-    if (prevSignature.length !== nextSignature.length) return true;
-    for(var i = 0; i < nextSignature.length; i++){
-        if (prevSignature[i] !== nextSignature[i]) return true;
-    }
-    return false;
-} // When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-    var signature = [];
-    signature.push(Refresh.getFamilyByType(exports));
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        if (key === '__esModule') continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        signature.push(key);
-        signature.push(Refresh.getFamilyByType(exportValue));
-    }
-    return signature;
-}
-function registerExportsForReactRefresh(module) {
-    var exports = module.exports, id = module.id;
-    Refresh.register(exports, id + ' %exports%');
-    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-    let isESM = '__esModule' in exports;
-    for(var key in exports){
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        Refresh.register(exportValue, id + ' %exports% ' + key);
-    }
-}
-
-},{"react-refresh/runtime":"786KC"}],"89ycD":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$eb26 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$eb26.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _inputText = require("../buttons/input-text");
-var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
-const ChooseTown = ({ townName , setTownName  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-town-name",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quel est le nom de votre commune ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-                lineNumber: 8,
-                columnNumber: 13
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
-                type: "text",
-                value: townName,
-                onChange: (e)=>{
-                    setTownName(e.target.value);
-                }
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-                lineNumber: 10,
-                columnNumber: 13
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-        lineNumber: 7,
-        columnNumber: 9
-    }, undefined);
-};
-_c = ChooseTown;
-exports.default = ChooseTown;
-var _c;
-$RefreshReg$(_c, "ChooseTown");
-
-  $parcel$ReactRefreshHelpers$eb26.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/input-text":"cEoUW","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cEoUW":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$eac1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$eac1.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const InputText = ({ type , value , name , placeholder , onChange  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-input-text",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-            type: type,
-            value: value,
-            name: name,
-            placeholder: placeholder,
-            onChange: onChange
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
-            lineNumber: 6,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
-        lineNumber: 5,
-        columnNumber: 9
-    }, undefined);
-};
-_c = InputText;
-exports.default = InputText;
-var _c;
-$RefreshReg$(_c, "InputText");
-
-  $parcel$ReactRefreshHelpers$eac1.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8MgvR":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$a15d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$a15d.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-//React import
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _colorsPickerWrapper = require("../../layout/colors-picker-wrapper");
-var _colorsPickerWrapperDefault = parcelHelpers.interopDefault(_colorsPickerWrapper);
-const ChooseDominantColor = ({ themeColors , setColor , color , colorsPickerValue , setColorsPickerValue  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-dominant-color",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quelle est la couleur dominante de votre charte graphique ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                lineNumber: 9,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
-                className: "colors",
-                children: [
-                    themeColors.map((themeColor)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                            type: "button",
-                            style: themeColor.hexadecimalColor === color ? {
-                                background: themeColor.hexadecimalColor,
-                                height: "4.3rem",
-                                width: "4.3rem"
-                            } : {
-                                background: themeColor.hexadecimalColor,
-                                opacity: 0.45
-                            },
-                            onClick: (e)=>setColor(themeColor.hexadecimalColor)
-                        }, themeColor.value, false, {
-                            fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                            lineNumber: 12,
-                            columnNumber: 9
-                        }, undefined)
-                    ),
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colorsPickerWrapperDefault.default, {
-                        setColor: setColor,
-                        color: color,
-                        colorsPickerValue: colorsPickerValue,
-                        setColorsPickerValue: setColorsPickerValue
-                    }, void 0, false, {
-                        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                        lineNumber: 27,
-                        columnNumber: 7
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-                lineNumber: 10,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
-        lineNumber: 8,
-        columnNumber: 5
-    }, undefined);
-};
-_c = ChooseDominantColor;
-exports.default = ChooseDominantColor;
-var _c;
-$RefreshReg$(_c, "ChooseDominantColor");
-
-  $parcel$ReactRefreshHelpers$a15d.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../layout/colors-picker-wrapper":"iMl4K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iMl4K":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$8333 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$8333.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const ColorsPickerWrapper = ({ color , setColor , colorsPickerValue , setColorsPickerValue  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-            type: "color",
-            className: "colors-picker",
-            style: color === colorsPickerValue ? {
-                color: color
-            } : {
-                color: colorsPickerValue,
-                opacity: 0.45
-            },
-            value: colorsPickerValue,
-            onChange: (e)=>{
-                setColor(e.target.value);
-                setColorsPickerValue(e.target.value);
-            }
-        }, void 0, false, {
-            fileName: "src/components/layout/colors-picker-wrapper.jsx",
-            lineNumber: 6,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false);
-};
-_c = ColorsPickerWrapper;
-exports.default = ColorsPickerWrapper;
-var _c;
-$RefreshReg$(_c, "ColorsPickerWrapper");
-
-  $parcel$ReactRefreshHelpers$8333.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hKyDF":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$3164 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$3164.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-//React import
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-//Component import
-var _checkboxes = require("../buttons/checkboxes");
-var _checkboxesDefault = parcelHelpers.interopDefault(_checkboxes);
-var _config = require("../../../config/config");
-const ChooseSignageEquipment = ({ onChangeAction , selectedSignageEquipment  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-signal-fonction",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quelles fonctions de signal\xe9tique souhaitez-vous implanter ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
-                lineNumber: 12,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_checkboxesDefault.default, {
-                items: _config.signageEquipment,
-                onChangeAction: onChangeAction,
-                selectedItems: selectedSignageEquipment
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
-                lineNumber: 13,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
-        lineNumber: 11,
-        columnNumber: 5
-    }, undefined);
-};
-_c = ChooseSignageEquipment;
-exports.default = ChooseSignageEquipment;
-var _c;
-$RefreshReg$(_c, "ChooseSignageEquipment");
-
-  $parcel$ReactRefreshHelpers$3164.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/checkboxes":"exstm","../../../config/config":"a6ccA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"exstm":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$3156 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$3156.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-//React import
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _s = $RefreshSig$();
-const Checkboxes = ({ items , onChangeAction , selectedItems =[]  })=>{
-    _s();
-    const [checkboxesState, setCheckboxesState] = _react.useState(items.map((item)=>selectedItems.some((selectedItem)=>selectedItem.value === item.value
-        )
-    ));
-    _react.useEffect(()=>{
-        onChangeAction(items.filter((item, index)=>checkboxesState[index]
-        ));
-    }, [
-        checkboxesState
-    ]);
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-checkboxes",
-        children: items.map((item, index)=>{
-            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                children: [
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                        type: "checkbox",
-                        id: item.value,
-                        name: item.value,
-                        value: item.value,
-                        defaultChecked: checkboxesState[index],
-                        onChange: (e)=>{
-                            setCheckboxesState((oldCheckboxesState)=>{
-                                const newCheckboxesState = [
-                                    ...oldCheckboxesState
-                                ];
-                                newCheckboxesState[index] = e.target.checked;
-                                return newCheckboxesState;
-                            });
-                        }
-                    }, void 0, false, {
-                        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
-                        lineNumber: 19,
-                        columnNumber: 13
-                    }, undefined),
-                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
-                        htmlFor: item.value,
-                        children: item.label
-                    }, void 0, false, {
-                        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
-                        lineNumber: 33,
-                        columnNumber: 13
-                    }, undefined)
-                ]
-            }, item.value, true, {
-                fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
-                lineNumber: 18,
-                columnNumber: 11
-            }, undefined);
-        })
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
-        lineNumber: 15,
-        columnNumber: 5
-    }, undefined);
-};
-_s(Checkboxes, "65DaY5cYwuy5KulZ/KInE7BYeH4=");
-_c = Checkboxes;
-exports.default = Checkboxes;
-var _c;
-$RefreshReg$(_c, "Checkboxes");
-
-  $parcel$ReactRefreshHelpers$3156.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"a6ccA":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "vectaryModels", ()=>vectaryModels
-);
-parcelHelpers.export(exports, "colorsDarkScheme", ()=>colorsDarkScheme
-);
-parcelHelpers.export(exports, "colorsLightScheme", ()=>colorsLightScheme
-);
-parcelHelpers.export(exports, "themeColors", ()=>themeColors
-);
-parcelHelpers.export(exports, "signageEquipment", ()=>signageEquipment
-);
-parcelHelpers.export(exports, "productQuantity", ()=>productQuantity
-);
-parcelHelpers.export(exports, "mailOfKingBoss", ()=>mailOfKingBoss
-);
-const vectaryModels = [
-    {
-        label: "Panneau directionnel",
-        name: "directionnalSign",
-        value: "directionnalSign",
-        id: "e23752d1-c5e8-4788-b719-8a913477dc6c"
-    },
-    {
-        label: "Panneau 2000",
-        name: "panel2000",
-        value: "panel2000",
-        id: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
-    },
-    {
-        label: "Panneau 3000",
-        name: "panel3000",
-        value: "panel3000",
-        id: "d7e90749-acb2-4861-bb20-08881e0777ce"
-    },
-    {
-        label: "Manchon text",
-        name: "sleeveText",
-        value: "sleeveText",
-        id: "57cf45e9-d355-4463-af66-f08c72993784"
-    }
-];
-const colorsDarkScheme = {
-    COULEUR_SECONDAIRE0000: "#3E844A",
-    COULEUR_PANNEAU: "#000000",
-    COULEUR_DOMINANTE: "#787878"
-};
-const colorsLightScheme = {
-    COULEUR_SECONDAIRE0000: "#FF1A1A",
-    COULEUR_PANNEAU: "#FFFFFF",
-    COULEUR_DOMINANTE: "#FFFFFF"
-};
-const themeColors = [
-    {
-        value: "blueOfAzure",
-        hexadecimalColor: "#0082EA",
-        label: "bleu d'azure"
-    },
-    {
-        value: "coblatBlue",
-        hexadecimalColor: "#44479F",
-        label: "blue cobalt"
-    },
-    {
-        value: "slateGrey",
-        hexadecimalColor: "#646971",
-        label: "gris ardoise"
-    },
-    {
-        value: "pomegranateRed",
-        hexadecimalColor: "#F71F4C",
-        label: "rouge grenade"
-    },
-    {
-        value: "poppyRed",
-        hexadecimalColor: "#E00012",
-        label: "rouge coquelicot"
-    },
-    {
-        value: "reddishOrange",
-        hexadecimalColor: "#C14C25",
-        label: "orange roux"
-    },
-    {
-        value: "mustardYellow",
-        hexadecimalColor: "#EF850B",
-        label: "jaune moutarde"
-    }
-];
-const signageEquipment = [
-    {
-        value: "option1",
-        label: "Effet de porte aux entrées de la commune",
-        price: 2400,
-        modelId: "e23752d1-c5e8-4788-b719-8a913477dc6c"
-    },
-    {
-        value: "option2",
-        label: "Orientation des véhicules vers les ressources",
-        price: 980,
-        modelId: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
-    },
-    {
-        value: "option3",
-        label: "Identification des parkings",
-        price: 1200,
-        modelId: "d7e90749-acb2-4861-bb20-08881e0777ce"
-    },
-    {
-        value: "option4",
-        label: "Information sur les ressources du centre-ville",
-        price: 4800,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
-    },
-    {
-        value: "option5",
-        label: "Orientation des piétons vers les ressources",
-        price: 3200,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
-    },
-    {
-        value: "option6",
-        label: "Interprétation historique des ressources",
-        price: 240,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
-    }
-];
-const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {
-    return ++i;
-});
-const mailOfKingBoss = [];
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f56lm":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$7930 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$7930.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _vectaryItems = require("../vectary-items/vectary-items");
-var _vectaryItemsDefault = parcelHelpers.interopDefault(_vectaryItems);
-const SignalSystem = ({ myPicto , setMyPicto , setIsLoaded , townName , models , currentColor , pictureSleeve  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-signal-system",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: [
-                    "Le nouveau syst\xe8me signal\xe9tique de ",
-                    townName
-                ]
-            }, void 0, true, {
-                fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
-                lineNumber: 8,
-                columnNumber: 13
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_vectaryItemsDefault.default, {
-                picto: myPicto,
-                setPicto: setMyPicto,
-                setIsLoaded: setIsLoaded,
-                models: models,
-                dominantColor: currentColor,
-                pictureSleeve: pictureSleeve
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
-                lineNumber: 9,
-                columnNumber: 13
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
-        lineNumber: 7,
-        columnNumber: 9
-    }, undefined);
-};
-_c = SignalSystem;
-exports.default = SignalSystem;
-var _c;
-$RefreshReg$(_c, "SignalSystem");
-
-  $parcel$ReactRefreshHelpers$7930.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../vectary-items/vectary-items":"3CApp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3CApp":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$9dc5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$9dc5.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-//React import
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-//Lib import
-var _api = require("../../../lib/api");
-//Component import
-var _iframe = require("./iframe");
-var _iframeDefault = parcelHelpers.interopDefault(_iframe);
-//Logic import
-var _updateMaterial = require("../../../functions/update-material");
-var _updateMaterialDefault = parcelHelpers.interopDefault(_updateMaterial);
-var _updateColor2 = require("../../../functions/update-color-2");
-var _updateColor2Default = parcelHelpers.interopDefault(_updateColor2);
-var _s = $RefreshSig$();
-const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor , pictureSleeve  })=>{
-    _s();
-    const viewerModels = [];
-    _react.useEffect(()=>{
-        const run = async ()=>{
-            setPicto([]);
-            setIsLoaded("");
-            models.map(async (model, index)=>{
-                const viewerApi = new _api.VctrApi("Model_" + model.modelId);
-                viewerModels.push(viewerApi);
-                await viewerApi.init();
-                await viewerApi.setPositionAbsolute("Camera", [
-                    4,
-                    2,
-                    7
-                ]);
-                // updateMaterial(dominantColor, viewerApi, pictureSleeve);
-                _updateColor2Default.default(viewerApi, pictureSleeve);
-                if (viewerApi.isReady === true) {
-                    const waitForScreen = async ()=>{
-                        const screenshot = await viewerApi.takeScreenshot();
-                        setPicto((oldScreen)=>{
-                            const newScreen = [
-                                ...oldScreen
-                            ];
-                            newScreen[index] = screenshot;
-                            return newScreen;
-                        });
-                    };
-                    const timeForScreen = ()=>{
-                        setTimeout(waitForScreen, 1000);
-                        setTimeout(setIsLoaded("Calculer le coût"), 2000);
-                    };
-                    timeForScreen();
-                }
-            });
-        };
-        run();
-    }, []);
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-iframe",
-        children: models.map((model, index)=>{
-            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactDefault.default.Fragment, {
-                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
-                    id: model.modelId,
-                    nameModel: model.label
-                }, model.modelId + index, false, {
-                    fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                    lineNumber: 62,
-                    columnNumber: 29
-                }, undefined)
-            }, model.modelId + index, false, {
-                fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                lineNumber: 61,
-                columnNumber: 25
-            }, undefined);
-        })
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-        lineNumber: 57,
-        columnNumber: 9
-    }, undefined);
-};
-_s(VectaryItems, "OD7bBpZva5O2jO+Puf00hKivP7c=");
-_c = VectaryItems;
-exports.default = VectaryItems;
-var _c;
-$RefreshReg$(_c, "VectaryItems");
-
-  $parcel$ReactRefreshHelpers$9dc5.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../lib/api":"6mCQj","./iframe":"3y0ds","../../../functions/update-material":"da8K6","../../../functions/update-color-2":"3DSfZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mCQj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "VctrApi", ()=>_Vectary$VctrApi
-);
-/*!
- * Copyright (c) 2022 by Vectary. All rights reserved.
- * Rev 13d1a4d8a9f360c894690e4d6df396af2f33ed23
- * @copyright
- */ var Vectary = function(e1) {
-    var t1 = {};
-    function a(i) {
-        if (t1[i]) return t1[i].exports;
-        var E = t1[i] = {
-            i: i,
-            l: !1,
-            exports: {}
-        };
-        return e1[i].call(E.exports, E, E.exports, a), E.l = !0, E.exports;
-    }
-    return a.m = e1, a.c = t1, a.d = function(e, t, i) {
-        a.o(e, t) || Object.defineProperty(e, t, {
-            enumerable: !0,
-            get: i
-        });
-    }, a.r = function(e) {
-        "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
-            value: "Module"
-        }), Object.defineProperty(e, "__esModule", {
-            value: !0
-        });
-    }, a.t = function(e, t2) {
-        if (1 & t2 && (e = a(e)), 8 & t2) return e;
-        if (4 & t2 && "object" === typeof e && e && e.__esModule) return e;
-        var i = Object.create(null);
-        if (a.r(i), Object.defineProperty(i, "default", {
-            enumerable: !0,
-            value: e
-        }), 2 & t2 && "string" != typeof e) for(var E in e)a.d(i, E, (function(t) {
-            return e[t];
-        }).bind(null, E));
-        return i;
-    }, a.n = function(e) {
-        var t = e && e.__esModule ? function t() {
-            return e["default"];
-        } : function t() {
-            return e;
-        };
-        return a.d(t, "a", t), t;
-    }, a.o = function(e, t) {
-        return Object.prototype.hasOwnProperty.call(e, t);
-    }, a.p = "/", a(a.s = "./src/viewer-api/scripts/vctr-api.ts");
-}({
-    "./src/_common_/types.ts": function(e2, t, a) {
-        "use strict";
-        var i, E, s, n;
-        a.d(t, "b", function() {
-            return i;
-        }), a.d(t, "a", function() {
-            return E;
-        }), a.d(t, "d", function() {
-            return s;
-        }), a.d(t, "c", function() {
-            return n;
-        }), function(e) {
-            e[e["ERROR"] = 0] = "ERROR", e[e["READY"] = 1] = "READY", e[e["GET_OBJECTS"] = 2] = "GET_OBJECTS", e[e["GET_OBJECT_BY_NAME"] = 3] = "GET_OBJECT_BY_NAME", e[e["GET_OBJECTS_BY_NAME"] = 4] = "GET_OBJECTS_BY_NAME", e[e["GET_MESHES"] = 5] = "GET_MESHES", e[e["GET_MESH_BY_NAME"] = 6] = "GET_MESH_BY_NAME", e[e["GET_MESHES_BY_NAME"] = 7] = "GET_MESHES_BY_NAME", e[e["GET_HIT_OBJECTS"] = 8] = "GET_HIT_OBJECTS", e[e["GET_VISIBILITY"] = 9] = "GET_VISIBILITY", e[e["SET_VISIBILITY"] = 10] = "SET_VISIBILITY", e[e["GET_POSITION"] = 11] = "GET_POSITION", e[e["SET_POSITION_REL"] = 12] = "SET_POSITION_REL", e[e["SET_POSITION_ABS"] = 13] = "SET_POSITION_ABS", e[e["GET_ROTATION"] = 14] = "GET_ROTATION", e[e["SET_ROTATION_REL"] = 15] = "SET_ROTATION_REL", e[e["SET_ROTATION_ABS"] = 16] = "SET_ROTATION_ABS", e[e["GET_SCALE"] = 17] = "GET_SCALE", e[e["SET_SCALE_REL"] = 18] = "SET_SCALE_REL", e[e["SET_SCALE_ABS"] = 19] = "SET_SCALE_ABS", e[e["GET_MATERIALS"] = 20] = "GET_MATERIALS", e[e["SET_MATERIAL"] = 21] = "SET_MATERIAL", e[e["GET_MATERIALS_BY_NAME"] = 22] = "GET_MATERIALS_BY_NAME", e[e["GET_MATERIAL_BY_NAME"] = 23] = "GET_MATERIAL_BY_NAME", e[e["GET_MATERIAL_PROPS"] = 24] = "GET_MATERIAL_PROPS", e[e["CREATE_MATERIAL"] = 25] = "CREATE_MATERIAL", e[e["UPDATE_MATERIAL"] = 26] = "UPDATE_MATERIAL", e[e["GET_BACKGROUND"] = 27] = "GET_BACKGROUND", e[e["SET_BACKGROUND"] = 28] = "SET_BACKGROUND", e[e["GET_EXPOSURE"] = 29] = "GET_EXPOSURE", e[e["SET_EXPOSURE"] = 30] = "SET_EXPOSURE", e[e["GET_ENVIRONMENT_MAP"] = 31] = "GET_ENVIRONMENT_MAP", e[e["SET_ENVIRONMENT_MAP"] = 32] = "SET_ENVIRONMENT_MAP", e[e["ROTATE_ENVIRONMENT_MAP"] = 33] = "ROTATE_ENVIRONMENT_MAP", e[e["GET_CAMERAS"] = 34] = "GET_CAMERAS", e[e["GET_CAMERAS_BY_NAME"] = 35] = "GET_CAMERAS_BY_NAME", e[e["GET_CAMERA_BY_NAME"] = 36] = "GET_CAMERA_BY_NAME", e[e["SWITCH_VIEW"] = 37] = "SWITCH_VIEW", e[e["SWITCH_VIEW_ASYNC"] = 38] = "SWITCH_VIEW_ASYNC", e[e["MOVE_VIEW"] = 39] = "MOVE_VIEW", e[e["ROTATE_VIEW"] = 40] = "ROTATE_VIEW", e[e["ZOOM_VIEW"] = 41] = "ZOOM_VIEW", e[e["GET_FOV"] = 42] = "GET_FOV", e[e["SET_FOV"] = 43] = "SET_FOV", e[e["TAKE_SCREENSHOT"] = 44] = "TAKE_SCREENSHOT", e[e["ENABLE_ANNOTATIONS"] = 45] = "ENABLE_ANNOTATIONS", e[e["GET_ANNOTATIONS"] = 46] = "GET_ANNOTATIONS", e[e["GET_ANNOTATION_BY_ID"] = 47] = "GET_ANNOTATION_BY_ID", e[e["ADD_ANNOTATION"] = 48] = "ADD_ANNOTATION", e[e["REMOVE_ANNOTATION_BY_ID"] = 49] = "REMOVE_ANNOTATION_BY_ID", e[e["EXPAND_ANNOTATIONS_BY_ID"] = 50] = "EXPAND_ANNOTATIONS_BY_ID", e[e["HIGHLIGHT_MESHES_BY_NAME"] = 51] = "HIGHLIGHT_MESHES_BY_NAME", e[e["UNHIGHLIGHT_MESHES_BY_NAME"] = 52] = "UNHIGHLIGHT_MESHES_BY_NAME", e[e["SET_CANVAS_STATE"] = 53] = "SET_CANVAS_STATE", e[e["GET_VIEW_STATE"] = 54] = "GET_VIEW_STATE", e[e["APPLY_VIEW_STATE"] = 55] = "APPLY_VIEW_STATE", e[e["SEND_EVENT"] = 56] = "SEND_EVENT", e[e["PLAY"] = 57] = "PLAY", e[e["LOAD"] = 58] = "LOAD", e[e["SET_UUID_AR"] = 59] = "SET_UUID_AR", e[e["TRIGGER_AR_CLICK"] = 60] = "TRIGGER_AR_CLICK", e[e["GET_2D_COORDINATES"] = 61] = "GET_2D_COORDINATES", e[e["GET_CURRENT_USER"] = 62] = "GET_CURRENT_USER", e[e["DID_RENDER_LAST_FRAME"] = 63] = "DID_RENDER_LAST_FRAME", e[e["ADD_EVENT_LISTENER"] = 64] = "ADD_EVENT_LISTENER", e[e["REMOVE_EVENT_LISTENER"] = 65] = "REMOVE_EVENT_LISTENER", e[e["UPDATE_EVENT"] = 66] = "UPDATE_EVENT", e[e["TAKE_FIXED_SIZE_SCREENSHOT"] = 67] = "TAKE_FIXED_SIZE_SCREENSHOT", e[e["ADD_COMPLEX_ANNOTATION"] = 68] = "ADD_COMPLEX_ANNOTATION", e[e["SET_ANNOTATION_VISIBILITY"] = 69] = "SET_ANNOTATION_VISIBILITY";
-        }(i || (i = {})), function(e) {
-            e["ORBIT_CONTROLS_STATE_CHANGE"] = "ORBIT_CONTROLS_STATE_CHANGE", e["MOUSE_MOVE"] = "MOUSE_MOVE", e["MOUSE_CLICK"] = "MOUSE_CLICK", e["MOUSE_DOWN"] = "MOUSE_DOWN";
-        }(E || (E = {})), function(e) {
-            e["NONE"] = "NONE", e["ROTATE"] = "ROTATE", e["DOLLY"] = "DOLLY", e["PAN"] = "PAN", e["TOUCH_ROTATE"] = "TOUCH_ROTATE", e["TOUCH_PAN"] = "TOUCH_PAN", e["TOUCH_DOLLY_PAN"] = "TOUCH_DOLLY_PAN", e["TOUCH_DOLLY_ROTATE"] = "TOUCH_DOLLY_ROTATE";
-        }(s || (s = {})), function(e) {
-            e["AUTO"] = "auto", e["ENGLISH"] = "en", e["SPANISH"] = "es", e["GERMAN"] = "de", e["FRENCH"] = "fr", e["ITALIAN"] = "it", e["RUSSIAN"] = "ru";
-        }(n || (n = {}));
-    },
-    "./src/viewer-api/scripts/vctr-api.ts": function(e3, t3, a1) {
-        "use strict";
-        a1.r(t3), a1.d(t3, "VctrApi", function() {
-            return s1;
-        });
-        var i1 = a1("./src/_common_/types.ts"), E1 = function(e4, t4, a2, i) {
-            function E(e) {
-                return e instanceof a2 ? e : new a2(function(t) {
-                    t(e);
-                });
-            }
-            return new (a2 || (a2 = Promise))(function(a, s) {
-                function n(e) {
-                    try {
-                        _(i.next(e));
-                    } catch (e5) {
-                        s(e5);
-                    }
-                }
-                function r(e) {
-                    try {
-                        _(i["throw"](e));
-                    } catch (e6) {
-                        s(e6);
-                    }
-                }
-                function _(e) {
-                    e.done ? a(e.value) : E(e.value).then(n, r);
-                }
-                _((i = i.apply(e4, t4 || [])).next());
-            });
-        };
-        class s1 {
-            constructor(e, t){
-                this.isReady = !1, this.iframeMsgMap = new Map, this.eventsCallbackMap = new Map, this.id = e, this.globalErrCb = t, s1.Utils = new n1(this);
-            }
-            init() {
-                return new Promise((e, t)=>E1(this, void 0, void 0, function*() {
-                        if (this.elem = document.getElementById(this.id), !this.elem) {
-                            const a = `Element with id "${this.id}" does not exist`;
-                            return this.globalErrCb ? this.globalErrCb(a) : t(a), e();
-                        }
-                        if (this.type = "IFRAME" === this.elem.nodeName ? "iframe" : "VCTR-VIEWER" === this.elem.nodeName ? "webcomponent" : null, !this.type) {
-                            const a = `Element with id "${this.id}" is not of an appropriate type`;
-                            return this.globalErrCb ? this.globalErrCb(a) : t(a), e();
-                        }
-                        switch(this.type){
-                            case "iframe":
-                                this.initIframeMessenger();
-                            default:
-                                yield this.getReady(), e();
-                        }
-                    })
-                );
-            }
-            getReady() {
-                return new Promise((e7, t)=>{
-                    const a = this.getRandomNum(), E = self.setInterval(()=>{
-                        if ("iframe" === this.type) this.iframeMsgMap.set(a, {
-                            err: null,
-                            succ: null
-                        }), this.elem.contentWindow.postMessage({
-                            id: this.id,
-                            msgId: a,
-                            method: i1["b"].READY
-                        }, "*");
-                        else {
-                            const e = !!this.elem.isReady && this.elem.isReady();
-                            e && (this.isReady = !0);
-                        }
-                        this.isReady && (self.clearInterval(E), e7());
-                    }, 500);
-                });
-            }
-            getObjects() {
-                return this.apiCallInternal(i1["b"].GET_OBJECTS);
-            }
-            getMeshes() {
-                return this.apiCallInternal(i1["b"].GET_MESHES);
-            }
-            getObjectsByName(e) {
-                return this.apiCallInternal(i1["b"].GET_OBJECTS_BY_NAME, {
-                    name: e
-                });
-            }
-            getObjectByName(e) {
-                return this.apiCallInternal(i1["b"].GET_OBJECT_BY_NAME, {
-                    name: e
-                });
-            }
-            getMeshesByName(e) {
-                return this.apiCallInternal(i1["b"].GET_MESHES_BY_NAME, {
-                    name: e
-                });
-            }
-            getMeshByName(e) {
-                return this.apiCallInternal(i1["b"].GET_MESH_BY_NAME, {
-                    name: e
-                });
-            }
-            getHitObjects(e = !1) {
-                return this.apiCallInternal(i1["b"].GET_HIT_OBJECTS, {
-                    firstHitOnly: e
-                });
-            }
-            get2DCoordinates(e) {
-                return this.apiCallInternal(i1["b"].GET_2D_COORDINATES, {
-                    name: e
-                });
-            }
-            getCameras() {
-                return this.apiCallInternal(i1["b"].GET_CAMERAS);
-            }
-            getCamerasByName(e) {
-                return this.apiCallInternal(i1["b"].GET_CAMERAS_BY_NAME, {
-                    name: e
-                });
-            }
-            getCameraByName(e) {
-                return this.apiCallInternal(i1["b"].GET_CAMERA_BY_NAME, {
-                    name: e
-                });
-            }
-            switchView(e) {
-                return this.apiCallInternal(i1["b"].SWITCH_VIEW, {
-                    name: e
-                });
-            }
-            switchViewAsync(e) {
-                return this.apiCallInternal(i1["b"].SWITCH_VIEW_ASYNC, {
-                    name: e
-                });
-            }
-            moveView(e) {
-                return this.apiCallInternal(i1["b"].MOVE_VIEW, {
-                    position: e
-                });
-            }
-            rotateView(e) {
-                return this.apiCallInternal(i1["b"].ROTATE_VIEW, {
-                    rotation: e
-                });
-            }
-            zoomView(e) {
-                return this.apiCallInternal(i1["b"].ZOOM_VIEW, {
-                    zoom: e
-                });
-            }
-            getVisibility(e) {
-                return this.apiCallInternal(i1["b"].GET_VISIBILITY, {
-                    name: e
-                });
-            }
-            setVisibility(e, t = !0, a = !1) {
-                return this.apiCallInternal(i1["b"].SET_VISIBILITY, {
-                    names: e,
-                    visible: t,
-                    isExclusive: a
-                });
-            }
-            getMaterials() {
-                return this.apiCallInternal(i1["b"].GET_MATERIALS);
-            }
-            createMaterial(e, t) {
-                return this.apiCallInternal(i1["b"].CREATE_MATERIAL, {
-                    material: e,
-                    cloneFromMatName: t
-                });
-            }
-            updateMaterial(e, t, a = !0) {
-                return this.apiCallInternal(i1["b"].UPDATE_MATERIAL, {
-                    name: e,
-                    props: t,
-                    withPrefetch: a
-                });
-            }
-            setMaterial(e, t) {
-                return this.apiCallInternal(i1["b"].SET_MATERIAL, {
-                    objectName: e,
-                    materialName: t
-                });
-            }
-            getMaterialsByName(e) {
-                return this.apiCallInternal(i1["b"].GET_MATERIALS_BY_NAME, {
-                    name: e
-                });
-            }
-            getMaterialByName(e) {
-                return this.apiCallInternal(i1["b"].GET_MATERIAL_BY_NAME, {
-                    name: e
-                });
-            }
-            getMaterialProperties(e) {
-                return this.apiCallInternal(i1["b"].GET_MATERIAL_PROPS, {
-                    name: e
-                });
-            }
-            getBackground() {
-                return this.apiCallInternal(i1["b"].GET_BACKGROUND);
-            }
-            setBackground(e) {
-                return this.apiCallInternal(i1["b"].SET_BACKGROUND, {
-                    background: e
-                });
-            }
-            enableAnnotations(e = !0) {
-                return this.apiCallInternal(i1["b"].ENABLE_ANNOTATIONS, {
-                    enable: e
-                });
-            }
-            getAnnotations() {
-                return this.apiCallInternal(i1["b"].GET_ANNOTATIONS);
-            }
-            getAnnotationById(e) {
-                return this.apiCallInternal(i1["b"].GET_ANNOTATION_BY_ID, {
-                    id: e
-                });
-            }
-            addAnnotation(e) {
-                return this.apiCallInternal(i1["b"].ADD_ANNOTATION, {
-                    annotationConf: e
-                });
-            }
-            addComplexAnnotation(e) {
-                return this.apiCallInternal(i1["b"].ADD_COMPLEX_ANNOTATION, {
-                    annotationConf: e
-                });
-            }
-            removeAnnotationById(e) {
-                return this.apiCallInternal(i1["b"].REMOVE_ANNOTATION_BY_ID, {
-                    id: e
-                });
-            }
-            setAnnotationVisibility(e, t) {
-                return this.apiCallInternal(i1["b"].SET_ANNOTATION_VISIBILITY, {
-                    id: e,
-                    visibility: t
-                });
-            }
-            expandAnnotationsById(e, t, a = !0) {
-                return this.apiCallInternal(i1["b"].EXPAND_ANNOTATIONS_BY_ID, {
-                    ids: e,
-                    expand: t,
-                    isExclusive: a
-                });
-            }
-            getPosition(e) {
-                return this.apiCallInternal(i1["b"].GET_POSITION, {
-                    name: e
-                });
-            }
-            setPositionRelative(e, t) {
-                return this.apiCallInternal(i1["b"].SET_POSITION_REL, {
-                    name: e,
-                    position: t
-                });
-            }
-            setPositionAbsolute(e, t) {
-                return this.apiCallInternal(i1["b"].SET_POSITION_ABS, {
-                    name: e,
-                    position: t
-                });
-            }
-            getRotation(e) {
-                return this.apiCallInternal(i1["b"].GET_ROTATION, {
-                    name: e
-                });
-            }
-            setRotationRelative(e, t, a = "XYZ") {
-                return this.apiCallInternal(i1["b"].SET_ROTATION_REL, {
-                    name: e,
-                    rotation: t,
-                    order: a
-                });
-            }
-            setRotationAbsolute(e, t, a = "XYZ") {
-                return this.apiCallInternal(i1["b"].SET_ROTATION_ABS, {
-                    name: e,
-                    rotation: t,
-                    order: a
-                });
-            }
-            getScale(e) {
-                return this.apiCallInternal(i1["b"].GET_SCALE, {
-                    name: e
-                });
-            }
-            setScaleRelative(e, t) {
-                return this.apiCallInternal(i1["b"].SET_SCALE_REL, {
-                    name: e,
-                    scale: t
-                });
-            }
-            setScaleAbsolute(e, t) {
-                return this.apiCallInternal(i1["b"].SET_SCALE_ABS, {
-                    name: e,
-                    scale: t
-                });
-            }
-            highlightMeshesByName(e, t = "#ffff00", a = 1, E = !1) {
-                return this.apiCallInternal(i1["b"].HIGHLIGHT_MESHES_BY_NAME, {
-                    names: e,
-                    color: t,
-                    intensity: a,
-                    isExclusive: E
-                });
-            }
-            unhighlightMeshesByName(e) {
-                return this.apiCallInternal(i1["b"].UNHIGHLIGHT_MESHES_BY_NAME, {
-                    names: e
-                });
-            }
-            takeScreenshot(e = 1, t) {
-                return this.apiCallInternal(i1["b"].TAKE_SCREENSHOT, {
-                    scale: e,
-                    scissor: t
-                });
-            }
-            takeFixedSizedScreenshot(e) {
-                return this.apiCallInternal(i1["b"].TAKE_FIXED_SIZE_SCREENSHOT, {
-                    dimension: e
-                });
-            }
-            getViewState() {
-                return this.apiCallInternal(i1["b"].GET_VIEW_STATE);
-            }
-            applyViewState(e) {
-                return this.apiCallInternal(i1["b"].APPLY_VIEW_STATE, {
-                    state: e
-                });
-            }
-            getExposure() {
-                return this.apiCallInternal(i1["b"].GET_EXPOSURE);
-            }
-            setExposure(e) {
-                return this.apiCallInternal(i1["b"].SET_EXPOSURE, {
-                    exposure: e
-                });
-            }
-            getEnvironmentMap() {
-                return this.apiCallInternal(i1["b"].GET_ENVIRONMENT_MAP);
-            }
-            setEnvironmentMap(e) {
-                return this.apiCallInternal(i1["b"].SET_ENVIRONMENT_MAP, {
-                    envMap: e
-                });
-            }
-            rotateEnvironmentMap(e) {
-                return this.apiCallInternal(i1["b"].ROTATE_ENVIRONMENT_MAP, {
-                    rotation: e
-                });
-            }
-            getFOV() {
-                return this.apiCallInternal(i1["b"].GET_FOV);
-            }
-            setFOV(e) {
-                return this.apiCallInternal(i1["b"].SET_FOV, {
-                    fov: e
-                });
-            }
-            sendEvent(e, t, a, E, s) {
-                return this.apiCallInternal(i1["b"].SEND_EVENT, {
-                    event: e,
-                    x: t,
-                    y: a,
-                    maxX: E,
-                    maxY: s
-                });
-            }
-            play(e, t) {
-                return this.apiCallInternal(i1["b"].PLAY, {
-                    animIdx: e,
-                    timeScale: t
-                });
-            }
-            load() {
-                return this.apiCallInternal(i1["b"].LOAD);
-            }
-            setUUIDAr(e) {
-                return this.apiCallInternal(i1["b"].SET_UUID_AR, {
-                    uuid: e
-                });
-            }
-            triggerARClick() {
-                return this.apiCallInternal(i1["b"].TRIGGER_AR_CLICK);
-            }
-            setCanvasState(e, t) {
-                return this.apiCallInternal(i1["b"].SET_CANVAS_STATE, {
-                    className: e,
-                    state: t
-                });
-            }
-            getCurrentUser() {
-                return this.apiCallInternal(i1["b"].GET_CURRENT_USER);
-            }
-            didRenderLastFrame() {
-                return this.apiCallInternal(i1["b"].DID_RENDER_LAST_FRAME);
-            }
-            addEventListener(e, t) {
-                return this.eventsCallbackMap.set(e, t), this.apiCallInternal(i1["b"].ADD_EVENT_LISTENER, {
-                    eventType: e
-                });
-            }
-            removeEventListener(e) {
-                return this.eventsCallbackMap.delete(e), this.apiCallInternal(i1["b"].REMOVE_EVENT_LISTENER, {
-                    eventType: e
-                });
-            }
-            apiCallInternal(e8, t) {
-                return new Promise((a, s)=>E1(this, void 0, void 0, function*() {
-                        try {
-                            if ("iframe" === this.type) {
-                                const i = this.getRandomNum();
-                                this.iframeMsgMap.set(i, {
-                                    err: this.globalErrCb ? this.globalErrCb : s,
-                                    succ: a
-                                }), this.elem.contentWindow.postMessage({
-                                    id: this.id,
-                                    msgId: i,
-                                    method: e8,
-                                    data: t ? JSON.stringify(t) : void 0
-                                }, "*");
-                            } else {
-                                let E;
-                                switch(e8){
-                                    case i1["b"].GET_OBJECTS:
-                                        E = this.elem.getObjects();
-                                        break;
-                                    case i1["b"].GET_MESHES:
-                                        E = this.elem.getMeshes();
-                                        break;
-                                    case i1["b"].GET_OBJECTS_BY_NAME:
-                                        E = this.elem.getObjectsByName(t.name);
-                                        break;
-                                    case i1["b"].GET_OBJECT_BY_NAME:
-                                        E = this.elem.getObjectByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MESHES_BY_NAME:
-                                        E = this.elem.getMeshesByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MESH_BY_NAME:
-                                        E = this.elem.getMeshByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MATERIALS:
-                                        E = this.elem.getMaterials();
-                                        break;
-                                    case i1["b"].CREATE_MATERIAL:
-                                        E = this.elem.createMaterial(t.material, t.cloneFromMatName);
-                                        break;
-                                    case i1["b"].UPDATE_MATERIAL:
-                                        E = this.elem.updateMaterial(t.name, t.props, t.withPrefetch);
-                                        break;
-                                    case i1["b"].SET_MATERIAL:
-                                        E = this.elem.setMaterial(t.objectName, t.materialName);
-                                        break;
-                                    case i1["b"].GET_MATERIALS_BY_NAME:
-                                        E = this.elem.getMaterialsByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MATERIAL_BY_NAME:
-                                        E = this.elem.getMaterialByName(t.name);
-                                        break;
-                                    case i1["b"].GET_MATERIAL_PROPS:
-                                        E = this.elem.getMaterialProperties(t.name);
-                                        break;
-                                    case i1["b"].GET_HIT_OBJECTS:
-                                        E = this.elem.getHitObjects(t.firstHitOnly);
-                                        break;
-                                    case i1["b"].GET_2D_COORDINATES:
-                                        E = this.elem.get2DCoordinates(t.name);
-                                        break;
-                                    case i1["b"].GET_CAMERAS:
-                                        E = this.elem.getCameras();
-                                        break;
-                                    case i1["b"].GET_CAMERAS_BY_NAME:
-                                        E = this.elem.getCamerasByName(t.name);
-                                        break;
-                                    case i1["b"].GET_CAMERA_BY_NAME:
-                                        E = this.elem.getCameraByName(t.name);
-                                        break;
-                                    case i1["b"].SWITCH_VIEW:
-                                        E = this.elem.switchView(t.name);
-                                        break;
-                                    case i1["b"].SWITCH_VIEW_ASYNC:
-                                        E = this.elem.switchViewAsync(t.name);
-                                        break;
-                                    case i1["b"].MOVE_VIEW:
-                                        E = this.elem.moveView(t.position);
-                                        break;
-                                    case i1["b"].ROTATE_VIEW:
-                                        E = this.elem.rotateView(t.rotation);
-                                        break;
-                                    case i1["b"].ZOOM_VIEW:
-                                        E = this.elem.zoomView(t.zoom);
-                                        break;
-                                    case i1["b"].GET_VISIBILITY:
-                                        E = this.elem.getVisibility(t.name);
-                                        break;
-                                    case i1["b"].SET_VISIBILITY:
-                                        E = this.elem.setVisibility(t.names, t.visible, t.isExclusive);
-                                        break;
-                                    case i1["b"].GET_BACKGROUND:
-                                        E = this.elem.getBackground();
-                                        break;
-                                    case i1["b"].SET_BACKGROUND:
-                                        E = yield this.elem.setBackground(t.background);
-                                        break;
-                                    case i1["b"].ENABLE_ANNOTATIONS:
-                                        E = yield this.elem.enableAnnotations(t.enable);
-                                        break;
-                                    case i1["b"].GET_ANNOTATIONS:
-                                        E = yield this.elem.getAnnotations();
-                                        break;
-                                    case i1["b"].GET_ANNOTATION_BY_ID:
-                                        E = yield this.elem.getAnnotationById(t.id);
-                                        break;
-                                    case i1["b"].ADD_ANNOTATION:
-                                        E = yield this.elem.addAnnotation(t.annotationConf);
-                                        break;
-                                    case i1["b"].ADD_COMPLEX_ANNOTATION:
-                                        E = yield this.elem.addComplexAnnotation(t.annotationConf);
-                                        break;
-                                    case i1["b"].SET_ANNOTATION_VISIBILITY:
-                                        E = yield this.elem.setAnnotationVisibility(t.id, t.visibility);
-                                        break;
-                                    case i1["b"].REMOVE_ANNOTATION_BY_ID:
-                                        E = yield this.elem.removeAnnotationById(t.id);
-                                        break;
-                                    case i1["b"].EXPAND_ANNOTATIONS_BY_ID:
-                                        E = yield this.elem.expandAnnotationsById(t.ids, t.expand, t.isExclusive);
-                                        break;
-                                    case i1["b"].GET_POSITION:
-                                        E = this.elem.getPosition(t.name);
-                                        break;
-                                    case i1["b"].SET_POSITION_REL:
-                                        E = yield this.elem.setPositionRelative(t.name, t.position);
-                                        break;
-                                    case i1["b"].SET_POSITION_ABS:
-                                        E = yield this.elem.setPositionAbsolute(t.name, t.position);
-                                        break;
-                                    case i1["b"].GET_ROTATION:
-                                        E = this.elem.getRotation(t.name);
-                                        break;
-                                    case i1["b"].SET_ROTATION_REL:
-                                        E = yield this.elem.setRotationRelative(t.name, t.rotation, t.order);
-                                        break;
-                                    case i1["b"].SET_ROTATION_ABS:
-                                        E = yield this.elem.setRotationAbsolute(t.name, t.rotation, t.order);
-                                        break;
-                                    case i1["b"].GET_SCALE:
-                                        E = this.elem.getScale(t.name);
-                                        break;
-                                    case i1["b"].SET_SCALE_REL:
-                                        E = yield this.elem.setScaleRelative(t.name, t.scale);
-                                        break;
-                                    case i1["b"].SET_SCALE_ABS:
-                                        E = yield this.elem.setScaleAbsolute(t.name, t.scale);
-                                        break;
-                                    case i1["b"].HIGHLIGHT_MESHES_BY_NAME:
-                                        E = yield this.elem.highlightMeshesByName(t.names, t.color, t.intensity, t.isExclusive);
-                                        break;
-                                    case i1["b"].UNHIGHLIGHT_MESHES_BY_NAME:
-                                        E = yield this.elem.unhighlightMeshesByName(t.names);
-                                        break;
-                                    case i1["b"].TAKE_SCREENSHOT:
-                                        E = yield this.elem.takeScreenshot(t.scale, t.scissor);
-                                        break;
-                                    case i1["b"].TAKE_FIXED_SIZE_SCREENSHOT:
-                                        E = yield this.elem.takeFixedSizedScreenshot(t.dimension);
-                                        break;
-                                    case i1["b"].GET_VIEW_STATE:
-                                        E = yield this.elem.getViewState();
-                                        break;
-                                    case i1["b"].APPLY_VIEW_STATE:
-                                        E = yield this.elem.applyViewState(t.state);
-                                        break;
-                                    case i1["b"].GET_EXPOSURE:
-                                        E = yield this.elem.getExposure();
-                                        break;
-                                    case i1["b"].SET_EXPOSURE:
-                                        E = yield this.elem.setExposure(t.exposure);
-                                        break;
-                                    case i1["b"].GET_ENVIRONMENT_MAP:
-                                        E = yield this.elem.getEnvironmentMap();
-                                        break;
-                                    case i1["b"].SET_ENVIRONMENT_MAP:
-                                        E = yield this.elem.setEnvironmentMap(t.envMap);
-                                        break;
-                                    case i1["b"].ROTATE_ENVIRONMENT_MAP:
-                                        E = yield this.elem.setEnvironmentMap(t.rotation);
-                                        break;
-                                    case i1["b"].GET_FOV:
-                                        E = yield this.elem.getFOV();
-                                        break;
-                                    case i1["b"].SET_FOV:
-                                        E = yield this.elem.setFOV(t.fov);
-                                        break;
-                                    case i1["b"].SEND_EVENT:
-                                        E = yield this.elem.sendEvent(t.event, t.x, t.y, t.maxX, t.maxY);
-                                        break;
-                                    case i1["b"].PLAY:
-                                        E = yield this.elem.play(t.animIdx, t.timeScale);
-                                        break;
-                                    case i1["b"].LOAD:
-                                        E = yield this.elem.load();
-                                        break;
-                                    case i1["b"].SET_UUID_AR:
-                                        E = yield this.elem.setUUIDAr(t.uuid);
-                                        break;
-                                    case i1["b"].TRIGGER_AR_CLICK:
-                                        E = yield this.elem.triggerARClick();
-                                        break;
-                                    case i1["b"].SET_CANVAS_STATE:
-                                        E = yield this.elem.setCanvasState(t.className, t.state);
-                                        break;
-                                    case i1["b"].GET_CURRENT_USER:
-                                        E = this.elem.getCurrentUser();
-                                        break;
-                                    case i1["b"].DID_RENDER_LAST_FRAME:
-                                        E = this.elem.didRenderLastFrame();
-                                        break;
-                                    case i1["b"].ADD_EVENT_LISTENER:
-                                        E = this.elem.addApiEventListner(t.eventType, this.eventsCallbackMap.get(t.eventType));
-                                        break;
-                                    case i1["b"].REMOVE_EVENT_LISTENER:
-                                        E = this.elem.removeApiEventListener(t.eventType);
-                                        break;
-                                }
-                                a(E);
-                            }
-                        } catch (e) {
-                            this.globalErrCb ? this.globalErrCb(e) : s(e), a();
-                        }
-                    })
-                );
-            }
-            initIframeMessenger() {
-                self.addEventListener("message", (e)=>{
-                    const t = e.data, a = this.iframeMsgMap.get(t.msgId);
-                    if (a) {
-                        switch(t.method){
-                            case i1["b"].READY:
-                                "true" === t.data && (this.isReady = !0);
-                                break;
-                            case i1["b"].ERROR:
-                                a.err(t.data);
-                                break;
-                            case i1["b"].GET_OBJECTS_BY_NAME:
-                            case i1["b"].GET_OBJECT_BY_NAME:
-                            case i1["b"].GET_CAMERAS_BY_NAME:
-                            case i1["b"].GET_CAMERA_BY_NAME:
-                            case i1["b"].GET_MESHES_BY_NAME:
-                            case i1["b"].GET_MESH_BY_NAME:
-                            case i1["b"].GET_MATERIALS_BY_NAME:
-                            case i1["b"].GET_MATERIAL_BY_NAME:
-                            case i1["b"].GET_MATERIAL_PROPS:
-                            case i1["b"].CREATE_MATERIAL:
-                            case i1["b"].UPDATE_MATERIAL:
-                            case i1["b"].GET_VIEW_STATE:
-                            case i1["b"].APPLY_VIEW_STATE:
-                            case i1["b"].GET_ANNOTATIONS:
-                            case i1["b"].GET_ANNOTATION_BY_ID:
-                            case i1["b"].ADD_ANNOTATION:
-                            case i1["b"].ADD_COMPLEX_ANNOTATION:
-                            case i1["b"].SET_ANNOTATION_VISIBILITY:
-                            case i1["b"].GET_CURRENT_USER:
-                            case i1["b"].DID_RENDER_LAST_FRAME:
-                                try {
-                                    const e = JSON.parse(t.data);
-                                    a.succ(e);
-                                } catch (e9) {
-                                    a.err(e9);
-                                }
-                                break;
-                            case i1["b"].SET_BACKGROUND:
-                                a.succ(!0);
-                                break;
-                            case i1["b"].SWITCH_VIEW:
-                            case i1["b"].SWITCH_VIEW_ASYNC:
-                            case i1["b"].MOVE_VIEW:
-                            case i1["b"].ROTATE_VIEW:
-                            case i1["b"].ZOOM_VIEW:
-                            case i1["b"].ENABLE_ANNOTATIONS:
-                            case i1["b"].REMOVE_ANNOTATION_BY_ID:
-                            case i1["b"].EXPAND_ANNOTATIONS_BY_ID:
-                            case i1["b"].SET_EXPOSURE:
-                            case i1["b"].SET_ENVIRONMENT_MAP:
-                            case i1["b"].ROTATE_ENVIRONMENT_MAP:
-                            case i1["b"].SEND_EVENT:
-                            case i1["b"].PLAY:
-                            case i1["b"].SET_UUID_AR:
-                            case i1["b"].TRIGGER_AR_CLICK:
-                            case i1["b"].SET_CANVAS_STATE:
-                            case i1["b"].ADD_EVENT_LISTENER:
-                            case i1["b"].REMOVE_EVENT_LISTENER:
-                                "true" === t.data ? a.succ(!0) : a.err("Something went wrong. API call result is false");
-                                break;
-                            case i1["b"].HIGHLIGHT_MESHES_BY_NAME:
-                            case i1["b"].UNHIGHLIGHT_MESHES_BY_NAME:
-                            case i1["b"].GET_VISIBILITY:
-                            case i1["b"].SET_VISIBILITY:
-                            case i1["b"].SET_POSITION_ABS:
-                            case i1["b"].SET_POSITION_REL:
-                            case i1["b"].SET_ROTATION_ABS:
-                            case i1["b"].SET_ROTATION_REL:
-                            case i1["b"].SET_SCALE_ABS:
-                            case i1["b"].SET_SCALE_REL:
-                            case i1["b"].SET_FOV:
-                                "true" === t.data ? a.succ(!0) : a.succ(!1);
-                                break;
-                            case i1["b"].GET_BACKGROUND:
-                            case i1["b"].GET_POSITION:
-                            case i1["b"].GET_ROTATION:
-                            case i1["b"].GET_SCALE:
-                            case i1["b"].GET_MATERIALS:
-                            case i1["b"].GET_EXPOSURE:
-                            case i1["b"].GET_FOV:
-                            case i1["b"].GET_OBJECTS:
-                            case i1["b"].GET_MESHES:
-                            case i1["b"].GET_HIT_OBJECTS:
-                            case i1["b"].GET_2D_COORDINATES:
-                            case i1["b"].GET_CAMERAS:
-                                try {
-                                    const e = JSON.parse(t.data);
-                                    a.succ(e);
-                                } catch (e10) {
-                                    a.err(e10);
-                                }
-                                break;
-                            case i1["b"].TAKE_SCREENSHOT:
-                            case i1["b"].TAKE_FIXED_SIZE_SCREENSHOT:
-                            case i1["b"].GET_ENVIRONMENT_MAP:
-                            case i1["b"].LOAD:
-                                try {
-                                    a.succ(t.data);
-                                } catch (e11) {
-                                    a.err(e11);
-                                }
-                                break;
-                            default:
-                                const e = `Unknown API event "${t.method}"`;
-                                this.globalErrCb && this.globalErrCb(e);
-                                break;
-                        }
-                        this.iframeMsgMap.delete(t.msgId);
-                    } else if (t.method == i1["b"].UPDATE_EVENT) {
-                        let e = JSON.parse(t.data);
-                        if (this.eventsCallbackMap.has(e.eventType)) this.eventsCallbackMap.get(e.eventType)(e.eventData);
-                        else {
-                            const t = `Missing callback for event: "${e.eventType}"`;
-                            this.globalErrCb && this.globalErrCb(t);
-                        }
-                    }
-                });
-            }
-            getRandomNum() {
-                const e = new Uint8Array(4);
-                return self.crypto.getRandomValues(e), `${e[0]}-${e[1]}-${e[2]}-${e[3]}`;
-            }
-        }
-        s1.ApiEvents = i1["a"];
-        class n1 {
-            constructor(e){
-                this.api = e;
-            }
-            animate(e, t5, a, i = ()=>{}) {
-                const E = performance.now();
-                let s, n = 0;
-                if ("string" === typeof t5) switch(t5){
-                    case "linear":
-                        s = this.linear;
-                        break;
-                    case "easeInQuad":
-                        s = this.easeInQuad;
-                        break;
-                    case "easeOutQuad":
-                        s = this.easeOutQuad;
-                        break;
-                    case "easeInOutQuad":
-                        s = this.easeInOutQuad;
-                        break;
-                    case "easeInCubic":
-                        s = this.easeInCubic;
-                        break;
-                    case "easeOutCubic":
-                        s = this.easeOutCubic;
-                        break;
-                    case "easeInOutCubic":
-                        s = this.easeInOutCubic;
-                        break;
-                    case "easeInQuart":
-                        s = this.easeInQuart;
-                        break;
-                    case "easeOutQuart":
-                        s = this.easeOutQuart;
-                        break;
-                    case "easeInOutQuart":
-                        s = this.easeInOutQuart;
-                        break;
-                    case "easeInOutExpo":
-                        s = this.easeInOutExpo;
-                        break;
-                    default:
-                        s = this.linear;
-                        break;
-                }
-                else s = t5;
-                function r() {
-                    if (n = performance.now() - E, n >= e) return a(s(1)), i(), void 0;
-                    let t = n / e;
-                    const _ = s(t);
-                    a(_), requestAnimationFrame(r);
-                }
-                r();
-            }
-            lerp(e, t, a) {
-                let i = e.slice();
-                return i[0] += (t[0] - e[0]) * a, i[1] += (t[1] - e[1]) * a, i[2] += (t[2] - e[2]) * a, i;
-            }
-            linear(e) {
-                return e;
-            }
-            easeInQuad(e) {
-                return e * e;
-            }
-            easeOutQuad(e) {
-                return e * (2 - e);
-            }
-            easeInOutQuad(e) {
-                return e < .5 ? 2 * e * e : -1 + (4 - 2 * e) * e;
-            }
-            easeInCubic(e) {
-                return e * e * e;
-            }
-            easeOutCubic(e) {
-                return --e * e * e + 1;
-            }
-            easeInOutCubic(e) {
-                return e < .5 ? 4 * e * e * e : (e - 1) * (2 * e - 2) * (2 * e - 2) + 1;
-            }
-            easeInQuart(e) {
-                return e * e * e * e;
-            }
-            easeOutQuart(e) {
-                return 1 - --e * e * e * e;
-            }
-            easeInOutQuart(e) {
-                return e < .5 ? 8 * e * e * e * e : 1 - 8 * --e * e * e * e;
-            }
-            easeInOutExpo(e) {
-                return e < .5 ? Math.pow(2, 20 * e - 10) / 2 : (2 - Math.pow(2, -20 * e + 10)) / 2;
-            }
-            fadeOut(e12, t6) {
-                return E1(this, void 0, void 0, function*() {
-                    const a = yield this.api.getMeshByName(e12);
-                    this.animate(t6, this.easeOutQuad, (e)=>{
-                        const t = this.lerp([
-                            1,
-                            0,
-                            0
-                        ], [
-                            0,
-                            0,
-                            0
-                        ], e), i = {
-                            opacity: `${t[0]}`
-                        };
-                        this.api.updateMaterial(a.material, i);
-                    }, ()=>{
-                        this.api.setVisibility([
-                            a.name
-                        ], !1);
-                    });
-                });
-            }
-            fadeIn(e13, t7) {
-                return E1(this, void 0, void 0, function*() {
-                    const a = yield this.api.getMeshByName(e13);
-                    this.api.updateMaterial(a.material, {
-                        opacity: "0.0"
-                    }), this.api.setVisibility([
-                        a.name
-                    ], !0), this.animate(t7, this.easeInQuad, (e)=>{
-                        const t = this.lerp([
-                            0,
-                            0,
-                            0
-                        ], [
-                            1,
-                            0,
-                            0
-                        ], e), i = {
-                            opacity: `${t[0]}`
-                        };
-                        this.api.updateMaterial(a.material, i);
-                    });
-                });
-            }
-            moveObjectsIncrementally(e14, t, a3) {
-                return E1(this, void 0, void 0, function*() {
-                    for(let i = 0; i < e14.length; i++){
-                        const E = e14[i], s = yield this.api.getPosition(E);
-                        setTimeout(()=>{
-                            this.animate(a3, this.easeOutQuad, (e)=>{
-                                const a = this.lerp(s, [
-                                    s[0] + t[0],
-                                    s[1] + t[1],
-                                    s[2] + t[2]
-                                ], e);
-                                this.api.setPositionAbsolute(E, a);
-                            });
-                        }, i * a3);
-                    }
-                });
-            }
-            swipeObject(e15, t, a4, i) {
-                return E1(this, void 0, void 0, function*() {
-                    const E = yield this.api.getMeshByName(e15), s = yield this.api.getPosition(E.name);
-                    "in" === i ? (this.fadeIn(E.name, a4), setTimeout(()=>{
-                        this.animate(a4, this.easeOutQuad, (e)=>{
-                            const a = this.lerp(s, [
-                                s[0] + t[0],
-                                s[1] + t[1],
-                                s[2] + t[2]
-                            ], e);
-                            this.api.setPositionAbsolute(E.name, a);
-                        });
-                    }, a4 / 2)) : (this.animate(a4, this.easeInQuad, (e)=>{
-                        const a = this.lerp(s, [
-                            s[0] + t[0],
-                            s[1] + t[1],
-                            s[2] + t[2]
-                        ], e);
-                        this.api.setPositionAbsolute(E.name, a);
-                    }), setTimeout(()=>{
-                        this.fadeOut(E.name, a4);
-                    }, a4 / 2));
-                });
-            }
-            animateRotation(e16, t, a5) {
-                return new Promise((i2, s)=>E1(this, void 0, void 0, function*() {
-                        try {
-                            const E = yield this.api.getRotation(e16);
-                            null === E && i2(), this.animate(a5, "linear", (a)=>{
-                                const i = [
-                                    E[0] + t[0] * a,
-                                    E[1] + t[1] * a,
-                                    E[2] + t[2] * a
-                                ];
-                                this.api.setRotationAbsolute(e16, i);
-                            }, ()=>{
-                                this.api.setRotationAbsolute(e16, [
-                                    E[0],
-                                    E[1],
-                                    E[2]
-                                ]), i2();
-                            });
-                        } catch (e) {
-                            s(e);
-                        }
-                    })
-                );
-            }
-            getElementVisible(e, t) {
-                const a = e.top >= 0 && t - e.top > 0, i = e.bottom >= 0 && t - e.bottom > 0;
-                if (!a && !i) return [
-                    0,
-                    0
-                ];
-                const E = e.top + e.height / 2, s = t - E, n = s < 0 || s > t ? 0 : Math.round(E / t * 100);
-                return a && i ? [
-                    100,
-                    n
-                ] : a ? [
-                    Math.round((t - e.top) / e.height * 100),
-                    n
-                ] : [
-                    Math.round((e.height - -1 * e.top) / e.height * 100),
-                    n
-                ];
-            }
-        }
-    }
-});
-const _Vectary$VctrApi = Vectary["VctrApi"];
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3y0ds":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$5048 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$5048.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _faviconPng = require("./favicon.png");
-var _faviconPngDefault = parcelHelpers.interopDefault(_faviconPng);
-const Iframe = ({ id , nameModel  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("iframe", {
-                id: "Model_" + id,
-                src: "https://www.vectary.com/viewer/v1/?model=" + id + "&arIcon=" + _faviconPngDefault.default,
-                frameBorder: "0",
-                width: "20%",
-                height: "200"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-                lineNumber: 8,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: nameModel
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-                lineNumber: 16,
-                columnNumber: 9
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
-        lineNumber: 7,
-        columnNumber: 5
-    }, undefined);
-};
-_c = Iframe;
-exports.default = Iframe;
-var _c;
-$RefreshReg$(_c, "Iframe");
-
-  $parcel$ReactRefreshHelpers$5048.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./favicon.png":"5jBaB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"5jBaB":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "favicon.3cfdc964.png" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"da8K6":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const updateMaterial = async (dominantColor, viewerApi, pictureSleeve)=>{
-    const updateColor = {
-        color: dominantColor,
-        map: pictureSleeve
-    };
-    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor);
-};
-exports.default = updateMaterial;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3DSfZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const updateMaterial2 = async (viewerApi, pictureSleeve)=>{
-    const updateColor2 = {
-        map: pictureSleeve
-    };
-    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor2);
-};
-exports.default = updateMaterial2;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"273co":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$701e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$701e.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const DynamicalPng = ({ reference , text , color  })=>{
-    const style = {
-        background: color
-    };
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        ref: reference,
-        className: "container-png",
-        style: style,
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h3", {
-            children: text
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
-            lineNumber: 9,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
-        lineNumber: 8,
-        columnNumber: 9
-    }, undefined);
-};
-_c = DynamicalPng;
-exports.default = DynamicalPng;
-var _c;
-$RefreshReg$(_c, "DynamicalPng");
-
-  $parcel$ReactRefreshHelpers$701e.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dyrfq":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$2af8 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$2af8.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-// require('dotenv').config();
-var _dropdown = require("../buttons/dropdown");
-var _dropdownDefault = parcelHelpers.interopDefault(_dropdown);
-var _inputText = require("../buttons/input-text");
-var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
-var _config = require("../../../config/config");
-const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedSignageEquipmentQuantity , onChangeAction ,  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quelles quantit\xe9s de chaque \xe9l\xe9ment ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                lineNumber: 18,
-                columnNumber: 7
-            }, undefined),
-            selectedSignageEquipment.map((oneSelectedSignageEquipement, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                    className: "container-how-items",
-                    children: [
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                            children: oneSelectedSignageEquipement.label
-                        }, void 0, false, {
-                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                            lineNumber: 24,
-                            columnNumber: 11
-                        }, undefined),
-                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dropdownDefault.default, {
-                            items: _config.productQuantity,
-                            defaultValue: selectedSignageEquipmentQuantity[oneSelectedSignageEquipement.value],
-                            onChange: (e)=>{
-                                onChangeAction(oneSelectedSignageEquipement.value, e.target.value);
-                            }
-                        }, void 0, false, {
-                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                            lineNumber: 25,
-                            columnNumber: 11
-                        }, undefined)
-                    ]
-                }, oneSelectedSignageEquipement.value, true, {
-                    fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                    lineNumber: 20,
-                    columnNumber: 9
-                }, undefined)
-            ),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
-                type: "email",
-                placeholder: "Votre adresse mail",
-                value: email,
-                name: "email",
-                onChange: (e)=>setEmail(e.target.value)
-                ,
-                required: true
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                lineNumber: 42,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-        lineNumber: 17,
-        columnNumber: 5
-    }, undefined);
-};
-_c = CalculateCost;
-exports.default = CalculateCost;
-var _c;
-$RefreshReg$(_c, "CalculateCost");
-
-  $parcel$ReactRefreshHelpers$2af8.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/dropdown":"2LfkA","../buttons/input-text":"cEoUW","../../../config/config":"a6ccA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2LfkA":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$bc8c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$bc8c.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const Dropdown = ({ items , onChange , defaultValue  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("select", {
-            onChange: onChange,
-            defaultValue: defaultValue,
-            children: items.map((item)=>{
-                return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("option", {
-                    value: item,
-                    children: item
-                }, item, false, {
-                    fileName: "src/components/wizzardComponents/buttons/dropdown.jsx",
-                    lineNumber: 14,
-                    columnNumber: 25
-                }, undefined);
-            })
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/buttons/dropdown.jsx",
-            lineNumber: 7,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false);
-};
-_c = Dropdown;
-exports.default = Dropdown;
-var _c;
-$RefreshReg$(_c, "Dropdown");
-
-  $parcel$ReactRefreshHelpers$bc8c.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1rqbK":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$caea = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$caea.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reducer = require("../../../functions/reducer");
-var _reducerDefault = parcelHelpers.interopDefault(_reducer);
-var _s = $RefreshSig$();
-const TotalCost = ({ quantity , signagesEquipements , image  })=>{
-    _s();
-    const [currentTotal, setCurrentTotal] = _react.useState(0);
-    const cheatTotal = [];
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-total-cost",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Merci nous revenons vers vous avec une offre "
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 13,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("table", {
-                border: "1",
-                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
-                    children: Object.keys(quantity).map((oneKey, index)=>{
-                        _react.useEffect(()=>{
-                            _reducerDefault.default(cheatTotal, signagesEquipements[index].price, quantity[oneKey], setCurrentTotal);
-                        }, []);
-                        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
-                            children: [
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                    children: signagesEquipements[index].label
-                                }, void 0, false, {
-                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 22,
-                                    columnNumber: 17
-                                }, undefined),
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
-                                        src: image[index],
-                                        alt: "Image du modèle " + signagesEquipements[index].label
-                                    }, void 0, false, {
-                                        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                        lineNumber: 23,
-                                        columnNumber: 21
-                                    }, undefined)
-                                }, void 0, false, {
-                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 23,
-                                    columnNumber: 17
-                                }, undefined),
-                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                    children: [
-                                        "X ",
-                                        quantity[oneKey]
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                    lineNumber: 24,
-                                    columnNumber: 17
-                                }, undefined)
-                            ]
-                        }, quantity[oneKey] + index, true, {
-                            fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                            lineNumber: 21,
-                            columnNumber: 15
-                        }, undefined);
-                    })
-                }, void 0, false, {
-                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                    lineNumber: 15,
-                    columnNumber: 9
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                lineNumber: 14,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-        lineNumber: 12,
-        columnNumber: 5
-    }, undefined);
-};
-_s(TotalCost, "SqGtFWzUHjJyPA/X9/+yEEYuAP4=");
-_c = TotalCost;
-exports.default = TotalCost;
-var _c;
-$RefreshReg$(_c, "TotalCost");
-
-  $parcel$ReactRefreshHelpers$caea.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../functions/reducer":"P8RCA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"P8RCA":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const reducer = (array, value, quantity, setState)=>{
-    array.push(value * quantity);
-    const cheatReduce = array.reduce((a, b)=>a + b
-    );
-    setState(cheatReduce);
-};
-exports.default = reducer;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2NQC3":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$b0d0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$b0d0.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const ViewWrapper = ({ children , previous ="Précédent" , next ="Suivant" , previousAction , nextAction ,  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            children,
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
-                className: "container-navigation",
-                children: [
-                    previous !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                        className: "previousInput",
-                        type: "button",
-                        value: previous,
-                        onClick: previousAction
-                    }, void 0, false, {
-                        fileName: "src/components/layout/view-wrapper.jsx",
-                        lineNumber: 16,
-                        columnNumber: 11
-                    }, undefined),
-                    next !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-                        className: "nextInput",
-                        type: "button",
-                        value: next,
-                        onClick: nextAction
-                    }, void 0, false, {
-                        fileName: "src/components/layout/view-wrapper.jsx",
-                        lineNumber: 24,
-                        columnNumber: 11
-                    }, undefined)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/layout/view-wrapper.jsx",
-                lineNumber: 14,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/layout/view-wrapper.jsx",
-        lineNumber: 11,
-        columnNumber: 5
-    }, undefined);
-};
-_c = ViewWrapper;
-exports.default = ViewWrapper;
-var _c;
-$RefreshReg$(_c, "ViewWrapper");
-
-  $parcel$ReactRefreshHelpers$b0d0.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9VZDV":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","../functions/export-as-image":"9VZDV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../functions/show-input":"jnUkf","react":"21dqq","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../components/layout/view-wrapper":"2NQC3","../config/config":"a6ccA","react-spring":"2gPbQ"}],"9VZDV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _html2Canvas = require("html2canvas");
@@ -34872,7 +32669,127 @@ exports.default = exportAsImage;
     return html2canvas;
 });
 
-},{}],"jnUkf":[function(require,module,exports) {
+},{}],"km3Ru":[function(require,module,exports) {
+"use strict";
+var Refresh = require('react-refresh/runtime');
+function debounce(func, delay) {
+    var args1;
+    var timeout = undefined;
+    return function(args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            timeout = undefined;
+            func.call(null, args);
+        }, delay);
+    };
+}
+var enqueueUpdate = debounce(function() {
+    Refresh.performReactRefresh();
+}, 30); // Everthing below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function(module) {
+    window.$RefreshReg$ = function(type, id) {
+        Refresh.register(type, module.id + ' ' + id);
+    };
+    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+};
+module.exports.postlude = function(module) {
+    if (isReactRefreshBoundary(module.exports)) {
+        registerExportsForReactRefresh(module);
+        if (module.hot) {
+            module.hot.dispose(function(data) {
+                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
+                data.prevExports = module.exports;
+            });
+            module.hot.accept(function(getParents) {
+                var prevExports = module.hot.data.prevExports;
+                var nextExports = module.exports; // Since we just executed the code for it, it's possible
+                // that the new exports make it ineligible for being a boundary.
+                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports); // It can also become ineligible if its exports are incompatible
+                // with the previous exports.
+                // For example, if you add/remove/change exports, we'll want
+                // to re-execute the importing modules, and force those components
+                // to re-render. Similarly, if you convert a class component
+                // to a function, we want to invalidate the boundary.
+                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+                if (isNoLongerABoundary || didInvalidate) {
+                    // We'll be conservative. The only case in which we won't do a full
+                    // reload is if all parent modules are also refresh boundaries.
+                    // In that case we'll add them to the current queue.
+                    var parents = getParents();
+                    if (parents.length === 0) {
+                        // Looks like we bubbled to the root. Can't recover from that.
+                        window.location.reload();
+                        return;
+                    }
+                    return parents;
+                }
+                enqueueUpdate();
+            });
+        }
+    }
+};
+function isReactRefreshBoundary(exports) {
+    if (Refresh.isLikelyComponentType(exports)) return true;
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    return false;
+    var hasExports = false;
+    var areAllExportsComponents = true;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        hasExports = true;
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
+        return false;
+        var exportValue = exports[key];
+        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
+    }
+    return hasExports && areAllExportsComponents;
+}
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+    var prevSignature = getRefreshBoundarySignature(prevExports);
+    var nextSignature = getRefreshBoundarySignature(nextExports);
+    if (prevSignature.length !== nextSignature.length) return true;
+    for(var i = 0; i < nextSignature.length; i++){
+        if (prevSignature[i] !== nextSignature[i]) return true;
+    }
+    return false;
+} // When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+    var signature = [];
+    signature.push(Refresh.getFamilyByType(exports));
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        if (key === '__esModule') continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        signature.push(key);
+        signature.push(Refresh.getFamilyByType(exportValue));
+    }
+    return signature;
+}
+function registerExportsForReactRefresh(module) {
+    var exports = module.exports, id = module.id;
+    Refresh.register(exports, id + ' %exports%');
+    if (exports == null || typeof exports !== 'object') // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+    let isESM = '__esModule' in exports;
+    for(var key in exports){
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        Refresh.register(exportValue, id + ' %exports% ' + key);
+    }
+}
+
+},{"react-refresh/runtime":"786KC"}],"jnUkf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 const showInput = (myState, nameInput)=>{
@@ -34883,7 +32800,6425 @@ const showInput = (myState, nameInput)=>{
 };
 exports.default = showInput;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fOVVj":[function() {},{}],"kEgDc":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"89ycD":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$eb26 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$eb26.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _inputText = require("../buttons/input-text");
+var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
+const ChooseTown = ({ townName , setTownName  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-town-name",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quel est le nom de votre commune ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+                lineNumber: 7,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
+                type: "text",
+                value: townName,
+                onChange: (e)=>{
+                    setTownName(e.target.value);
+                }
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+                lineNumber: 9,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+        lineNumber: 6,
+        columnNumber: 9
+    }, undefined);
+};
+_c = ChooseTown;
+exports.default = ChooseTown;
+var _c;
+$RefreshReg$(_c, "ChooseTown");
+
+  $parcel$ReactRefreshHelpers$eb26.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/input-text":"cEoUW","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cEoUW":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$eac1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$eac1.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const InputText = ({ type , value , name , placeholder , onChange  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-input-text",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+            type: type,
+            value: value,
+            name: name,
+            placeholder: placeholder,
+            onChange: onChange
+        }, void 0, false, {
+            fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
+            lineNumber: 6,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
+        lineNumber: 5,
+        columnNumber: 9
+    }, undefined);
+};
+_c = InputText;
+exports.default = InputText;
+var _c;
+$RefreshReg$(_c, "InputText");
+
+  $parcel$ReactRefreshHelpers$eac1.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8MgvR":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$a15d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$a15d.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+//React import
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _colorsPickerWrapper = require("../../layout/colors-picker-wrapper");
+var _colorsPickerWrapperDefault = parcelHelpers.interopDefault(_colorsPickerWrapper);
+const ChooseDominantColor = ({ themeColors , setColor , color , colorsPickerValue , setColorsPickerValue  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-dominant-color",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quelle est la couleur dominante de votre charte graphique ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                lineNumber: 9,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
+                className: "colors",
+                children: [
+                    themeColors.map((themeColor)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                            type: "button",
+                            style: themeColor.hexadecimalColor === color ? {
+                                background: themeColor.hexadecimalColor,
+                                height: "4.3rem",
+                                width: "4.3rem"
+                            } : {
+                                background: themeColor.hexadecimalColor,
+                                opacity: 0.45
+                            },
+                            onClick: (e)=>setColor(themeColor.hexadecimalColor)
+                        }, themeColor.value, false, {
+                            fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                            lineNumber: 12,
+                            columnNumber: 9
+                        }, undefined)
+                    ),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_colorsPickerWrapperDefault.default, {
+                        setColor: setColor,
+                        color: color,
+                        colorsPickerValue: colorsPickerValue,
+                        setColorsPickerValue: setColorsPickerValue
+                    }, void 0, false, {
+                        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                        lineNumber: 27,
+                        columnNumber: 7
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+                lineNumber: 10,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/choose-dominant-colors.jsx",
+        lineNumber: 8,
+        columnNumber: 5
+    }, undefined);
+};
+_c = ChooseDominantColor;
+exports.default = ChooseDominantColor;
+var _c;
+$RefreshReg$(_c, "ChooseDominantColor");
+
+  $parcel$ReactRefreshHelpers$a15d.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../layout/colors-picker-wrapper":"iMl4K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iMl4K":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$8333 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$8333.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const ColorsPickerWrapper = ({ color , setColor , colorsPickerValue , setColorsPickerValue  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+            type: "color",
+            className: "colors-picker",
+            style: color === colorsPickerValue ? {
+                color: color
+            } : {
+                color: colorsPickerValue,
+                opacity: 0.45
+            },
+            value: colorsPickerValue,
+            onChange: (e)=>{
+                setColor(e.target.value);
+                setColorsPickerValue(e.target.value);
+            }
+        }, void 0, false, {
+            fileName: "src/components/layout/colors-picker-wrapper.jsx",
+            lineNumber: 6,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false);
+};
+_c = ColorsPickerWrapper;
+exports.default = ColorsPickerWrapper;
+var _c;
+$RefreshReg$(_c, "ColorsPickerWrapper");
+
+  $parcel$ReactRefreshHelpers$8333.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"hKyDF":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$3164 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$3164.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+//React import
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+//Component import
+var _checkboxes = require("../buttons/checkboxes");
+var _checkboxesDefault = parcelHelpers.interopDefault(_checkboxes);
+var _config = require("../../../config/config");
+const ChooseSignageEquipment = ({ onChangeAction , selectedSignageEquipment  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-signal-fonction",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quelles fonctions de signal\xe9tique souhaitez-vous implanter ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
+                lineNumber: 12,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_checkboxesDefault.default, {
+                items: _config.signageEquipment,
+                onChangeAction: onChangeAction,
+                selectedItems: selectedSignageEquipment
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
+                lineNumber: 13,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/choose-signage-equipment.jsx",
+        lineNumber: 11,
+        columnNumber: 5
+    }, undefined);
+};
+_c = ChooseSignageEquipment;
+exports.default = ChooseSignageEquipment;
+var _c;
+$RefreshReg$(_c, "ChooseSignageEquipment");
+
+  $parcel$ReactRefreshHelpers$3164.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/checkboxes":"exstm","../../../config/config":"a6ccA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"exstm":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$3156 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$3156.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+//React import
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _s = $RefreshSig$();
+const Checkboxes = ({ items , onChangeAction , selectedItems =[]  })=>{
+    _s();
+    const [checkboxesState, setCheckboxesState] = _react.useState(items.map((item)=>selectedItems.some((selectedItem)=>selectedItem.value === item.value
+        )
+    ));
+    _react.useEffect(()=>{
+        onChangeAction(items.filter((item, index)=>checkboxesState[index]
+        ));
+    }, [
+        checkboxesState
+    ]);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-checkboxes",
+        children: items.map((item, index)=>{
+            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                children: [
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                        type: "checkbox",
+                        id: item.value,
+                        name: item.value,
+                        value: item.value,
+                        defaultChecked: checkboxesState[index],
+                        onChange: (e)=>{
+                            setCheckboxesState((oldCheckboxesState)=>{
+                                const newCheckboxesState = [
+                                    ...oldCheckboxesState
+                                ];
+                                newCheckboxesState[index] = e.target.checked;
+                                return newCheckboxesState;
+                            });
+                        }
+                    }, void 0, false, {
+                        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
+                        lineNumber: 19,
+                        columnNumber: 13
+                    }, undefined),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("label", {
+                        htmlFor: item.value,
+                        children: item.label
+                    }, void 0, false, {
+                        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
+                        lineNumber: 33,
+                        columnNumber: 13
+                    }, undefined)
+                ]
+            }, item.value, true, {
+                fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
+                lineNumber: 18,
+                columnNumber: 11
+            }, undefined);
+        })
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/buttons/checkboxes.jsx",
+        lineNumber: 15,
+        columnNumber: 5
+    }, undefined);
+};
+_s(Checkboxes, "65DaY5cYwuy5KulZ/KInE7BYeH4=");
+_c = Checkboxes;
+exports.default = Checkboxes;
+var _c;
+$RefreshReg$(_c, "Checkboxes");
+
+  $parcel$ReactRefreshHelpers$3156.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"a6ccA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "vectaryModels", ()=>vectaryModels
+);
+parcelHelpers.export(exports, "colorsDarkScheme", ()=>colorsDarkScheme
+);
+parcelHelpers.export(exports, "colorsLightScheme", ()=>colorsLightScheme
+);
+parcelHelpers.export(exports, "themeColors", ()=>themeColors
+);
+parcelHelpers.export(exports, "signageEquipment", ()=>signageEquipment
+);
+parcelHelpers.export(exports, "productQuantity", ()=>productQuantity
+);
+parcelHelpers.export(exports, "mailOfKingBoss", ()=>mailOfKingBoss
+);
+const vectaryModels = [
+    {
+        label: "Panneau directionnel",
+        name: "directionnalSign",
+        value: "directionnalSign",
+        id: "e23752d1-c5e8-4788-b719-8a913477dc6c"
+    },
+    {
+        label: "Panneau 2000",
+        name: "panel2000",
+        value: "panel2000",
+        id: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
+    },
+    {
+        label: "Panneau 3000",
+        name: "panel3000",
+        value: "panel3000",
+        id: "d7e90749-acb2-4861-bb20-08881e0777ce"
+    },
+    {
+        label: "Manchon text",
+        name: "sleeveText",
+        value: "sleeveText",
+        id: "57cf45e9-d355-4463-af66-f08c72993784"
+    }
+];
+const colorsDarkScheme = {
+    COULEUR_SECONDAIRE0000: "#3E844A",
+    COULEUR_PANNEAU: "#000000",
+    COULEUR_DOMINANTE: "#787878"
+};
+const colorsLightScheme = {
+    COULEUR_SECONDAIRE0000: "#FF1A1A",
+    COULEUR_PANNEAU: "#FFFFFF",
+    COULEUR_DOMINANTE: "#FFFFFF"
+};
+const themeColors = [
+    {
+        value: "blueOfAzure",
+        hexadecimalColor: "#0082EA",
+        label: "bleu d'azure"
+    },
+    {
+        value: "coblatBlue",
+        hexadecimalColor: "#44479F",
+        label: "blue cobalt"
+    },
+    {
+        value: "slateGrey",
+        hexadecimalColor: "#646971",
+        label: "gris ardoise"
+    },
+    {
+        value: "pomegranateRed",
+        hexadecimalColor: "#F71F4C",
+        label: "rouge grenade"
+    },
+    {
+        value: "poppyRed",
+        hexadecimalColor: "#E00012",
+        label: "rouge coquelicot"
+    },
+    {
+        value: "reddishOrange",
+        hexadecimalColor: "#C14C25",
+        label: "orange roux"
+    },
+    {
+        value: "mustardYellow",
+        hexadecimalColor: "#EF850B",
+        label: "jaune moutarde"
+    }
+];
+const signageEquipment = [
+    {
+        value: "option1",
+        label: "Effet de porte aux entrées de la commune",
+        price: 2400,
+        modelId: "e23752d1-c5e8-4788-b719-8a913477dc6c"
+    },
+    {
+        value: "option2",
+        label: "Orientation des véhicules vers les ressources",
+        price: 980,
+        modelId: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
+    },
+    {
+        value: "option3",
+        label: "Identification des parkings",
+        price: 1200,
+        modelId: "d7e90749-acb2-4861-bb20-08881e0777ce"
+    },
+    {
+        value: "option4",
+        label: "Information sur les ressources du centre-ville",
+        price: 4800,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+    },
+    {
+        value: "option5",
+        label: "Orientation des piétons vers les ressources",
+        price: 3200,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+    },
+    {
+        value: "option6",
+        label: "Interprétation historique des ressources",
+        price: 240,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+    }
+];
+const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {
+    return ++i;
+});
+const mailOfKingBoss = [];
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f56lm":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$7930 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$7930.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _vectaryItems = require("../vectary-items/vectary-items");
+var _vectaryItemsDefault = parcelHelpers.interopDefault(_vectaryItems);
+const SignalSystem = ({ myPicto , setMyPicto , setIsLoaded , townName , models , currentColor , pictureSleeve , currentAnim  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-signal-system",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: [
+                    "Le nouveau syst\xe8me signal\xe9tique de ",
+                    townName
+                ]
+            }, void 0, true, {
+                fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
+                lineNumber: 8,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_vectaryItemsDefault.default, {
+                picto: myPicto,
+                setPicto: setMyPicto,
+                setIsLoaded: setIsLoaded,
+                models: models,
+                dominantColor: currentColor,
+                pictureSleeve: pictureSleeve
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
+                lineNumber: 9,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/signal-system.jsx",
+        lineNumber: 7,
+        columnNumber: 9
+    }, undefined);
+};
+_c = SignalSystem;
+exports.default = SignalSystem;
+var _c;
+$RefreshReg$(_c, "SignalSystem");
+
+  $parcel$ReactRefreshHelpers$7930.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../vectary-items/vectary-items":"3CApp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3CApp":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$9dc5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$9dc5.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+//React import
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+//Lib import
+var _api = require("../../../lib/api");
+//Component import
+var _iframe = require("./iframe");
+var _iframeDefault = parcelHelpers.interopDefault(_iframe);
+//Logic import
+var _updateMaterial = require("../../../functions/update-material");
+var _updateMaterialDefault = parcelHelpers.interopDefault(_updateMaterial);
+var _updateColor2 = require("../../../functions/update-color-2");
+var _updateColor2Default = parcelHelpers.interopDefault(_updateColor2);
+var _s = $RefreshSig$();
+const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor , pictureSleeve  })=>{
+    _s();
+    const viewerModels = [];
+    _react.useEffect(()=>{
+        const run = async ()=>{
+            setPicto([]);
+            setIsLoaded("");
+            models.map(async (model, index)=>{
+                const viewerApi = new _api.VctrApi("Model_" + model.modelId);
+                viewerModels.push(viewerApi);
+                await viewerApi.init();
+                await viewerApi.setPositionAbsolute("Camera", [
+                    4,
+                    2,
+                    7
+                ]);
+                // updateMaterial(dominantColor, viewerApi, pictureSleeve);
+                _updateColor2Default.default(viewerApi, pictureSleeve);
+                if (viewerApi.isReady === true) {
+                    const waitForScreen = async ()=>{
+                        const screenshot = await viewerApi.takeScreenshot();
+                        setPicto((oldScreen)=>{
+                            const newScreen = [
+                                ...oldScreen
+                            ];
+                            newScreen[index] = screenshot;
+                            return newScreen;
+                        });
+                    };
+                    const timeForScreen = ()=>{
+                        setTimeout(waitForScreen, 1000);
+                        setTimeout(setIsLoaded("Calculer le coût"), 2000);
+                    };
+                    timeForScreen();
+                }
+            });
+        };
+        run();
+    }, []);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-iframe",
+        children: models.map((model, index)=>{
+            return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactDefault.default.Fragment, {
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
+                    id: model.modelId,
+                    nameModel: model.label
+                }, model.modelId + index, false, {
+                    fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
+                    lineNumber: 62,
+                    columnNumber: 29
+                }, undefined)
+            }, model.modelId + index, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
+                lineNumber: 61,
+                columnNumber: 25
+            }, undefined);
+        })
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
+        lineNumber: 57,
+        columnNumber: 9
+    }, undefined);
+};
+_s(VectaryItems, "OD7bBpZva5O2jO+Puf00hKivP7c=");
+_c = VectaryItems;
+exports.default = VectaryItems;
+var _c;
+$RefreshReg$(_c, "VectaryItems");
+
+  $parcel$ReactRefreshHelpers$9dc5.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../lib/api":"6mCQj","./iframe":"3y0ds","../../../functions/update-material":"da8K6","../../../functions/update-color-2":"3DSfZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mCQj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "VctrApi", ()=>_Vectary$VctrApi
+);
+/*!
+ * Copyright (c) 2022 by Vectary. All rights reserved.
+ * Rev 13d1a4d8a9f360c894690e4d6df396af2f33ed23
+ * @copyright
+ */ var Vectary = function(e1) {
+    var t1 = {};
+    function a(i) {
+        if (t1[i]) return t1[i].exports;
+        var E = t1[i] = {
+            i: i,
+            l: !1,
+            exports: {}
+        };
+        return e1[i].call(E.exports, E, E.exports, a), E.l = !0, E.exports;
+    }
+    return a.m = e1, a.c = t1, a.d = function(e, t, i) {
+        a.o(e, t) || Object.defineProperty(e, t, {
+            enumerable: !0,
+            get: i
+        });
+    }, a.r = function(e) {
+        "undefined" !== typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, {
+            value: "Module"
+        }), Object.defineProperty(e, "__esModule", {
+            value: !0
+        });
+    }, a.t = function(e, t2) {
+        if (1 & t2 && (e = a(e)), 8 & t2) return e;
+        if (4 & t2 && "object" === typeof e && e && e.__esModule) return e;
+        var i = Object.create(null);
+        if (a.r(i), Object.defineProperty(i, "default", {
+            enumerable: !0,
+            value: e
+        }), 2 & t2 && "string" != typeof e) for(var E in e)a.d(i, E, (function(t) {
+            return e[t];
+        }).bind(null, E));
+        return i;
+    }, a.n = function(e) {
+        var t = e && e.__esModule ? function t() {
+            return e["default"];
+        } : function t() {
+            return e;
+        };
+        return a.d(t, "a", t), t;
+    }, a.o = function(e, t) {
+        return Object.prototype.hasOwnProperty.call(e, t);
+    }, a.p = "/", a(a.s = "./src/viewer-api/scripts/vctr-api.ts");
+}({
+    "./src/_common_/types.ts": function(e2, t, a) {
+        "use strict";
+        var i, E, s, n;
+        a.d(t, "b", function() {
+            return i;
+        }), a.d(t, "a", function() {
+            return E;
+        }), a.d(t, "d", function() {
+            return s;
+        }), a.d(t, "c", function() {
+            return n;
+        }), function(e) {
+            e[e["ERROR"] = 0] = "ERROR", e[e["READY"] = 1] = "READY", e[e["GET_OBJECTS"] = 2] = "GET_OBJECTS", e[e["GET_OBJECT_BY_NAME"] = 3] = "GET_OBJECT_BY_NAME", e[e["GET_OBJECTS_BY_NAME"] = 4] = "GET_OBJECTS_BY_NAME", e[e["GET_MESHES"] = 5] = "GET_MESHES", e[e["GET_MESH_BY_NAME"] = 6] = "GET_MESH_BY_NAME", e[e["GET_MESHES_BY_NAME"] = 7] = "GET_MESHES_BY_NAME", e[e["GET_HIT_OBJECTS"] = 8] = "GET_HIT_OBJECTS", e[e["GET_VISIBILITY"] = 9] = "GET_VISIBILITY", e[e["SET_VISIBILITY"] = 10] = "SET_VISIBILITY", e[e["GET_POSITION"] = 11] = "GET_POSITION", e[e["SET_POSITION_REL"] = 12] = "SET_POSITION_REL", e[e["SET_POSITION_ABS"] = 13] = "SET_POSITION_ABS", e[e["GET_ROTATION"] = 14] = "GET_ROTATION", e[e["SET_ROTATION_REL"] = 15] = "SET_ROTATION_REL", e[e["SET_ROTATION_ABS"] = 16] = "SET_ROTATION_ABS", e[e["GET_SCALE"] = 17] = "GET_SCALE", e[e["SET_SCALE_REL"] = 18] = "SET_SCALE_REL", e[e["SET_SCALE_ABS"] = 19] = "SET_SCALE_ABS", e[e["GET_MATERIALS"] = 20] = "GET_MATERIALS", e[e["SET_MATERIAL"] = 21] = "SET_MATERIAL", e[e["GET_MATERIALS_BY_NAME"] = 22] = "GET_MATERIALS_BY_NAME", e[e["GET_MATERIAL_BY_NAME"] = 23] = "GET_MATERIAL_BY_NAME", e[e["GET_MATERIAL_PROPS"] = 24] = "GET_MATERIAL_PROPS", e[e["CREATE_MATERIAL"] = 25] = "CREATE_MATERIAL", e[e["UPDATE_MATERIAL"] = 26] = "UPDATE_MATERIAL", e[e["GET_BACKGROUND"] = 27] = "GET_BACKGROUND", e[e["SET_BACKGROUND"] = 28] = "SET_BACKGROUND", e[e["GET_EXPOSURE"] = 29] = "GET_EXPOSURE", e[e["SET_EXPOSURE"] = 30] = "SET_EXPOSURE", e[e["GET_ENVIRONMENT_MAP"] = 31] = "GET_ENVIRONMENT_MAP", e[e["SET_ENVIRONMENT_MAP"] = 32] = "SET_ENVIRONMENT_MAP", e[e["ROTATE_ENVIRONMENT_MAP"] = 33] = "ROTATE_ENVIRONMENT_MAP", e[e["GET_CAMERAS"] = 34] = "GET_CAMERAS", e[e["GET_CAMERAS_BY_NAME"] = 35] = "GET_CAMERAS_BY_NAME", e[e["GET_CAMERA_BY_NAME"] = 36] = "GET_CAMERA_BY_NAME", e[e["SWITCH_VIEW"] = 37] = "SWITCH_VIEW", e[e["SWITCH_VIEW_ASYNC"] = 38] = "SWITCH_VIEW_ASYNC", e[e["MOVE_VIEW"] = 39] = "MOVE_VIEW", e[e["ROTATE_VIEW"] = 40] = "ROTATE_VIEW", e[e["ZOOM_VIEW"] = 41] = "ZOOM_VIEW", e[e["GET_FOV"] = 42] = "GET_FOV", e[e["SET_FOV"] = 43] = "SET_FOV", e[e["TAKE_SCREENSHOT"] = 44] = "TAKE_SCREENSHOT", e[e["ENABLE_ANNOTATIONS"] = 45] = "ENABLE_ANNOTATIONS", e[e["GET_ANNOTATIONS"] = 46] = "GET_ANNOTATIONS", e[e["GET_ANNOTATION_BY_ID"] = 47] = "GET_ANNOTATION_BY_ID", e[e["ADD_ANNOTATION"] = 48] = "ADD_ANNOTATION", e[e["REMOVE_ANNOTATION_BY_ID"] = 49] = "REMOVE_ANNOTATION_BY_ID", e[e["EXPAND_ANNOTATIONS_BY_ID"] = 50] = "EXPAND_ANNOTATIONS_BY_ID", e[e["HIGHLIGHT_MESHES_BY_NAME"] = 51] = "HIGHLIGHT_MESHES_BY_NAME", e[e["UNHIGHLIGHT_MESHES_BY_NAME"] = 52] = "UNHIGHLIGHT_MESHES_BY_NAME", e[e["SET_CANVAS_STATE"] = 53] = "SET_CANVAS_STATE", e[e["GET_VIEW_STATE"] = 54] = "GET_VIEW_STATE", e[e["APPLY_VIEW_STATE"] = 55] = "APPLY_VIEW_STATE", e[e["SEND_EVENT"] = 56] = "SEND_EVENT", e[e["PLAY"] = 57] = "PLAY", e[e["LOAD"] = 58] = "LOAD", e[e["SET_UUID_AR"] = 59] = "SET_UUID_AR", e[e["TRIGGER_AR_CLICK"] = 60] = "TRIGGER_AR_CLICK", e[e["GET_2D_COORDINATES"] = 61] = "GET_2D_COORDINATES", e[e["GET_CURRENT_USER"] = 62] = "GET_CURRENT_USER", e[e["DID_RENDER_LAST_FRAME"] = 63] = "DID_RENDER_LAST_FRAME", e[e["ADD_EVENT_LISTENER"] = 64] = "ADD_EVENT_LISTENER", e[e["REMOVE_EVENT_LISTENER"] = 65] = "REMOVE_EVENT_LISTENER", e[e["UPDATE_EVENT"] = 66] = "UPDATE_EVENT", e[e["TAKE_FIXED_SIZE_SCREENSHOT"] = 67] = "TAKE_FIXED_SIZE_SCREENSHOT", e[e["ADD_COMPLEX_ANNOTATION"] = 68] = "ADD_COMPLEX_ANNOTATION", e[e["SET_ANNOTATION_VISIBILITY"] = 69] = "SET_ANNOTATION_VISIBILITY";
+        }(i || (i = {})), function(e) {
+            e["ORBIT_CONTROLS_STATE_CHANGE"] = "ORBIT_CONTROLS_STATE_CHANGE", e["MOUSE_MOVE"] = "MOUSE_MOVE", e["MOUSE_CLICK"] = "MOUSE_CLICK", e["MOUSE_DOWN"] = "MOUSE_DOWN";
+        }(E || (E = {})), function(e) {
+            e["NONE"] = "NONE", e["ROTATE"] = "ROTATE", e["DOLLY"] = "DOLLY", e["PAN"] = "PAN", e["TOUCH_ROTATE"] = "TOUCH_ROTATE", e["TOUCH_PAN"] = "TOUCH_PAN", e["TOUCH_DOLLY_PAN"] = "TOUCH_DOLLY_PAN", e["TOUCH_DOLLY_ROTATE"] = "TOUCH_DOLLY_ROTATE";
+        }(s || (s = {})), function(e) {
+            e["AUTO"] = "auto", e["ENGLISH"] = "en", e["SPANISH"] = "es", e["GERMAN"] = "de", e["FRENCH"] = "fr", e["ITALIAN"] = "it", e["RUSSIAN"] = "ru";
+        }(n || (n = {}));
+    },
+    "./src/viewer-api/scripts/vctr-api.ts": function(e3, t3, a1) {
+        "use strict";
+        a1.r(t3), a1.d(t3, "VctrApi", function() {
+            return s1;
+        });
+        var i1 = a1("./src/_common_/types.ts"), E1 = function(e4, t4, a2, i) {
+            function E(e) {
+                return e instanceof a2 ? e : new a2(function(t) {
+                    t(e);
+                });
+            }
+            return new (a2 || (a2 = Promise))(function(a, s) {
+                function n(e) {
+                    try {
+                        _(i.next(e));
+                    } catch (e5) {
+                        s(e5);
+                    }
+                }
+                function r(e) {
+                    try {
+                        _(i["throw"](e));
+                    } catch (e6) {
+                        s(e6);
+                    }
+                }
+                function _(e) {
+                    e.done ? a(e.value) : E(e.value).then(n, r);
+                }
+                _((i = i.apply(e4, t4 || [])).next());
+            });
+        };
+        class s1 {
+            constructor(e, t){
+                this.isReady = !1, this.iframeMsgMap = new Map, this.eventsCallbackMap = new Map, this.id = e, this.globalErrCb = t, s1.Utils = new n1(this);
+            }
+            init() {
+                return new Promise((e, t)=>E1(this, void 0, void 0, function*() {
+                        if (this.elem = document.getElementById(this.id), !this.elem) {
+                            const a = `Element with id "${this.id}" does not exist`;
+                            return this.globalErrCb ? this.globalErrCb(a) : t(a), e();
+                        }
+                        if (this.type = "IFRAME" === this.elem.nodeName ? "iframe" : "VCTR-VIEWER" === this.elem.nodeName ? "webcomponent" : null, !this.type) {
+                            const a = `Element with id "${this.id}" is not of an appropriate type`;
+                            return this.globalErrCb ? this.globalErrCb(a) : t(a), e();
+                        }
+                        switch(this.type){
+                            case "iframe":
+                                this.initIframeMessenger();
+                            default:
+                                yield this.getReady(), e();
+                        }
+                    })
+                );
+            }
+            getReady() {
+                return new Promise((e7, t)=>{
+                    const a = this.getRandomNum(), E = self.setInterval(()=>{
+                        if ("iframe" === this.type) this.iframeMsgMap.set(a, {
+                            err: null,
+                            succ: null
+                        }), this.elem.contentWindow.postMessage({
+                            id: this.id,
+                            msgId: a,
+                            method: i1["b"].READY
+                        }, "*");
+                        else {
+                            const e = !!this.elem.isReady && this.elem.isReady();
+                            e && (this.isReady = !0);
+                        }
+                        this.isReady && (self.clearInterval(E), e7());
+                    }, 500);
+                });
+            }
+            getObjects() {
+                return this.apiCallInternal(i1["b"].GET_OBJECTS);
+            }
+            getMeshes() {
+                return this.apiCallInternal(i1["b"].GET_MESHES);
+            }
+            getObjectsByName(e) {
+                return this.apiCallInternal(i1["b"].GET_OBJECTS_BY_NAME, {
+                    name: e
+                });
+            }
+            getObjectByName(e) {
+                return this.apiCallInternal(i1["b"].GET_OBJECT_BY_NAME, {
+                    name: e
+                });
+            }
+            getMeshesByName(e) {
+                return this.apiCallInternal(i1["b"].GET_MESHES_BY_NAME, {
+                    name: e
+                });
+            }
+            getMeshByName(e) {
+                return this.apiCallInternal(i1["b"].GET_MESH_BY_NAME, {
+                    name: e
+                });
+            }
+            getHitObjects(e = !1) {
+                return this.apiCallInternal(i1["b"].GET_HIT_OBJECTS, {
+                    firstHitOnly: e
+                });
+            }
+            get2DCoordinates(e) {
+                return this.apiCallInternal(i1["b"].GET_2D_COORDINATES, {
+                    name: e
+                });
+            }
+            getCameras() {
+                return this.apiCallInternal(i1["b"].GET_CAMERAS);
+            }
+            getCamerasByName(e) {
+                return this.apiCallInternal(i1["b"].GET_CAMERAS_BY_NAME, {
+                    name: e
+                });
+            }
+            getCameraByName(e) {
+                return this.apiCallInternal(i1["b"].GET_CAMERA_BY_NAME, {
+                    name: e
+                });
+            }
+            switchView(e) {
+                return this.apiCallInternal(i1["b"].SWITCH_VIEW, {
+                    name: e
+                });
+            }
+            switchViewAsync(e) {
+                return this.apiCallInternal(i1["b"].SWITCH_VIEW_ASYNC, {
+                    name: e
+                });
+            }
+            moveView(e) {
+                return this.apiCallInternal(i1["b"].MOVE_VIEW, {
+                    position: e
+                });
+            }
+            rotateView(e) {
+                return this.apiCallInternal(i1["b"].ROTATE_VIEW, {
+                    rotation: e
+                });
+            }
+            zoomView(e) {
+                return this.apiCallInternal(i1["b"].ZOOM_VIEW, {
+                    zoom: e
+                });
+            }
+            getVisibility(e) {
+                return this.apiCallInternal(i1["b"].GET_VISIBILITY, {
+                    name: e
+                });
+            }
+            setVisibility(e, t = !0, a = !1) {
+                return this.apiCallInternal(i1["b"].SET_VISIBILITY, {
+                    names: e,
+                    visible: t,
+                    isExclusive: a
+                });
+            }
+            getMaterials() {
+                return this.apiCallInternal(i1["b"].GET_MATERIALS);
+            }
+            createMaterial(e, t) {
+                return this.apiCallInternal(i1["b"].CREATE_MATERIAL, {
+                    material: e,
+                    cloneFromMatName: t
+                });
+            }
+            updateMaterial(e, t, a = !0) {
+                return this.apiCallInternal(i1["b"].UPDATE_MATERIAL, {
+                    name: e,
+                    props: t,
+                    withPrefetch: a
+                });
+            }
+            setMaterial(e, t) {
+                return this.apiCallInternal(i1["b"].SET_MATERIAL, {
+                    objectName: e,
+                    materialName: t
+                });
+            }
+            getMaterialsByName(e) {
+                return this.apiCallInternal(i1["b"].GET_MATERIALS_BY_NAME, {
+                    name: e
+                });
+            }
+            getMaterialByName(e) {
+                return this.apiCallInternal(i1["b"].GET_MATERIAL_BY_NAME, {
+                    name: e
+                });
+            }
+            getMaterialProperties(e) {
+                return this.apiCallInternal(i1["b"].GET_MATERIAL_PROPS, {
+                    name: e
+                });
+            }
+            getBackground() {
+                return this.apiCallInternal(i1["b"].GET_BACKGROUND);
+            }
+            setBackground(e) {
+                return this.apiCallInternal(i1["b"].SET_BACKGROUND, {
+                    background: e
+                });
+            }
+            enableAnnotations(e = !0) {
+                return this.apiCallInternal(i1["b"].ENABLE_ANNOTATIONS, {
+                    enable: e
+                });
+            }
+            getAnnotations() {
+                return this.apiCallInternal(i1["b"].GET_ANNOTATIONS);
+            }
+            getAnnotationById(e) {
+                return this.apiCallInternal(i1["b"].GET_ANNOTATION_BY_ID, {
+                    id: e
+                });
+            }
+            addAnnotation(e) {
+                return this.apiCallInternal(i1["b"].ADD_ANNOTATION, {
+                    annotationConf: e
+                });
+            }
+            addComplexAnnotation(e) {
+                return this.apiCallInternal(i1["b"].ADD_COMPLEX_ANNOTATION, {
+                    annotationConf: e
+                });
+            }
+            removeAnnotationById(e) {
+                return this.apiCallInternal(i1["b"].REMOVE_ANNOTATION_BY_ID, {
+                    id: e
+                });
+            }
+            setAnnotationVisibility(e, t) {
+                return this.apiCallInternal(i1["b"].SET_ANNOTATION_VISIBILITY, {
+                    id: e,
+                    visibility: t
+                });
+            }
+            expandAnnotationsById(e, t, a = !0) {
+                return this.apiCallInternal(i1["b"].EXPAND_ANNOTATIONS_BY_ID, {
+                    ids: e,
+                    expand: t,
+                    isExclusive: a
+                });
+            }
+            getPosition(e) {
+                return this.apiCallInternal(i1["b"].GET_POSITION, {
+                    name: e
+                });
+            }
+            setPositionRelative(e, t) {
+                return this.apiCallInternal(i1["b"].SET_POSITION_REL, {
+                    name: e,
+                    position: t
+                });
+            }
+            setPositionAbsolute(e, t) {
+                return this.apiCallInternal(i1["b"].SET_POSITION_ABS, {
+                    name: e,
+                    position: t
+                });
+            }
+            getRotation(e) {
+                return this.apiCallInternal(i1["b"].GET_ROTATION, {
+                    name: e
+                });
+            }
+            setRotationRelative(e, t, a = "XYZ") {
+                return this.apiCallInternal(i1["b"].SET_ROTATION_REL, {
+                    name: e,
+                    rotation: t,
+                    order: a
+                });
+            }
+            setRotationAbsolute(e, t, a = "XYZ") {
+                return this.apiCallInternal(i1["b"].SET_ROTATION_ABS, {
+                    name: e,
+                    rotation: t,
+                    order: a
+                });
+            }
+            getScale(e) {
+                return this.apiCallInternal(i1["b"].GET_SCALE, {
+                    name: e
+                });
+            }
+            setScaleRelative(e, t) {
+                return this.apiCallInternal(i1["b"].SET_SCALE_REL, {
+                    name: e,
+                    scale: t
+                });
+            }
+            setScaleAbsolute(e, t) {
+                return this.apiCallInternal(i1["b"].SET_SCALE_ABS, {
+                    name: e,
+                    scale: t
+                });
+            }
+            highlightMeshesByName(e, t = "#ffff00", a = 1, E = !1) {
+                return this.apiCallInternal(i1["b"].HIGHLIGHT_MESHES_BY_NAME, {
+                    names: e,
+                    color: t,
+                    intensity: a,
+                    isExclusive: E
+                });
+            }
+            unhighlightMeshesByName(e) {
+                return this.apiCallInternal(i1["b"].UNHIGHLIGHT_MESHES_BY_NAME, {
+                    names: e
+                });
+            }
+            takeScreenshot(e = 1, t) {
+                return this.apiCallInternal(i1["b"].TAKE_SCREENSHOT, {
+                    scale: e,
+                    scissor: t
+                });
+            }
+            takeFixedSizedScreenshot(e) {
+                return this.apiCallInternal(i1["b"].TAKE_FIXED_SIZE_SCREENSHOT, {
+                    dimension: e
+                });
+            }
+            getViewState() {
+                return this.apiCallInternal(i1["b"].GET_VIEW_STATE);
+            }
+            applyViewState(e) {
+                return this.apiCallInternal(i1["b"].APPLY_VIEW_STATE, {
+                    state: e
+                });
+            }
+            getExposure() {
+                return this.apiCallInternal(i1["b"].GET_EXPOSURE);
+            }
+            setExposure(e) {
+                return this.apiCallInternal(i1["b"].SET_EXPOSURE, {
+                    exposure: e
+                });
+            }
+            getEnvironmentMap() {
+                return this.apiCallInternal(i1["b"].GET_ENVIRONMENT_MAP);
+            }
+            setEnvironmentMap(e) {
+                return this.apiCallInternal(i1["b"].SET_ENVIRONMENT_MAP, {
+                    envMap: e
+                });
+            }
+            rotateEnvironmentMap(e) {
+                return this.apiCallInternal(i1["b"].ROTATE_ENVIRONMENT_MAP, {
+                    rotation: e
+                });
+            }
+            getFOV() {
+                return this.apiCallInternal(i1["b"].GET_FOV);
+            }
+            setFOV(e) {
+                return this.apiCallInternal(i1["b"].SET_FOV, {
+                    fov: e
+                });
+            }
+            sendEvent(e, t, a, E, s) {
+                return this.apiCallInternal(i1["b"].SEND_EVENT, {
+                    event: e,
+                    x: t,
+                    y: a,
+                    maxX: E,
+                    maxY: s
+                });
+            }
+            play(e, t) {
+                return this.apiCallInternal(i1["b"].PLAY, {
+                    animIdx: e,
+                    timeScale: t
+                });
+            }
+            load() {
+                return this.apiCallInternal(i1["b"].LOAD);
+            }
+            setUUIDAr(e) {
+                return this.apiCallInternal(i1["b"].SET_UUID_AR, {
+                    uuid: e
+                });
+            }
+            triggerARClick() {
+                return this.apiCallInternal(i1["b"].TRIGGER_AR_CLICK);
+            }
+            setCanvasState(e, t) {
+                return this.apiCallInternal(i1["b"].SET_CANVAS_STATE, {
+                    className: e,
+                    state: t
+                });
+            }
+            getCurrentUser() {
+                return this.apiCallInternal(i1["b"].GET_CURRENT_USER);
+            }
+            didRenderLastFrame() {
+                return this.apiCallInternal(i1["b"].DID_RENDER_LAST_FRAME);
+            }
+            addEventListener(e, t) {
+                return this.eventsCallbackMap.set(e, t), this.apiCallInternal(i1["b"].ADD_EVENT_LISTENER, {
+                    eventType: e
+                });
+            }
+            removeEventListener(e) {
+                return this.eventsCallbackMap.delete(e), this.apiCallInternal(i1["b"].REMOVE_EVENT_LISTENER, {
+                    eventType: e
+                });
+            }
+            apiCallInternal(e8, t) {
+                return new Promise((a, s)=>E1(this, void 0, void 0, function*() {
+                        try {
+                            if ("iframe" === this.type) {
+                                const i = this.getRandomNum();
+                                this.iframeMsgMap.set(i, {
+                                    err: this.globalErrCb ? this.globalErrCb : s,
+                                    succ: a
+                                }), this.elem.contentWindow.postMessage({
+                                    id: this.id,
+                                    msgId: i,
+                                    method: e8,
+                                    data: t ? JSON.stringify(t) : void 0
+                                }, "*");
+                            } else {
+                                let E;
+                                switch(e8){
+                                    case i1["b"].GET_OBJECTS:
+                                        E = this.elem.getObjects();
+                                        break;
+                                    case i1["b"].GET_MESHES:
+                                        E = this.elem.getMeshes();
+                                        break;
+                                    case i1["b"].GET_OBJECTS_BY_NAME:
+                                        E = this.elem.getObjectsByName(t.name);
+                                        break;
+                                    case i1["b"].GET_OBJECT_BY_NAME:
+                                        E = this.elem.getObjectByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MESHES_BY_NAME:
+                                        E = this.elem.getMeshesByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MESH_BY_NAME:
+                                        E = this.elem.getMeshByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MATERIALS:
+                                        E = this.elem.getMaterials();
+                                        break;
+                                    case i1["b"].CREATE_MATERIAL:
+                                        E = this.elem.createMaterial(t.material, t.cloneFromMatName);
+                                        break;
+                                    case i1["b"].UPDATE_MATERIAL:
+                                        E = this.elem.updateMaterial(t.name, t.props, t.withPrefetch);
+                                        break;
+                                    case i1["b"].SET_MATERIAL:
+                                        E = this.elem.setMaterial(t.objectName, t.materialName);
+                                        break;
+                                    case i1["b"].GET_MATERIALS_BY_NAME:
+                                        E = this.elem.getMaterialsByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MATERIAL_BY_NAME:
+                                        E = this.elem.getMaterialByName(t.name);
+                                        break;
+                                    case i1["b"].GET_MATERIAL_PROPS:
+                                        E = this.elem.getMaterialProperties(t.name);
+                                        break;
+                                    case i1["b"].GET_HIT_OBJECTS:
+                                        E = this.elem.getHitObjects(t.firstHitOnly);
+                                        break;
+                                    case i1["b"].GET_2D_COORDINATES:
+                                        E = this.elem.get2DCoordinates(t.name);
+                                        break;
+                                    case i1["b"].GET_CAMERAS:
+                                        E = this.elem.getCameras();
+                                        break;
+                                    case i1["b"].GET_CAMERAS_BY_NAME:
+                                        E = this.elem.getCamerasByName(t.name);
+                                        break;
+                                    case i1["b"].GET_CAMERA_BY_NAME:
+                                        E = this.elem.getCameraByName(t.name);
+                                        break;
+                                    case i1["b"].SWITCH_VIEW:
+                                        E = this.elem.switchView(t.name);
+                                        break;
+                                    case i1["b"].SWITCH_VIEW_ASYNC:
+                                        E = this.elem.switchViewAsync(t.name);
+                                        break;
+                                    case i1["b"].MOVE_VIEW:
+                                        E = this.elem.moveView(t.position);
+                                        break;
+                                    case i1["b"].ROTATE_VIEW:
+                                        E = this.elem.rotateView(t.rotation);
+                                        break;
+                                    case i1["b"].ZOOM_VIEW:
+                                        E = this.elem.zoomView(t.zoom);
+                                        break;
+                                    case i1["b"].GET_VISIBILITY:
+                                        E = this.elem.getVisibility(t.name);
+                                        break;
+                                    case i1["b"].SET_VISIBILITY:
+                                        E = this.elem.setVisibility(t.names, t.visible, t.isExclusive);
+                                        break;
+                                    case i1["b"].GET_BACKGROUND:
+                                        E = this.elem.getBackground();
+                                        break;
+                                    case i1["b"].SET_BACKGROUND:
+                                        E = yield this.elem.setBackground(t.background);
+                                        break;
+                                    case i1["b"].ENABLE_ANNOTATIONS:
+                                        E = yield this.elem.enableAnnotations(t.enable);
+                                        break;
+                                    case i1["b"].GET_ANNOTATIONS:
+                                        E = yield this.elem.getAnnotations();
+                                        break;
+                                    case i1["b"].GET_ANNOTATION_BY_ID:
+                                        E = yield this.elem.getAnnotationById(t.id);
+                                        break;
+                                    case i1["b"].ADD_ANNOTATION:
+                                        E = yield this.elem.addAnnotation(t.annotationConf);
+                                        break;
+                                    case i1["b"].ADD_COMPLEX_ANNOTATION:
+                                        E = yield this.elem.addComplexAnnotation(t.annotationConf);
+                                        break;
+                                    case i1["b"].SET_ANNOTATION_VISIBILITY:
+                                        E = yield this.elem.setAnnotationVisibility(t.id, t.visibility);
+                                        break;
+                                    case i1["b"].REMOVE_ANNOTATION_BY_ID:
+                                        E = yield this.elem.removeAnnotationById(t.id);
+                                        break;
+                                    case i1["b"].EXPAND_ANNOTATIONS_BY_ID:
+                                        E = yield this.elem.expandAnnotationsById(t.ids, t.expand, t.isExclusive);
+                                        break;
+                                    case i1["b"].GET_POSITION:
+                                        E = this.elem.getPosition(t.name);
+                                        break;
+                                    case i1["b"].SET_POSITION_REL:
+                                        E = yield this.elem.setPositionRelative(t.name, t.position);
+                                        break;
+                                    case i1["b"].SET_POSITION_ABS:
+                                        E = yield this.elem.setPositionAbsolute(t.name, t.position);
+                                        break;
+                                    case i1["b"].GET_ROTATION:
+                                        E = this.elem.getRotation(t.name);
+                                        break;
+                                    case i1["b"].SET_ROTATION_REL:
+                                        E = yield this.elem.setRotationRelative(t.name, t.rotation, t.order);
+                                        break;
+                                    case i1["b"].SET_ROTATION_ABS:
+                                        E = yield this.elem.setRotationAbsolute(t.name, t.rotation, t.order);
+                                        break;
+                                    case i1["b"].GET_SCALE:
+                                        E = this.elem.getScale(t.name);
+                                        break;
+                                    case i1["b"].SET_SCALE_REL:
+                                        E = yield this.elem.setScaleRelative(t.name, t.scale);
+                                        break;
+                                    case i1["b"].SET_SCALE_ABS:
+                                        E = yield this.elem.setScaleAbsolute(t.name, t.scale);
+                                        break;
+                                    case i1["b"].HIGHLIGHT_MESHES_BY_NAME:
+                                        E = yield this.elem.highlightMeshesByName(t.names, t.color, t.intensity, t.isExclusive);
+                                        break;
+                                    case i1["b"].UNHIGHLIGHT_MESHES_BY_NAME:
+                                        E = yield this.elem.unhighlightMeshesByName(t.names);
+                                        break;
+                                    case i1["b"].TAKE_SCREENSHOT:
+                                        E = yield this.elem.takeScreenshot(t.scale, t.scissor);
+                                        break;
+                                    case i1["b"].TAKE_FIXED_SIZE_SCREENSHOT:
+                                        E = yield this.elem.takeFixedSizedScreenshot(t.dimension);
+                                        break;
+                                    case i1["b"].GET_VIEW_STATE:
+                                        E = yield this.elem.getViewState();
+                                        break;
+                                    case i1["b"].APPLY_VIEW_STATE:
+                                        E = yield this.elem.applyViewState(t.state);
+                                        break;
+                                    case i1["b"].GET_EXPOSURE:
+                                        E = yield this.elem.getExposure();
+                                        break;
+                                    case i1["b"].SET_EXPOSURE:
+                                        E = yield this.elem.setExposure(t.exposure);
+                                        break;
+                                    case i1["b"].GET_ENVIRONMENT_MAP:
+                                        E = yield this.elem.getEnvironmentMap();
+                                        break;
+                                    case i1["b"].SET_ENVIRONMENT_MAP:
+                                        E = yield this.elem.setEnvironmentMap(t.envMap);
+                                        break;
+                                    case i1["b"].ROTATE_ENVIRONMENT_MAP:
+                                        E = yield this.elem.setEnvironmentMap(t.rotation);
+                                        break;
+                                    case i1["b"].GET_FOV:
+                                        E = yield this.elem.getFOV();
+                                        break;
+                                    case i1["b"].SET_FOV:
+                                        E = yield this.elem.setFOV(t.fov);
+                                        break;
+                                    case i1["b"].SEND_EVENT:
+                                        E = yield this.elem.sendEvent(t.event, t.x, t.y, t.maxX, t.maxY);
+                                        break;
+                                    case i1["b"].PLAY:
+                                        E = yield this.elem.play(t.animIdx, t.timeScale);
+                                        break;
+                                    case i1["b"].LOAD:
+                                        E = yield this.elem.load();
+                                        break;
+                                    case i1["b"].SET_UUID_AR:
+                                        E = yield this.elem.setUUIDAr(t.uuid);
+                                        break;
+                                    case i1["b"].TRIGGER_AR_CLICK:
+                                        E = yield this.elem.triggerARClick();
+                                        break;
+                                    case i1["b"].SET_CANVAS_STATE:
+                                        E = yield this.elem.setCanvasState(t.className, t.state);
+                                        break;
+                                    case i1["b"].GET_CURRENT_USER:
+                                        E = this.elem.getCurrentUser();
+                                        break;
+                                    case i1["b"].DID_RENDER_LAST_FRAME:
+                                        E = this.elem.didRenderLastFrame();
+                                        break;
+                                    case i1["b"].ADD_EVENT_LISTENER:
+                                        E = this.elem.addApiEventListner(t.eventType, this.eventsCallbackMap.get(t.eventType));
+                                        break;
+                                    case i1["b"].REMOVE_EVENT_LISTENER:
+                                        E = this.elem.removeApiEventListener(t.eventType);
+                                        break;
+                                }
+                                a(E);
+                            }
+                        } catch (e) {
+                            this.globalErrCb ? this.globalErrCb(e) : s(e), a();
+                        }
+                    })
+                );
+            }
+            initIframeMessenger() {
+                self.addEventListener("message", (e)=>{
+                    const t = e.data, a = this.iframeMsgMap.get(t.msgId);
+                    if (a) {
+                        switch(t.method){
+                            case i1["b"].READY:
+                                "true" === t.data && (this.isReady = !0);
+                                break;
+                            case i1["b"].ERROR:
+                                a.err(t.data);
+                                break;
+                            case i1["b"].GET_OBJECTS_BY_NAME:
+                            case i1["b"].GET_OBJECT_BY_NAME:
+                            case i1["b"].GET_CAMERAS_BY_NAME:
+                            case i1["b"].GET_CAMERA_BY_NAME:
+                            case i1["b"].GET_MESHES_BY_NAME:
+                            case i1["b"].GET_MESH_BY_NAME:
+                            case i1["b"].GET_MATERIALS_BY_NAME:
+                            case i1["b"].GET_MATERIAL_BY_NAME:
+                            case i1["b"].GET_MATERIAL_PROPS:
+                            case i1["b"].CREATE_MATERIAL:
+                            case i1["b"].UPDATE_MATERIAL:
+                            case i1["b"].GET_VIEW_STATE:
+                            case i1["b"].APPLY_VIEW_STATE:
+                            case i1["b"].GET_ANNOTATIONS:
+                            case i1["b"].GET_ANNOTATION_BY_ID:
+                            case i1["b"].ADD_ANNOTATION:
+                            case i1["b"].ADD_COMPLEX_ANNOTATION:
+                            case i1["b"].SET_ANNOTATION_VISIBILITY:
+                            case i1["b"].GET_CURRENT_USER:
+                            case i1["b"].DID_RENDER_LAST_FRAME:
+                                try {
+                                    const e = JSON.parse(t.data);
+                                    a.succ(e);
+                                } catch (e9) {
+                                    a.err(e9);
+                                }
+                                break;
+                            case i1["b"].SET_BACKGROUND:
+                                a.succ(!0);
+                                break;
+                            case i1["b"].SWITCH_VIEW:
+                            case i1["b"].SWITCH_VIEW_ASYNC:
+                            case i1["b"].MOVE_VIEW:
+                            case i1["b"].ROTATE_VIEW:
+                            case i1["b"].ZOOM_VIEW:
+                            case i1["b"].ENABLE_ANNOTATIONS:
+                            case i1["b"].REMOVE_ANNOTATION_BY_ID:
+                            case i1["b"].EXPAND_ANNOTATIONS_BY_ID:
+                            case i1["b"].SET_EXPOSURE:
+                            case i1["b"].SET_ENVIRONMENT_MAP:
+                            case i1["b"].ROTATE_ENVIRONMENT_MAP:
+                            case i1["b"].SEND_EVENT:
+                            case i1["b"].PLAY:
+                            case i1["b"].SET_UUID_AR:
+                            case i1["b"].TRIGGER_AR_CLICK:
+                            case i1["b"].SET_CANVAS_STATE:
+                            case i1["b"].ADD_EVENT_LISTENER:
+                            case i1["b"].REMOVE_EVENT_LISTENER:
+                                "true" === t.data ? a.succ(!0) : a.err("Something went wrong. API call result is false");
+                                break;
+                            case i1["b"].HIGHLIGHT_MESHES_BY_NAME:
+                            case i1["b"].UNHIGHLIGHT_MESHES_BY_NAME:
+                            case i1["b"].GET_VISIBILITY:
+                            case i1["b"].SET_VISIBILITY:
+                            case i1["b"].SET_POSITION_ABS:
+                            case i1["b"].SET_POSITION_REL:
+                            case i1["b"].SET_ROTATION_ABS:
+                            case i1["b"].SET_ROTATION_REL:
+                            case i1["b"].SET_SCALE_ABS:
+                            case i1["b"].SET_SCALE_REL:
+                            case i1["b"].SET_FOV:
+                                "true" === t.data ? a.succ(!0) : a.succ(!1);
+                                break;
+                            case i1["b"].GET_BACKGROUND:
+                            case i1["b"].GET_POSITION:
+                            case i1["b"].GET_ROTATION:
+                            case i1["b"].GET_SCALE:
+                            case i1["b"].GET_MATERIALS:
+                            case i1["b"].GET_EXPOSURE:
+                            case i1["b"].GET_FOV:
+                            case i1["b"].GET_OBJECTS:
+                            case i1["b"].GET_MESHES:
+                            case i1["b"].GET_HIT_OBJECTS:
+                            case i1["b"].GET_2D_COORDINATES:
+                            case i1["b"].GET_CAMERAS:
+                                try {
+                                    const e = JSON.parse(t.data);
+                                    a.succ(e);
+                                } catch (e10) {
+                                    a.err(e10);
+                                }
+                                break;
+                            case i1["b"].TAKE_SCREENSHOT:
+                            case i1["b"].TAKE_FIXED_SIZE_SCREENSHOT:
+                            case i1["b"].GET_ENVIRONMENT_MAP:
+                            case i1["b"].LOAD:
+                                try {
+                                    a.succ(t.data);
+                                } catch (e11) {
+                                    a.err(e11);
+                                }
+                                break;
+                            default:
+                                const e = `Unknown API event "${t.method}"`;
+                                this.globalErrCb && this.globalErrCb(e);
+                                break;
+                        }
+                        this.iframeMsgMap.delete(t.msgId);
+                    } else if (t.method == i1["b"].UPDATE_EVENT) {
+                        let e = JSON.parse(t.data);
+                        if (this.eventsCallbackMap.has(e.eventType)) this.eventsCallbackMap.get(e.eventType)(e.eventData);
+                        else {
+                            const t = `Missing callback for event: "${e.eventType}"`;
+                            this.globalErrCb && this.globalErrCb(t);
+                        }
+                    }
+                });
+            }
+            getRandomNum() {
+                const e = new Uint8Array(4);
+                return self.crypto.getRandomValues(e), `${e[0]}-${e[1]}-${e[2]}-${e[3]}`;
+            }
+        }
+        s1.ApiEvents = i1["a"];
+        class n1 {
+            constructor(e){
+                this.api = e;
+            }
+            animate(e, t5, a, i = ()=>{}) {
+                const E = performance.now();
+                let s, n = 0;
+                if ("string" === typeof t5) switch(t5){
+                    case "linear":
+                        s = this.linear;
+                        break;
+                    case "easeInQuad":
+                        s = this.easeInQuad;
+                        break;
+                    case "easeOutQuad":
+                        s = this.easeOutQuad;
+                        break;
+                    case "easeInOutQuad":
+                        s = this.easeInOutQuad;
+                        break;
+                    case "easeInCubic":
+                        s = this.easeInCubic;
+                        break;
+                    case "easeOutCubic":
+                        s = this.easeOutCubic;
+                        break;
+                    case "easeInOutCubic":
+                        s = this.easeInOutCubic;
+                        break;
+                    case "easeInQuart":
+                        s = this.easeInQuart;
+                        break;
+                    case "easeOutQuart":
+                        s = this.easeOutQuart;
+                        break;
+                    case "easeInOutQuart":
+                        s = this.easeInOutQuart;
+                        break;
+                    case "easeInOutExpo":
+                        s = this.easeInOutExpo;
+                        break;
+                    default:
+                        s = this.linear;
+                        break;
+                }
+                else s = t5;
+                function r() {
+                    if (n = performance.now() - E, n >= e) return a(s(1)), i(), void 0;
+                    let t = n / e;
+                    const _ = s(t);
+                    a(_), requestAnimationFrame(r);
+                }
+                r();
+            }
+            lerp(e, t, a) {
+                let i = e.slice();
+                return i[0] += (t[0] - e[0]) * a, i[1] += (t[1] - e[1]) * a, i[2] += (t[2] - e[2]) * a, i;
+            }
+            linear(e) {
+                return e;
+            }
+            easeInQuad(e) {
+                return e * e;
+            }
+            easeOutQuad(e) {
+                return e * (2 - e);
+            }
+            easeInOutQuad(e) {
+                return e < .5 ? 2 * e * e : -1 + (4 - 2 * e) * e;
+            }
+            easeInCubic(e) {
+                return e * e * e;
+            }
+            easeOutCubic(e) {
+                return --e * e * e + 1;
+            }
+            easeInOutCubic(e) {
+                return e < .5 ? 4 * e * e * e : (e - 1) * (2 * e - 2) * (2 * e - 2) + 1;
+            }
+            easeInQuart(e) {
+                return e * e * e * e;
+            }
+            easeOutQuart(e) {
+                return 1 - --e * e * e * e;
+            }
+            easeInOutQuart(e) {
+                return e < .5 ? 8 * e * e * e * e : 1 - 8 * --e * e * e * e;
+            }
+            easeInOutExpo(e) {
+                return e < .5 ? Math.pow(2, 20 * e - 10) / 2 : (2 - Math.pow(2, -20 * e + 10)) / 2;
+            }
+            fadeOut(e12, t6) {
+                return E1(this, void 0, void 0, function*() {
+                    const a = yield this.api.getMeshByName(e12);
+                    this.animate(t6, this.easeOutQuad, (e)=>{
+                        const t = this.lerp([
+                            1,
+                            0,
+                            0
+                        ], [
+                            0,
+                            0,
+                            0
+                        ], e), i = {
+                            opacity: `${t[0]}`
+                        };
+                        this.api.updateMaterial(a.material, i);
+                    }, ()=>{
+                        this.api.setVisibility([
+                            a.name
+                        ], !1);
+                    });
+                });
+            }
+            fadeIn(e13, t7) {
+                return E1(this, void 0, void 0, function*() {
+                    const a = yield this.api.getMeshByName(e13);
+                    this.api.updateMaterial(a.material, {
+                        opacity: "0.0"
+                    }), this.api.setVisibility([
+                        a.name
+                    ], !0), this.animate(t7, this.easeInQuad, (e)=>{
+                        const t = this.lerp([
+                            0,
+                            0,
+                            0
+                        ], [
+                            1,
+                            0,
+                            0
+                        ], e), i = {
+                            opacity: `${t[0]}`
+                        };
+                        this.api.updateMaterial(a.material, i);
+                    });
+                });
+            }
+            moveObjectsIncrementally(e14, t, a3) {
+                return E1(this, void 0, void 0, function*() {
+                    for(let i = 0; i < e14.length; i++){
+                        const E = e14[i], s = yield this.api.getPosition(E);
+                        setTimeout(()=>{
+                            this.animate(a3, this.easeOutQuad, (e)=>{
+                                const a = this.lerp(s, [
+                                    s[0] + t[0],
+                                    s[1] + t[1],
+                                    s[2] + t[2]
+                                ], e);
+                                this.api.setPositionAbsolute(E, a);
+                            });
+                        }, i * a3);
+                    }
+                });
+            }
+            swipeObject(e15, t, a4, i) {
+                return E1(this, void 0, void 0, function*() {
+                    const E = yield this.api.getMeshByName(e15), s = yield this.api.getPosition(E.name);
+                    "in" === i ? (this.fadeIn(E.name, a4), setTimeout(()=>{
+                        this.animate(a4, this.easeOutQuad, (e)=>{
+                            const a = this.lerp(s, [
+                                s[0] + t[0],
+                                s[1] + t[1],
+                                s[2] + t[2]
+                            ], e);
+                            this.api.setPositionAbsolute(E.name, a);
+                        });
+                    }, a4 / 2)) : (this.animate(a4, this.easeInQuad, (e)=>{
+                        const a = this.lerp(s, [
+                            s[0] + t[0],
+                            s[1] + t[1],
+                            s[2] + t[2]
+                        ], e);
+                        this.api.setPositionAbsolute(E.name, a);
+                    }), setTimeout(()=>{
+                        this.fadeOut(E.name, a4);
+                    }, a4 / 2));
+                });
+            }
+            animateRotation(e16, t, a5) {
+                return new Promise((i2, s)=>E1(this, void 0, void 0, function*() {
+                        try {
+                            const E = yield this.api.getRotation(e16);
+                            null === E && i2(), this.animate(a5, "linear", (a)=>{
+                                const i = [
+                                    E[0] + t[0] * a,
+                                    E[1] + t[1] * a,
+                                    E[2] + t[2] * a
+                                ];
+                                this.api.setRotationAbsolute(e16, i);
+                            }, ()=>{
+                                this.api.setRotationAbsolute(e16, [
+                                    E[0],
+                                    E[1],
+                                    E[2]
+                                ]), i2();
+                            });
+                        } catch (e) {
+                            s(e);
+                        }
+                    })
+                );
+            }
+            getElementVisible(e, t) {
+                const a = e.top >= 0 && t - e.top > 0, i = e.bottom >= 0 && t - e.bottom > 0;
+                if (!a && !i) return [
+                    0,
+                    0
+                ];
+                const E = e.top + e.height / 2, s = t - E, n = s < 0 || s > t ? 0 : Math.round(E / t * 100);
+                return a && i ? [
+                    100,
+                    n
+                ] : a ? [
+                    Math.round((t - e.top) / e.height * 100),
+                    n
+                ] : [
+                    Math.round((e.height - -1 * e.top) / e.height * 100),
+                    n
+                ];
+            }
+        }
+    }
+});
+const _Vectary$VctrApi = Vectary["VctrApi"];
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3y0ds":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$5048 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$5048.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _faviconPng = require("./favicon.png");
+var _faviconPngDefault = parcelHelpers.interopDefault(_faviconPng);
+const Iframe = ({ id , nameModel  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("iframe", {
+                id: "Model_" + id,
+                src: "https://www.vectary.com/viewer/v1/?model=" + id + "&arIcon=" + _faviconPngDefault.default + "&arY=280&arX=10",
+                frameBorder: "0",
+                width: "20%",
+                height: "200"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+                lineNumber: 8,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                children: nameModel
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+                lineNumber: 16,
+                columnNumber: 9
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/vectary-items/iframe.jsx",
+        lineNumber: 7,
+        columnNumber: 5
+    }, undefined);
+};
+_c = Iframe;
+exports.default = Iframe;
+var _c;
+$RefreshReg$(_c, "Iframe");
+
+  $parcel$ReactRefreshHelpers$5048.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./favicon.png":"5jBaB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"5jBaB":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "favicon.3cfdc964.png" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"da8K6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const updateMaterial = async (dominantColor, viewerApi, pictureSleeve)=>{
+    const updateColor = {
+        color: dominantColor,
+        map: pictureSleeve
+    };
+    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor);
+};
+exports.default = updateMaterial;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3DSfZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const updateMaterial2 = async (viewerApi, pictureSleeve)=>{
+    const updateColor2 = {
+        map: pictureSleeve
+    };
+    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor2);
+};
+exports.default = updateMaterial2;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"273co":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$701e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$701e.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const DynamicalPng = ({ reference , text , color  })=>{
+    const style = {
+        background: color
+    };
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        ref: reference,
+        className: "container-png",
+        style: style,
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h3", {
+            children: text
+        }, void 0, false, {
+            fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
+            lineNumber: 9,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/dynamical_png/dynamical_png.jsx",
+        lineNumber: 8,
+        columnNumber: 9
+    }, undefined);
+};
+_c = DynamicalPng;
+exports.default = DynamicalPng;
+var _c;
+$RefreshReg$(_c, "DynamicalPng");
+
+  $parcel$ReactRefreshHelpers$701e.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dyrfq":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$2af8 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$2af8.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+// require('dotenv').config();
+var _dropdown = require("../buttons/dropdown");
+var _dropdownDefault = parcelHelpers.interopDefault(_dropdown);
+var _inputText = require("../buttons/input-text");
+var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
+var _config = require("../../../config/config");
+const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedSignageEquipmentQuantity , onChangeAction , currentAnim  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quelles quantit\xe9s de chaque \xe9l\xe9ment ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                lineNumber: 19,
+                columnNumber: 7
+            }, undefined),
+            selectedSignageEquipment.map((oneSelectedSignageEquipement, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                    className: "container-how-items",
+                    children: [
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                            children: oneSelectedSignageEquipement.label
+                        }, void 0, false, {
+                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                            lineNumber: 25,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dropdownDefault.default, {
+                            items: _config.productQuantity,
+                            defaultValue: selectedSignageEquipmentQuantity[oneSelectedSignageEquipement.value],
+                            onChange: (e)=>{
+                                onChangeAction(oneSelectedSignageEquipement.value, e.target.value);
+                            }
+                        }, void 0, false, {
+                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                            lineNumber: 26,
+                            columnNumber: 11
+                        }, undefined)
+                    ]
+                }, oneSelectedSignageEquipement.value, true, {
+                    fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                    lineNumber: 21,
+                    columnNumber: 9
+                }, undefined)
+            ),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
+                type: "email",
+                placeholder: "Votre adresse mail",
+                value: email,
+                name: "email",
+                onChange: (e)=>setEmail(e.target.value)
+                ,
+                required: true
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                lineNumber: 43,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+        lineNumber: 18,
+        columnNumber: 5
+    }, undefined);
+};
+_c = CalculateCost;
+exports.default = CalculateCost;
+var _c;
+$RefreshReg$(_c, "CalculateCost");
+
+  $parcel$ReactRefreshHelpers$2af8.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/dropdown":"2LfkA","../buttons/input-text":"cEoUW","../../../config/config":"a6ccA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2LfkA":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$bc8c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$bc8c.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const Dropdown = ({ items , onChange , defaultValue  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("select", {
+            onChange: onChange,
+            defaultValue: defaultValue,
+            children: items.map((item)=>{
+                return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("option", {
+                    value: item,
+                    children: item
+                }, item, false, {
+                    fileName: "src/components/wizzardComponents/buttons/dropdown.jsx",
+                    lineNumber: 14,
+                    columnNumber: 25
+                }, undefined);
+            })
+        }, void 0, false, {
+            fileName: "src/components/wizzardComponents/buttons/dropdown.jsx",
+            lineNumber: 7,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false);
+};
+_c = Dropdown;
+exports.default = Dropdown;
+var _c;
+$RefreshReg$(_c, "Dropdown");
+
+  $parcel$ReactRefreshHelpers$bc8c.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1rqbK":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$caea = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$caea.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reducer = require("../../../functions/reducer");
+var _reducerDefault = parcelHelpers.interopDefault(_reducer);
+var _s = $RefreshSig$();
+const TotalCost = ({ quantity , signagesEquipements , image , currentAnim  })=>{
+    _s();
+    const [currentTotal, setCurrentTotal] = _react.useState(0);
+    const cheatTotal = [];
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-total-cost",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Merci nous revenons vers vous avec une offre "
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                lineNumber: 13,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("table", {
+                border: "1",
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
+                    children: Object.keys(quantity).map((oneKey, index)=>{
+                        _react.useEffect(()=>{
+                            _reducerDefault.default(cheatTotal, signagesEquipements[index].price, quantity[oneKey], setCurrentTotal);
+                        }, []);
+                        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
+                            children: [
+                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                    children: signagesEquipements[index].label
+                                }, void 0, false, {
+                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                    lineNumber: 22,
+                                    columnNumber: 17
+                                }, undefined),
+                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
+                                        src: image[index],
+                                        alt: "Image du modèle " + signagesEquipements[index].label
+                                    }, void 0, false, {
+                                        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                        lineNumber: 23,
+                                        columnNumber: 21
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                    lineNumber: 23,
+                                    columnNumber: 17
+                                }, undefined),
+                                /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
+                                    children: [
+                                        "X ",
+                                        quantity[oneKey]
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                    lineNumber: 24,
+                                    columnNumber: 17
+                                }, undefined)
+                            ]
+                        }, quantity[oneKey] + index, true, {
+                            fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                            lineNumber: 21,
+                            columnNumber: 15
+                        }, undefined);
+                    })
+                }, void 0, false, {
+                    fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                    lineNumber: 15,
+                    columnNumber: 9
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                lineNumber: 14,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+        lineNumber: 12,
+        columnNumber: 5
+    }, undefined);
+};
+_s(TotalCost, "SqGtFWzUHjJyPA/X9/+yEEYuAP4=");
+_c = TotalCost;
+exports.default = TotalCost;
+var _c;
+$RefreshReg$(_c, "TotalCost");
+
+  $parcel$ReactRefreshHelpers$caea.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../functions/reducer":"P8RCA","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"P8RCA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const reducer = (array, value, quantity, setState)=>{
+    array.push(value * quantity);
+    const cheatReduce = array.reduce((a, b)=>a + b
+    );
+    setState(cheatReduce);
+};
+exports.default = reducer;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2NQC3":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$b0d0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$b0d0.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactSpring = require("react-spring");
+const ViewWrapper = ({ children , previous ="Précédent" , next ="Suivant" , previousAction , nextAction , currentAnim  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.div, {
+        style: currentAnim,
+        children: [
+            children,
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("section", {
+                className: "container-navigation",
+                children: [
+                    previous !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                        className: "previousInput",
+                        type: "button",
+                        value: previous,
+                        onClick: previousAction
+                    }, void 0, false, {
+                        fileName: "src/components/layout/view-wrapper.jsx",
+                        lineNumber: 19,
+                        columnNumber: 11
+                    }, undefined),
+                    next !== false && /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                        className: "nextInput",
+                        type: "button",
+                        value: next,
+                        onClick: nextAction
+                    }, void 0, false, {
+                        fileName: "src/components/layout/view-wrapper.jsx",
+                        lineNumber: 27,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/layout/view-wrapper.jsx",
+                lineNumber: 17,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/layout/view-wrapper.jsx",
+        lineNumber: 14,
+        columnNumber: 5
+    }, undefined);
+};
+_c = ViewWrapper;
+exports.default = ViewWrapper;
+var _c;
+$RefreshReg$(_c, "ViewWrapper");
+
+  $parcel$ReactRefreshHelpers$b0d0.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-spring":"2gPbQ"}],"2gPbQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _web = require("@react-spring/web");
+parcelHelpers.exportAll(_web, exports);
+
+},{"@react-spring/web":"75MAn","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"75MAn":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "a", ()=>animated
+);
+parcelHelpers.export(exports, "animated", ()=>animated
+);
+var _core = require("@react-spring/core");
+var _reactDom = require("react-dom");
+var _shared = require("@react-spring/shared");
+var _animated = require("@react-spring/animated");
+parcelHelpers.exportAll(_core, exports);
+function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+const _excluded$2 = [
+    "style",
+    "children",
+    "scrollTop",
+    "scrollLeft"
+];
+const isCustomPropRE = /^--/;
+function dangerousStyleValue(name, value) {
+    if (value == null || typeof value === 'boolean' || value === '') return '';
+    if (typeof value === 'number' && value !== 0 && !isCustomPropRE.test(name) && !(isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name])) return value + 'px';
+    return ('' + value).trim();
+}
+const attributeCache = {};
+function applyAnimatedValues(instance, props) {
+    if (!instance.nodeType || !instance.setAttribute) return false;
+    const isFilterElement = instance.nodeName === 'filter' || instance.parentNode && instance.parentNode.nodeName === 'filter';
+    const _ref = props, { style , children , scrollTop , scrollLeft  } = _ref, attributes = _objectWithoutPropertiesLoose(_ref, _excluded$2);
+    const values = Object.values(attributes);
+    const names = Object.keys(attributes).map((name)=>isFilterElement || instance.hasAttribute(name) ? name : attributeCache[name] || (attributeCache[name] = name.replace(/([A-Z])/g, (n)=>'-' + n.toLowerCase()
+        ))
+    );
+    if (children !== void 0) instance.textContent = children;
+    for(let name1 in style)if (style.hasOwnProperty(name1)) {
+        const value = dangerousStyleValue(name1, style[name1]);
+        if (isCustomPropRE.test(name1)) instance.style.setProperty(name1, value);
+        else instance.style[name1] = value;
+    }
+    names.forEach((name, i)=>{
+        instance.setAttribute(name, values[i]);
+    });
+    if (scrollTop !== void 0) instance.scrollTop = scrollTop;
+    if (scrollLeft !== void 0) instance.scrollLeft = scrollLeft;
+}
+let isUnitlessNumber = {
+    animationIterationCount: true,
+    borderImageOutset: true,
+    borderImageSlice: true,
+    borderImageWidth: true,
+    boxFlex: true,
+    boxFlexGroup: true,
+    boxOrdinalGroup: true,
+    columnCount: true,
+    columns: true,
+    flex: true,
+    flexGrow: true,
+    flexPositive: true,
+    flexShrink: true,
+    flexNegative: true,
+    flexOrder: true,
+    gridRow: true,
+    gridRowEnd: true,
+    gridRowSpan: true,
+    gridRowStart: true,
+    gridColumn: true,
+    gridColumnEnd: true,
+    gridColumnSpan: true,
+    gridColumnStart: true,
+    fontWeight: true,
+    lineClamp: true,
+    lineHeight: true,
+    opacity: true,
+    order: true,
+    orphans: true,
+    tabSize: true,
+    widows: true,
+    zIndex: true,
+    zoom: true,
+    fillOpacity: true,
+    floodOpacity: true,
+    stopOpacity: true,
+    strokeDasharray: true,
+    strokeDashoffset: true,
+    strokeMiterlimit: true,
+    strokeOpacity: true,
+    strokeWidth: true
+};
+const prefixKey = (prefix, key)=>prefix + key.charAt(0).toUpperCase() + key.substring(1)
+;
+const prefixes = [
+    'Webkit',
+    'Ms',
+    'Moz',
+    'O'
+];
+isUnitlessNumber = Object.keys(isUnitlessNumber).reduce((acc, prop)=>{
+    prefixes.forEach((prefix)=>acc[prefixKey(prefix, prop)] = acc[prop]
+    );
+    return acc;
+}, isUnitlessNumber);
+const _excluded$1 = [
+    "x",
+    "y",
+    "z"
+];
+const domTransforms = /^(matrix|translate|scale|rotate|skew)/;
+const pxTransforms = /^(translate)/;
+const degTransforms = /^(rotate|skew)/;
+const addUnit = (value, unit)=>_shared.is.num(value) && value !== 0 ? value + unit : value
+;
+const isValueIdentity = (value, id)=>_shared.is.arr(value) ? value.every((v)=>isValueIdentity(v, id)
+    ) : _shared.is.num(value) ? value === id : parseFloat(value) === id
+;
+class AnimatedStyle extends _animated.AnimatedObject {
+    constructor(_ref){
+        let { x: x1 , y: y1 , z: z1  } = _ref, style = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+        const inputs = [];
+        const transforms = [];
+        if (x1 || y1 || z1) {
+            inputs.push([
+                x1 || 0,
+                y1 || 0,
+                z1 || 0
+            ]);
+            transforms.push((xyz)=>[
+                    `translate3d(${xyz.map((v)=>addUnit(v, 'px')
+                    ).join(',')})`,
+                    isValueIdentity(xyz, 0)
+                ]
+            );
+        }
+        _shared.eachProp(style, (value, key)=>{
+            if (key === 'transform') {
+                inputs.push([
+                    value || ''
+                ]);
+                transforms.push((transform)=>[
+                        transform,
+                        transform === ''
+                    ]
+                );
+            } else if (domTransforms.test(key)) {
+                delete style[key];
+                if (_shared.is.und(value)) return;
+                const unit = pxTransforms.test(key) ? 'px' : degTransforms.test(key) ? 'deg' : '';
+                inputs.push(_shared.toArray(value));
+                transforms.push(key === 'rotate3d' ? ([x, y, z, deg])=>[
+                        `rotate3d(${x},${y},${z},${addUnit(deg, unit)})`,
+                        isValueIdentity(deg, 0)
+                    ]
+                 : (input)=>[
+                        `${key}(${input.map((v)=>addUnit(v, unit)
+                        ).join(',')})`,
+                        isValueIdentity(input, key.startsWith('scale') ? 1 : 0)
+                    ]
+                );
+            }
+        });
+        if (inputs.length) style.transform = new FluidTransform(inputs, transforms);
+        super(style);
+    }
+}
+class FluidTransform extends _shared.FluidValue {
+    constructor(inputs, transforms){
+        super();
+        this._value = null;
+        this.inputs = inputs;
+        this.transforms = transforms;
+    }
+    get() {
+        return this._value || (this._value = this._get());
+    }
+    _get() {
+        let transform = '';
+        let identity = true;
+        _shared.each(this.inputs, (input, i)=>{
+            const arg1 = _shared.getFluidValue(input[0]);
+            const [t, id] = this.transforms[i](_shared.is.arr(arg1) ? arg1 : input.map(_shared.getFluidValue));
+            transform += ' ' + t;
+            identity = identity && id;
+        });
+        return identity ? 'none' : transform;
+    }
+    observerAdded(count) {
+        if (count == 1) _shared.each(this.inputs, (input)=>_shared.each(input, (value)=>_shared.hasFluidValue(value) && _shared.addFluidObserver(value, this)
+            )
+        );
+    }
+    observerRemoved(count) {
+        if (count == 0) _shared.each(this.inputs, (input)=>_shared.each(input, (value)=>_shared.hasFluidValue(value) && _shared.removeFluidObserver(value, this)
+            )
+        );
+    }
+    eventObserved(event) {
+        if (event.type == 'change') this._value = null;
+        _shared.callFluidObservers(this, event);
+    }
+}
+const primitives = [
+    'a',
+    'abbr',
+    'address',
+    'area',
+    'article',
+    'aside',
+    'audio',
+    'b',
+    'base',
+    'bdi',
+    'bdo',
+    'big',
+    'blockquote',
+    'body',
+    'br',
+    'button',
+    'canvas',
+    'caption',
+    'cite',
+    'code',
+    'col',
+    'colgroup',
+    'data',
+    'datalist',
+    'dd',
+    'del',
+    'details',
+    'dfn',
+    'dialog',
+    'div',
+    'dl',
+    'dt',
+    'em',
+    'embed',
+    'fieldset',
+    'figcaption',
+    'figure',
+    'footer',
+    'form',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'head',
+    'header',
+    'hgroup',
+    'hr',
+    'html',
+    'i',
+    'iframe',
+    'img',
+    'input',
+    'ins',
+    'kbd',
+    'keygen',
+    'label',
+    'legend',
+    'li',
+    'link',
+    'main',
+    'map',
+    'mark',
+    'menu',
+    'menuitem',
+    'meta',
+    'meter',
+    'nav',
+    'noscript',
+    'object',
+    'ol',
+    'optgroup',
+    'option',
+    'output',
+    'p',
+    'param',
+    'picture',
+    'pre',
+    'progress',
+    'q',
+    'rp',
+    'rt',
+    'ruby',
+    's',
+    'samp',
+    'script',
+    'section',
+    'select',
+    'small',
+    'source',
+    'span',
+    'strong',
+    'style',
+    'sub',
+    'summary',
+    'sup',
+    'table',
+    'tbody',
+    'td',
+    'textarea',
+    'tfoot',
+    'th',
+    'thead',
+    'time',
+    'title',
+    'tr',
+    'track',
+    'u',
+    'ul',
+    'var',
+    'video',
+    'wbr',
+    'circle',
+    'clipPath',
+    'defs',
+    'ellipse',
+    'foreignObject',
+    'g',
+    'image',
+    'line',
+    'linearGradient',
+    'mask',
+    'path',
+    'pattern',
+    'polygon',
+    'polyline',
+    'radialGradient',
+    'rect',
+    'stop',
+    'svg',
+    'text',
+    'tspan'
+];
+const _excluded = [
+    "scrollTop",
+    "scrollLeft"
+];
+_core.Globals.assign({
+    batchedUpdates: _reactDom.unstable_batchedUpdates,
+    createStringInterpolator: _shared.createStringInterpolator,
+    colors: _shared.colors
+});
+const host = _animated.createHost(primitives, {
+    applyAnimatedValues,
+    createAnimatedStyle: (style)=>new AnimatedStyle(style)
+    ,
+    getComponentProps: (_ref)=>{
+        let props = _objectWithoutPropertiesLoose(_ref, _excluded);
+        return props;
+    }
+});
+const animated = host.animated;
+
+},{"@react-spring/core":"f5VEd","react-dom":"j6uA9","@react-spring/shared":"jm667","@react-spring/animated":"abfrL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f5VEd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Globals", ()=>_shared.Globals
+);
+parcelHelpers.export(exports, "createInterpolator", ()=>_shared.createInterpolator
+);
+parcelHelpers.export(exports, "BailSignal", ()=>BailSignal
+);
+parcelHelpers.export(exports, "Controller", ()=>Controller
+);
+parcelHelpers.export(exports, "FrameValue", ()=>FrameValue
+);
+parcelHelpers.export(exports, "Interpolation", ()=>Interpolation
+);
+parcelHelpers.export(exports, "Spring", ()=>Spring
+);
+parcelHelpers.export(exports, "SpringContext", ()=>SpringContext
+);
+parcelHelpers.export(exports, "SpringRef", ()=>SpringRef
+);
+parcelHelpers.export(exports, "SpringValue", ()=>SpringValue
+);
+parcelHelpers.export(exports, "Trail", ()=>Trail
+);
+parcelHelpers.export(exports, "Transition", ()=>Transition
+);
+parcelHelpers.export(exports, "config", ()=>config
+);
+parcelHelpers.export(exports, "easings", ()=>easings
+);
+parcelHelpers.export(exports, "inferTo", ()=>inferTo
+);
+parcelHelpers.export(exports, "interpolate", ()=>interpolate
+);
+parcelHelpers.export(exports, "to", ()=>to
+);
+parcelHelpers.export(exports, "update", ()=>update
+);
+parcelHelpers.export(exports, "useChain", ()=>useChain
+);
+parcelHelpers.export(exports, "useSpring", ()=>useSpring
+);
+parcelHelpers.export(exports, "useSpringRef", ()=>useSpringRef
+);
+parcelHelpers.export(exports, "useSprings", ()=>useSprings
+);
+parcelHelpers.export(exports, "useTrail", ()=>useTrail
+);
+parcelHelpers.export(exports, "useTransition", ()=>useTransition
+);
+var _shared = require("@react-spring/shared");
+var _react = require("react");
+var _animated = require("@react-spring/animated");
+var _animated1 = require("@react-spring/types/animated");
+parcelHelpers.exportAll(_animated1, exports);
+var _interpolation = require("@react-spring/types/interpolation");
+parcelHelpers.exportAll(_interpolation, exports);
+function _extends() {
+    _extends = Object.assign || function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
+}
+function callProp(value, ...args) {
+    return _shared.is.fun(value) ? value(...args) : value;
+}
+const matchProp = (value, key)=>value === true || !!(key && value && (_shared.is.fun(value) ? value(key) : _shared.toArray(value).includes(key)))
+;
+const resolveProp = (prop, key)=>_shared.is.obj(prop) ? key && prop[key] : prop
+;
+const getDefaultProp = (props, key)=>props.default === true ? props[key] : props.default ? props.default[key] : undefined
+;
+const noopTransform = (value)=>value
+;
+const getDefaultProps = (props, transform = noopTransform)=>{
+    let keys = DEFAULT_PROPS;
+    if (props.default && props.default !== true) {
+        props = props.default;
+        keys = Object.keys(props);
+    }
+    const defaults1 = {};
+    for (const key of keys){
+        const value = transform(props[key], key);
+        if (!_shared.is.und(value)) defaults1[key] = value;
+    }
+    return defaults1;
+};
+const DEFAULT_PROPS = [
+    'config',
+    'onProps',
+    'onStart',
+    'onChange',
+    'onPause',
+    'onResume',
+    'onRest'
+];
+const RESERVED_PROPS = {
+    config: 1,
+    from: 1,
+    to: 1,
+    ref: 1,
+    loop: 1,
+    reset: 1,
+    pause: 1,
+    cancel: 1,
+    reverse: 1,
+    immediate: 1,
+    default: 1,
+    delay: 1,
+    onProps: 1,
+    onStart: 1,
+    onChange: 1,
+    onPause: 1,
+    onResume: 1,
+    onRest: 1,
+    onResolve: 1,
+    items: 1,
+    trail: 1,
+    sort: 1,
+    expires: 1,
+    initial: 1,
+    enter: 1,
+    update: 1,
+    leave: 1,
+    children: 1,
+    onDestroyed: 1,
+    keys: 1,
+    callId: 1,
+    parentId: 1
+};
+function getForwardProps(props) {
+    const forward = {};
+    let count = 0;
+    _shared.eachProp(props, (value, prop)=>{
+        if (!RESERVED_PROPS[prop]) {
+            forward[prop] = value;
+            count++;
+        }
+    });
+    if (count) return forward;
+}
+function inferTo(props) {
+    const to1 = getForwardProps(props);
+    if (to1) {
+        const out = {
+            to: to1
+        };
+        _shared.eachProp(props, (val, key)=>key in to1 || (out[key] = val)
+        );
+        return out;
+    }
+    return _extends({}, props);
+}
+function computeGoal(value) {
+    value = _shared.getFluidValue(value);
+    return _shared.is.arr(value) ? value.map(computeGoal) : _shared.isAnimatedString(value) ? _shared.Globals.createStringInterpolator({
+        range: [
+            0,
+            1
+        ],
+        output: [
+            value,
+            value
+        ]
+    })(1) : value;
+}
+function hasProps(props) {
+    for(const _ in props)return true;
+    return false;
+}
+function isAsyncTo(to2) {
+    return _shared.is.fun(to2) || _shared.is.arr(to2) && _shared.is.obj(to2[0]);
+}
+function detachRefs(ctrl, ref) {
+    var _ctrl$ref;
+    (_ctrl$ref = ctrl.ref) == null || _ctrl$ref.delete(ctrl);
+    ref == null || ref.delete(ctrl);
+}
+function replaceRef(ctrl, ref) {
+    if (ref && ctrl.ref !== ref) {
+        var _ctrl$ref2;
+        (_ctrl$ref2 = ctrl.ref) == null || _ctrl$ref2.delete(ctrl);
+        ref.add(ctrl);
+        ctrl.ref = ref;
+    }
+}
+function useChain(refs, timeSteps, timeFrame = 1000) {
+    _shared.useLayoutEffect(()=>{
+        if (timeSteps) {
+            let prevDelay = 0;
+            _shared.each(refs, (ref, i)=>{
+                const controllers = ref.current;
+                if (controllers.length) {
+                    let delay = timeFrame * timeSteps[i];
+                    if (isNaN(delay)) delay = prevDelay;
+                    else prevDelay = delay;
+                    _shared.each(controllers, (ctrl)=>{
+                        _shared.each(ctrl.queue, (props)=>{
+                            const memoizedDelayProp = props.delay;
+                            props.delay = (key)=>delay + callProp(memoizedDelayProp || 0, key)
+                            ;
+                        });
+                    });
+                    ref.start();
+                }
+            });
+        } else {
+            let p = Promise.resolve();
+            _shared.each(refs, (ref)=>{
+                const controllers = ref.current;
+                if (controllers.length) {
+                    const queues = controllers.map((ctrl)=>{
+                        const q = ctrl.queue;
+                        ctrl.queue = [];
+                        return q;
+                    });
+                    p = p.then(()=>{
+                        _shared.each(controllers, (ctrl, i)=>_shared.each(queues[i] || [], (update1)=>ctrl.queue.push(update1)
+                            )
+                        );
+                        return Promise.all(ref.start());
+                    });
+                }
+            });
+        }
+    });
+}
+const config = {
+    default: {
+        tension: 170,
+        friction: 26
+    },
+    gentle: {
+        tension: 120,
+        friction: 14
+    },
+    wobbly: {
+        tension: 180,
+        friction: 12
+    },
+    stiff: {
+        tension: 210,
+        friction: 20
+    },
+    slow: {
+        tension: 280,
+        friction: 60
+    },
+    molasses: {
+        tension: 280,
+        friction: 120
+    }
+};
+const c1 = 1.70158;
+const c2 = c1 * 1.525;
+const c3 = c1 + 1;
+const c4 = 2 * Math.PI / 3;
+const c5 = 2 * Math.PI / 4.5;
+const bounceOut = (x)=>{
+    const n1 = 7.5625;
+    const d1 = 2.75;
+    if (x < 1 / d1) return n1 * x * x;
+    else if (x < 2 / d1) return n1 * (x -= 1.5 / d1) * x + 0.75;
+    else if (x < 2.5 / d1) return n1 * (x -= 2.25 / d1) * x + 0.9375;
+    else return n1 * (x -= 2.625 / d1) * x + 0.984375;
+};
+const easings = {
+    linear: (x)=>x
+    ,
+    easeInQuad: (x)=>x * x
+    ,
+    easeOutQuad: (x)=>1 - (1 - x) * (1 - x)
+    ,
+    easeInOutQuad: (x)=>x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2
+    ,
+    easeInCubic: (x)=>x * x * x
+    ,
+    easeOutCubic: (x)=>1 - Math.pow(1 - x, 3)
+    ,
+    easeInOutCubic: (x)=>x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
+    ,
+    easeInQuart: (x)=>x * x * x * x
+    ,
+    easeOutQuart: (x)=>1 - Math.pow(1 - x, 4)
+    ,
+    easeInOutQuart: (x)=>x < 0.5 ? 8 * x * x * x * x : 1 - Math.pow(-2 * x + 2, 4) / 2
+    ,
+    easeInQuint: (x)=>x * x * x * x * x
+    ,
+    easeOutQuint: (x)=>1 - Math.pow(1 - x, 5)
+    ,
+    easeInOutQuint: (x)=>x < 0.5 ? 16 * x * x * x * x * x : 1 - Math.pow(-2 * x + 2, 5) / 2
+    ,
+    easeInSine: (x)=>1 - Math.cos(x * Math.PI / 2)
+    ,
+    easeOutSine: (x)=>Math.sin(x * Math.PI / 2)
+    ,
+    easeInOutSine: (x)=>-(Math.cos(Math.PI * x) - 1) / 2
+    ,
+    easeInExpo: (x)=>x === 0 ? 0 : Math.pow(2, 10 * x - 10)
+    ,
+    easeOutExpo: (x)=>x === 1 ? 1 : 1 - Math.pow(2, -10 * x)
+    ,
+    easeInOutExpo: (x)=>x === 0 ? 0 : x === 1 ? 1 : x < 0.5 ? Math.pow(2, 20 * x - 10) / 2 : (2 - Math.pow(2, -20 * x + 10)) / 2
+    ,
+    easeInCirc: (x)=>1 - Math.sqrt(1 - Math.pow(x, 2))
+    ,
+    easeOutCirc: (x)=>Math.sqrt(1 - Math.pow(x - 1, 2))
+    ,
+    easeInOutCirc: (x)=>x < 0.5 ? (1 - Math.sqrt(1 - Math.pow(2 * x, 2))) / 2 : (Math.sqrt(1 - Math.pow(-2 * x + 2, 2)) + 1) / 2
+    ,
+    easeInBack: (x)=>c3 * x * x * x - c1 * x * x
+    ,
+    easeOutBack: (x)=>1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2)
+    ,
+    easeInOutBack: (x)=>x < 0.5 ? Math.pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2) / 2 : (Math.pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2
+    ,
+    easeInElastic: (x)=>x === 0 ? 0 : x === 1 ? 1 : -Math.pow(2, 10 * x - 10) * Math.sin((x * 10 - 10.75) * c4)
+    ,
+    easeOutElastic: (x)=>x === 0 ? 0 : x === 1 ? 1 : Math.pow(2, -10 * x) * Math.sin((x * 10 - 0.75) * c4) + 1
+    ,
+    easeInOutElastic: (x)=>x === 0 ? 0 : x === 1 ? 1 : x < 0.5 ? -(Math.pow(2, 20 * x - 10) * Math.sin((20 * x - 11.125) * c5)) / 2 : Math.pow(2, -20 * x + 10) * Math.sin((20 * x - 11.125) * c5) / 2 + 1
+    ,
+    easeInBounce: (x)=>1 - bounceOut(1 - x)
+    ,
+    easeOutBounce: bounceOut,
+    easeInOutBounce: (x)=>x < 0.5 ? (1 - bounceOut(1 - 2 * x)) / 2 : (1 + bounceOut(2 * x - 1)) / 2
+};
+const defaults = _extends({}, config.default, {
+    mass: 1,
+    damping: 1,
+    easing: easings.linear,
+    clamp: false
+});
+class AnimationConfig {
+    constructor(){
+        this.tension = void 0;
+        this.friction = void 0;
+        this.frequency = void 0;
+        this.damping = void 0;
+        this.mass = void 0;
+        this.velocity = 0;
+        this.restVelocity = void 0;
+        this.precision = void 0;
+        this.progress = void 0;
+        this.duration = void 0;
+        this.easing = void 0;
+        this.clamp = void 0;
+        this.bounce = void 0;
+        this.decay = void 0;
+        this.round = void 0;
+        Object.assign(this, defaults);
+    }
+}
+function mergeConfig(config1, newConfig, defaultConfig) {
+    if (defaultConfig) {
+        defaultConfig = _extends({}, defaultConfig);
+        sanitizeConfig(defaultConfig, newConfig);
+        newConfig = _extends({}, defaultConfig, newConfig);
+    }
+    sanitizeConfig(config1, newConfig);
+    Object.assign(config1, newConfig);
+    for(const key in defaults)if (config1[key] == null) config1[key] = defaults[key];
+    let { mass , frequency , damping  } = config1;
+    if (!_shared.is.und(frequency)) {
+        if (frequency < 0.01) frequency = 0.01;
+        if (damping < 0) damping = 0;
+        config1.tension = Math.pow(2 * Math.PI / frequency, 2) * mass;
+        config1.friction = 4 * Math.PI * damping * mass / frequency;
+    }
+    return config1;
+}
+function sanitizeConfig(config2, props) {
+    if (!_shared.is.und(props.decay)) config2.duration = undefined;
+    else {
+        const isTensionConfig = !_shared.is.und(props.tension) || !_shared.is.und(props.friction);
+        if (isTensionConfig || !_shared.is.und(props.frequency) || !_shared.is.und(props.damping) || !_shared.is.und(props.mass)) {
+            config2.duration = undefined;
+            config2.decay = undefined;
+        }
+        if (isTensionConfig) config2.frequency = undefined;
+    }
+}
+const emptyArray = [];
+class Animation {
+    constructor(){
+        this.changed = false;
+        this.values = emptyArray;
+        this.toValues = null;
+        this.fromValues = emptyArray;
+        this.to = void 0;
+        this.from = void 0;
+        this.config = new AnimationConfig();
+        this.immediate = false;
+    }
+}
+function scheduleProps(callId, { key , props , defaultProps , state , actions  }) {
+    return new Promise((resolve, reject)=>{
+        var _props$cancel;
+        let delay;
+        let timeout;
+        let cancel = matchProp((_props$cancel = props.cancel) != null ? _props$cancel : defaultProps == null ? void 0 : defaultProps.cancel, key);
+        if (cancel) onStart();
+        else {
+            if (!_shared.is.und(props.pause)) state.paused = matchProp(props.pause, key);
+            let pause = defaultProps == null ? void 0 : defaultProps.pause;
+            if (pause !== true) pause = state.paused || matchProp(pause, key);
+            delay = callProp(props.delay || 0, key);
+            if (pause) {
+                state.resumeQueue.add(onResume);
+                actions.pause();
+            } else {
+                actions.resume();
+                onResume();
+            }
+        }
+        function onPause() {
+            state.resumeQueue.add(onResume);
+            state.timeouts.delete(timeout);
+            timeout.cancel();
+            delay = timeout.time - _shared.raf.now();
+        }
+        function onResume() {
+            if (delay > 0 && !_shared.Globals.skipAnimation) {
+                state.delayed = true;
+                timeout = _shared.raf.setTimeout(onStart, delay);
+                state.pauseQueue.add(onPause);
+                state.timeouts.add(timeout);
+            } else onStart();
+        }
+        function onStart() {
+            if (state.delayed) state.delayed = false;
+            state.pauseQueue.delete(onPause);
+            state.timeouts.delete(timeout);
+            if (callId <= (state.cancelId || 0)) cancel = true;
+            try {
+                actions.start(_extends({}, props, {
+                    callId,
+                    cancel
+                }), resolve);
+            } catch (err) {
+                reject(err);
+            }
+        }
+    });
+}
+const getCombinedResult = (target, results)=>results.length == 1 ? results[0] : results.some((result)=>result.cancelled
+    ) ? getCancelledResult(target.get()) : results.every((result)=>result.noop
+    ) ? getNoopResult(target.get()) : getFinishedResult(target.get(), results.every((result)=>result.finished
+    ))
+;
+const getNoopResult = (value)=>({
+        value,
+        noop: true,
+        finished: true,
+        cancelled: false
+    })
+;
+const getFinishedResult = (value, finished, cancelled = false)=>({
+        value,
+        finished,
+        cancelled
+    })
+;
+const getCancelledResult = (value)=>({
+        value,
+        cancelled: true,
+        finished: false
+    })
+;
+function runAsync(to3, props1, state, target) {
+    const { callId , parentId , onRest  } = props1;
+    const { asyncTo: prevTo , promise: prevPromise  } = state;
+    if (!parentId && to3 === prevTo && !props1.reset) return prevPromise;
+    return state.promise = (async ()=>{
+        state.asyncId = callId;
+        state.asyncTo = to3;
+        const defaultProps = getDefaultProps(props1, (value, key)=>key === 'onRest' ? undefined : value
+        );
+        let preventBail;
+        let bail;
+        const bailPromise = new Promise((resolve, reject)=>(preventBail = resolve, bail = reject)
+        );
+        const bailIfEnded = (bailSignal)=>{
+            const bailResult = callId <= (state.cancelId || 0) && getCancelledResult(target) || callId !== state.asyncId && getFinishedResult(target, false);
+            if (bailResult) {
+                bailSignal.result = bailResult;
+                bail(bailSignal);
+                throw bailSignal;
+            }
+        };
+        const animate = (arg1, arg2)=>{
+            const bailSignal = new BailSignal();
+            const skipAnimationSignal = new SkipAniamtionSignal();
+            return (async ()=>{
+                if (_shared.Globals.skipAnimation) {
+                    stopAsync(state);
+                    skipAnimationSignal.result = getFinishedResult(target, false);
+                    bail(skipAnimationSignal);
+                    throw skipAnimationSignal;
+                }
+                bailIfEnded(bailSignal);
+                const props = _shared.is.obj(arg1) ? _extends({}, arg1) : _extends({}, arg2, {
+                    to: arg1
+                });
+                props.parentId = callId;
+                _shared.eachProp(defaultProps, (value, key)=>{
+                    if (_shared.is.und(props[key])) props[key] = value;
+                });
+                const result = await target.start(props);
+                bailIfEnded(bailSignal);
+                if (state.paused) await new Promise((resume)=>{
+                    state.resumeQueue.add(resume);
+                });
+                return result;
+            })();
+        };
+        let result1;
+        if (_shared.Globals.skipAnimation) {
+            stopAsync(state);
+            return getFinishedResult(target, false);
+        }
+        try {
+            let animating;
+            if (_shared.is.arr(to3)) animating = (async (queue)=>{
+                for (const props of queue)await animate(props);
+            })(to3);
+            else animating = Promise.resolve(to3(animate, target.stop.bind(target)));
+            await Promise.all([
+                animating.then(preventBail),
+                bailPromise
+            ]);
+            result1 = getFinishedResult(target.get(), true, false);
+        } catch (err) {
+            if (err instanceof BailSignal) result1 = err.result;
+            else if (err instanceof SkipAniamtionSignal) result1 = err.result;
+            else throw err;
+        } finally{
+            if (callId == state.asyncId) {
+                state.asyncId = parentId;
+                state.asyncTo = parentId ? prevTo : undefined;
+                state.promise = parentId ? prevPromise : undefined;
+            }
+        }
+        if (_shared.is.fun(onRest)) _shared.raf.batchedUpdates(()=>{
+            onRest(result1, target, target.item);
+        });
+        return result1;
+    })();
+}
+function stopAsync(state, cancelId) {
+    _shared.flush(state.timeouts, (t)=>t.cancel()
+    );
+    state.pauseQueue.clear();
+    state.resumeQueue.clear();
+    state.asyncId = state.asyncTo = state.promise = undefined;
+    if (cancelId) state.cancelId = cancelId;
+}
+class BailSignal extends Error {
+    constructor(){
+        super("An async animation has been interrupted. You see this error because you forgot to use `await` or `.catch(...)` on its returned promise.");
+        this.result = void 0;
+    }
+}
+class SkipAniamtionSignal extends Error {
+    constructor(){
+        super('SkipAnimationSignal');
+        this.result = void 0;
+    }
+}
+const isFrameValue = (value)=>value instanceof FrameValue
+;
+let nextId$1 = 1;
+class FrameValue extends _shared.FluidValue {
+    constructor(...args){
+        super(...args);
+        this.id = nextId$1++;
+        this.key = void 0;
+        this._priority = 0;
+    }
+    get priority() {
+        return this._priority;
+    }
+    set priority(priority) {
+        if (this._priority != priority) {
+            this._priority = priority;
+            this._onPriorityChange(priority);
+        }
+    }
+    get() {
+        const node = _animated.getAnimated(this);
+        return node && node.getValue();
+    }
+    to(...args) {
+        return _shared.Globals.to(this, args);
+    }
+    interpolate(...args) {
+        _shared.deprecateInterpolate();
+        return _shared.Globals.to(this, args);
+    }
+    toJSON() {
+        return this.get();
+    }
+    observerAdded(count) {
+        if (count == 1) this._attach();
+    }
+    observerRemoved(count) {
+        if (count == 0) this._detach();
+    }
+    _attach() {}
+    _detach() {}
+    _onChange(value, idle = false) {
+        _shared.callFluidObservers(this, {
+            type: 'change',
+            parent: this,
+            value,
+            idle
+        });
+    }
+    _onPriorityChange(priority) {
+        if (!this.idle) _shared.frameLoop.sort(this);
+        _shared.callFluidObservers(this, {
+            type: 'priority',
+            parent: this,
+            priority
+        });
+    }
+}
+const $P = Symbol.for('SpringPhase');
+const HAS_ANIMATED = 1;
+const IS_ANIMATING = 2;
+const IS_PAUSED = 4;
+const hasAnimated = (target)=>(target[$P] & HAS_ANIMATED) > 0
+;
+const isAnimating = (target)=>(target[$P] & IS_ANIMATING) > 0
+;
+const isPaused = (target)=>(target[$P] & IS_PAUSED) > 0
+;
+const setActiveBit = (target, active)=>active ? target[$P] |= IS_ANIMATING | HAS_ANIMATED : target[$P] &= ~IS_ANIMATING
+;
+const setPausedBit = (target, paused)=>paused ? target[$P] |= IS_PAUSED : target[$P] &= ~IS_PAUSED
+;
+class SpringValue extends FrameValue {
+    constructor(arg1, arg2){
+        super();
+        this.key = void 0;
+        this.animation = new Animation();
+        this.queue = void 0;
+        this.defaultProps = {};
+        this._state = {
+            paused: false,
+            delayed: false,
+            pauseQueue: new Set(),
+            resumeQueue: new Set(),
+            timeouts: new Set()
+        };
+        this._pendingCalls = new Set();
+        this._lastCallId = 0;
+        this._lastToId = 0;
+        this._memoizedDuration = 0;
+        if (!_shared.is.und(arg1) || !_shared.is.und(arg2)) {
+            const props = _shared.is.obj(arg1) ? _extends({}, arg1) : _extends({}, arg2, {
+                from: arg1
+            });
+            if (_shared.is.und(props.default)) props.default = true;
+            this.start(props);
+        }
+    }
+    get idle() {
+        return !(isAnimating(this) || this._state.asyncTo) || isPaused(this);
+    }
+    get goal() {
+        return _shared.getFluidValue(this.animation.to);
+    }
+    get velocity() {
+        const node1 = _animated.getAnimated(this);
+        return node1 instanceof _animated.AnimatedValue ? node1.lastVelocity || 0 : node1.getPayload().map((node)=>node.lastVelocity || 0
+        );
+    }
+    get hasAnimated() {
+        return hasAnimated(this);
+    }
+    get isAnimating() {
+        return isAnimating(this);
+    }
+    get isPaused() {
+        return isPaused(this);
+    }
+    get isDelayed() {
+        return this._state.delayed;
+    }
+    advance(dt) {
+        let idle = true;
+        let changed = false;
+        const anim = this.animation;
+        let { config: config3 , toValues  } = anim;
+        const payload = _animated.getPayload(anim.to);
+        if (!payload && _shared.hasFluidValue(anim.to)) toValues = _shared.toArray(_shared.getFluidValue(anim.to));
+        anim.values.forEach((node, i)=>{
+            if (node.done) return;
+            const to4 = node.constructor == _animated.AnimatedString ? 1 : payload ? payload[i].lastPosition : toValues[i];
+            let finished = anim.immediate;
+            let position = to4;
+            if (!finished) {
+                position = node.lastPosition;
+                if (config3.tension <= 0) {
+                    node.done = true;
+                    return;
+                }
+                let elapsed = node.elapsedTime += dt;
+                const from = anim.fromValues[i];
+                const v0 = node.v0 != null ? node.v0 : node.v0 = _shared.is.arr(config3.velocity) ? config3.velocity[i] : config3.velocity;
+                let velocity;
+                if (!_shared.is.und(config3.duration)) {
+                    let p = 1;
+                    if (config3.duration > 0) {
+                        if (this._memoizedDuration !== config3.duration) {
+                            this._memoizedDuration = config3.duration;
+                            if (node.durationProgress > 0) {
+                                node.elapsedTime = config3.duration * node.durationProgress;
+                                elapsed = node.elapsedTime += dt;
+                            }
+                        }
+                        p = (config3.progress || 0) + elapsed / this._memoizedDuration;
+                        p = p > 1 ? 1 : p < 0 ? 0 : p;
+                        node.durationProgress = p;
+                    }
+                    position = from + config3.easing(p) * (to4 - from);
+                    velocity = (position - node.lastPosition) / dt;
+                    finished = p == 1;
+                } else if (config3.decay) {
+                    const decay = config3.decay === true ? 0.998 : config3.decay;
+                    const e = Math.exp(-(1 - decay) * elapsed);
+                    position = from + v0 / (1 - decay) * (1 - e);
+                    finished = Math.abs(node.lastPosition - position) < 0.1;
+                    velocity = v0 * e;
+                } else {
+                    velocity = node.lastVelocity == null ? v0 : node.lastVelocity;
+                    const precision = config3.precision || (from == to4 ? 0.005 : Math.min(1, Math.abs(to4 - from) * 0.001));
+                    const restVelocity = config3.restVelocity || precision / 10;
+                    const bounceFactor = config3.clamp ? 0 : config3.bounce;
+                    const canBounce = !_shared.is.und(bounceFactor);
+                    const isGrowing = from == to4 ? node.v0 > 0 : from < to4;
+                    let isMoving;
+                    let isBouncing = false;
+                    const step = 1;
+                    const numSteps = Math.ceil(dt / step);
+                    for(let n = 0; n < numSteps; ++n){
+                        isMoving = Math.abs(velocity) > restVelocity;
+                        if (!isMoving) {
+                            finished = Math.abs(to4 - position) <= precision;
+                            if (finished) break;
+                        }
+                        if (canBounce) {
+                            isBouncing = position == to4 || position > to4 == isGrowing;
+                            if (isBouncing) {
+                                velocity = -velocity * bounceFactor;
+                                position = to4;
+                            }
+                        }
+                        const springForce = -config3.tension * 0.000001 * (position - to4);
+                        const dampingForce = -config3.friction * 0.001 * velocity;
+                        const acceleration = (springForce + dampingForce) / config3.mass;
+                        velocity = velocity + acceleration * step;
+                        position = position + velocity * step;
+                    }
+                }
+                node.lastVelocity = velocity;
+                if (Number.isNaN(position)) {
+                    console.warn(`Got NaN while animating:`, this);
+                    finished = true;
+                }
+            }
+            if (payload && !payload[i].done) finished = false;
+            if (finished) node.done = true;
+            else idle = false;
+            if (node.setValue(position, config3.round)) changed = true;
+        });
+        const node2 = _animated.getAnimated(this);
+        const currVal = node2.getValue();
+        if (idle) {
+            const finalVal = _shared.getFluidValue(anim.to);
+            if ((currVal !== finalVal || changed) && !config3.decay) {
+                node2.setValue(finalVal);
+                this._onChange(finalVal);
+            } else if (changed && config3.decay) this._onChange(currVal);
+            this._stop();
+        } else if (changed) this._onChange(currVal);
+    }
+    set(value) {
+        _shared.raf.batchedUpdates(()=>{
+            this._stop();
+            this._focus(value);
+            this._set(value);
+        });
+        return this;
+    }
+    pause() {
+        this._update({
+            pause: true
+        });
+    }
+    resume() {
+        this._update({
+            pause: false
+        });
+    }
+    finish() {
+        if (isAnimating(this)) {
+            const { to: to5 , config: config4  } = this.animation;
+            _shared.raf.batchedUpdates(()=>{
+                this._onStart();
+                if (!config4.decay) this._set(to5, false);
+                this._stop();
+            });
+        }
+        return this;
+    }
+    update(props) {
+        const queue = this.queue || (this.queue = []);
+        queue.push(props);
+        return this;
+    }
+    start(to6, arg2) {
+        let queue;
+        if (!_shared.is.und(to6)) queue = [
+            _shared.is.obj(to6) ? to6 : _extends({}, arg2, {
+                to: to6
+            })
+        ];
+        else {
+            queue = this.queue || [];
+            this.queue = [];
+        }
+        return Promise.all(queue.map((props)=>{
+            const up = this._update(props);
+            return up;
+        })).then((results)=>getCombinedResult(this, results)
+        );
+    }
+    stop(cancel) {
+        const { to: to7  } = this.animation;
+        this._focus(this.get());
+        stopAsync(this._state, cancel && this._lastCallId);
+        _shared.raf.batchedUpdates(()=>this._stop(to7, cancel)
+        );
+        return this;
+    }
+    reset() {
+        this._update({
+            reset: true
+        });
+    }
+    eventObserved(event) {
+        if (event.type == 'change') this._start();
+        else if (event.type == 'priority') this.priority = event.priority + 1;
+    }
+    _prepareNode(props) {
+        const key = this.key || '';
+        let { to: to8 , from  } = props;
+        to8 = _shared.is.obj(to8) ? to8[key] : to8;
+        if (to8 == null || isAsyncTo(to8)) to8 = undefined;
+        from = _shared.is.obj(from) ? from[key] : from;
+        if (from == null) from = undefined;
+        const range = {
+            to: to8,
+            from
+        };
+        if (!hasAnimated(this)) {
+            if (props.reverse) [to8, from] = [
+                from,
+                to8
+            ];
+            from = _shared.getFluidValue(from);
+            if (!_shared.is.und(from)) this._set(from);
+            else if (!_animated.getAnimated(this)) this._set(to8);
+        }
+        return range;
+    }
+    _update(_ref, isLoop) {
+        let props = _extends({}, _ref);
+        const { key , defaultProps  } = this;
+        if (props.default) Object.assign(defaultProps, getDefaultProps(props, (value, prop)=>/^on/.test(prop) ? resolveProp(value, key) : value
+        ));
+        mergeActiveFn(this, props, 'onProps');
+        sendEvent(this, 'onProps', props, this);
+        const range = this._prepareNode(props);
+        if (Object.isFrozen(this)) throw Error("Cannot animate a `SpringValue` object that is frozen. Did you forget to pass your component to `animated(...)` before animating its props?");
+        const state = this._state;
+        return scheduleProps(++this._lastCallId, {
+            key,
+            props,
+            defaultProps,
+            state,
+            actions: {
+                pause: ()=>{
+                    if (!isPaused(this)) {
+                        setPausedBit(this, true);
+                        _shared.flushCalls(state.pauseQueue);
+                        sendEvent(this, 'onPause', getFinishedResult(this, checkFinished(this, this.animation.to)), this);
+                    }
+                },
+                resume: ()=>{
+                    if (isPaused(this)) {
+                        setPausedBit(this, false);
+                        if (isAnimating(this)) this._resume();
+                        _shared.flushCalls(state.resumeQueue);
+                        sendEvent(this, 'onResume', getFinishedResult(this, checkFinished(this, this.animation.to)), this);
+                    }
+                },
+                start: this._merge.bind(this, range)
+            }
+        }).then((result)=>{
+            if (props.loop && result.finished && !(isLoop && result.noop)) {
+                const nextProps = createLoopUpdate(props);
+                if (nextProps) return this._update(nextProps, true);
+            }
+            return result;
+        });
+    }
+    _merge(range, props, resolve) {
+        if (props.cancel) {
+            this.stop(true);
+            return resolve(getCancelledResult(this));
+        }
+        const hasToProp = !_shared.is.und(range.to);
+        const hasFromProp = !_shared.is.und(range.from);
+        if (hasToProp || hasFromProp) {
+            if (props.callId > this._lastToId) this._lastToId = props.callId;
+            else return resolve(getCancelledResult(this));
+        }
+        const { key , defaultProps , animation: anim  } = this;
+        const { to: prevTo , from: prevFrom  } = anim;
+        let { to: to9 = prevTo , from =prevFrom  } = range;
+        if (hasFromProp && !hasToProp && (!props.default || _shared.is.und(to9))) to9 = from;
+        if (props.reverse) [to9, from] = [
+            from,
+            to9
+        ];
+        const hasFromChanged = !_shared.isEqual(from, prevFrom);
+        if (hasFromChanged) anim.from = from;
+        from = _shared.getFluidValue(from);
+        const hasToChanged = !_shared.isEqual(to9, prevTo);
+        if (hasToChanged) this._focus(to9);
+        const hasAsyncTo = isAsyncTo(props.to);
+        const { config: config5  } = anim;
+        const { decay , velocity  } = config5;
+        if (hasToProp || hasFromProp) config5.velocity = 0;
+        if (props.config && !hasAsyncTo) mergeConfig(config5, callProp(props.config, key), props.config !== defaultProps.config ? callProp(defaultProps.config, key) : void 0);
+        let node = _animated.getAnimated(this);
+        if (!node || _shared.is.und(to9)) return resolve(getFinishedResult(this, true));
+        const reset = _shared.is.und(props.reset) ? hasFromProp && !props.default : !_shared.is.und(from) && matchProp(props.reset, key);
+        const value = reset ? from : this.get();
+        const goal = computeGoal(to9);
+        const isAnimatable = _shared.is.num(goal) || _shared.is.arr(goal) || _shared.isAnimatedString(goal);
+        const immediate = !hasAsyncTo && (!isAnimatable || matchProp(defaultProps.immediate || props.immediate, key));
+        if (hasToChanged) {
+            const nodeType = _animated.getAnimatedType(to9);
+            if (nodeType !== node.constructor) {
+                if (immediate) node = this._set(goal);
+                else throw Error(`Cannot animate between ${node.constructor.name} and ${nodeType.name}, as the "to" prop suggests`);
+            }
+        }
+        const goalType = node.constructor;
+        let started = _shared.hasFluidValue(to9);
+        let finished = false;
+        if (!started) {
+            const hasValueChanged = reset || !hasAnimated(this) && hasFromChanged;
+            if (hasToChanged || hasValueChanged) {
+                finished = _shared.isEqual(computeGoal(value), goal);
+                started = !finished;
+            }
+            if (!_shared.isEqual(anim.immediate, immediate) && !immediate || !_shared.isEqual(config5.decay, decay) || !_shared.isEqual(config5.velocity, velocity)) started = true;
+        }
+        if (finished && isAnimating(this)) {
+            if (anim.changed && !reset) started = true;
+            else if (!started) this._stop(prevTo);
+        }
+        if (!hasAsyncTo) {
+            if (started || _shared.hasFluidValue(prevTo)) {
+                anim.values = node.getPayload();
+                anim.toValues = _shared.hasFluidValue(to9) ? null : goalType == _animated.AnimatedString ? [
+                    1
+                ] : _shared.toArray(goal);
+            }
+            if (anim.immediate != immediate) {
+                anim.immediate = immediate;
+                if (!immediate && !reset) this._set(prevTo);
+            }
+            if (started) {
+                const { onRest  } = anim;
+                _shared.each(ACTIVE_EVENTS, (type)=>mergeActiveFn(this, props, type)
+                );
+                const result = getFinishedResult(this, checkFinished(this, prevTo));
+                _shared.flushCalls(this._pendingCalls, result);
+                this._pendingCalls.add(resolve);
+                if (anim.changed) _shared.raf.batchedUpdates(()=>{
+                    anim.changed = !reset;
+                    onRest == null || onRest(result, this);
+                    if (reset) callProp(defaultProps.onRest, result);
+                    else anim.onStart == null || anim.onStart(result, this);
+                });
+            }
+        }
+        if (reset) this._set(value);
+        if (hasAsyncTo) resolve(runAsync(props.to, props, this._state, this));
+        else if (started) this._start();
+        else if (isAnimating(this) && !hasToChanged) this._pendingCalls.add(resolve);
+        else resolve(getNoopResult(value));
+    }
+    _focus(value) {
+        const anim = this.animation;
+        if (value !== anim.to) {
+            if (_shared.getFluidObservers(this)) this._detach();
+            anim.to = value;
+            if (_shared.getFluidObservers(this)) this._attach();
+        }
+    }
+    _attach() {
+        let priority = 0;
+        const { to: to10  } = this.animation;
+        if (_shared.hasFluidValue(to10)) {
+            _shared.addFluidObserver(to10, this);
+            if (isFrameValue(to10)) priority = to10.priority + 1;
+        }
+        this.priority = priority;
+    }
+    _detach() {
+        const { to: to11  } = this.animation;
+        if (_shared.hasFluidValue(to11)) _shared.removeFluidObserver(to11, this);
+    }
+    _set(arg, idle = true) {
+        const value = _shared.getFluidValue(arg);
+        if (!_shared.is.und(value)) {
+            const oldNode = _animated.getAnimated(this);
+            if (!oldNode || !_shared.isEqual(value, oldNode.getValue())) {
+                const nodeType = _animated.getAnimatedType(value);
+                if (!oldNode || oldNode.constructor != nodeType) _animated.setAnimated(this, nodeType.create(value));
+                else oldNode.setValue(value);
+                if (oldNode) _shared.raf.batchedUpdates(()=>{
+                    this._onChange(value, idle);
+                });
+            }
+        }
+        return _animated.getAnimated(this);
+    }
+    _onStart() {
+        const anim = this.animation;
+        if (!anim.changed) {
+            anim.changed = true;
+            sendEvent(this, 'onStart', getFinishedResult(this, checkFinished(this, anim.to)), this);
+        }
+    }
+    _onChange(value, idle) {
+        if (!idle) {
+            this._onStart();
+            callProp(this.animation.onChange, value, this);
+        }
+        callProp(this.defaultProps.onChange, value, this);
+        super._onChange(value, idle);
+    }
+    _start() {
+        const anim = this.animation;
+        _animated.getAnimated(this).reset(_shared.getFluidValue(anim.to));
+        if (!anim.immediate) anim.fromValues = anim.values.map((node)=>node.lastPosition
+        );
+        if (!isAnimating(this)) {
+            setActiveBit(this, true);
+            if (!isPaused(this)) this._resume();
+        }
+    }
+    _resume() {
+        if (_shared.Globals.skipAnimation) this.finish();
+        else _shared.frameLoop.start(this);
+    }
+    _stop(goal, cancel) {
+        if (isAnimating(this)) {
+            setActiveBit(this, false);
+            const anim = this.animation;
+            _shared.each(anim.values, (node)=>{
+                node.done = true;
+            });
+            if (anim.toValues) anim.onChange = anim.onPause = anim.onResume = undefined;
+            _shared.callFluidObservers(this, {
+                type: 'idle',
+                parent: this
+            });
+            const result = cancel ? getCancelledResult(this.get()) : getFinishedResult(this.get(), checkFinished(this, goal != null ? goal : anim.to));
+            _shared.flushCalls(this._pendingCalls, result);
+            if (anim.changed) {
+                anim.changed = false;
+                sendEvent(this, 'onRest', result, this);
+            }
+        }
+    }
+}
+function checkFinished(target, to12) {
+    const goal = computeGoal(to12);
+    const value = computeGoal(target.get());
+    return _shared.isEqual(value, goal);
+}
+function createLoopUpdate(props, loop = props.loop, to13 = props.to) {
+    let loopRet = callProp(loop);
+    if (loopRet) {
+        const overrides = loopRet !== true && inferTo(loopRet);
+        const reverse = (overrides || props).reverse;
+        const reset = !overrides || overrides.reset;
+        return createUpdate(_extends({}, props, {
+            loop,
+            default: false,
+            pause: undefined,
+            to: !reverse || isAsyncTo(to13) ? to13 : undefined,
+            from: reset ? props.from : undefined,
+            reset
+        }, overrides));
+    }
+}
+function createUpdate(props) {
+    const { to: to14 , from  } = props = inferTo(props);
+    const keys = new Set();
+    if (_shared.is.obj(to14)) findDefined(to14, keys);
+    if (_shared.is.obj(from)) findDefined(from, keys);
+    props.keys = keys.size ? Array.from(keys) : null;
+    return props;
+}
+function declareUpdate(props) {
+    const update2 = createUpdate(props);
+    if (_shared.is.und(update2.default)) update2.default = getDefaultProps(update2);
+    return update2;
+}
+function findDefined(values, keys) {
+    _shared.eachProp(values, (value, key)=>value != null && keys.add(key)
+    );
+}
+const ACTIVE_EVENTS = [
+    'onStart',
+    'onRest',
+    'onChange',
+    'onPause',
+    'onResume'
+];
+function mergeActiveFn(target, props, type) {
+    target.animation[type] = props[type] !== getDefaultProp(props, type) ? resolveProp(props[type], target.key) : undefined;
+}
+function sendEvent(target, type, ...args) {
+    var _target$animation$typ, _target$animation, _target$defaultProps$, _target$defaultProps;
+    (_target$animation$typ = (_target$animation = target.animation)[type]) == null || _target$animation$typ.call(_target$animation, ...args);
+    (_target$defaultProps$ = (_target$defaultProps = target.defaultProps)[type]) == null || _target$defaultProps$.call(_target$defaultProps, ...args);
+}
+const BATCHED_EVENTS = [
+    'onStart',
+    'onChange',
+    'onRest'
+];
+let nextId = 1;
+class Controller {
+    constructor(props, flush){
+        this.id = nextId++;
+        this.springs = {};
+        this.queue = [];
+        this.ref = void 0;
+        this._flush = void 0;
+        this._initialProps = void 0;
+        this._lastAsyncId = 0;
+        this._active = new Set();
+        this._changed = new Set();
+        this._started = false;
+        this._item = void 0;
+        this._state = {
+            paused: false,
+            pauseQueue: new Set(),
+            resumeQueue: new Set(),
+            timeouts: new Set()
+        };
+        this._events = {
+            onStart: new Map(),
+            onChange: new Map(),
+            onRest: new Map()
+        };
+        this._onFrame = this._onFrame.bind(this);
+        if (flush) this._flush = flush;
+        if (props) this.start(_extends({
+            default: true
+        }, props));
+    }
+    get idle() {
+        return !this._state.asyncTo && Object.values(this.springs).every((spring)=>{
+            return spring.idle && !spring.isDelayed && !spring.isPaused;
+        });
+    }
+    get item() {
+        return this._item;
+    }
+    set item(item) {
+        this._item = item;
+    }
+    get() {
+        const values = {};
+        this.each((spring, key)=>values[key] = spring.get()
+        );
+        return values;
+    }
+    set(values) {
+        for(const key in values){
+            const value = values[key];
+            if (!_shared.is.und(value)) this.springs[key].set(value);
+        }
+    }
+    update(props) {
+        if (props) this.queue.push(createUpdate(props));
+        return this;
+    }
+    start(props) {
+        let { queue  } = this;
+        if (props) queue = _shared.toArray(props).map(createUpdate);
+        else this.queue = [];
+        if (this._flush) return this._flush(this, queue);
+        prepareKeys(this, queue);
+        return flushUpdateQueue(this, queue);
+    }
+    stop(arg, keys) {
+        if (arg !== !!arg) keys = arg;
+        if (keys) {
+            const springs = this.springs;
+            _shared.each(_shared.toArray(keys), (key)=>springs[key].stop(!!arg)
+            );
+        } else {
+            stopAsync(this._state, this._lastAsyncId);
+            this.each((spring)=>spring.stop(!!arg)
+            );
+        }
+        return this;
+    }
+    pause(keys) {
+        if (_shared.is.und(keys)) this.start({
+            pause: true
+        });
+        else {
+            const springs = this.springs;
+            _shared.each(_shared.toArray(keys), (key)=>springs[key].pause()
+            );
+        }
+        return this;
+    }
+    resume(keys) {
+        if (_shared.is.und(keys)) this.start({
+            pause: false
+        });
+        else {
+            const springs = this.springs;
+            _shared.each(_shared.toArray(keys), (key)=>springs[key].resume()
+            );
+        }
+        return this;
+    }
+    each(iterator) {
+        _shared.eachProp(this.springs, iterator);
+    }
+    _onFrame() {
+        const { onStart: onStart1 , onChange: onChange1 , onRest: onRest1  } = this._events;
+        const active = this._active.size > 0;
+        const changed = this._changed.size > 0;
+        if (active && !this._started || changed && !this._started) {
+            this._started = true;
+            _shared.flush(onStart1, ([onStart, result])=>{
+                result.value = this.get();
+                onStart(result, this, this._item);
+            });
+        }
+        const idle = !active && this._started;
+        const values = changed || idle && onRest1.size ? this.get() : null;
+        if (changed && onChange1.size) _shared.flush(onChange1, ([onChange, result])=>{
+            result.value = values;
+            onChange(result, this, this._item);
+        });
+        if (idle) {
+            this._started = false;
+            _shared.flush(onRest1, ([onRest, result])=>{
+                result.value = values;
+                onRest(result, this, this._item);
+            });
+        }
+    }
+    eventObserved(event) {
+        if (event.type == 'change') {
+            this._changed.add(event.parent);
+            if (!event.idle) this._active.add(event.parent);
+        } else if (event.type == 'idle') this._active.delete(event.parent);
+        else return;
+        _shared.raf.onFrame(this._onFrame);
+    }
+}
+function flushUpdateQueue(ctrl, queue) {
+    return Promise.all(queue.map((props)=>flushUpdate(ctrl, props)
+    )).then((results)=>getCombinedResult(ctrl, results)
+    );
+}
+async function flushUpdate(ctrl, props2, isLoop) {
+    const { keys , to: to15 , from , loop , onRest , onResolve  } = props2;
+    const defaults2 = _shared.is.obj(props2.default) && props2.default;
+    if (loop) props2.loop = false;
+    if (to15 === false) props2.to = null;
+    if (from === false) props2.from = null;
+    const asyncTo = _shared.is.arr(to15) || _shared.is.fun(to15) ? to15 : undefined;
+    if (asyncTo) {
+        props2.to = undefined;
+        props2.onRest = undefined;
+        if (defaults2) defaults2.onRest = undefined;
+    } else _shared.each(BATCHED_EVENTS, (key)=>{
+        const handler = props2[key];
+        if (_shared.is.fun(handler)) {
+            const queue = ctrl['_events'][key];
+            props2[key] = ({ finished , cancelled  })=>{
+                const result = queue.get(handler);
+                if (result) {
+                    if (!finished) result.finished = false;
+                    if (cancelled) result.cancelled = true;
+                } else queue.set(handler, {
+                    value: null,
+                    finished: finished || false,
+                    cancelled: cancelled || false
+                });
+            };
+            if (defaults2) defaults2[key] = props2[key];
+        }
+    });
+    const state = ctrl['_state'];
+    if (props2.pause === !state.paused) {
+        state.paused = props2.pause;
+        _shared.flushCalls(props2.pause ? state.pauseQueue : state.resumeQueue);
+    } else if (state.paused) props2.pause = true;
+    const promises = (keys || Object.keys(ctrl.springs)).map((key)=>ctrl.springs[key].start(props2)
+    );
+    const cancel = props2.cancel === true || getDefaultProp(props2, 'cancel') === true;
+    if (asyncTo || cancel && state.asyncId) promises.push(scheduleProps(++ctrl['_lastAsyncId'], {
+        props: props2,
+        state,
+        actions: {
+            pause: _shared.noop,
+            resume: _shared.noop,
+            start (props, resolve) {
+                if (cancel) {
+                    stopAsync(state, ctrl['_lastAsyncId']);
+                    resolve(getCancelledResult(ctrl));
+                } else {
+                    props.onRest = onRest;
+                    resolve(runAsync(asyncTo, props, state, ctrl));
+                }
+            }
+        }
+    }));
+    if (state.paused) await new Promise((resume)=>{
+        state.resumeQueue.add(resume);
+    });
+    const result2 = getCombinedResult(ctrl, await Promise.all(promises));
+    if (loop && result2.finished && !(isLoop && result2.noop)) {
+        const nextProps = createLoopUpdate(props2, loop, to15);
+        if (nextProps) {
+            prepareKeys(ctrl, [
+                nextProps
+            ]);
+            return flushUpdate(ctrl, nextProps, true);
+        }
+    }
+    if (onResolve) _shared.raf.batchedUpdates(()=>onResolve(result2, ctrl, ctrl.item)
+    );
+    return result2;
+}
+function getSprings(ctrl, props3) {
+    const springs = _extends({}, ctrl.springs);
+    if (props3) _shared.each(_shared.toArray(props3), (props)=>{
+        if (_shared.is.und(props.keys)) props = createUpdate(props);
+        if (!_shared.is.obj(props.to)) props = _extends({}, props, {
+            to: undefined
+        });
+        prepareSprings(springs, props, (key)=>{
+            return createSpring(key);
+        });
+    });
+    setSprings(ctrl, springs);
+    return springs;
+}
+function setSprings(ctrl, springs) {
+    _shared.eachProp(springs, (spring, key)=>{
+        if (!ctrl.springs[key]) {
+            ctrl.springs[key] = spring;
+            _shared.addFluidObserver(spring, ctrl);
+        }
+    });
+}
+function createSpring(key, observer) {
+    const spring = new SpringValue();
+    spring.key = key;
+    if (observer) _shared.addFluidObserver(spring, observer);
+    return spring;
+}
+function prepareSprings(springs, props, create) {
+    if (props.keys) _shared.each(props.keys, (key)=>{
+        const spring = springs[key] || (springs[key] = create(key));
+        spring['_prepareNode'](props);
+    });
+}
+function prepareKeys(ctrl, queue) {
+    _shared.each(queue, (props)=>{
+        prepareSprings(ctrl.springs, props, (key)=>{
+            return createSpring(key, ctrl);
+        });
+    });
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for(i = 0; i < sourceKeys.length; i++){
+        key = sourceKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        target[key] = source[key];
+    }
+    return target;
+}
+const _excluded$3 = [
+    "children"
+];
+const SpringContext = (_ref)=>{
+    let { children  } = _ref, props = _objectWithoutPropertiesLoose(_ref, _excluded$3);
+    const inherited = _react.useContext(ctx);
+    const pause = props.pause || !!inherited.pause, immediate = props.immediate || !!inherited.immediate;
+    props = _shared.useMemoOne(()=>({
+            pause,
+            immediate
+        })
+    , [
+        pause,
+        immediate
+    ]);
+    const { Provider  } = ctx;
+    return _react.createElement(Provider, {
+        value: props
+    }, children);
+};
+const ctx = makeContext(SpringContext, {});
+SpringContext.Provider = ctx.Provider;
+SpringContext.Consumer = ctx.Consumer;
+function makeContext(target, init) {
+    Object.assign(target, _react.createContext(init));
+    target.Provider._context = target;
+    target.Consumer._context = target;
+    return target;
+}
+const SpringRef = ()=>{
+    const current = [];
+    const SpringRef1 = function SpringRef(props) {
+        _shared.deprecateDirectCall();
+        const results = [];
+        _shared.each(current, (ctrl, i)=>{
+            if (_shared.is.und(props)) results.push(ctrl.start());
+            else {
+                const update3 = _getProps(props, ctrl, i);
+                if (update3) results.push(ctrl.start(update3));
+            }
+        });
+        return results;
+    };
+    SpringRef1.current = current;
+    SpringRef1.add = function(ctrl) {
+        if (!current.includes(ctrl)) current.push(ctrl);
+    };
+    SpringRef1.delete = function(ctrl) {
+        const i = current.indexOf(ctrl);
+        if (~i) current.splice(i, 1);
+    };
+    SpringRef1.pause = function() {
+        _shared.each(current, (ctrl)=>ctrl.pause(...arguments)
+        );
+        return this;
+    };
+    SpringRef1.resume = function() {
+        _shared.each(current, (ctrl)=>ctrl.resume(...arguments)
+        );
+        return this;
+    };
+    SpringRef1.set = function(values) {
+        _shared.each(current, (ctrl)=>ctrl.set(values)
+        );
+    };
+    SpringRef1.start = function(props) {
+        const results = [];
+        _shared.each(current, (ctrl, i)=>{
+            if (_shared.is.und(props)) results.push(ctrl.start());
+            else {
+                const update4 = this._getProps(props, ctrl, i);
+                if (update4) results.push(ctrl.start(update4));
+            }
+        });
+        return results;
+    };
+    SpringRef1.stop = function() {
+        _shared.each(current, (ctrl)=>ctrl.stop(...arguments)
+        );
+        return this;
+    };
+    SpringRef1.update = function(props) {
+        _shared.each(current, (ctrl, i)=>ctrl.update(this._getProps(props, ctrl, i))
+        );
+        return this;
+    };
+    const _getProps = function _getProps(arg, ctrl, index) {
+        return _shared.is.fun(arg) ? arg(index, ctrl) : arg;
+    };
+    SpringRef1._getProps = _getProps;
+    return SpringRef1;
+};
+function useSprings(length, props, deps) {
+    const propsFn = _shared.is.fun(props) && props;
+    if (propsFn && !deps) deps = [];
+    const ref = _react.useMemo(()=>propsFn || arguments.length == 3 ? SpringRef() : void 0
+    , []);
+    const layoutId = _react.useRef(0);
+    const forceUpdate = _shared.useForceUpdate();
+    const state = _react.useMemo(()=>({
+            ctrls: [],
+            queue: [],
+            flush (ctrl, updates) {
+                const springs = getSprings(ctrl, updates);
+                const canFlushSync = layoutId.current > 0 && !state.queue.length && !Object.keys(springs).some((key)=>!ctrl.springs[key]
+                );
+                return canFlushSync ? flushUpdateQueue(ctrl, updates) : new Promise((resolve)=>{
+                    setSprings(ctrl, springs);
+                    state.queue.push(()=>{
+                        resolve(flushUpdateQueue(ctrl, updates));
+                    });
+                    forceUpdate();
+                });
+            }
+        })
+    , []);
+    const ctrls = _react.useRef([
+        ...state.ctrls
+    ]);
+    const updates1 = [];
+    const prevLength = _shared.usePrev(length) || 0;
+    _react.useMemo(()=>{
+        _shared.each(ctrls.current.slice(length, prevLength), (ctrl)=>{
+            detachRefs(ctrl, ref);
+            ctrl.stop(true);
+        });
+        ctrls.current.length = length;
+        declareUpdates(prevLength, length);
+    }, [
+        length
+    ]);
+    _react.useMemo(()=>{
+        declareUpdates(0, Math.min(prevLength, length));
+    }, deps);
+    function declareUpdates(startIndex, endIndex) {
+        for(let i = startIndex; i < endIndex; i++){
+            const ctrl = ctrls.current[i] || (ctrls.current[i] = new Controller(null, state.flush));
+            const update5 = propsFn ? propsFn(i, ctrl) : props[i];
+            if (update5) updates1[i] = declareUpdate(update5);
+        }
+    }
+    const springs1 = ctrls.current.map((ctrl, i)=>getSprings(ctrl, updates1[i])
+    );
+    const context = _react.useContext(SpringContext);
+    const prevContext = _shared.usePrev(context);
+    const hasContext = context !== prevContext && hasProps(context);
+    _shared.useLayoutEffect(()=>{
+        layoutId.current++;
+        state.ctrls = ctrls.current;
+        const { queue  } = state;
+        if (queue.length) {
+            state.queue = [];
+            _shared.each(queue, (cb)=>cb()
+            );
+        }
+        _shared.each(ctrls.current, (ctrl, i)=>{
+            ref == null || ref.add(ctrl);
+            if (hasContext) ctrl.start({
+                default: context
+            });
+            const update6 = updates1[i];
+            if (update6) {
+                replaceRef(ctrl, update6.ref);
+                if (ctrl.ref) ctrl.queue.push(update6);
+                else ctrl.start(update6);
+            }
+        });
+    });
+    _shared.useOnce(()=>()=>{
+            _shared.each(state.ctrls, (ctrl)=>ctrl.stop(true)
+            );
+        }
+    );
+    const values = springs1.map((x)=>_extends({}, x)
+    );
+    return ref ? [
+        values,
+        ref
+    ] : values;
+}
+function useSpring(props, deps) {
+    const isFn = _shared.is.fun(props);
+    const [[values], ref] = useSprings(1, isFn ? props : [
+        props
+    ], isFn ? deps || [] : deps);
+    return isFn || arguments.length == 2 ? [
+        values,
+        ref
+    ] : values;
+}
+const initSpringRef = ()=>SpringRef()
+;
+const useSpringRef = ()=>_react.useState(initSpringRef)[0]
+;
+function useTrail(length, propsArg1, deps) {
+    var _passedRef;
+    const propsFn = _shared.is.fun(propsArg1) && propsArg1;
+    if (propsFn && !deps) deps = [];
+    let reverse = true;
+    let passedRef = undefined;
+    const result = useSprings(length, (i, ctrl)=>{
+        const props = propsFn ? propsFn(i, ctrl) : propsArg1;
+        passedRef = props.ref;
+        reverse = reverse && props.reverse;
+        return props;
+    }, deps || [
+        {}
+    ]);
+    const ref = (_passedRef = passedRef) != null ? _passedRef : result[1];
+    _shared.useLayoutEffect(()=>{
+        _shared.each(ref.current, (ctrl, i)=>{
+            const parent = ref.current[i + (reverse ? 1 : -1)];
+            if (parent) ctrl.start({
+                to: parent.springs
+            });
+            else ctrl.start();
+        });
+    }, deps);
+    if (propsFn || arguments.length == 3) {
+        ref['_getProps'] = (propsArg, ctrl, i)=>{
+            const props = _shared.is.fun(propsArg) ? propsArg(i, ctrl) : propsArg;
+            if (props) {
+                const parent = ref.current[i + (props.reverse ? 1 : -1)];
+                if (parent) props.to = parent.springs;
+                return props;
+            }
+        };
+        return result;
+    }
+    ref['start'] = (propsArg)=>{
+        const results = [];
+        _shared.each(ref.current, (ctrl, i)=>{
+            const props = _shared.is.fun(propsArg) ? propsArg(i, ctrl) : propsArg;
+            const parent = ref.current[i + (reverse ? 1 : -1)];
+            if (parent) results.push(ctrl.start(_extends({}, props, {
+                to: parent.springs
+            })));
+            else results.push(ctrl.start(_extends({}, props)));
+        });
+        return results;
+    };
+    return result[0];
+}
+let TransitionPhase;
+(function(TransitionPhase1) {
+    TransitionPhase1["MOUNT"] = "mount";
+    TransitionPhase1["ENTER"] = "enter";
+    TransitionPhase1["UPDATE"] = "update";
+    TransitionPhase1["LEAVE"] = "leave";
+})(TransitionPhase || (TransitionPhase = {}));
+function useTransition(data, props, deps) {
+    const propsFn = _shared.is.fun(props) && props;
+    const { reset , sort , trail =0 , expires =true , exitBeforeEnter =false , onDestroyed , ref: propsRef , config: propsConfig  } = propsFn ? propsFn() : props;
+    const ref = _react.useMemo(()=>propsFn || arguments.length == 3 ? SpringRef() : void 0
+    , []);
+    const items = _shared.toArray(data);
+    const transitions1 = [];
+    const usedTransitions = _react.useRef(null);
+    const prevTransitions = reset ? null : usedTransitions.current;
+    _shared.useLayoutEffect(()=>{
+        usedTransitions.current = transitions1;
+    });
+    _shared.useOnce(()=>{
+        _shared.each(usedTransitions.current, (t)=>{
+            var _t$ctrl$ref;
+            (_t$ctrl$ref = t.ctrl.ref) == null || _t$ctrl$ref.add(t.ctrl);
+            const change = changes.get(t);
+            if (change) t.ctrl.start(change.payload);
+        });
+        return ()=>{
+            _shared.each(usedTransitions.current, (t)=>{
+                if (t.expired) clearTimeout(t.expirationId);
+                detachRefs(t.ctrl, ref);
+                t.ctrl.stop(true);
+            });
+        };
+    });
+    const keys = getKeys(items, propsFn ? propsFn() : props, prevTransitions);
+    const expired = reset && usedTransitions.current || [];
+    _shared.useLayoutEffect(()=>_shared.each(expired, ({ ctrl , item , key  })=>{
+            detachRefs(ctrl, ref);
+            callProp(onDestroyed, item, key);
+        })
+    );
+    const reused = [];
+    if (prevTransitions) _shared.each(prevTransitions, (t, i)=>{
+        if (t.expired) {
+            clearTimeout(t.expirationId);
+            expired.push(t);
+        } else {
+            i = reused[i] = keys.indexOf(t.key);
+            if (~i) transitions1[i] = t;
+        }
+    });
+    _shared.each(items, (item, i)=>{
+        if (!transitions1[i]) {
+            transitions1[i] = {
+                key: keys[i],
+                item,
+                phase: TransitionPhase.MOUNT,
+                ctrl: new Controller()
+            };
+            transitions1[i].ctrl.item = item;
+        }
+    });
+    if (reused.length) {
+        let i = -1;
+        const { leave  } = propsFn ? propsFn() : props;
+        _shared.each(reused, (keyIndex, prevIndex)=>{
+            const t = prevTransitions[prevIndex];
+            if (~keyIndex) {
+                i = transitions1.indexOf(t);
+                transitions1[i] = _extends({}, t, {
+                    item: items[keyIndex]
+                });
+            } else if (leave) transitions1.splice(++i, 0, t);
+        });
+    }
+    if (_shared.is.fun(sort)) transitions1.sort((a, b)=>sort(a.item, b.item)
+    );
+    let delay = -trail;
+    const forceUpdate = _shared.useForceUpdate();
+    const defaultProps = getDefaultProps(props);
+    const changes = new Map();
+    const exitingTransitions = _react.useRef(new Map());
+    const forceChange = _react.useRef(false);
+    _shared.each(transitions1, (t1, i)=>{
+        const key = t1.key;
+        const prevPhase = t1.phase;
+        const p = propsFn ? propsFn() : props;
+        let to16;
+        let phase;
+        let propsDelay = callProp(p.delay || 0, key);
+        if (prevPhase == TransitionPhase.MOUNT) {
+            to16 = p.enter;
+            phase = TransitionPhase.ENTER;
+        } else {
+            const isLeave = keys.indexOf(key) < 0;
+            if (prevPhase != TransitionPhase.LEAVE) {
+                if (isLeave) {
+                    to16 = p.leave;
+                    phase = TransitionPhase.LEAVE;
+                } else if (to16 = p.update) phase = TransitionPhase.UPDATE;
+                else return;
+            } else if (!isLeave) {
+                to16 = p.enter;
+                phase = TransitionPhase.ENTER;
+            } else return;
+        }
+        to16 = callProp(to16, t1.item, i);
+        to16 = _shared.is.obj(to16) ? inferTo(to16) : {
+            to: to16
+        };
+        if (!to16.config) {
+            const config6 = propsConfig || defaultProps.config;
+            to16.config = callProp(config6, t1.item, i, phase);
+        }
+        delay += trail;
+        const payload = _extends({}, defaultProps, {
+            delay: propsDelay + delay,
+            ref: propsRef,
+            immediate: p.immediate,
+            reset: false
+        }, to16);
+        if (phase == TransitionPhase.ENTER && _shared.is.und(payload.from)) {
+            const _p = propsFn ? propsFn() : props;
+            const from = _shared.is.und(_p.initial) || prevTransitions ? _p.from : _p.initial;
+            payload.from = callProp(from, t1.item, i);
+        }
+        const { onResolve  } = payload;
+        payload.onResolve = (result)=>{
+            callProp(onResolve, result);
+            const transitions = usedTransitions.current;
+            const t2 = transitions.find((t)=>t.key === key
+            );
+            if (!t2) return;
+            if (result.cancelled && t2.phase != TransitionPhase.UPDATE) return;
+            if (t2.ctrl.idle) {
+                const idle = transitions.every((t)=>t.ctrl.idle
+                );
+                if (t2.phase == TransitionPhase.LEAVE) {
+                    const expiry = callProp(expires, t2.item);
+                    if (expiry !== false) {
+                        const expiryMs = expiry === true ? 0 : expiry;
+                        t2.expired = true;
+                        if (!idle && expiryMs > 0) {
+                            if (expiryMs <= 0x7fffffff) t2.expirationId = setTimeout(forceUpdate, expiryMs);
+                            return;
+                        }
+                    }
+                }
+                if (idle && transitions.some((t)=>t.expired
+                )) {
+                    exitingTransitions.current.delete(t2);
+                    if (exitBeforeEnter) forceChange.current = true;
+                    forceUpdate();
+                }
+            }
+        };
+        const springs = getSprings(t1.ctrl, payload);
+        if (phase === TransitionPhase.LEAVE && exitBeforeEnter) exitingTransitions.current.set(t1, {
+            phase,
+            springs,
+            payload
+        });
+        else changes.set(t1, {
+            phase,
+            springs,
+            payload
+        });
+    });
+    const context = _react.useContext(SpringContext);
+    const prevContext = _shared.usePrev(context);
+    const hasContext = context !== prevContext && hasProps(context);
+    _shared.useLayoutEffect(()=>{
+        if (hasContext) _shared.each(transitions1, (t)=>{
+            t.ctrl.start({
+                default: context
+            });
+        });
+    }, [
+        context
+    ]);
+    _shared.each(changes, (_, t)=>{
+        if (exitingTransitions.current.size) {
+            const ind = transitions1.findIndex((state)=>state.key === t.key
+            );
+            transitions1.splice(ind, 1);
+        }
+    });
+    _shared.useLayoutEffect(()=>{
+        _shared.each(exitingTransitions.current.size ? exitingTransitions.current : changes, ({ phase , payload  }, t)=>{
+            const { ctrl  } = t;
+            t.phase = phase;
+            ref == null || ref.add(ctrl);
+            if (hasContext && phase == TransitionPhase.ENTER) ctrl.start({
+                default: context
+            });
+            if (payload) {
+                replaceRef(ctrl, payload.ref);
+                if (ctrl.ref && !forceChange.current) ctrl.update(payload);
+                else {
+                    ctrl.start(payload);
+                    if (forceChange.current) forceChange.current = false;
+                }
+            }
+        });
+    }, reset ? void 0 : deps);
+    const renderTransitions = (render)=>_react.createElement(_react.Fragment, null, transitions1.map((t, i)=>{
+            const { springs  } = changes.get(t) || t.ctrl;
+            const elem = render(_extends({}, springs), t.item, t, i);
+            return elem && elem.type ? _react.createElement(elem.type, _extends({}, elem.props, {
+                key: _shared.is.str(t.key) || _shared.is.num(t.key) ? t.key : t.ctrl.id,
+                ref: elem.ref
+            })) : elem;
+        }))
+    ;
+    return ref ? [
+        renderTransitions,
+        ref
+    ] : renderTransitions;
+}
+let nextKey = 1;
+function getKeys(items, { key , keys =key  }, prevTransitions) {
+    if (keys === null) {
+        const reused = new Set();
+        return items.map((item)=>{
+            const t3 = prevTransitions && prevTransitions.find((t)=>t.item === item && t.phase !== TransitionPhase.LEAVE && !reused.has(t)
+            );
+            if (t3) {
+                reused.add(t3);
+                return t3.key;
+            }
+            return nextKey++;
+        });
+    }
+    return _shared.is.und(keys) ? items : _shared.is.fun(keys) ? items.map(keys) : _shared.toArray(keys);
+}
+const _excluded$2 = [
+    "children"
+];
+function Spring(_ref) {
+    let { children  } = _ref, props = _objectWithoutPropertiesLoose(_ref, _excluded$2);
+    return children(useSpring(props));
+}
+const _excluded$1 = [
+    "items",
+    "children"
+];
+function Trail(_ref) {
+    let { items , children  } = _ref, props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
+    const trails = useTrail(items.length, props);
+    return items.map((item, index)=>{
+        const result = children(item, index);
+        return _shared.is.fun(result) ? result(trails[index]) : result;
+    });
+}
+const _excluded = [
+    "items",
+    "children"
+];
+function Transition(_ref) {
+    let { items , children  } = _ref, props = _objectWithoutPropertiesLoose(_ref, _excluded);
+    return useTransition(items, props)(children);
+}
+class Interpolation extends FrameValue {
+    constructor(source, args){
+        super();
+        this.key = void 0;
+        this.idle = true;
+        this.calc = void 0;
+        this._active = new Set();
+        this.source = source;
+        this.calc = _shared.createInterpolator(...args);
+        const value = this._get();
+        const nodeType = _animated.getAnimatedType(value);
+        _animated.setAnimated(this, nodeType.create(value));
+    }
+    advance(_dt) {
+        const value = this._get();
+        const oldValue = this.get();
+        if (!_shared.isEqual(value, oldValue)) {
+            _animated.getAnimated(this).setValue(value);
+            this._onChange(value, this.idle);
+        }
+        if (!this.idle && checkIdle(this._active)) becomeIdle(this);
+    }
+    _get() {
+        const inputs = _shared.is.arr(this.source) ? this.source.map(_shared.getFluidValue) : _shared.toArray(_shared.getFluidValue(this.source));
+        return this.calc(...inputs);
+    }
+    _start() {
+        if (this.idle && !checkIdle(this._active)) {
+            this.idle = false;
+            _shared.each(_animated.getPayload(this), (node)=>{
+                node.done = false;
+            });
+            if (_shared.Globals.skipAnimation) {
+                _shared.raf.batchedUpdates(()=>this.advance()
+                );
+                becomeIdle(this);
+            } else _shared.frameLoop.start(this);
+        }
+    }
+    _attach() {
+        let priority = 1;
+        _shared.each(_shared.toArray(this.source), (source)=>{
+            if (_shared.hasFluidValue(source)) _shared.addFluidObserver(source, this);
+            if (isFrameValue(source)) {
+                if (!source.idle) this._active.add(source);
+                priority = Math.max(priority, source.priority + 1);
+            }
+        });
+        this.priority = priority;
+        this._start();
+    }
+    _detach() {
+        _shared.each(_shared.toArray(this.source), (source)=>{
+            if (_shared.hasFluidValue(source)) _shared.removeFluidObserver(source, this);
+        });
+        this._active.clear();
+        becomeIdle(this);
+    }
+    eventObserved(event) {
+        if (event.type == 'change') {
+            if (event.idle) this.advance();
+            else {
+                this._active.add(event.parent);
+                this._start();
+            }
+        } else if (event.type == 'idle') this._active.delete(event.parent);
+        else if (event.type == 'priority') this.priority = _shared.toArray(this.source).reduce((highest, parent)=>Math.max(highest, (isFrameValue(parent) ? parent.priority : 0) + 1)
+        , 0);
+    }
+}
+function isIdle(source) {
+    return source.idle !== false;
+}
+function checkIdle(active) {
+    return !active.size || Array.from(active).every(isIdle);
+}
+function becomeIdle(self) {
+    if (!self.idle) {
+        self.idle = true;
+        _shared.each(_animated.getPayload(self), (node)=>{
+            node.done = true;
+        });
+        _shared.callFluidObservers(self, {
+            type: 'idle',
+            parent: self
+        });
+    }
+}
+const to = (source, ...args)=>new Interpolation(source, args)
+;
+const interpolate = (source, ...args)=>(_shared.deprecateInterpolate(), new Interpolation(source, args))
+;
+_shared.Globals.assign({
+    createStringInterpolator: _shared.createStringInterpolator,
+    to: (source, args)=>new Interpolation(source, args)
+});
+const update = _shared.frameLoop.advance;
+
+},{"@react-spring/shared":"jm667","react":"21dqq","@react-spring/animated":"abfrL","@react-spring/types/animated":"e9Tpo","@react-spring/types/interpolation":"dlWzh","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jm667":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "raf", ()=>_rafz.raf
+);
+parcelHelpers.export(exports, "FluidValue", ()=>FluidValue
+);
+parcelHelpers.export(exports, "Globals", ()=>globals
+);
+parcelHelpers.export(exports, "addFluidObserver", ()=>addFluidObserver
+);
+parcelHelpers.export(exports, "callFluidObserver", ()=>callFluidObserver
+);
+parcelHelpers.export(exports, "callFluidObservers", ()=>callFluidObservers
+);
+parcelHelpers.export(exports, "colorToRgba", ()=>colorToRgba
+);
+parcelHelpers.export(exports, "colors", ()=>colors
+);
+parcelHelpers.export(exports, "createInterpolator", ()=>createInterpolator
+);
+parcelHelpers.export(exports, "createStringInterpolator", ()=>createStringInterpolator
+);
+parcelHelpers.export(exports, "defineHidden", ()=>defineHidden
+);
+parcelHelpers.export(exports, "deprecateDirectCall", ()=>deprecateDirectCall
+);
+parcelHelpers.export(exports, "deprecateInterpolate", ()=>deprecateInterpolate
+);
+parcelHelpers.export(exports, "each", ()=>each
+);
+parcelHelpers.export(exports, "eachProp", ()=>eachProp
+);
+parcelHelpers.export(exports, "flush", ()=>flush
+);
+parcelHelpers.export(exports, "flushCalls", ()=>flushCalls
+);
+parcelHelpers.export(exports, "frameLoop", ()=>frameLoop
+);
+parcelHelpers.export(exports, "getFluidObservers", ()=>getFluidObservers
+);
+parcelHelpers.export(exports, "getFluidValue", ()=>getFluidValue
+);
+parcelHelpers.export(exports, "hasFluidValue", ()=>hasFluidValue
+);
+parcelHelpers.export(exports, "hex3", ()=>hex3
+);
+parcelHelpers.export(exports, "hex4", ()=>hex4
+);
+parcelHelpers.export(exports, "hex6", ()=>hex6
+);
+parcelHelpers.export(exports, "hex8", ()=>hex8
+);
+parcelHelpers.export(exports, "hsl", ()=>hsl
+);
+parcelHelpers.export(exports, "hsla", ()=>hsla
+);
+parcelHelpers.export(exports, "is", ()=>is
+);
+parcelHelpers.export(exports, "isAnimatedString", ()=>isAnimatedString
+);
+parcelHelpers.export(exports, "isEqual", ()=>isEqual
+);
+parcelHelpers.export(exports, "isSSR", ()=>isSSR
+);
+parcelHelpers.export(exports, "noop", ()=>noop
+);
+parcelHelpers.export(exports, "removeFluidObserver", ()=>removeFluidObserver
+);
+parcelHelpers.export(exports, "rgb", ()=>rgb
+);
+parcelHelpers.export(exports, "rgba", ()=>rgba
+);
+parcelHelpers.export(exports, "setFluidGetter", ()=>setFluidGetter
+);
+parcelHelpers.export(exports, "toArray", ()=>toArray
+);
+parcelHelpers.export(exports, "useForceUpdate", ()=>useForceUpdate
+);
+parcelHelpers.export(exports, "useLayoutEffect", ()=>useLayoutEffect
+);
+parcelHelpers.export(exports, "useMemoOne", ()=>useMemoOne
+);
+parcelHelpers.export(exports, "useOnce", ()=>useOnce
+);
+parcelHelpers.export(exports, "usePrev", ()=>usePrev
+);
+var _rafz = require("@react-spring/rafz");
+var _react = require("react");
+function noop() {}
+const defineHidden = (obj, key, value)=>Object.defineProperty(obj, key, {
+        value,
+        writable: true,
+        configurable: true
+    })
+;
+const is = {
+    arr: Array.isArray,
+    obj: (a)=>!!a && a.constructor.name === 'Object'
+    ,
+    fun: (a)=>typeof a === 'function'
+    ,
+    str: (a)=>typeof a === 'string'
+    ,
+    num: (a)=>typeof a === 'number'
+    ,
+    und: (a)=>a === undefined
+};
+function isEqual(a, b) {
+    if (is.arr(a)) {
+        if (!is.arr(b) || a.length !== b.length) return false;
+        for(let i = 0; i < a.length; i++){
+            if (a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+    return a === b;
+}
+const each = (obj, fn)=>obj.forEach(fn)
+;
+function eachProp(obj, fn, ctx) {
+    if (is.arr(obj)) {
+        for(let i = 0; i < obj.length; i++)fn.call(ctx, obj[i], `${i}`);
+        return;
+    }
+    for(const key in obj)if (obj.hasOwnProperty(key)) fn.call(ctx, obj[key], key);
+}
+const toArray = (a)=>is.und(a) ? [] : is.arr(a) ? a : [
+        a
+    ]
+;
+function flush(queue, iterator) {
+    if (queue.size) {
+        const items = Array.from(queue);
+        queue.clear();
+        each(items, iterator);
+    }
+}
+const flushCalls = (queue, ...args)=>flush(queue, (fn)=>fn(...args)
+    )
+;
+const isSSR = ()=>typeof window === 'undefined' || !window.navigator || /ServerSideRendering|^Deno\//.test(window.navigator.userAgent)
+;
+let createStringInterpolator$1;
+let to;
+let colors$1 = null;
+let skipAnimation = false;
+let willAdvance = noop;
+const assign = (globals1)=>{
+    if (globals1.to) to = globals1.to;
+    if (globals1.now) _rafz.raf.now = globals1.now;
+    if (globals1.colors !== undefined) colors$1 = globals1.colors;
+    if (globals1.skipAnimation != null) skipAnimation = globals1.skipAnimation;
+    if (globals1.createStringInterpolator) createStringInterpolator$1 = globals1.createStringInterpolator;
+    if (globals1.requestAnimationFrame) _rafz.raf.use(globals1.requestAnimationFrame);
+    if (globals1.batchedUpdates) _rafz.raf.batchedUpdates = globals1.batchedUpdates;
+    if (globals1.willAdvance) willAdvance = globals1.willAdvance;
+    if (globals1.frameLoop) _rafz.raf.frameLoop = globals1.frameLoop;
+};
+var globals = /*#__PURE__*/ Object.freeze({
+    __proto__: null,
+    get createStringInterpolator () {
+        return createStringInterpolator$1;
+    },
+    get to () {
+        return to;
+    },
+    get colors () {
+        return colors$1;
+    },
+    get skipAnimation () {
+        return skipAnimation;
+    },
+    get willAdvance () {
+        return willAdvance;
+    },
+    assign: assign
+});
+const startQueue = new Set();
+let currentFrame = [];
+let prevFrame = [];
+let priority = 0;
+const frameLoop = {
+    get idle () {
+        return !startQueue.size && !currentFrame.length;
+    },
+    start (animation) {
+        if (priority > animation.priority) {
+            startQueue.add(animation);
+            _rafz.raf.onStart(flushStartQueue);
+        } else {
+            startSafely(animation);
+            _rafz.raf(advance);
+        }
+    },
+    advance,
+    sort (animation) {
+        if (priority) _rafz.raf.onFrame(()=>frameLoop.sort(animation)
+        );
+        else {
+            const prevIndex = currentFrame.indexOf(animation);
+            if (~prevIndex) {
+                currentFrame.splice(prevIndex, 1);
+                startUnsafely(animation);
+            }
+        }
+    },
+    clear () {
+        currentFrame = [];
+        startQueue.clear();
+    }
+};
+function flushStartQueue() {
+    startQueue.forEach(startSafely);
+    startQueue.clear();
+    _rafz.raf(advance);
+}
+function startSafely(animation) {
+    if (!currentFrame.includes(animation)) startUnsafely(animation);
+}
+function startUnsafely(animation) {
+    currentFrame.splice(findIndex(currentFrame, (other)=>other.priority > animation.priority
+    ), 0, animation);
+}
+function advance(dt) {
+    const nextFrame = prevFrame;
+    for(let i = 0; i < currentFrame.length; i++){
+        const animation = currentFrame[i];
+        priority = animation.priority;
+        if (!animation.idle) {
+            willAdvance(animation);
+            animation.advance(dt);
+            if (!animation.idle) nextFrame.push(animation);
+        }
+    }
+    priority = 0;
+    prevFrame = currentFrame;
+    prevFrame.length = 0;
+    currentFrame = nextFrame;
+    return currentFrame.length > 0;
+}
+function findIndex(arr, test) {
+    const index = arr.findIndex(test);
+    return index < 0 ? arr.length : index;
+}
+const colors = {
+    transparent: 0x00000000,
+    aliceblue: 0xf0f8ffff,
+    antiquewhite: 0xfaebd7ff,
+    aqua: 0x00ffffff,
+    aquamarine: 0x7fffd4ff,
+    azure: 0xf0ffffff,
+    beige: 0xf5f5dcff,
+    bisque: 0xffe4c4ff,
+    black: 0x000000ff,
+    blanchedalmond: 0xffebcdff,
+    blue: 0x0000ffff,
+    blueviolet: 0x8a2be2ff,
+    brown: 0xa52a2aff,
+    burlywood: 0xdeb887ff,
+    burntsienna: 0xea7e5dff,
+    cadetblue: 0x5f9ea0ff,
+    chartreuse: 0x7fff00ff,
+    chocolate: 0xd2691eff,
+    coral: 0xff7f50ff,
+    cornflowerblue: 0x6495edff,
+    cornsilk: 0xfff8dcff,
+    crimson: 0xdc143cff,
+    cyan: 0x00ffffff,
+    darkblue: 0x00008bff,
+    darkcyan: 0x008b8bff,
+    darkgoldenrod: 0xb8860bff,
+    darkgray: 0xa9a9a9ff,
+    darkgreen: 0x006400ff,
+    darkgrey: 0xa9a9a9ff,
+    darkkhaki: 0xbdb76bff,
+    darkmagenta: 0x8b008bff,
+    darkolivegreen: 0x556b2fff,
+    darkorange: 0xff8c00ff,
+    darkorchid: 0x9932ccff,
+    darkred: 0x8b0000ff,
+    darksalmon: 0xe9967aff,
+    darkseagreen: 0x8fbc8fff,
+    darkslateblue: 0x483d8bff,
+    darkslategray: 0x2f4f4fff,
+    darkslategrey: 0x2f4f4fff,
+    darkturquoise: 0x00ced1ff,
+    darkviolet: 0x9400d3ff,
+    deeppink: 0xff1493ff,
+    deepskyblue: 0x00bfffff,
+    dimgray: 0x696969ff,
+    dimgrey: 0x696969ff,
+    dodgerblue: 0x1e90ffff,
+    firebrick: 0xb22222ff,
+    floralwhite: 0xfffaf0ff,
+    forestgreen: 0x228b22ff,
+    fuchsia: 0xff00ffff,
+    gainsboro: 0xdcdcdcff,
+    ghostwhite: 0xf8f8ffff,
+    gold: 0xffd700ff,
+    goldenrod: 0xdaa520ff,
+    gray: 0x808080ff,
+    green: 0x008000ff,
+    greenyellow: 0xadff2fff,
+    grey: 0x808080ff,
+    honeydew: 0xf0fff0ff,
+    hotpink: 0xff69b4ff,
+    indianred: 0xcd5c5cff,
+    indigo: 0x4b0082ff,
+    ivory: 0xfffff0ff,
+    khaki: 0xf0e68cff,
+    lavender: 0xe6e6faff,
+    lavenderblush: 0xfff0f5ff,
+    lawngreen: 0x7cfc00ff,
+    lemonchiffon: 0xfffacdff,
+    lightblue: 0xadd8e6ff,
+    lightcoral: 0xf08080ff,
+    lightcyan: 0xe0ffffff,
+    lightgoldenrodyellow: 0xfafad2ff,
+    lightgray: 0xd3d3d3ff,
+    lightgreen: 0x90ee90ff,
+    lightgrey: 0xd3d3d3ff,
+    lightpink: 0xffb6c1ff,
+    lightsalmon: 0xffa07aff,
+    lightseagreen: 0x20b2aaff,
+    lightskyblue: 0x87cefaff,
+    lightslategray: 0x778899ff,
+    lightslategrey: 0x778899ff,
+    lightsteelblue: 0xb0c4deff,
+    lightyellow: 0xffffe0ff,
+    lime: 0x00ff00ff,
+    limegreen: 0x32cd32ff,
+    linen: 0xfaf0e6ff,
+    magenta: 0xff00ffff,
+    maroon: 0x800000ff,
+    mediumaquamarine: 0x66cdaaff,
+    mediumblue: 0x0000cdff,
+    mediumorchid: 0xba55d3ff,
+    mediumpurple: 0x9370dbff,
+    mediumseagreen: 0x3cb371ff,
+    mediumslateblue: 0x7b68eeff,
+    mediumspringgreen: 0x00fa9aff,
+    mediumturquoise: 0x48d1ccff,
+    mediumvioletred: 0xc71585ff,
+    midnightblue: 0x191970ff,
+    mintcream: 0xf5fffaff,
+    mistyrose: 0xffe4e1ff,
+    moccasin: 0xffe4b5ff,
+    navajowhite: 0xffdeadff,
+    navy: 0x000080ff,
+    oldlace: 0xfdf5e6ff,
+    olive: 0x808000ff,
+    olivedrab: 0x6b8e23ff,
+    orange: 0xffa500ff,
+    orangered: 0xff4500ff,
+    orchid: 0xda70d6ff,
+    palegoldenrod: 0xeee8aaff,
+    palegreen: 0x98fb98ff,
+    paleturquoise: 0xafeeeeff,
+    palevioletred: 0xdb7093ff,
+    papayawhip: 0xffefd5ff,
+    peachpuff: 0xffdab9ff,
+    peru: 0xcd853fff,
+    pink: 0xffc0cbff,
+    plum: 0xdda0ddff,
+    powderblue: 0xb0e0e6ff,
+    purple: 0x800080ff,
+    rebeccapurple: 0x663399ff,
+    red: 0xff0000ff,
+    rosybrown: 0xbc8f8fff,
+    royalblue: 0x4169e1ff,
+    saddlebrown: 0x8b4513ff,
+    salmon: 0xfa8072ff,
+    sandybrown: 0xf4a460ff,
+    seagreen: 0x2e8b57ff,
+    seashell: 0xfff5eeff,
+    sienna: 0xa0522dff,
+    silver: 0xc0c0c0ff,
+    skyblue: 0x87ceebff,
+    slateblue: 0x6a5acdff,
+    slategray: 0x708090ff,
+    slategrey: 0x708090ff,
+    snow: 0xfffafaff,
+    springgreen: 0x00ff7fff,
+    steelblue: 0x4682b4ff,
+    tan: 0xd2b48cff,
+    teal: 0x008080ff,
+    thistle: 0xd8bfd8ff,
+    tomato: 0xff6347ff,
+    turquoise: 0x40e0d0ff,
+    violet: 0xee82eeff,
+    wheat: 0xf5deb3ff,
+    white: 0xffffffff,
+    whitesmoke: 0xf5f5f5ff,
+    yellow: 0xffff00ff,
+    yellowgreen: 0x9acd32ff
+};
+const NUMBER = '[-+]?\\d*\\.?\\d+';
+const PERCENTAGE = NUMBER + '%';
+function call(...parts) {
+    return '\\(\\s*(' + parts.join(')\\s*,\\s*(') + ')\\s*\\)';
+}
+const rgb = new RegExp('rgb' + call(NUMBER, NUMBER, NUMBER));
+const rgba = new RegExp('rgba' + call(NUMBER, NUMBER, NUMBER, NUMBER));
+const hsl = new RegExp('hsl' + call(NUMBER, PERCENTAGE, PERCENTAGE));
+const hsla = new RegExp('hsla' + call(NUMBER, PERCENTAGE, PERCENTAGE, NUMBER));
+const hex3 = /^#([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/;
+const hex4 = /^#([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/;
+const hex6 = /^#([0-9a-fA-F]{6})$/;
+const hex8 = /^#([0-9a-fA-F]{8})$/;
+function normalizeColor(color) {
+    let match;
+    if (typeof color === 'number') return color >>> 0 === color && color >= 0 && color <= 0xffffffff ? color : null;
+    if (match = hex6.exec(color)) return parseInt(match[1] + 'ff', 16) >>> 0;
+    if (colors$1 && colors$1[color] !== undefined) return colors$1[color];
+    if (match = rgb.exec(color)) return (parse255(match[1]) << 24 | parse255(match[2]) << 16 | parse255(match[3]) << 8 | 0x000000ff) >>> 0;
+    if (match = rgba.exec(color)) return (parse255(match[1]) << 24 | parse255(match[2]) << 16 | parse255(match[3]) << 8 | parse1(match[4])) >>> 0;
+    if (match = hex3.exec(color)) return parseInt(match[1] + match[1] + match[2] + match[2] + match[3] + match[3] + 'ff', 16) >>> 0;
+    if (match = hex8.exec(color)) return parseInt(match[1], 16) >>> 0;
+    if (match = hex4.exec(color)) return parseInt(match[1] + match[1] + match[2] + match[2] + match[3] + match[3] + match[4] + match[4], 16) >>> 0;
+    if (match = hsl.exec(color)) return (hslToRgb(parse360(match[1]), parsePercentage(match[2]), parsePercentage(match[3])) | 0x000000ff) >>> 0;
+    if (match = hsla.exec(color)) return (hslToRgb(parse360(match[1]), parsePercentage(match[2]), parsePercentage(match[3])) | parse1(match[4])) >>> 0;
+    return null;
+}
+function hue2rgb(p, q, t) {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 0.5) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    return p;
+}
+function hslToRgb(h, s, l) {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    const r = hue2rgb(p, q, h + 1 / 3);
+    const g = hue2rgb(p, q, h);
+    const b = hue2rgb(p, q, h - 1 / 3);
+    return Math.round(r * 255) << 24 | Math.round(g * 255) << 16 | Math.round(b * 255) << 8;
+}
+function parse255(str) {
+    const int = parseInt(str, 10);
+    if (int < 0) return 0;
+    if (int > 255) return 255;
+    return int;
+}
+function parse360(str) {
+    const int = parseFloat(str);
+    return (int % 360 + 360) % 360 / 360;
+}
+function parse1(str) {
+    const num = parseFloat(str);
+    if (num < 0) return 0;
+    if (num > 1) return 255;
+    return Math.round(num * 255);
+}
+function parsePercentage(str) {
+    const int = parseFloat(str);
+    if (int < 0) return 0;
+    if (int > 100) return 1;
+    return int / 100;
+}
+function colorToRgba(input) {
+    let int32Color = normalizeColor(input);
+    if (int32Color === null) return input;
+    int32Color = int32Color || 0;
+    let r = (int32Color & 0xff000000) >>> 24;
+    let g = (int32Color & 0x00ff0000) >>> 16;
+    let b = (int32Color & 0x0000ff00) >>> 8;
+    let a = (int32Color & 0x000000ff) / 255;
+    return `rgba(${r}, ${g}, ${b}, ${a})`;
+}
+const createInterpolator = (range1, output, extrapolate)=>{
+    if (is.fun(range1)) return range1;
+    if (is.arr(range1)) return createInterpolator({
+        range: range1,
+        output: output,
+        extrapolate
+    });
+    if (is.str(range1.output[0])) return createStringInterpolator$1(range1);
+    const config = range1;
+    const outputRange = config.output;
+    const inputRange = config.range || [
+        0,
+        1
+    ];
+    const extrapolateLeft = config.extrapolateLeft || config.extrapolate || 'extend';
+    const extrapolateRight = config.extrapolateRight || config.extrapolate || 'extend';
+    const easing = config.easing || ((t)=>t
+    );
+    return (input)=>{
+        const range = findRange(input, inputRange);
+        return interpolate(input, inputRange[range], inputRange[range + 1], outputRange[range], outputRange[range + 1], easing, extrapolateLeft, extrapolateRight, config.map);
+    };
+};
+function interpolate(input, inputMin, inputMax, outputMin, outputMax, easing, extrapolateLeft, extrapolateRight, map) {
+    let result = map ? map(input) : input;
+    if (result < inputMin) {
+        if (extrapolateLeft === 'identity') return result;
+        else if (extrapolateLeft === 'clamp') result = inputMin;
+    }
+    if (result > inputMax) {
+        if (extrapolateRight === 'identity') return result;
+        else if (extrapolateRight === 'clamp') result = inputMax;
+    }
+    if (outputMin === outputMax) return outputMin;
+    if (inputMin === inputMax) return input <= inputMin ? outputMin : outputMax;
+    if (inputMin === -Infinity) result = -result;
+    else if (inputMax === Infinity) result = result - inputMin;
+    else result = (result - inputMin) / (inputMax - inputMin);
+    result = easing(result);
+    if (outputMin === -Infinity) result = -result;
+    else if (outputMax === Infinity) result = result + outputMin;
+    else result = result * (outputMax - outputMin) + outputMin;
+    return result;
+}
+function findRange(input, inputRange) {
+    for(var i = 1; i < inputRange.length - 1; ++i)if (inputRange[i] >= input) break;
+    return i - 1;
+}
+function _extends() {
+    _extends = Object.assign || function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
+}
+const $get = Symbol.for('FluidValue.get');
+const $observers = Symbol.for('FluidValue.observers');
+const hasFluidValue = (arg)=>Boolean(arg && arg[$get])
+;
+const getFluidValue = (arg)=>arg && arg[$get] ? arg[$get]() : arg
+;
+const getFluidObservers = (target)=>target[$observers] || null
+;
+function callFluidObserver(observer, event) {
+    if (observer.eventObserved) observer.eventObserved(event);
+    else observer(event);
+}
+function callFluidObservers(target, event) {
+    let observers = target[$observers];
+    if (observers) observers.forEach((observer)=>{
+        callFluidObserver(observer, event);
+    });
+}
+class FluidValue {
+    constructor(get){
+        this[$get] = void 0;
+        this[$observers] = void 0;
+        if (!get && !(get = this.get)) throw Error('Unknown getter');
+        setFluidGetter(this, get);
+    }
+}
+const setFluidGetter = (target, get)=>setHidden(target, $get, get)
+;
+function addFluidObserver(target, observer) {
+    if (target[$get]) {
+        let observers = target[$observers];
+        if (!observers) setHidden(target, $observers, observers = new Set());
+        if (!observers.has(observer)) {
+            observers.add(observer);
+            if (target.observerAdded) target.observerAdded(observers.size, observer);
+        }
+    }
+    return observer;
+}
+function removeFluidObserver(target, observer) {
+    let observers = target[$observers];
+    if (observers && observers.has(observer)) {
+        const count = observers.size - 1;
+        if (count) observers.delete(observer);
+        else target[$observers] = null;
+        if (target.observerRemoved) target.observerRemoved(count, observer);
+    }
+}
+const setHidden = (target, key, value)=>Object.defineProperty(target, key, {
+        value,
+        writable: true,
+        configurable: true
+    })
+;
+const numberRegex = /[+\-]?(?:0|[1-9]\d*)(?:\.\d*)?(?:[eE][+\-]?\d+)?/g;
+const colorRegex = /(#(?:[0-9a-f]{2}){2,4}|(#[0-9a-f]{3})|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d\.]+%?\))/gi;
+const unitRegex = new RegExp(`(${numberRegex.source})(%|[a-z]+)`, 'i');
+const rgbaRegex = /rgba\(([0-9\.-]+), ([0-9\.-]+), ([0-9\.-]+), ([0-9\.-]+)\)/gi;
+const cssVariableRegex = /var\((--[a-zA-Z0-9-_]+),? ?([a-zA-Z0-9 ()%#.,-]+)?\)/;
+const variableToRgba = (input)=>{
+    const [token, fallback] = parseCSSVariable(input);
+    if (!token || isSSR()) return input;
+    const value = window.getComputedStyle(document.documentElement).getPropertyValue(token);
+    if (value) return value.trim();
+    else if (fallback && fallback.startsWith('--')) {
+        const _value = window.getComputedStyle(document.documentElement).getPropertyValue(fallback);
+        if (_value) return _value;
+        else return input;
+    } else if (fallback && cssVariableRegex.test(fallback)) return variableToRgba(fallback);
+    else if (fallback) return fallback;
+    return input;
+};
+const parseCSSVariable = (current)=>{
+    const match = cssVariableRegex.exec(current);
+    if (!match) return [
+        , 
+    ];
+    const [, token, fallback] = match;
+    return [
+        token,
+        fallback
+    ];
+};
+let namedColorRegex;
+const rgbaRound = (_, p1, p2, p3, p4)=>`rgba(${Math.round(p1)}, ${Math.round(p2)}, ${Math.round(p3)}, ${p4})`
+;
+const createStringInterpolator = (config)=>{
+    if (!namedColorRegex) namedColorRegex = colors$1 ? new RegExp(`(${Object.keys(colors$1).join('|')})(?!\\w)`, 'g') : /^\b$/;
+    const output1 = config.output.map((value)=>{
+        return getFluidValue(value).replace(cssVariableRegex, variableToRgba).replace(colorRegex, colorToRgba).replace(namedColorRegex, colorToRgba);
+    });
+    const keyframes = output1.map((value)=>value.match(numberRegex).map(Number)
+    );
+    const outputRanges = keyframes[0].map((_, i)=>keyframes.map((values)=>{
+            if (!(i in values)) throw Error('The arity of each "output" value must be equal');
+            return values[i];
+        })
+    );
+    const interpolators = outputRanges.map((output)=>createInterpolator(_extends({}, config, {
+            output
+        }))
+    );
+    return (input)=>{
+        var _output$find;
+        const missingUnit = !unitRegex.test(output1[0]) && ((_output$find = output1.find((value)=>unitRegex.test(value)
+        )) == null ? void 0 : _output$find.replace(numberRegex, ''));
+        let i = 0;
+        return output1[0].replace(numberRegex, ()=>`${interpolators[i++](input)}${missingUnit || ''}`
+        ).replace(rgbaRegex, rgbaRound);
+    };
+};
+const prefix = 'react-spring: ';
+const once = (fn)=>{
+    const func = fn;
+    let called = false;
+    if (typeof func != 'function') throw new TypeError(`${prefix}once requires a function parameter`);
+    return (...args)=>{
+        if (!called) {
+            func(...args);
+            called = true;
+        }
+    };
+};
+const warnInterpolate = once(console.warn);
+function deprecateInterpolate() {
+    warnInterpolate(`${prefix}The "interpolate" function is deprecated in v9 (use "to" instead)`);
+}
+const warnDirectCall = once(console.warn);
+function deprecateDirectCall() {
+    warnDirectCall(`${prefix}Directly calling start instead of using the api object is deprecated in v9 (use ".start" instead), this will be removed in later 0.X.0 versions`);
+}
+function isAnimatedString(value) {
+    return is.str(value) && (value[0] == '#' || /\d/.test(value) || !isSSR() && cssVariableRegex.test(value) || value in (colors$1 || {}));
+}
+const useLayoutEffect = typeof window !== 'undefined' && window.document && window.document.createElement ? _react.useLayoutEffect : _react.useEffect;
+const useIsMounted = ()=>{
+    const isMounted = _react.useRef(false);
+    useLayoutEffect(()=>{
+        isMounted.current = true;
+        return ()=>{
+            isMounted.current = false;
+        };
+    }, []);
+    return isMounted;
+};
+function useForceUpdate() {
+    const update = _react.useState()[1];
+    const isMounted = useIsMounted();
+    return ()=>{
+        if (isMounted.current) update(Math.random());
+    };
+}
+function useMemoOne(getResult, inputs) {
+    const [initial] = _react.useState(()=>({
+            inputs,
+            result: getResult()
+        })
+    );
+    const committed = _react.useRef();
+    const prevCache = committed.current;
+    let cache = prevCache;
+    if (cache) {
+        const useCache = Boolean(inputs && cache.inputs && areInputsEqual(inputs, cache.inputs));
+        if (!useCache) cache = {
+            inputs,
+            result: getResult()
+        };
+    } else cache = initial;
+    _react.useEffect(()=>{
+        committed.current = cache;
+        if (prevCache == initial) initial.inputs = initial.result = undefined;
+    }, [
+        cache
+    ]);
+    return cache.result;
+}
+function areInputsEqual(next, prev) {
+    if (next.length !== prev.length) return false;
+    for(let i = 0; i < next.length; i++){
+        if (next[i] !== prev[i]) return false;
+    }
+    return true;
+}
+const useOnce = (effect)=>_react.useEffect(effect, emptyDeps)
+;
+const emptyDeps = [];
+function usePrev(value) {
+    const prevRef = _react.useRef();
+    _react.useEffect(()=>{
+        prevRef.current = value;
+    });
+    return prevRef.current;
+}
+
+},{"@react-spring/rafz":"jCdCs","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jCdCs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "__raf", ()=>__raf
+);
+parcelHelpers.export(exports, "raf", ()=>raf
+);
+let updateQueue = makeQueue();
+const raf = (fn)=>schedule(fn, updateQueue)
+;
+let writeQueue = makeQueue();
+raf.write = (fn)=>schedule(fn, writeQueue)
+;
+let onStartQueue = makeQueue();
+raf.onStart = (fn)=>schedule(fn, onStartQueue)
+;
+let onFrameQueue = makeQueue();
+raf.onFrame = (fn)=>schedule(fn, onFrameQueue)
+;
+let onFinishQueue = makeQueue();
+raf.onFinish = (fn)=>schedule(fn, onFinishQueue)
+;
+let timeouts = [];
+raf.setTimeout = (handler, ms)=>{
+    let time = raf.now() + ms;
+    let cancel = ()=>{
+        let i = timeouts.findIndex((t)=>t.cancel == cancel
+        );
+        if (~i) timeouts.splice(i, 1);
+        pendingCount -= ~i ? 1 : 0;
+    };
+    let timeout = {
+        time,
+        handler,
+        cancel
+    };
+    timeouts.splice(findTimeout(time), 0, timeout);
+    pendingCount += 1;
+    start();
+    return timeout;
+};
+let findTimeout = (time)=>~(~timeouts.findIndex((t)=>t.time > time
+    ) || ~timeouts.length)
+;
+raf.cancel = (fn)=>{
+    onStartQueue.delete(fn);
+    onFrameQueue.delete(fn);
+    updateQueue.delete(fn);
+    writeQueue.delete(fn);
+    onFinishQueue.delete(fn);
+};
+raf.sync = (fn)=>{
+    sync = true;
+    raf.batchedUpdates(fn);
+    sync = false;
+};
+raf.throttle = (fn)=>{
+    let lastArgs;
+    function queuedFn() {
+        try {
+            fn(...lastArgs);
+        } finally{
+            lastArgs = null;
+        }
+    }
+    function throttled(...args) {
+        lastArgs = args;
+        raf.onStart(queuedFn);
+    }
+    throttled.handler = fn;
+    throttled.cancel = ()=>{
+        onStartQueue.delete(queuedFn);
+        lastArgs = null;
+    };
+    return throttled;
+};
+let nativeRaf = typeof window != 'undefined' ? window.requestAnimationFrame : ()=>{};
+raf.use = (impl)=>nativeRaf = impl
+;
+raf.now = typeof performance != 'undefined' ? ()=>performance.now()
+ : Date.now;
+raf.batchedUpdates = (fn)=>fn()
+;
+raf.catch = console.error;
+raf.frameLoop = 'always';
+raf.advance = ()=>{
+    if (raf.frameLoop !== 'demand') console.warn('Cannot call the manual advancement of rafz whilst frameLoop is not set as demand');
+    else update();
+};
+let ts = -1;
+let pendingCount = 0;
+let sync = false;
+function schedule(fn, queue) {
+    if (sync) {
+        queue.delete(fn);
+        fn(0);
+    } else {
+        queue.add(fn);
+        start();
+    }
+}
+function start() {
+    if (ts < 0) {
+        ts = 0;
+        if (raf.frameLoop !== 'demand') nativeRaf(loop);
+    }
+}
+function stop() {
+    ts = -1;
+}
+function loop() {
+    if (~ts) {
+        nativeRaf(loop);
+        raf.batchedUpdates(update);
+    }
+}
+function update() {
+    let prevTs = ts;
+    ts = raf.now();
+    let count = findTimeout(ts);
+    if (count) {
+        eachSafely(timeouts.splice(0, count), (t)=>t.handler()
+        );
+        pendingCount -= count;
+    }
+    onStartQueue.flush();
+    updateQueue.flush(prevTs ? Math.min(64, ts - prevTs) : 16.667);
+    onFrameQueue.flush();
+    writeQueue.flush();
+    onFinishQueue.flush();
+    if (!pendingCount) stop();
+}
+function makeQueue() {
+    let next = new Set();
+    let current = next;
+    return {
+        add (fn) {
+            pendingCount += current == next && !next.has(fn) ? 1 : 0;
+            next.add(fn);
+        },
+        delete (fn) {
+            pendingCount -= current == next && next.has(fn) ? 1 : 0;
+            return next.delete(fn);
+        },
+        flush (arg) {
+            if (current.size) {
+                next = new Set();
+                pendingCount -= current.size;
+                eachSafely(current, (fn)=>fn(arg) && next.add(fn)
+                );
+                pendingCount += next.size;
+                current = next;
+            }
+        }
+    };
+}
+function eachSafely(values, each) {
+    values.forEach((value)=>{
+        try {
+            each(value);
+        } catch (e) {
+            raf.catch(e);
+        }
+    });
+}
+const __raf = {
+    count () {
+        return pendingCount;
+    },
+    isRunning () {
+        return ts >= 0;
+    },
+    clear () {
+        ts = -1;
+        timeouts = [];
+        onStartQueue = makeQueue();
+        updateQueue = makeQueue();
+        onFrameQueue = makeQueue();
+        writeQueue = makeQueue();
+        onFinishQueue = makeQueue();
+        pendingCount = 0;
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"abfrL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Animated", ()=>Animated
+);
+parcelHelpers.export(exports, "AnimatedArray", ()=>AnimatedArray
+);
+parcelHelpers.export(exports, "AnimatedObject", ()=>AnimatedObject
+);
+parcelHelpers.export(exports, "AnimatedString", ()=>AnimatedString
+);
+parcelHelpers.export(exports, "AnimatedValue", ()=>AnimatedValue
+);
+parcelHelpers.export(exports, "createHost", ()=>createHost
+);
+parcelHelpers.export(exports, "getAnimated", ()=>getAnimated
+);
+parcelHelpers.export(exports, "getAnimatedType", ()=>getAnimatedType
+);
+parcelHelpers.export(exports, "getPayload", ()=>getPayload
+);
+parcelHelpers.export(exports, "isAnimated", ()=>isAnimated
+);
+parcelHelpers.export(exports, "setAnimated", ()=>setAnimated
+);
+var _shared = require("@react-spring/shared");
+var _react = require("react");
+const $node = Symbol.for('Animated:node');
+const isAnimated = (value)=>!!value && value[$node] === value
+;
+const getAnimated = (owner)=>owner && owner[$node]
+;
+const setAnimated = (owner, node)=>_shared.defineHidden(owner, $node, node)
+;
+const getPayload = (owner)=>owner && owner[$node] && owner[$node].getPayload()
+;
+class Animated {
+    constructor(){
+        this.payload = void 0;
+        setAnimated(this, this);
+    }
+    getPayload() {
+        return this.payload || [];
+    }
+}
+class AnimatedValue extends Animated {
+    constructor(_value){
+        super();
+        this.done = true;
+        this.elapsedTime = void 0;
+        this.lastPosition = void 0;
+        this.lastVelocity = void 0;
+        this.v0 = void 0;
+        this.durationProgress = 0;
+        this._value = _value;
+        if (_shared.is.num(this._value)) this.lastPosition = this._value;
+    }
+    static create(value) {
+        return new AnimatedValue(value);
+    }
+    getPayload() {
+        return [
+            this
+        ];
+    }
+    getValue() {
+        return this._value;
+    }
+    setValue(value, step) {
+        if (_shared.is.num(value)) {
+            this.lastPosition = value;
+            if (step) {
+                value = Math.round(value / step) * step;
+                if (this.done) this.lastPosition = value;
+            }
+        }
+        if (this._value === value) return false;
+        this._value = value;
+        return true;
+    }
+    reset() {
+        const { done  } = this;
+        this.done = false;
+        if (_shared.is.num(this._value)) {
+            this.elapsedTime = 0;
+            this.durationProgress = 0;
+            this.lastPosition = this._value;
+            if (done) this.lastVelocity = null;
+            this.v0 = null;
+        }
+    }
+}
+class AnimatedString extends AnimatedValue {
+    constructor(value){
+        super(0);
+        this._string = null;
+        this._toString = void 0;
+        this._toString = _shared.createInterpolator({
+            output: [
+                value,
+                value
+            ]
+        });
+    }
+    static create(value) {
+        return new AnimatedString(value);
+    }
+    getValue() {
+        let value = this._string;
+        return value == null ? this._string = this._toString(this._value) : value;
+    }
+    setValue(value) {
+        if (_shared.is.str(value)) {
+            if (value == this._string) return false;
+            this._string = value;
+            this._value = 1;
+        } else if (super.setValue(value)) this._string = null;
+        else return false;
+        return true;
+    }
+    reset(goal) {
+        if (goal) this._toString = _shared.createInterpolator({
+            output: [
+                this.getValue(),
+                goal
+            ]
+        });
+        this._value = 0;
+        super.reset();
+    }
+}
+const TreeContext = {
+    dependencies: null
+};
+class AnimatedObject extends Animated {
+    constructor(source){
+        super();
+        this.source = source;
+        this.setValue(source);
+    }
+    getValue(animated) {
+        const values = {};
+        _shared.eachProp(this.source, (source, key)=>{
+            if (isAnimated(source)) values[key] = source.getValue(animated);
+            else if (_shared.hasFluidValue(source)) values[key] = _shared.getFluidValue(source);
+            else if (!animated) values[key] = source;
+        });
+        return values;
+    }
+    setValue(source) {
+        this.source = source;
+        this.payload = this._makePayload(source);
+    }
+    reset() {
+        if (this.payload) _shared.each(this.payload, (node)=>node.reset()
+        );
+    }
+    _makePayload(source) {
+        if (source) {
+            const payload = new Set();
+            _shared.eachProp(source, this._addToPayload, payload);
+            return Array.from(payload);
+        }
+    }
+    _addToPayload(source) {
+        if (TreeContext.dependencies && _shared.hasFluidValue(source)) TreeContext.dependencies.add(source);
+        const payload = getPayload(source);
+        if (payload) _shared.each(payload, (node)=>this.add(node)
+        );
+    }
+}
+class AnimatedArray extends AnimatedObject {
+    constructor(source){
+        super(source);
+    }
+    static create(source) {
+        return new AnimatedArray(source);
+    }
+    getValue() {
+        return this.source.map((node)=>node.getValue()
+        );
+    }
+    setValue(source) {
+        const payload = this.getPayload();
+        if (source.length == payload.length) return payload.map((node, i)=>node.setValue(source[i])
+        ).some(Boolean);
+        super.setValue(source.map(makeAnimated));
+        return true;
+    }
+}
+function makeAnimated(value) {
+    const nodeType = _shared.isAnimatedString(value) ? AnimatedString : AnimatedValue;
+    return nodeType.create(value);
+}
+function getAnimatedType(value) {
+    const parentNode = getAnimated(value);
+    return parentNode ? parentNode.constructor : _shared.is.arr(value) ? AnimatedArray : _shared.isAnimatedString(value) ? AnimatedString : AnimatedValue;
+}
+function _extends() {
+    _extends = Object.assign || function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
+}
+const withAnimated = (Component, host)=>{
+    const hasInstance = !_shared.is.fun(Component) || Component.prototype && Component.prototype.isReactComponent;
+    return _react.forwardRef((givenProps, givenRef)=>{
+        const instanceRef = _react.useRef(null);
+        const ref = hasInstance && _react.useCallback((value)=>{
+            instanceRef.current = updateRef(givenRef, value);
+        }, [
+            givenRef
+        ]);
+        const [props, deps] = getAnimatedState(givenProps, host);
+        const forceUpdate = _shared.useForceUpdate();
+        const callback = ()=>{
+            const instance = instanceRef.current;
+            if (hasInstance && !instance) return;
+            const didUpdate = instance ? host.applyAnimatedValues(instance, props.getValue(true)) : false;
+            if (didUpdate === false) forceUpdate();
+        };
+        const observer1 = new PropsObserver(callback, deps);
+        const observerRef = _react.useRef();
+        _shared.useLayoutEffect(()=>{
+            observerRef.current = observer1;
+            _shared.each(deps, (dep)=>_shared.addFluidObserver(dep, observer1)
+            );
+            return ()=>{
+                if (observerRef.current) {
+                    _shared.each(observerRef.current.deps, (dep)=>_shared.removeFluidObserver(dep, observerRef.current)
+                    );
+                    _shared.raf.cancel(observerRef.current.update);
+                }
+            };
+        });
+        _react.useEffect(callback, []);
+        _shared.useOnce(()=>()=>{
+                const observer = observerRef.current;
+                _shared.each(observer.deps, (dep)=>_shared.removeFluidObserver(dep, observer)
+                );
+            }
+        );
+        const usedProps = host.getComponentProps(props.getValue());
+        return _react.createElement(Component, _extends({}, usedProps, {
+            ref: ref
+        }));
+    });
+};
+class PropsObserver {
+    constructor(update, deps){
+        this.update = update;
+        this.deps = deps;
+    }
+    eventObserved(event) {
+        if (event.type == 'change') _shared.raf.write(this.update);
+    }
+}
+function getAnimatedState(props, host) {
+    const dependencies = new Set();
+    TreeContext.dependencies = dependencies;
+    if (props.style) props = _extends({}, props, {
+        style: host.createAnimatedStyle(props.style)
+    });
+    props = new AnimatedObject(props);
+    TreeContext.dependencies = null;
+    return [
+        props,
+        dependencies
+    ];
+}
+function updateRef(ref, value) {
+    if (ref) {
+        if (_shared.is.fun(ref)) ref(value);
+        else ref.current = value;
+    }
+    return value;
+}
+const cacheKey = Symbol.for('AnimatedComponent');
+const createHost = (components, { applyAnimatedValues: _applyAnimatedValues = ()=>false
+ , createAnimatedStyle: _createAnimatedStyle = (style)=>new AnimatedObject(style)
+ , getComponentProps: _getComponentProps = (props)=>props
+  } = {})=>{
+    const hostConfig = {
+        applyAnimatedValues: _applyAnimatedValues,
+        createAnimatedStyle: _createAnimatedStyle,
+        getComponentProps: _getComponentProps
+    };
+    const animated = (Component)=>{
+        const displayName = getDisplayName(Component) || 'Anonymous';
+        if (_shared.is.str(Component)) Component = animated[Component] || (animated[Component] = withAnimated(Component, hostConfig));
+        else Component = Component[cacheKey] || (Component[cacheKey] = withAnimated(Component, hostConfig));
+        Component.displayName = `Animated(${displayName})`;
+        return Component;
+    };
+    _shared.eachProp(components, (Component, key)=>{
+        if (_shared.is.arr(components)) key = getDisplayName(Component);
+        animated[key] = animated(Component);
+    });
+    return {
+        animated
+    };
+};
+const getDisplayName = (arg)=>_shared.is.str(arg) ? arg : arg && _shared.is.str(arg.displayName) ? arg.displayName : _shared.is.fun(arg) && arg.name || null
+;
+
+},{"@react-spring/shared":"jm667","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e9Tpo":[function(require,module,exports) {
+
+},{}],"dlWzh":[function(require,module,exports) {
+
+},{}],"jaez3":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$3a50 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$3a50.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactSpring = require("react-spring");
+var _titletest = require("./components/titletest");
+var _titletestDefault = parcelHelpers.interopDefault(_titletest);
+var _drawSvg = require("./components/draw-svg");
+var _drawSvgDefault = parcelHelpers.interopDefault(_drawSvg);
+var _leftToRight = require("./components/left-to-right");
+var _leftToRightDefault = parcelHelpers.interopDefault(_leftToRight);
+var _arrayAnimation = require("./components/array-animation");
+var _arrayAnimationDefault = parcelHelpers.interopDefault(_arrayAnimation);
+var _s = $RefreshSig$();
+const ReactSpring = ()=>{
+    _s();
+    const [draw, setDraw] = _react.useState(false);
+    const [index, setIndex] = _react.useState(0);
+    const [styleToConfess, setStyleToConfess] = _react.useState();
+    const [welcom, setWelcom] = _react.useState(_reactSpring.useSpring({
+        reset: true,
+        config: {
+            duration: 3000
+        },
+        from: {
+            opacity: 0,
+            y: 600
+        },
+        to: {
+            opacity: 1,
+            y: 0
+        }
+    }));
+    const welcomAnim = _reactSpring.useSpring({
+        reset: true,
+        config: {
+            duration: 3000
+        },
+        from: {
+            opacity: 0,
+            y: 600
+        },
+        to: {
+            opacity: 1,
+            y: 0
+        }
+    });
+    const comeBack = _reactSpring.useSpring({
+        reset: true,
+        config: {
+            duration: 1000
+        },
+        from: {
+            opacity: 0,
+            x: -600
+        },
+        to: {
+            opacity: 1,
+            x: 0
+        }
+    });
+    const leavePage = _reactSpring.useSpring({
+        reset: true,
+        config: {
+            duration: 1500
+        },
+        from: {
+            opacity: 1,
+            x: 0
+        },
+        to: {
+            opacity: 0,
+            x: -600
+        }
+    });
+    const componentArray = [
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_titletestDefault.default, {
+            move: styleToConfess,
+            index: index
+        }, void 0, false, {
+            fileName: "src/pages/react-spring/react-spring.jsx",
+            lineNumber: 43,
+            columnNumber: 9
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_drawSvgDefault.default, {
+            index: index,
+            // currentAnim={conditionForGoodAnim(componentArray)}
+            currentAnim: welcom
+        }, void 0, false, {
+            fileName: "src/pages/react-spring/react-spring.jsx",
+            lineNumber: 48,
+            columnNumber: 9
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_leftToRightDefault.default, {
+            index: index
+        }, void 0, false, {
+            fileName: "src/pages/react-spring/react-spring.jsx",
+            lineNumber: 53,
+            columnNumber: 9
+        }, undefined)
+    ];
+    //Pour faire l'annimation sur les composants
+    const AnimatedDonut = _reactSpring.animated("Donut");
+    const drawing = ()=>{
+        const { x: x1  } = _reactSpring.useSpring({
+            reset: true,
+            reverse: flip,
+            from: {
+                x: 0
+            },
+            x: 1,
+            delay: 200,
+            config: _reactSpring.config.molasses,
+            onReset: ()=>setDraw(!draw)
+        });
+        return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.svg, {
+            style: {
+                margin: 20,
+                width: 80,
+                height: 80
+            },
+            viewBox: "0 0 45 44",
+            strokerWidth: "2",
+            fill: "white",
+            stroke: "rgb(45, 55, 71)",
+            strokeLinecap: "round",
+            strokeLinejoin: "round",
+            strokeDasharray: 156,
+            strokeDashoffset: x1.to((x)=>(1 - x) * 156
+            ),
+            children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("polygon", {
+                points: POINTS
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/react-spring.jsx",
+                lineNumber: 86,
+                columnNumber: 17
+            }, undefined)
+        }, void 0, false, {
+            fileName: "src/pages/react-spring/react-spring.jsx",
+            lineNumber: 75,
+            columnNumber: 13
+        }, undefined);
+    };
+    const displayNewPage = ()=>{
+        setIndex(index + 1);
+    };
+    const waitEndOfAnnim = ()=>{
+        setTimeout(displayNewPage, 1000);
+    };
+    const displayLastPage = ()=>{
+        setIndex(index - 1);
+    };
+    const waitEndOfAnnimBack = ()=>{
+        setTimeout(displayLastPage, 1000);
+    };
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            componentArray[index],
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                type: "button",
+                value: "Pr\xe9c\xe9dent",
+                style: {
+                    width: "12rem",
+                    height: "2rem"
+                },
+                onClick: ()=>{
+                    waitEndOfAnnimBack();
+                    setStyleToConfess(comeBack);
+                }
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/react-spring.jsx",
+                lineNumber: 117,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                type: "button",
+                value: "Suivant",
+                style: {
+                    width: "12rem",
+                    height: "2rem"
+                },
+                onClick: ()=>{
+                    setStyleToConfess(leavePage);
+                    waitEndOfAnnim();
+                }
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/react-spring.jsx",
+                lineNumber: 126,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/react-spring/react-spring.jsx",
+        lineNumber: 106,
+        columnNumber: 9
+    }, undefined);
+};
+_s(ReactSpring, "vKqIBk7rzW5Dr6J1UnFBq9n9Bcg=", false, function() {
+    return [
+        _reactSpring.useSpring,
+        _reactSpring.useSpring,
+        _reactSpring.useSpring
+    ];
+});
+_c = ReactSpring;
+exports.default = ReactSpring;
+var _c;
+$RefreshReg$(_c, "ReactSpring");
+
+  $parcel$ReactRefreshHelpers$3a50.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-spring":"2gPbQ","./components/titletest":"i6hhn","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/draw-svg":"jNaXV","./components/left-to-right":"fsNKb","./components/array-animation":"i2ojs"}],"i6hhn":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$14b0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$14b0.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactSpring = require("react-spring");
+var _s = $RefreshSig$();
+const TitleTest = ({ move , index , currentAnim  })=>{
+    _s();
+    const [flip, setFlip] = _react.useState(false);
+    const [moveActive, setMoveActive] = _react.useState();
+    // const displayTitle = () => {
+    //     const displayTitleAnim = useSpring({
+    //         loop: {reverse: true},
+    //         from: { opacity: 0},
+    //         to: { opacity: 1},
+    //         config: {duration: 3000},
+    //         onReset: () => setFlip(!flip),
+    //     })
+    //     return (
+    //         <animated.h1 
+    //             style={
+    //                 moveActive === true ? displayTitleAnim : {background: "red"}
+    //             }
+    //         >
+    //             Diplsay Title
+    //         </animated.h1>
+    //     )
+    // }
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.div, {
+        className: "container-test",
+        style: move,
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                children: "Salut je suis cens\xe9 me d\xe9caller de la droite vers la gauche pour disparaitre de la page"
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/components/titletest.jsx",
+                lineNumber: 35,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                type: "button",
+                onClick: ()=>{
+                    setMoveActive(move);
+                    console.log(move);
+                }
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/components/titletest.jsx",
+                lineNumber: 36,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/react-spring/components/titletest.jsx",
+        lineNumber: 31,
+        columnNumber: 9
+    }, undefined);
+};
+_s(TitleTest, "44sAvTnaXaYu8NDmyPXYbPt5A10=");
+_c = TitleTest;
+exports.default = TitleTest;
+var _c;
+$RefreshReg$(_c, "TitleTest");
+
+  $parcel$ReactRefreshHelpers$14b0.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-spring":"2gPbQ"}],"jNaXV":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$c883 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$c883.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactSpring = require("react-spring");
+var _s = $RefreshSig$();
+const DrawSvg = ({ currentAnim , index  })=>{
+    _s();
+    const [flip, set] = _react.useState(false);
+    const { x: x1  } = _reactSpring.useSpring({
+        reset: true,
+        reverse: flip,
+        from: {
+            x: 0
+        },
+        x: 1,
+        delay: 0,
+        config: _reactSpring.config.molasses,
+        onRest: ()=>set(!flip)
+    });
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.div, {
+        className: "container-svg",
+        style: currentAnim,
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.svg, {
+                style: {
+                    margin: 20,
+                    width: 400,
+                    height: 400
+                },
+                viewBox: "0 0 45 44",
+                strokeWidth: "2",
+                fill: "rgb(180, 58, 58)",
+                stroke: "rgb(45, 55, 71)",
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeDasharray: 156,
+                strokeDashoffset: x1.to((x)=>(1 - x) * 156
+                ),
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("polygon", {
+                    className: "left-side",
+                    points: "0,0 0,40 0,40, 40,40"
+                }, void 0, false, {
+                    fileName: "src/pages/react-spring/components/draw-svg.jsx",
+                    lineNumber: 29,
+                    columnNumber: 17
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/components/draw-svg.jsx",
+                lineNumber: 18,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.svg, {
+                style: {
+                    margin: 20,
+                    width: 400,
+                    height: 400
+                },
+                viewBox: "0 0 45 44",
+                strokeWidth: "1",
+                fill: "rgb(45, 55, 58)",
+                stroke: "rgb(170, 58, 58)",
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeDasharray: 156,
+                strokeDashoffset: x1.to((x)=>(1 - x) * 156
+                ),
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("polygon", {
+                    className: "right-side",
+                    points: "0,0 40,0 40,40"
+                }, void 0, false, {
+                    fileName: "src/pages/react-spring/components/draw-svg.jsx",
+                    lineNumber: 42,
+                    columnNumber: 17
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/components/draw-svg.jsx",
+                lineNumber: 31,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/react-spring/components/draw-svg.jsx",
+        lineNumber: 17,
+        columnNumber: 9
+    }, undefined);
+};
+_s(DrawSvg, "8a6F/djzi2l/eJ7IPW80Dk1oBJc=", false, function() {
+    return [
+        _reactSpring.useSpring
+    ];
+});
+_c = DrawSvg;
+exports.default = DrawSvg;
+var _c;
+$RefreshReg$(_c, "DrawSvg");
+
+  $parcel$ReactRefreshHelpers$c883.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-spring":"2gPbQ"}],"fsNKb":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$4b82 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$4b82.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactSpring = require("react-spring");
+var _s = $RefreshSig$();
+const LeftToRight = ({ currentAnim , index  })=>{
+    _s();
+    const [trigger, setTrigger] = _react.useState();
+    const [show, setShow] = _react.useState(true);
+    const animMoveSquare = _reactSpring.useSpring({
+        config: {
+            duration: 2000
+        },
+        from: {
+            opacity: 1,
+            x: 180
+        },
+        to: {
+            opacity: 0,
+            x: -100
+        }
+    });
+    const animComeBack = _reactSpring.useSpring({
+        config: {
+            duration: 2000
+        },
+        from: {
+            opacity: 0,
+            x: -100
+        },
+        to: {
+            opacity: 1,
+            x: 0
+        }
+    });
+    animByControler = new _reactSpring.Controller({
+        config: {
+            duration: 2000
+        },
+        from: {
+            opacity: 1,
+            x: 180
+        },
+        to: {
+            opacity: 0,
+            x: -100
+        }
+    });
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_jsxDevRuntime.Fragment, {
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.div, {
+                className: "container-square",
+                style: trigger,
+                children: [
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
+                        children: "Salut"
+                    }, void 0, false, {
+                        fileName: "src/pages/react-spring/components/left-to-right.jsx",
+                        lineNumber: 33,
+                        columnNumber: 21
+                    }, undefined),
+                    /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
+                        children: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum debitis, itaque veritatis odio laborum similique magnam ab quis sed cumque dolores, neque consequuntur suscipit corrupti. Id perferendis excepturi doloremque dolorem repellendus obcaecati, at exercitationem aspernatur distinctio libero veritatis cumque, adipisci incidunt deserunt pariatur consequatur ipsam sequi illum asperiores architecto ratione!"
+                    }, void 0, false, {
+                        fileName: "src/pages/react-spring/components/left-to-right.jsx",
+                        lineNumber: 34,
+                        columnNumber: 21
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/pages/react-spring/components/left-to-right.jsx",
+                lineNumber: 29,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                type: "button",
+                value: "Next",
+                onClick: ()=>{
+                    setTrigger(animMoveSquare);
+                }
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/components/left-to-right.jsx",
+                lineNumber: 36,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                type: "button",
+                value: "comeBack",
+                onClick: ()=>{
+                    setTrigger(animComeBack);
+                }
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/components/left-to-right.jsx",
+                lineNumber: 43,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true);
+};
+_s(LeftToRight, "bHqUj09/nPiYzEg7t/QXAFC/JU0=", false, function() {
+    return [
+        _reactSpring.useSpring,
+        _reactSpring.useSpring
+    ];
+});
+_c = LeftToRight;
+exports.default = LeftToRight;
+var _c;
+$RefreshReg$(_c, "LeftToRight");
+
+  $parcel$ReactRefreshHelpers$4b82.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-spring":"2gPbQ"}],"i2ojs":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$c860 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$c860.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactSpring = require("react-spring");
+var _drawSvg = require("./draw-svg");
+var _drawSvgDefault = parcelHelpers.interopDefault(_drawSvg);
+var _leftToRight = require("./left-to-right");
+var _leftToRightDefault = parcelHelpers.interopDefault(_leftToRight);
+var _titletest = require("./titletest");
+var _titletestDefault = parcelHelpers.interopDefault(_titletest);
+var _s = $RefreshSig$();
+const ArrayAnimation = ()=>{
+    _s();
+    const [numberList, setNumberList] = _react.useState(0);
+    const [myAnim, setMyAnim] = _react.useState();
+    const myList = [
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_titletestDefault.default, {}, void 0, false, {
+            fileName: "src/pages/react-spring/components/array-animation.jsx",
+            lineNumber: 12,
+            columnNumber: 9
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_drawSvgDefault.default, {}, void 0, false, {
+            fileName: "src/pages/react-spring/components/array-animation.jsx",
+            lineNumber: 13,
+            columnNumber: 9
+        }, undefined),
+        /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_leftToRightDefault.default, {}, void 0, false, {
+            fileName: "src/pages/react-spring/components/array-animation.jsx",
+            lineNumber: 14,
+            columnNumber: 9
+        }, undefined)
+    ];
+    _react.useEffect(()=>{
+        console.log("coucou");
+    }, myAnim);
+    const scrollLeft = _reactSpring.useSpring({
+        config: {
+            duration: 2000
+        },
+        from: {
+            x: 150
+        },
+        to: {
+            x: 0
+        }
+    });
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.h1, {
+                style: myAnim,
+                children: myList[numberList]
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/components/array-animation.jsx",
+                lineNumber: 28,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+                type: "button",
+                onClick: ()=>{
+                    setNumberList(numberList + 1);
+                    setMyAnim(scrollLeft);
+                }
+            }, void 0, false, {
+                fileName: "src/pages/react-spring/components/array-animation.jsx",
+                lineNumber: 33,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/react-spring/components/array-animation.jsx",
+        lineNumber: 27,
+        columnNumber: 9
+    }, undefined);
+};
+_s(ArrayAnimation, "Ikgu7hzaNWDrydBrv+S1X0XWg70=", false, function() {
+    return [
+        _reactSpring.useSpring
+    ];
+});
+_c = ArrayAnimation;
+exports.default = ArrayAnimation;
+var _c;
+$RefreshReg$(_c, "ArrayAnimation");
+
+  $parcel$ReactRefreshHelpers$c860.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-spring":"2gPbQ","./draw-svg":"jNaXV","./left-to-right":"fsNKb","./titletest":"i6hhn"}],"fOVVj":[function() {},{}],"kEgDc":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "Roboto-Light.df813467.ttf" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"aTm38":[function(require,module,exports) {

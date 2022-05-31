@@ -180,4 +180,15 @@ body .container-components .container-navigation .previousInput {
   height: 50%;
 }
 
+.container-svg svg {
+  position: absolute;
+  left: 33%;
+  right: 33%;
+}
+
+.container-square {
+  background-color: #35358a;
+  border: 10px solid #21617b;
+}
+
 /*# sourceMappingURL=index.08963856.css.map */
