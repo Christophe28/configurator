@@ -6,7 +6,7 @@ import Wizzard from "./pages/wizzard";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<ReactSpring />} />
+      <Route path="/" element={<Wizzard />} />
     </Routes>
   );
 };

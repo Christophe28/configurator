@@ -18,6 +18,13 @@ const ReactSpring = () => {
         to: { opacity: 1, y: 0}
     }));
 
+    const welcomAnim = useSpring({
+        reset: true,
+        config: { duration: 3000 },
+        from: { opacity: 0, y: 600 },
+        to: { opacity: 1, y: 0 }
+    })
+
     const comeBack = useSpring({
         reset: true,
         config: { duration: 1000 },

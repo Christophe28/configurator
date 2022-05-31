@@ -1,6 +1,7 @@
 //React import
 import React from "react";
 import { useState, useRef, useEffect } from "react";
+import { useSpring, animated, config } from "react-spring";
 
 //Component import
 import ChooseTown from "../components/wizzardComponents/pages/choose-town";
@@ -37,15 +38,44 @@ const Wizzard = () => {
   const [emailUser, setEmailUser] = useState("");
   const [pictoVectaryModel, setPictoVectaryModel] = useState([]);
   const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = useState("");
+  const [currentAnim, setCurrentAnim] = useState();
 
-  //=============================================================
-  const [currentTest, setCurrentTest] = useState(0);
-  const tableTest = [1, 2, 3, 4, 5, 6];
-
-  //=============================================================
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
 
+  //=============Animation=============//
+  const welcomAnim = useSpring({
+    reset: true,
+    config: { duration: 1500 },
+    from: { opacity: 0, y: 600 },
+    to: { opacity: 1, y: 0 }
+  })
+
+  const comeBack = useSpring({
+      reset: true,
+      config: { duration: 1000 },
+      from: { opacity: 0, x: -600 },
+      to: { opacity: 1, x: 0 }
+  })
+
+  const leavePage = useSpring({
+      reset: true,
+      config: { duration: 1500 },
+      from: { opacity: 1, x: 0 },
+      to: { opacity: 0, x: -600 }
+  })
+  console.log("currentAnim : ", currentAnim);
+  const changePage = () => {
+    setCurrentWizardStep(currentWizardStep + 1);
+    setCurrentAnim(welcomAnim);
+  }
+  const waitForRefreshAnim = () => {
+    setCurrentAnim();
+  }
+  const waitEndOfAnnim = () => {
+    setTimeout(changePage, 2000);
+    setTimeout(waitForRefreshAnim, 4000);
+  }
   useEffect(() => {
     setSelectedSignageEquipmentQuantity((oldState) => {
       const newState = {};
@@ -60,8 +90,10 @@ const Wizzard = () => {
     <ViewWrapper 
       previous={false} 
       next={showInput(townName)}
+      currentAnim={currentAnim}
       nextAction={() => {
-          setCurrentWizardStep(currentWizardStep + 1);
+          setCurrentAnim(leavePage);
+          waitEndOfAnnim();
         }
       }
     >
@@ -73,8 +105,10 @@ const Wizzard = () => {
     <ViewWrapper
       next={showInput(color)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      currentAnim={currentAnim}
       nextAction={() => {
-        setCurrentWizardStep(currentWizardStep + 1);
+        setCurrentAnim(leavePage);
+        waitEndOfAnnim();
         exportAsImage(exportRef.current, setImage);
       }}
     >
@@ -88,8 +122,13 @@ const Wizzard = () => {
     </ViewWrapper>,
     <ViewWrapper
       next={showInput(selectedSignageEquipment)}
+      currentAnim={currentAnim}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
-      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+      nextAction={() => {
+          setCurrentAnim(leavePage);
+          waitEndOfAnnim();
+        }
+      }
     >
       <ChooseSignageEquipment
         onChangeAction={(selectedSignageEquipment) => {
@@ -99,9 +138,16 @@ const Wizzard = () => {
       />
     </ViewWrapper>,
     <ViewWrapper
+      currentAnim={currentAnim}
       next={showInput(vectaryModelIsLoaded, vectaryModelIsLoaded)}
-      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
-      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+      previousAction={() => {
+          setCurrentWizardStep(currentWizardStep - 1)
+        }
+      }
+      nextAction={() => {
+        setCurrentAnim(leavePage);
+        waitEndOfAnnim();
+      }}
     >
       <SignalSystem
         setIsLoaded={setVectaryModelIsLoaded}
@@ -114,16 +160,19 @@ const Wizzard = () => {
       />
     </ViewWrapper>,
     <ViewWrapper
+      currentAnim={currentAnim}
       next={showInput(emailUser, textInputNext)}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => {
         sendInvoice();
-        setCurrentWizardStep(currentWizardStep + 1);
+        setCurrentAnim(leavePage);
+        waitEndOfAnnim();
       }}
     >
       <CalculateCost
         selectedSignageEquipment={selectedSignageEquipment}
         selectedSignageEquipmentQuantity={selectedSignageEquipmentQuantity}
+        currentAnim={currentAnim}
         setEmail={setEmailUser}
         email={emailUser}
         onChangeAction={(itemValue, quantity) =>
@@ -136,11 +185,13 @@ const Wizzard = () => {
       />
     </ViewWrapper>,
     <ViewWrapper
+      currentAnim={currentAnim}
       next={false}
       previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
       <TotalCost
+        currentAnim={currentAnim}
         image={pictoVectaryModel}
         quantity={selectedSignageEquipmentQuantity}
         signagesEquipements={selectedSignageEquipment}
@@ -187,18 +238,6 @@ const Wizzard = () => {
   return (
     <div className="container-components">
       {wizardSteps[currentWizardStep]}
-      <h1 
-        className="container-test"
-      >
-        {tableTest[currentTest]}
-      </h1>
-      <input 
-        type="button" 
-        className="button-animation"
-        onClick={() => {
-          setCurrentTest(currentTest + 1);
-        }}
-      />
       <DynamicalPng reference={exportRef} text={townName} color={color}/>
     </div>
   );

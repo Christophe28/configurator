@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSpring, animated, config } from "react-spring";
 
 const ViewWrapper = ({
   children,
@@ -6,9 +7,11 @@ const ViewWrapper = ({
   next = "Suivant",
   previousAction,
   nextAction,
+  currentAnim
 }) => {
+
   return (
-    <div>
+    <animated.div style={currentAnim}>
       {children}
 
       <section className="container-navigation">
@@ -29,7 +32,7 @@ const ViewWrapper = ({
           />
         )}
       </section>
-    </div>
+    </animated.div>
   );
 };
 

@@ -5,25 +5,25 @@ const TitleTest = ({ move, index, currentAnim }) => {
     const [flip, setFlip] = useState(false);
     const [moveActive, setMoveActive] = useState();
 
-    const displayTitle = () => {
-        const displayTitleAnim = useSpring({
-            loop: {reverse: true},
-            from: { opacity: 0},
-            to: { opacity: 1},
-            config: {duration: 3000},
-            onReset: () => setFlip(!flip),
-        })
+    // const displayTitle = () => {
+    //     const displayTitleAnim = useSpring({
+    //         loop: {reverse: true},
+    //         from: { opacity: 0},
+    //         to: { opacity: 1},
+    //         config: {duration: 3000},
+    //         onReset: () => setFlip(!flip),
+    //     })
 
-        return (
-            <animated.h1 
-                style={
-                    moveActive === true ? displayTitleAnim : {background: "red"}
-                }
-            >
-                Diplsay Title
-            </animated.h1>
-        )
-    }
+    //     return (
+    //         <animated.h1 
+    //             style={
+    //                 moveActive === true ? displayTitleAnim : {background: "red"}
+    //             }
+    //         >
+    //             Diplsay Title
+    //         </animated.h1>
+    //     )
+    // }
 
 
 

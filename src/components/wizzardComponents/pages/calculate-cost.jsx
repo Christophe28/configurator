@@ -11,6 +11,7 @@ const CalculateCost = ({
   selectedSignageEquipment,
   selectedSignageEquipmentQuantity,
   onChangeAction,
+  currentAnim
 }) => {
   return (
 
