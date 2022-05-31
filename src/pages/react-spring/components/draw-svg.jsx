@@ -3,7 +3,7 @@ import { useSpring, animated, config } from 'react-spring';
 
 const DrawSvg = ({ currentAnim, index }) => {
     const [flip, set] = useState(false);
-    console.log("index", index);
+
     const { x } = useSpring({
         reset: true,
         reverse: flip,

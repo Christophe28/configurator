@@ -9,28 +9,24 @@ import ArrayAnimation from './components/array-animation';
 const ReactSpring = () => {
     
     const [draw, setDraw] = useState(false);
-    const [cancelAnim, setCancelAnim] = useState(true);
     const [index, setIndex] = useState(0);
     const [styleToConfess, setStyleToConfess] = useState();
     const [welcom, setWelcom] = useState(useSpring({
-        config: {duration: 5000},
+        reset: true,
+        config: {duration: 3000},
         from: { opacity: 0, y: 600},
         to: { opacity: 1, y: 0}
     }));
-    const [leave, setLeave] = useState(useSpring({
-        config: { duration: 1000 },
-        from: { opacity: 1, x: 180 },
-        to: { opacity: 0, x: -1500 }
-    }));
-    const [comeBack, setComeBack] = useState(useSpring({
-        cancel: cancelAnim,
+
+    const comeBack = useSpring({
+        reset: true,
         config: { duration: 1000 },
         from: { opacity: 0, x: -600 },
-        to: { opacity: 1, x: 180 }
-    }))
+        to: { opacity: 1, x: 0 }
+    })
 
     const leavePage = useSpring({
-        cancel: cancelAnim,
+        reset: true,
         config: { duration: 1500 },
         from: { opacity: 1, x: 0 },
         to: { opacity: 0, x: -600 }
@@ -88,7 +84,6 @@ const ReactSpring = () => {
    const displayNewPage = () => {
         setIndex(index + 1);
    };
-
    const waitEndOfAnnim = () => {
        setTimeout(displayNewPage, 1000);
    }
@@ -127,7 +122,6 @@ const ReactSpring = () => {
                 style={{width: "12rem", height: "2rem"}}
                 onClick={() => {
                     setStyleToConfess(leavePage);
-                    setCancelAnim(false);
                     waitEndOfAnnim();
                 }}
             />
