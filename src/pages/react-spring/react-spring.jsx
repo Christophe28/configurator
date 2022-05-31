@@ -7,7 +7,52 @@ import LeftToRight from './components/left-to-right';
 import ArrayAnimation from './components/array-animation';
 
 const ReactSpring = () => {
+    
     const [draw, setDraw] = useState(false);
+    const [cancelAnim, setCancelAnim] = useState(true);
+    const [index, setIndex] = useState(0);
+    const [styleToConfess, setStyleToConfess] = useState();
+    const [welcom, setWelcom] = useState(useSpring({
+        config: {duration: 5000},
+        from: { opacity: 0, y: 600},
+        to: { opacity: 1, y: 0}
+    }));
+    const [leave, setLeave] = useState(useSpring({
+        config: { duration: 1000 },
+        from: { opacity: 1, x: 180 },
+        to: { opacity: 0, x: -1500 }
+    }));
+    const [comeBack, setComeBack] = useState(useSpring({
+        cancel: cancelAnim,
+        config: { duration: 1000 },
+        from: { opacity: 0, x: -600 },
+        to: { opacity: 1, x: 180 }
+    }))
+
+    const leavePage = useSpring({
+        cancel: cancelAnim,
+        config: { duration: 1500 },
+        from: { opacity: 1, x: 0 },
+        to: { opacity: 0, x: -600 }
+    })
+    
+    const componentArray = [
+        <TitleTest 
+            move={styleToConfess}
+            index={index}
+            // currentAnim={conditionForGoodAnim(componentArray)}
+        />,
+        <DrawSvg 
+            index={index}
+            // currentAnim={conditionForGoodAnim(componentArray)}
+            currentAnim={welcom}
+        />,
+        <LeftToRight 
+            index={index}
+            // currentAnim={conditionForGoodAnim(componentArray)}
+        />
+    ];
+
 
     //Pour faire l'annimation sur les composants
     const AnimatedDonut = animated("Donut");
@@ -40,12 +85,52 @@ const ReactSpring = () => {
         )
     }
 
+   const displayNewPage = () => {
+        setIndex(index + 1);
+   };
+
+   const waitEndOfAnnim = () => {
+       setTimeout(displayNewPage, 1000);
+   }
+
+   const displayLastPage = () => {
+       setIndex(index - 1);
+   };
+   const waitEndOfAnnimBack = () => {
+       setTimeout(displayLastPage, 1000);
+   }
+
     return (
         <div>
-            <TitleTest />
-            <DrawSvg />
-            <LeftToRight />
-            <ArrayAnimation />
+            {componentArray[index]}
+            {/* <TitleTest 
+                styles={{display: "none"}}
+            />
+            <DrawSvg 
+                styles={{display: "none"}}
+            />
+            <LeftToRight 
+                styles={{display: "none"}}
+            /> */}
+            <input 
+                type="button" 
+                value="Précédent"
+                style={{width: "12rem", height: "2rem"}}
+                onClick={() => {
+                    waitEndOfAnnimBack();
+                    setStyleToConfess(comeBack);
+                }}
+            />
+            <input 
+                type="button" 
+                value="Suivant" 
+                style={{width: "12rem", height: "2rem"}}
+                onClick={() => {
+                    setStyleToConfess(leavePage);
+                    setCancelAnim(false);
+                    waitEndOfAnnim();
+                }}
+            />
         </div>
     );
 };

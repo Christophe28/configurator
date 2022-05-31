@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { useSpring, animated, config } from 'react-spring';
+import { useSpring, animated, Controller, config } from 'react-spring';
 
-const TitleTest = ({myAnimation}) => {
+const TitleTest = ({ move, index, currentAnim }) => {
     const [flip, setFlip] = useState(false);
-    const [active, setActive] = useState(false);
+    const [moveActive, setMoveActive] = useState();
 
     const displayTitle = () => {
         const displayTitleAnim = useSpring({
@@ -14,12 +14,10 @@ const TitleTest = ({myAnimation}) => {
             onReset: () => setFlip(!flip),
         })
 
-    
-        // return <animated.h1 style={displayTitleAnim}>Display Title</animated.h1>
         return (
             <animated.h1 
                 style={
-                    active === true ? displayTitleAnim : {background: "red"}
+                    moveActive === true ? displayTitleAnim : {background: "red"}
                 }
             >
                 Diplsay Title
@@ -27,11 +25,19 @@ const TitleTest = ({myAnimation}) => {
         )
     }
 
+
+
     return (
-        <div className="container-test" style={myAnimation}>
-            {displayTitle()}
-            <input type="button" onClick={() => setActive(true)}/>
-        </div>
+        <animated.div 
+            className="container-test"
+            style={move}
+        >
+            <p>Salut je suis censé me décaller de la droite vers la gauche pour disparaitre de la page</p>
+            <input type="button" onClick={() => {
+                setMoveActive(move);
+                console.log(move);  
+            }} />
+        </animated.div>
     );
 };
 

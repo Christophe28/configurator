@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
+import DrawSvg from './draw-svg';
+import LeftToRight from './left-to-right';
+import TitleTest from './titletest';
+
 const ArrayAnimation = () => {
     const [numberList, setNumberList] = useState(0);
+    const [myAnim, setMyAnim] = useState();
 
-    const myList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const myList=[
+        <TitleTest />,
+        <DrawSvg />,
+        <LeftToRight />
+    ]
 
-    const anim = {
-
-    }
+    useEffect(() => {
+        console.log("coucou");
+    }, myAnim);
+    const scrollLeft = useSpring({
+        config: {duration: 2000},
+        from: {x: 150},
+        to: {x: 0}
+    })
 
     return (
         <div>
-            <h1>{myList[numberList]}</h1>
+            <animated.h1
+                style={myAnim}
+            >
+                {myList[numberList]}
+            </animated.h1>
             <input 
                 type="button" 
                 onClick={() => {
-                    
+                    setNumberList(numberList + 1);
+                    setMyAnim(scrollLeft);
                 }}
             />
         </div>

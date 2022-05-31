@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { useSpring, animated, config } from 'react-spring';
 
-const DrawSvg = () => {
+const DrawSvg = ({ currentAnim, index }) => {
     const [flip, set] = useState(false);
-
+    console.log("index", index);
     const { x } = useSpring({
         reset: true,
         reverse: flip,
@@ -14,7 +14,7 @@ const DrawSvg = () => {
         onRest: () => set(!flip),
       })
     return (
-        <div className="container-svg">
+        <animated.div className="container-svg" style={currentAnim}>
             <animated.svg
                 style={{ margin: 20, width: 400, height: 400 }}
                 viewBox="0 0 45 44"
@@ -41,7 +41,7 @@ const DrawSvg = () => {
             >
                 <polygon className="right-side" points={"0,0 40,0 40,40"} />
             </animated.svg>
-        </div>
+        </animated.div>
     );
 };
 
