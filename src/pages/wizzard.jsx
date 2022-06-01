@@ -46,7 +46,7 @@ const Wizzard = () => {
   //=============Animation=============//
   const welcomAnim = useSpring({
     reset: true,
-    config: { duration: 1500 },
+    config: { duration: 1000 },
     from: { opacity: 0, y: 600 },
     to: { opacity: 1, y: 0 }
   })
@@ -60,11 +60,19 @@ const Wizzard = () => {
 
   const leavePage = useSpring({
       reset: true,
-      config: { duration: 1500 },
+      config: { duration: 1000 },
       from: { opacity: 1, x: 0 },
       to: { opacity: 0, x: -600 }
   })
-  console.log("currentAnim : ", currentAnim);
+  
+  const previousLeave = useSpring({
+    reset: true,
+    config: { duration: 1000 },
+    from: { opacity: 1, y: 0 },
+    to: { opacity: 0, y: 600 }
+  })
+
+  //Next
   const changePage = () => {
     setCurrentWizardStep(currentWizardStep + 1);
     setCurrentAnim(welcomAnim);
@@ -74,8 +82,20 @@ const Wizzard = () => {
   }
   const waitEndOfAnnim = () => {
     setTimeout(changePage, 2000);
-    setTimeout(waitForRefreshAnim, 4000);
+    setTimeout(waitForRefreshAnim, 3000);
   }
+
+  //Before
+  const comeBackComposant = () => {
+    setCurrentWizardStep(currentWizardStep - 1);
+    setCurrentAnim(comeBack);
+  }
+
+  const waitComposantLeavePage = () => {
+    setTimeout(comeBackComposant, 2000);
+    setTimeout(waitForRefreshAnim, 3000);
+  }
+
   useEffect(() => {
     setSelectedSignageEquipmentQuantity((oldState) => {
       const newState = {};
@@ -104,7 +124,10 @@ const Wizzard = () => {
     </ViewWrapper>,
     <ViewWrapper
       next={showInput(color)}
-      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      previousAction={() => {
+        setCurrentAnim(previousLeave);
+        waitComposantLeavePage();
+      }}
       currentAnim={currentAnim}
       nextAction={() => {
         setCurrentAnim(leavePage);
@@ -123,7 +146,10 @@ const Wizzard = () => {
     <ViewWrapper
       next={showInput(selectedSignageEquipment)}
       currentAnim={currentAnim}
-      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      previousAction={() => {
+        setCurrentAnim(previousLeave);
+        waitComposantLeavePage();
+      }}
       nextAction={() => {
           setCurrentAnim(leavePage);
           waitEndOfAnnim();
@@ -141,9 +167,9 @@ const Wizzard = () => {
       currentAnim={currentAnim}
       next={showInput(vectaryModelIsLoaded, vectaryModelIsLoaded)}
       previousAction={() => {
-          setCurrentWizardStep(currentWizardStep - 1)
-        }
-      }
+        setCurrentAnim(previousLeave);
+        waitComposantLeavePage();
+      }}
       nextAction={() => {
         setCurrentAnim(leavePage);
         waitEndOfAnnim();
@@ -162,7 +188,10 @@ const Wizzard = () => {
     <ViewWrapper
       currentAnim={currentAnim}
       next={showInput(emailUser, textInputNext)}
-      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      previousAction={() => {
+        setCurrentAnim(previousLeave);
+        waitComposantLeavePage();
+      }}
       nextAction={() => {
         sendInvoice();
         setCurrentAnim(leavePage);
@@ -187,7 +216,10 @@ const Wizzard = () => {
     <ViewWrapper
       currentAnim={currentAnim}
       next={false}
-      previousAction={() => setCurrentWizardStep(currentWizardStep - 1)}
+      previousAction={() => {
+        setCurrentAnim(previousLeave);
+        waitComposantLeavePage();
+      }}
       nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
     >
       <TotalCost
