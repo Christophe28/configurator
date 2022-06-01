@@ -24560,14 +24560,14 @@ const Wizzard = ()=>{
     const [emailUser, setEmailUser] = _react.useState("");
     const [pictoVectaryModel, setPictoVectaryModel] = _react.useState([]);
     const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = _react.useState("");
-    const [currentAnim, setCurrentAnim] = _react.useState();
+    const [currentAnim, setCurrentAnim1] = _react.useState();
     const exportRef = _react.useRef();
     const textInputNext = "Recevoir un devis";
     //=============Animation=============//
     const welcomAnim = _reactSpring.useSpring({
         reset: true,
         config: {
-            duration: 1500
+            duration: 1000
         },
         from: {
             opacity: 0,
@@ -24595,7 +24595,7 @@ const Wizzard = ()=>{
     const leavePage = _reactSpring.useSpring({
         reset: true,
         config: {
-            duration: 1500
+            duration: 1000
         },
         from: {
             opacity: 1,
@@ -24606,17 +24606,46 @@ const Wizzard = ()=>{
             x: -600
         }
     });
-    console.log("currentAnim : ", currentAnim);
+    const previousLeave = _reactSpring.useSpring({
+        reset: true,
+        config: {
+            duration: 1000
+        },
+        from: {
+            opacity: 1,
+            y: 0
+        },
+        to: {
+            opacity: 0,
+            y: 600
+        }
+    });
+    //Next
     const changePage = ()=>{
         setCurrentWizardStep(currentWizardStep + 1);
-        setCurrentAnim(welcomAnim);
+        setCurrentAnim1(welcomAnim);
     };
     const waitForRefreshAnim = ()=>{
-        setCurrentAnim();
+        setCurrentAnim1();
     };
     const waitEndOfAnnim = ()=>{
         setTimeout(changePage, 2000);
-        setTimeout(waitForRefreshAnim, 4000);
+        setTimeout(waitForRefreshAnim, 3000);
+    };
+    //Before
+    const comeBackComposant = ()=>{
+        setCurrentWizardStep(currentWizardStep - 1);
+        setCurrentAnim1(comeBack);
+    };
+    const waitComposantLeavePage = ()=>{
+        setTimeout(comeBackComposant, 2000);
+        setTimeout(waitForRefreshAnim, 3000);
+    };
+    const generalAnimFunction = (setCurrentState, currentState, value, setCurrentAnim, spawnComponent)=>{
+        const firstStep = ()=>{
+            setCurrentState(currentState + value);
+            setCurrentAnim(spawnComponent);
+        };
     };
     _react.useEffect(()=>{
         setSelectedSignageEquipmentQuantity((oldState)=>{
@@ -24635,7 +24664,7 @@ const Wizzard = ()=>{
             next: _showInputDefault.default(townName),
             currentAnim: currentAnim,
             nextAction: ()=>{
-                setCurrentAnim(leavePage);
+                setCurrentAnim1(leavePage);
                 waitEndOfAnnim();
             },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseTownDefault.default, {
@@ -24643,21 +24672,23 @@ const Wizzard = ()=>{
                 townName: townName
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 100,
+                lineNumber: 127,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 90,
+            lineNumber: 117,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             next: _showInputDefault.default(color),
-            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
-            ,
+            previousAction: ()=>{
+                setCurrentAnim1(previousLeave);
+                waitComposantLeavePage();
+            },
             currentAnim: currentAnim,
             nextAction: ()=>{
-                setCurrentAnim(leavePage);
+                setCurrentAnim1(leavePage);
                 waitEndOfAnnim();
                 _exportAsImageDefault.default(exportRef.current, setImage);
             },
@@ -24669,21 +24700,23 @@ const Wizzard = ()=>{
                 themeColors: _config.themeColors
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 115,
+                lineNumber: 145,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 105,
+            lineNumber: 132,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             next: _showInputDefault.default(selectedSignageEquipment1),
             currentAnim: currentAnim,
-            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
-            ,
+            previousAction: ()=>{
+                setCurrentAnim1(previousLeave);
+                waitComposantLeavePage();
+            },
             nextAction: ()=>{
-                setCurrentAnim(leavePage);
+                setCurrentAnim1(leavePage);
                 waitEndOfAnnim();
             },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_chooseSignageEquipmentDefault.default, {
@@ -24693,22 +24726,23 @@ const Wizzard = ()=>{
                 selectedSignageEquipment: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 133,
+                lineNumber: 166,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 123,
+            lineNumber: 153,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             currentAnim: currentAnim,
             next: _showInputDefault.default(vectaryModelIsLoaded, vectaryModelIsLoaded),
             previousAction: ()=>{
-                setCurrentWizardStep(currentWizardStep - 1);
+                setCurrentAnim1(previousLeave);
+                waitComposantLeavePage();
             },
             nextAction: ()=>{
-                setCurrentAnim(leavePage);
+                setCurrentAnim1(leavePage);
                 waitEndOfAnnim();
             },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_signalSystemDefault.default, {
@@ -24721,22 +24755,24 @@ const Wizzard = ()=>{
                 pictureSleeve: image
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 152,
+                lineNumber: 185,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 140,
+            lineNumber: 173,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             currentAnim: currentAnim,
             next: _showInputDefault.default(emailUser, textInputNext),
-            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
-            ,
+            previousAction: ()=>{
+                setCurrentAnim1(previousLeave);
+                waitComposantLeavePage();
+            },
             nextAction: ()=>{
                 sendInvoice();
-                setCurrentAnim(leavePage);
+                setCurrentAnim1(leavePage);
                 waitEndOfAnnim();
             },
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_calculateCostDefault.default, {
@@ -24754,19 +24790,21 @@ const Wizzard = ()=>{
                     })
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 172,
+                lineNumber: 208,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 162,
+            lineNumber: 195,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             currentAnim: currentAnim,
             next: false,
-            previousAction: ()=>setCurrentWizardStep(currentWizardStep - 1)
-            ,
+            previousAction: ()=>{
+                setCurrentAnim1(previousLeave);
+                waitComposantLeavePage();
+            },
             nextAction: ()=>setCurrentWizardStep(currentWizardStep + 1)
             ,
             children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_totalCostDefault.default, {
@@ -24776,12 +24814,12 @@ const Wizzard = ()=>{
                 signagesEquipements: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 193,
+                lineNumber: 232,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 187,
+            lineNumber: 223,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24825,18 +24863,19 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 241,
+                lineNumber: 280,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 239,
+        lineNumber: 278,
         columnNumber: 5
     }, undefined);
 };
-_s(Wizzard, "ysmIqW18/98bT1g092XOMQ6/pSs=", false, function() {
+_s(Wizzard, "Vjg/P3XI1EV5SsVm5oDI2tSnfao=", false, function() {
     return [
+        _reactSpring.useSpring,
         _reactSpring.useSpring,
         _reactSpring.useSpring,
         _reactSpring.useSpring
