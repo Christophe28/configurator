@@ -107,9 +107,18 @@
     left: 0;
   }
 
+  .container-checkboxes {
+    padding-left: 20px;
+  }
+
+  .container-checkboxes div {
+    justify-content: flex-start;
+    display: flex;
+  }
+
   .container-checkboxes div input {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
     vertical-align: bottom;
     position: relative;
   }
@@ -120,10 +129,10 @@
 
   .container-checkboxes div label {
     white-space: nowrap;
-    width: 49rem;
+    width: 1rem;
     text-align: left;
     padding: 10px;
-    font-size: 1.25rem;
+    font-size: .95rem;
     font-weight: bolder;
     display: inline-block;
   }
@@ -145,6 +154,46 @@
 
   .container-dominant-color .colors input:hover {
     cursor: pointer;
+  }
+
+  .container-iframe {
+    flex-flow: wrap;
+    justify-content: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+  }
+
+  .container-iframe div {
+    margin: 2rem;
+  }
+
+  .container-iframe div iframe {
+    width: 300px;
+    height: 20rem;
+  }
+
+  .container-how-items {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .container-how-items select {
+    height: 20px;
+  }
+
+  .container-total-cost {
+    padding-top: 5%;
+  }
+
+  .container-total-cost table {
+    margin: auto;
+  }
+
+  .container-total-cost table img {
+    width: 50%;
+    height: 50%;
   }
 }
 
