@@ -31,10 +31,7 @@ const Wizzard = () => {
   const [colorsPickerValue, setColorsPickerValue] = useState("");
   const [image, setImage] = useState();
   const [selectedSignageEquipment, setSelectedSignageEquipment] = useState([]);
-  const [
-    selectedSignageEquipmentQuantity,
-    setSelectedSignageEquipmentQuantity,
-  ] = useState({});
+  const [selectedSignageEquipmentQuantity, setSelectedSignageEquipmentQuantity] = useState({});
   const [emailUser, setEmailUser] = useState("");
   const [pictoVectaryModel, setPictoVectaryModel] = useState([]);
   const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = useState("");
