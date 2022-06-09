@@ -1,0 +1,26 @@
+.container-checkboxes {
+    
+    div {
+
+        input {
+            width: 2.5rem;
+            height: 2.5rem;
+            vertical-align: bottom;     
+            position: relative;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        label {
+            font-size: 1.25rem;
+            font-weight: bolder;
+            display: inline-block;
+            padding: 10px;
+            white-space: nowrap; 
+            width: 49rem;
+            text-align: left;
+        }
+    }
+}
