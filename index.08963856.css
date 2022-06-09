@@ -73,6 +73,10 @@
     font-weight: bolder;
   }
 
+  .container-input-text {
+    width: 100%;
+  }
+
   .container-input-text input {
     text-align: center;
     height: 3.85rem;
