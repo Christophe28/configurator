@@ -1,10 +1,11 @@
 .container-checkboxes {
-    
+    padding-left: 20px;
     div {
-
+        display: flex;
+        justify-content: flex-start;
         input {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
             vertical-align: bottom;     
             position: relative;
 
@@ -14,12 +15,12 @@
         }
 
         label {
-            font-size: 1.25rem;
+            font-size: 0.95rem;
             font-weight: bolder;
             display: inline-block;
             padding: 10px;
             white-space: nowrap; 
-            width: 49rem;
+            width: 1rem;
             text-align: left;
         }
     }
