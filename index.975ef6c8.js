@@ -24848,13 +24848,6 @@ const Wizzard = ()=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-components",
         children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
-                children: "Test"
-            }, void 0, false, {
-                fileName: "src/pages/wizzard.jsx",
-                lineNumber: 269,
-                columnNumber: 7
-            }, undefined),
             wizardSteps[currentWizardStep],
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_dynamicalPngDefault.default, {
                 reference: exportRef,
@@ -24862,7 +24855,7 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 271,
+                lineNumber: 270,
                 columnNumber: 7
             }, undefined)
         ]
