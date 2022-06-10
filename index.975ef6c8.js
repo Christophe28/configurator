@@ -24849,7 +24849,7 @@ const Wizzard = ()=>{
         className: "container-components",
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: "test longueur"
+                children: "test longueur !"
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
                 lineNumber: 269,

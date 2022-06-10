@@ -87,7 +87,7 @@ body .container-components .container-navigation .previousInput {
 
 @media screen and (max-width: 600px) {
   .container-input-text input {
-    width: 100%;
+    width: 100vw;
   }
 }
 
