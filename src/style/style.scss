@@ -1,6 +1,5 @@
 @import "./settings.scss";
 
-//Phone size
 @media screen and(max-width: 590px) {
     @import "./phone-size/pages/wizzard.scss";
 
@@ -16,7 +15,6 @@
     @import "./phone-size/components/pages/total-cost.scss";
 }
 
-//Computer size
 @media screen and(min-width: 780px) {
 
     @import "./pages/wizzard.scss";

@@ -41,6 +41,16 @@ const Wizzard = () => {
   const textInputNext = "Recevoir un devis";
 
   //=============Animation=============//
+  const test = (time, startOpacity, startX, endOpacity, endX) => {
+    const anim = useSpring({
+      reset: true,
+      config: { duration: time },
+      from: { opacity: startOpacity, x: startX},
+      to: { opacity: endOpacity, x: endX}
+    })
+    return anim
+  }
+
   const welcomAnim = useSpring({
     reset: true,
     config: { duration: 1000 },
@@ -212,12 +222,12 @@ const Wizzard = () => {
     </ViewWrapper>,
     <ViewWrapper
       currentAnim={currentAnim}
-      next={false}
+      next={'coucou'}
       previousAction={() => {
         setCurrentAnim(previousLeave);
         waitComposantLeavePage();
       }}
-      nextAction={() => setCurrentWizardStep(currentWizardStep + 1)}
+      nextAction={() => setCurrentWizardStep(0)}
     >
       <TotalCost
         currentAnim={currentAnim}
