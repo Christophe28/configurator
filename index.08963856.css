@@ -20,7 +20,7 @@ body .container-components {
 
 @media screen and (max-width: 600px) {
   body .container-components {
-    max-width: 100%;
+    max-width: 20%;
   }
 }
 

@@ -24628,7 +24628,7 @@ const Wizzard = ()=>{
     };
     const waitEndOfAnnim = ()=>{
         setTimeout(changePage, 2000);
-        setTimeout(waitForRefreshAnim, 3000);
+        setTimeout(waitForRefreshAnim, 2000);
     };
     //Before
     const comeBackComposant = ()=>{
@@ -24792,7 +24792,7 @@ const Wizzard = ()=>{
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             currentAnim: currentAnim,
-            next: 'coucou',
+            next: 'Acceuil',
             previousAction: ()=>{
                 setCurrentAnim(previousLeave);
                 waitComposantLeavePage();
@@ -24849,7 +24849,7 @@ const Wizzard = ()=>{
         className: "container-components",
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: "max width"
+                children: "max width !!!"
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
                 lineNumber: 269,
