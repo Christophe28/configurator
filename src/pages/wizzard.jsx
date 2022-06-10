@@ -266,7 +266,6 @@ const Wizzard = () => {
 
   return (
     <div className="container-components">
-      <p>Checkbox responsive</p>
       {wizardSteps[currentWizardStep]}
       <DynamicalPng reference={exportRef} text={townName} color={color}/>
     </div>
