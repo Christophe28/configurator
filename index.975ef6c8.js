@@ -24792,7 +24792,7 @@ const Wizzard = ()=>{
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
             currentAnim: currentAnim,
-            next: 'Acceuil',
+            next: 'Accueil',
             previousAction: ()=>{
                 setCurrentAnim(previousLeave);
                 waitComposantLeavePage();
@@ -24855,7 +24855,7 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 270,
+                lineNumber: 271,
                 columnNumber: 7
             }, undefined)
         ]
@@ -28823,7 +28823,7 @@ const ColorsPickerWrapper = ({ color , setColor , colorsPickerValue , setColorsP
                 opacity: 0.45
             },
             value: colorsPickerValue,
-            onInput: (e)=>{
+            onChange: (e)=>{
                 setColor(e.target.value);
                 setColorsPickerValue(e.target.value);
             }
@@ -29073,39 +29073,53 @@ const themeColors = [
 const signageEquipment = [
     {
         value: "option1",
-        label: "Effet de porte aux entrées de la commune",
-        price: 2400,
-        modelId: "e23752d1-c5e8-4788-b719-8a913477dc6c"
+        label: "panneau d'interprétation",
+        price: 900,
+        modelId: "0de11c33-d091-457f-8dc8-d025b6f2858c",
+        meshToHide: {
+            sleeve: "MANCHON_LONG",
+            panel: "PANNEAU_500"
+        }
     },
     {
         value: "option2",
-        label: "Orientation des véhicules vers les ressources",
-        price: 980,
-        modelId: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
+        label: "Identifications des parkings",
+        price: 1000,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784",
+        meshToHide: {
+            sleeve: "MANCHON_LONG",
+            panel: ""
+        }
     },
     {
         value: "option3",
-        label: "Identification des parkings",
-        price: 1200,
-        modelId: "d7e90749-acb2-4861-bb20-08881e0777ce"
+        label: "Relais Info Services",
+        price: 1500,
+        modelId: "e8397f01-d261-4992-8438-78fd0df02cad",
+        meshToHide: {
+            sleeve: "MANCHON_COURT",
+            panel: "PANNEAU 350"
+        }
     },
     {
         value: "option4",
-        label: "Information sur les ressources du centre-ville",
-        price: 4800,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+        label: "Directionnel piétons",
+        price: 500,
+        modelId: "350b72ff-317b-419e-8244-10e143cce692",
+        meshToHide: {
+            sleeve: "MANCHON_COURT",
+            panel: ""
+        }
     },
     {
         value: "option5",
-        label: "Orientation des piétons vers les ressources",
-        price: 3200,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
-    },
-    {
-        value: "option6",
-        label: "Interprétation historique des ressources",
-        price: 240,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+        label: "Directionnel piétons + Relais Info Services",
+        price: 1000,
+        modelId: "6dfa2976-0c74-46f3-9ac7-edeb2405d5f9",
+        meshToHide: {
+            sleeve: "MANCHON_COURT",
+            panel: "PANNEAU 350"
+        }
     }
 ];
 const productQuantity = Array.apply(null, new Array(10)).map(function(el, i) {
@@ -29127,7 +29141,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _vectaryItems = require("../vectary-items/vectary-items");
 var _vectaryItemsDefault = parcelHelpers.interopDefault(_vectaryItems);
-const SignalSystem = ({ myPicto , setMyPicto , setIsLoaded , townName , models , currentColor , pictureSleeve , currentAnim  })=>{
+const SignalSystem = ({ myPicto , setMyPicto , setIsLoaded , townName , models , currentColor , pictureSleeve  })=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-signal-system",
         children: [
@@ -29189,29 +29203,24 @@ var _api = require("../../../lib/api");
 var _iframe = require("./iframe");
 var _iframeDefault = parcelHelpers.interopDefault(_iframe);
 //Logic import
-var _updateMaterial = require("../../../functions/update-material");
-var _updateMaterialDefault = parcelHelpers.interopDefault(_updateMaterial);
-var _updateColor2 = require("../../../functions/update-color-2");
-var _updateColor2Default = parcelHelpers.interopDefault(_updateColor2);
+var _updateSvg = require("../../../functions/update-svg");
+var _updateSvgDefault = parcelHelpers.interopDefault(_updateSvg);
 var _s = $RefreshSig$();
-const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor , pictureSleeve  })=>{
+const VectaryItems = ({ setPicto , setIsLoaded , models , pictureSleeve  })=>{
     _s();
-    const viewerModels = [];
+    // const viewerModels = [];
     _react.useEffect(()=>{
         const run = async ()=>{
             setPicto([]);
             setIsLoaded("");
             models.map(async (model, index)=>{
                 const viewerApi = new _api.VctrApi("Model_" + model.modelId);
-                viewerModels.push(viewerApi);
+                // viewerModels.push(viewerApi);
                 await viewerApi.init();
-                await viewerApi.setPositionAbsolute("Camera", [
-                    4,
-                    2,
-                    7
-                ]);
-                // updateMaterial(dominantColor, viewerApi, pictureSleeve);
-                _updateColor2Default.default(viewerApi, pictureSleeve);
+                const allScene = await viewerApi.getObjects();
+                if ("Model_" + model.modelId === viewerApi.id) for(let meshToHide in model.meshToHide)viewerApi.setVisibility(model.meshToHide[meshToHide], false, false);
+                // console.log(model);
+                _updateSvgDefault.default(viewerApi, pictureSleeve, allScene, models);
                 if (viewerApi.isReady === true) {
                     const waitForScreen = async ()=>{
                         const screenshot = await viewerApi.takeScreenshot();
@@ -29235,19 +29244,19 @@ const VectaryItems = ({ picto , setPicto , setIsLoaded , models , dominantColor 
     }, []);
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         className: "container-iframe",
-        children: models.map((model, index)=>{
+        children: models.map((model)=>{
             return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactDefault.default.Fragment, {
                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_iframeDefault.default, {
                     id: model.modelId,
                     nameModel: model.label
-                }, model.modelId + index, false, {
+                }, void 0, false, {
                     fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                    lineNumber: 62,
+                    lineNumber: 63,
                     columnNumber: 29
                 }, undefined)
-            }, model.modelId + index, false, {
+            }, model.value, false, {
                 fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                lineNumber: 61,
+                lineNumber: 62,
                 columnNumber: 25
             }, undefined);
         })
@@ -29268,7 +29277,7 @@ $RefreshReg$(_c, "VectaryItems");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../lib/api":"6mCQj","./iframe":"3y0ds","../../../functions/update-material":"da8K6","../../../functions/update-color-2":"3DSfZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mCQj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../../../lib/api":"6mCQj","./iframe":"3y0ds","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../functions/update-svg":"4wKEN"}],"6mCQj":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "VctrApi", ()=>_Vectary$VctrApi
@@ -30416,28 +30425,16 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"da8K6":[function(require,module,exports) {
+},{}],"4wKEN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-const updateMaterial = async (dominantColor, viewerApi, pictureSleeve)=>{
-    const updateColor = {
-        color: dominantColor,
-        map: pictureSleeve
-    };
-    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor);
-};
-exports.default = updateMaterial;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3DSfZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-const updateMaterial2 = async (viewerApi, pictureSleeve)=>{
+const updateSvg = async (viewerApi, pictureSleeve, viewerModels, configModels)=>{
     const updateColor2 = {
         map: pictureSleeve
     };
-    await viewerApi.updateMaterial("COULEUR_DOMINANTE", updateColor2);
+    for (let model of viewerModels)if (model.name === "MANCHON_LONG" || model.name === "MANCHON_COURT") await viewerApi.updateMaterial(model.material, updateColor2);
 };
-exports.default = updateMaterial2;
+exports.default = updateSvg;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"273co":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$701e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
