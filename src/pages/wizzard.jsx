@@ -212,7 +212,7 @@ const Wizzard = () => {
     </ViewWrapper>,
     <ViewWrapper
       currentAnim={currentAnim}
-      next={'coucou'}
+      next={'Acceuil'}
       previousAction={() => {
         setCurrentAnim(previousLeave);
         waitComposantLeavePage();
@@ -266,7 +266,7 @@ const Wizzard = () => {
 
   return (
     <div className="container-components">
-      <p>test longueur</p>
+      <p>Couleurs bouton rond</p>
       {wizardSteps[currentWizardStep]}
       <DynamicalPng reference={exportRef} text={townName} color={color}/>
     </div>

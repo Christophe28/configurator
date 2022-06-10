@@ -1,6 +1,9 @@
 .container-dominant-color {
     
     .colors {
+        @media screen and (min-width: 601px){
+            background-color: black;
+        }
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -12,7 +15,7 @@
             border-radius: 50%;
             border: 0px;
             margin-right: 2rem;
-            
+            -webkit-appearance: none;
             &:hover {
                 cursor: pointer;
             }
