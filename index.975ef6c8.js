@@ -24849,7 +24849,7 @@ const Wizzard = ()=>{
         className: "container-components",
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: "max width !!!"
+                children: "max width 90% !!!"
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
                 lineNumber: 269,
@@ -24890,7 +24890,7 @@ $RefreshReg$(_c, "Wizzard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-spring":"2gPbQ","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../components/layout/view-wrapper":"2NQC3","../config/config":"a6ccA","../functions/export-as-image":"9VZDV","../functions/show-input":"jnUkf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"2gPbQ":[function(require,module,exports) {
+},{"react":"21dqq","react-spring":"2gPbQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react/jsx-dev-runtime":"iTorj","../components/wizzardComponents/pages/choose-town":"89ycD","../components/wizzardComponents/pages/choose-dominant-colors":"8MgvR","../components/wizzardComponents/pages/choose-signage-equipment":"hKyDF","../components/wizzardComponents/pages/signal-system":"f56lm","../components/wizzardComponents/dynamical_png/dynamical_png":"273co","../components/wizzardComponents/pages/calculate-cost":"dyrfq","../components/wizzardComponents/pages/total-cost":"1rqbK","../components/layout/view-wrapper":"2NQC3","../config/config":"a6ccA","../functions/export-as-image":"9VZDV","../functions/show-input":"jnUkf"}],"2gPbQ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _web = require("@react-spring/web");
@@ -28512,102 +28512,7 @@ const getDisplayName = (arg)=>_shared.is.str(arg) ? arg : arg && _shared.is.str(
 
 },{}],"dlWzh":[function(require,module,exports) {
 
-},{}],"89ycD":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$eb26 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$eb26.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _inputText = require("../buttons/input-text");
-var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
-const ChooseTown = ({ townName , setTownName  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-town-name",
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quel est le nom de votre commune ?"
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-                lineNumber: 7,
-                columnNumber: 13
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
-                type: "text",
-                value: townName,
-                onChange: (e)=>{
-                    setTownName(e.target.value);
-                }
-            }, void 0, false, {
-                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-                lineNumber: 9,
-                columnNumber: 13
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
-        lineNumber: 6,
-        columnNumber: 9
-    }, undefined);
-};
-_c = ChooseTown;
-exports.default = ChooseTown;
-var _c;
-$RefreshReg$(_c, "ChooseTown");
-
-  $parcel$ReactRefreshHelpers$eb26.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/input-text":"cEoUW","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cEoUW":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$eac1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$eac1.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const InputText = ({ type , value , name , placeholder , onChange  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "container-input-text",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
-            type: type,
-            value: value,
-            name: name,
-            placeholder: placeholder,
-            onChange: onChange
-        }, void 0, false, {
-            fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
-            lineNumber: 6,
-            columnNumber: 13
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
-        lineNumber: 5,
-        columnNumber: 9
-    }, undefined);
-};
-_c = InputText;
-exports.default = InputText;
-var _c;
-$RefreshReg$(_c, "InputText");
-
-  $parcel$ReactRefreshHelpers$eac1.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"km3Ru":[function(require,module,exports) {
+},{}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require('react-refresh/runtime');
 function debounce(func, delay) {
@@ -28727,7 +28632,102 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"786KC"}],"8MgvR":[function(require,module,exports) {
+},{"react-refresh/runtime":"786KC"}],"89ycD":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$eb26 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$eb26.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _inputText = require("../buttons/input-text");
+var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
+const ChooseTown = ({ townName , setTownName  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-town-name",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: "Quel est le nom de votre commune ?"
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+                lineNumber: 7,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_inputTextDefault.default, {
+                type: "text",
+                value: townName,
+                onChange: (e)=>{
+                    setTownName(e.target.value);
+                }
+            }, void 0, false, {
+                fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+                lineNumber: 9,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/wizzardComponents/pages/choose-town.jsx",
+        lineNumber: 6,
+        columnNumber: 9
+    }, undefined);
+};
+_c = ChooseTown;
+exports.default = ChooseTown;
+var _c;
+$RefreshReg$(_c, "ChooseTown");
+
+  $parcel$ReactRefreshHelpers$eb26.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../buttons/input-text":"cEoUW","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"cEoUW":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$eac1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$eac1.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const InputText = ({ type , value , name , placeholder , onChange  })=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "container-input-text",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("input", {
+            type: type,
+            value: value,
+            name: name,
+            placeholder: placeholder,
+            onChange: onChange
+        }, void 0, false, {
+            fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
+            lineNumber: 6,
+            columnNumber: 13
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/wizzardComponents/buttons/input-text.jsx",
+        lineNumber: 5,
+        columnNumber: 9
+    }, undefined);
+};
+_c = InputText;
+exports.default = InputText;
+var _c;
+$RefreshReg$(_c, "InputText");
+
+  $parcel$ReactRefreshHelpers$eac1.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8MgvR":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$a15d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
