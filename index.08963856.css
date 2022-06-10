@@ -110,11 +110,31 @@ body .container-components .container-navigation .previousInput {
   left: 0;
 }
 
+@media screen and (max-width: 600px) {
+  .container-checkboxes {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container-checkboxes div {
+    justify-content: flex-start;
+    display: flex;
+  }
+}
+
 .container-checkboxes div input {
   width: 2.5rem;
   height: 2.5rem;
   vertical-align: bottom;
   position: relative;
+}
+
+@media screen and (max-width: 600px) {
+  .container-checkboxes div input {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .container-checkboxes div input:hover {
@@ -131,10 +151,23 @@ body .container-components .container-navigation .previousInput {
   display: inline-block;
 }
 
+@media screen and (max-width: 600px) {
+  .container-checkboxes div label {
+    width: 1rem;
+    font-size: .95rem;
+  }
+}
+
 .container-dominant-color .colors {
   flex-flow: wrap;
   justify-content: center;
   display: flex;
+}
+
+@media screen and (min-width: 601px) {
+  .container-dominant-color .colors {
+    background-color: #000;
+  }
 }
 
 .container-dominant-color .colors input {
