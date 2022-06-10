@@ -18,12 +18,6 @@ body .container-components {
   margin-top: 25vh;
 }
 
-@media screen and (max-width: 600px) {
-  body .container-components {
-    max-width: 20%;
-  }
-}
-
 body .container-components h2 {
   color: #707070;
   font-size: 2rem;
@@ -93,7 +87,7 @@ body .container-components .container-navigation .previousInput {
 
 @media screen and (max-width: 600px) {
   .container-input-text input {
-    width: 100%;
+    width: 50%;
   }
 }
 

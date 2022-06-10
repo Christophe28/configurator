@@ -24628,7 +24628,7 @@ const Wizzard = ()=>{
     };
     const waitEndOfAnnim = ()=>{
         setTimeout(changePage, 2000);
-        setTimeout(waitForRefreshAnim, 2000);
+        setTimeout(waitForRefreshAnim, 3000);
     };
     //Before
     const comeBackComposant = ()=>{
