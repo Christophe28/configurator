@@ -78,6 +78,7 @@ body .container-components .container-navigation .previousInput {
   height: 3.85rem;
   width: 33rem;
   color: #707070;
+  -webkit-appearance: none;
   border: 1px solid #707070;
   border-radius: 30px;
   font-size: 2rem;
