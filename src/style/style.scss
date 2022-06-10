@@ -1,32 +1,13 @@
 @import "./settings.scss";
 
-@media screen and(max-width: 590px) {
-    @import "./phone-size/pages/wizzard.scss";
+@import "./pages/wizzard.scss";
 
-    @import "./phone-size/components/dynamical-png.scss";
-    @import "./phone-size/components/input-text.scss";
-    @import "./phone-size/components/color-piker-wrapper.scss";
-    @import "./phone-size/components/checkboxes.scss";
+@import "./components/dynamical-png.scss";
+@import "./components/input-text.scss";
+@import "./components/colors-pîcker-wrapper.scss";
+@import "./components/checkboxes.scss";
 
-
-    @import "./phone-size/components/pages/choose-dominant-colors.scss";
-    @import "./phone-size/components/pages/signal-system.scss";
-    @import "./phone-size/components/pages/calculate-cost.scss";
-    @import "./phone-size/components/pages/total-cost.scss";
-}
-
-@media screen and(min-width: 780px) {
-
-    @import "./pages/wizzard.scss";
-
-    @import "./components/dynamical-png.scss";
-    @import "./components/input-text.scss";
-    @import "./components/colors-pîcker-wrapper.scss";
-    @import "./components/checkboxes.scss";
-
-    @import "./components/pages/choose-dominant-colors.scss";
-    @import "./components/pages/signal-system.scss";
-    @import "./components/pages/calculate-cost.scss";
-    @import "./components/pages/total-cost.scss";
-}
-
+@import "./components/pages/choose-dominant-colors.scss";
+@import "./components/pages/signal-system.scss";
+@import "./components/pages/calculate-cost.scss";
+@import "./components/pages/total-cost.scss";

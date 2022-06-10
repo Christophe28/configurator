@@ -41,16 +41,6 @@ const Wizzard = () => {
   const textInputNext = "Recevoir un devis";
 
   //=============Animation=============//
-  const test = (time, startOpacity, startX, endOpacity, endX) => {
-    const anim = useSpring({
-      reset: true,
-      config: { duration: time },
-      from: { opacity: startOpacity, x: startX},
-      to: { opacity: endOpacity, x: endX}
-    })
-    return anim
-  }
-
   const welcomAnim = useSpring({
     reset: true,
     config: { duration: 1000 },
@@ -276,6 +266,7 @@ const Wizzard = () => {
 
   return (
     <div className="container-components">
+      <p>test longueur</p>
       {wizardSteps[currentWizardStep]}
       <DynamicalPng reference={exportRef} text={townName} color={color}/>
     </div>

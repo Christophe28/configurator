@@ -1,14 +1,5 @@
-@media screen and (max-width: 576px) {
-    //Gsm portrait
-}
-@media screen and (min-width: 600px) and (max-width: 768px) {
-    //Tablette
-}
-@media screen and (min-width: 780px) and (max-width: 992px) {
-
-}
 body {
-
+    
     h2, label, input, p, th {
         font-family: $font-1;
         text-align: center;
@@ -42,7 +33,8 @@ body {
                 border: 1px solid $color-1;
                 font-weight: bolder;
                 font-size: 1.5rem;
-
+                background-color: blue;
+                -webkit-appearance: none;
                 &:hover {
                     cursor: pointer;
                 }
