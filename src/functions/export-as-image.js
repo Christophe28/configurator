@@ -1,5 +1,4 @@
 import html2canvas from "html2canvas";
-import { position } from "html2canvas";
 
 const exportAsImage = async (element, setImage) => {
     const canvas = await html2canvas((element), {

@@ -15,7 +15,7 @@ const ColorsPickerWrapper = ({ color, setColor, colorsPickerValue, setColorsPick
                     }
                 }
                 value={colorsPickerValue}
-                onInput={(e) => {
+                onChange={(e) => {
                     setColor(e.target.value);
                     setColorsPickerValue(e.target.value);
                 }}

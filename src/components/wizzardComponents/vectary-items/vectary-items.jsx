@@ -1,6 +1,6 @@
 //React import
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 //Lib import
 import { VctrApi } from '../../../lib/api';
@@ -10,11 +10,9 @@ import Iframe from './iframe';
 
 //Logic import
 import updateMaterial from '../../../functions/update-material';
-import updateMaterial2 from '../../../functions/update-color-2';
+import updateSvg from '../../../functions/update-svg';
 const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pictureSleeve }) => {
     const viewerModels = [];
-
-
 
     useEffect(() => {
         const run = async () => {
@@ -26,11 +24,9 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
                 viewerModels.push(viewerApi);
                 await viewerApi.init();
                 
-                await viewerApi.setPositionAbsolute("Camera", [4, 2, 7]);
+                const allScene = await viewerApi.getObjects();
 
-
-                // updateMaterial(dominantColor, viewerApi, pictureSleeve);
-                updateMaterial2(viewerApi, pictureSleeve);
+                updateSvg(viewerApi, pictureSleeve, allScene);
 
                 if(viewerApi.isReady === true) {
                     const waitForScreen = async () => { 
@@ -56,11 +52,10 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
     return (
         <div className="container-iframe">
             {
-                models.map((model, index) => {
+                models.map((model) => {
                     return(    
-                        <React.Fragment key={model.modelId + index}>
+                        <React.Fragment key={model.value}>
                             <Iframe
-                                key={model.modelId + index}
                                 id={model.modelId}
                                 nameModel={model.label}
                             />    

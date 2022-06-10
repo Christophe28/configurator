@@ -1,7 +1,7 @@
 import React from 'react';
 import VectaryItems from '../vectary-items/vectary-items';
 
-const SignalSystem = ({ myPicto, setMyPicto, setIsLoaded, townName ,models, currentColor, pictureSleeve, currentAnim }) => {
+const SignalSystem = ({ myPicto, setMyPicto, setIsLoaded, townName ,models, currentColor, pictureSleeve }) => {
 
     return (
         <div className="container-signal-system">

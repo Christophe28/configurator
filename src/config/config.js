@@ -82,39 +82,33 @@ export const themeColors = [
 export const signageEquipment = [
     {
         value: "option1",
-        label: "Effet de porte aux entrées de la commune",
-        price: 2400,
-        modelId: "e23752d1-c5e8-4788-b719-8a913477dc6c"
+        label: "panneau d'interprétation",
+        price: 900,
+        modelId: "0de11c33-d091-457f-8dc8-d025b6f2858c"
     },
     {
         value: "option2",
-        label: "Orientation des véhicules vers les ressources",
-        price: 980,
-        modelId: "42ff93c8-3ef7-4f9e-a632-10c6d2a7ab59"
+        label: "Identifications des parkings",
+        price: 1000,
+        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
     },
     {
         value: "option3",
-        label: "Identification des parkings",
-        price: 1200,
-        modelId: "d7e90749-acb2-4861-bb20-08881e0777ce"
+        label: "Relais Info Services",
+        price: 1500,
+        modelId: "e8397f01-d261-4992-8438-78fd0df02cad"
     },
     {
         value: "option4",
-        label: "Information sur les ressources du centre-ville",
-        price: 4800,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+        label: "Directionnel piétons",
+        price: 500,
+        modelId: "350b72ff-317b-419e-8244-10e143cce692"
     },
     {
         value: "option5",
-        label: "Orientation des piétons vers les ressources",
-        price: 3200,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
-    },
-    {
-        value: "option6",
-        label: "Interprétation historique des ressources",
-        price: 240,
-        modelId: "57cf45e9-d355-4463-af66-f08c72993784"
+        label: "Directionnel piétons + Relais Info Services",
+        price: 1000,
+        modelId: "6dfa2976-0c74-46f3-9ac7-edeb2405d5f9"
     }
 ]
 
