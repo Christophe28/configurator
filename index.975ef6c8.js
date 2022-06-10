@@ -24849,7 +24849,7 @@ const Wizzard = ()=>{
         className: "container-components",
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
-                children: "T'es un tueur Pierre !"
+                children: "T'es un tueur Pierre !!"
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
                 lineNumber: 269,
