@@ -28823,7 +28823,7 @@ const ColorsPickerWrapper = ({ color , setColor , colorsPickerValue , setColorsP
                 opacity: 0.45
             },
             value: colorsPickerValue,
-            onChange: (e)=>{
+            onInput: (e)=>{
                 setColor(e.target.value);
                 setColorsPickerValue(e.target.value);
             }
