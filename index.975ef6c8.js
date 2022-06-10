@@ -24562,23 +24562,6 @@ const Wizzard = ()=>{
     const exportRef = _react.useRef();
     const textInputNext = "Recevoir un devis";
     //=============Animation=============//
-    const test = (time, startOpacity, startX, endOpacity, endX)=>{
-        const anim = _reactSpring.useSpring({
-            reset: true,
-            config: {
-                duration: time
-            },
-            from: {
-                opacity: startOpacity,
-                x: startX
-            },
-            to: {
-                opacity: endOpacity,
-                x: endX
-            }
-        });
-        return anim;
-    };
     const welcomAnim = _reactSpring.useSpring({
         reset: true,
         config: {
@@ -24681,12 +24664,12 @@ const Wizzard = ()=>{
                 townName: townName
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 127,
+                lineNumber: 117,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 117,
+            lineNumber: 107,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24709,12 +24692,12 @@ const Wizzard = ()=>{
                 themeColors: _config.themeColors
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 145,
+                lineNumber: 135,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 132,
+            lineNumber: 122,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24735,12 +24718,12 @@ const Wizzard = ()=>{
                 selectedSignageEquipment: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 166,
+                lineNumber: 156,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 153,
+            lineNumber: 143,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24764,12 +24747,12 @@ const Wizzard = ()=>{
                 pictureSleeve: image
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 185,
+                lineNumber: 175,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 173,
+            lineNumber: 163,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24799,12 +24782,12 @@ const Wizzard = ()=>{
                     })
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 208,
+                lineNumber: 198,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 195,
+            lineNumber: 185,
             columnNumber: 5
         }, undefined),
         /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_viewWrapperDefault.default, {
@@ -24823,12 +24806,12 @@ const Wizzard = ()=>{
                 signagesEquipements: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 232,
+                lineNumber: 222,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 223,
+            lineNumber: 213,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24872,13 +24855,13 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 280,
+                lineNumber: 270,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 278,
+        lineNumber: 268,
         columnNumber: 5
     }, undefined);
 };
@@ -30758,7 +30741,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactSpring = require("react-spring");
 const ViewWrapper = ({ children , previous ="Précédent" , next ="Suivant" , previousAction , nextAction , currentAnim  })=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactSpring.animated.div, {
         style: currentAnim,
         children: [
             children,
