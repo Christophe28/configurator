@@ -9,11 +9,11 @@ import { VctrApi } from '../../../lib/api';
 import Iframe from './iframe';
 
 //Logic import
-import updateMaterial from '../../../functions/update-material';
 import updateSvg from '../../../functions/update-svg';
-const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pictureSleeve }) => {
-    const viewerModels = [];
 
+const VectaryItems = ({ setPicto, setIsLoaded, models, pictureSleeve }) => {
+    // const viewerModels = [];
+    
     useEffect(() => {
         const run = async () => {
             setPicto([]);
@@ -21,13 +21,18 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
             models.map(async (model, index) => {
                 
                 const viewerApi = new VctrApi("Model_" + model.modelId);
-                viewerModels.push(viewerApi);
+                // viewerModels.push(viewerApi);
                 await viewerApi.init();
                 
                 const allScene = await viewerApi.getObjects();
-
-                updateSvg(viewerApi, pictureSleeve, allScene);
-
+                if("Model_" + model.modelId === viewerApi.id) {
+                    for(let meshToHide in model.meshToHide) {
+                        viewerApi.setVisibility(model.meshToHide[meshToHide], false, false);
+                    }
+                }
+                // console.log(model);
+                updateSvg(viewerApi, pictureSleeve, allScene, models);
+                
                 if(viewerApi.isReady === true) {
                     const waitForScreen = async () => { 
                         const screenshot = await viewerApi.takeScreenshot();
@@ -48,11 +53,11 @@ const VectaryItems = ({ picto, setPicto, setIsLoaded, models, dominantColor, pic
         run();
     }, [])
 
-    
     return (
         <div className="container-iframe">
             {
                 models.map((model) => {
+                    
                     return(    
                         <React.Fragment key={model.value}>
                             <Iframe
