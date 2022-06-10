@@ -140,6 +140,7 @@ body .container-components .container-navigation .previousInput {
 .container-dominant-color .colors input {
   width: 4rem;
   height: 4rem;
+  -webkit-appearance: none;
   border: none;
   border-radius: 50%;
   margin-right: 2rem;
