@@ -24849,7 +24849,7 @@ const Wizzard = ()=>{
         className: "container-components",
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
-                children: "Checkbox responsive"
+                children: "-webkit-appareance = none;"
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
                 lineNumber: 269,

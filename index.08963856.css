@@ -8,6 +8,10 @@
   src: local(RobotoBlack), url("Roboto-Black.103194fc.ttf") format("truetype");
 }
 
+body {
+  -webkit-appearance: none;
+}
+
 body h2, body label, body input, body p, body th {
   text-align: center;
   font-family: Roboto, sans-serif;
