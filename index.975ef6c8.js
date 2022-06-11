@@ -24565,7 +24565,7 @@ const Wizzard = ()=>{
     const welcomAnim = _reactSpring.useSpring({
         reset: true,
         config: {
-            duration: 1000
+            duration: 500
         },
         from: {
             opacity: 0,
@@ -24579,35 +24579,35 @@ const Wizzard = ()=>{
     const comeBack = _reactSpring.useSpring({
         reset: true,
         config: {
-            duration: 1000
+            duration: 500
         },
         from: {
             opacity: 0,
-            x: -600
+            y: -600
         },
         to: {
             opacity: 1,
-            x: 0
+            y: 0
         }
     });
     const leavePage = _reactSpring.useSpring({
         reset: true,
         config: {
-            duration: 1000
+            duration: 500
         },
         from: {
             opacity: 1,
-            x: 0
+            y: 0
         },
         to: {
             opacity: 0,
-            x: -600
+            y: -600
         }
     });
     const previousLeave = _reactSpring.useSpring({
         reset: true,
         config: {
-            duration: 1000
+            duration: 500
         },
         from: {
             opacity: 1,
@@ -24627,8 +24627,8 @@ const Wizzard = ()=>{
         setCurrentAnim();
     };
     const waitEndOfAnnim = ()=>{
-        setTimeout(changePage, 2000);
-        setTimeout(waitForRefreshAnim, 3000);
+        setTimeout(changePage, 1000);
+        setTimeout(waitForRefreshAnim, 1500);
     };
     //Before
     const comeBackComposant = ()=>{
@@ -24636,8 +24636,8 @@ const Wizzard = ()=>{
         setCurrentAnim(comeBack);
     };
     const waitComposantLeavePage = ()=>{
-        setTimeout(comeBackComposant, 2000);
-        setTimeout(waitForRefreshAnim, 3000);
+        setTimeout(comeBackComposant, 1000);
+        setTimeout(waitForRefreshAnim, 1500);
     };
     _react.useEffect(()=>{
         setSelectedSignageEquipmentQuantity((oldState)=>{
@@ -24773,6 +24773,7 @@ const Wizzard = ()=>{
                 currentAnim: currentAnim,
                 setEmail: setEmailUser,
                 email: emailUser,
+                image: pictoVectaryModel,
                 onChangeAction: (itemValue, quantity)=>setSelectedSignageEquipmentQuantity((oldState)=>{
                         const newState = {
                             ...oldState
@@ -24806,12 +24807,12 @@ const Wizzard = ()=>{
                 signagesEquipements: selectedSignageEquipment1
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 222,
+                lineNumber: 223,
                 columnNumber: 7
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/wizzard.jsx",
-            lineNumber: 213,
+            lineNumber: 214,
             columnNumber: 5
         }, undefined), 
     ];
@@ -24855,13 +24856,13 @@ const Wizzard = ()=>{
                 color: color
             }, void 0, false, {
                 fileName: "src/pages/wizzard.jsx",
-                lineNumber: 271,
+                lineNumber: 272,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/wizzard.jsx",
-        lineNumber: 268,
+        lineNumber: 269,
         columnNumber: 5
     }, undefined);
 };
@@ -29078,7 +29079,8 @@ const signageEquipment = [
         modelId: "0de11c33-d091-457f-8dc8-d025b6f2858c",
         meshToHide: {
             sleeve: "MANCHON_LONG",
-            panel: "PANNEAU_500"
+            panel: "PANNEAU_500",
+            panel: "PANNEAU_350"
         }
     },
     {
@@ -29087,8 +29089,7 @@ const signageEquipment = [
         price: 1000,
         modelId: "57cf45e9-d355-4463-af66-f08c72993784",
         meshToHide: {
-            sleeve: "MANCHON_LONG",
-            panel: ""
+            sleeve: "MANCHON_LONG"
         }
     },
     {
@@ -29107,8 +29108,7 @@ const signageEquipment = [
         price: 500,
         modelId: "350b72ff-317b-419e-8244-10e143cce692",
         meshToHide: {
-            sleeve: "MANCHON_COURT",
-            panel: ""
+            sleeve: "MANCHON_COURT"
         }
     },
     {
@@ -29208,18 +29208,15 @@ var _updateSvgDefault = parcelHelpers.interopDefault(_updateSvg);
 var _s = $RefreshSig$();
 const VectaryItems = ({ setPicto , setIsLoaded , models , pictureSleeve  })=>{
     _s();
-    // const viewerModels = [];
     _react.useEffect(()=>{
         const run = async ()=>{
             setPicto([]);
             setIsLoaded("");
             models.map(async (model, index)=>{
                 const viewerApi = new _api.VctrApi("Model_" + model.modelId);
-                // viewerModels.push(viewerApi);
                 await viewerApi.init();
                 const allScene = await viewerApi.getObjects();
                 if ("Model_" + model.modelId === viewerApi.id) for(let meshToHide in model.meshToHide)viewerApi.setVisibility(model.meshToHide[meshToHide], false, false);
-                // console.log(model);
                 _updateSvgDefault.default(viewerApi, pictureSleeve, allScene, models);
                 if (viewerApi.isReady === true) {
                     const waitForScreen = async ()=>{
@@ -29251,18 +29248,18 @@ const VectaryItems = ({ setPicto , setIsLoaded , models , pictureSleeve  })=>{
                     nameModel: model.label
                 }, void 0, false, {
                     fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                    lineNumber: 63,
+                    lineNumber: 62,
                     columnNumber: 29
                 }, undefined)
             }, model.value, false, {
                 fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-                lineNumber: 62,
+                lineNumber: 61,
                 columnNumber: 25
             }, undefined);
         })
     }, void 0, false, {
         fileName: "src/components/wizzardComponents/vectary-items/vectary-items.jsx",
-        lineNumber: 57,
+        lineNumber: 56,
         columnNumber: 9
     }, undefined);
 };
@@ -30497,19 +30494,27 @@ var _dropdownDefault = parcelHelpers.interopDefault(_dropdown);
 var _inputText = require("../buttons/input-text");
 var _inputTextDefault = parcelHelpers.interopDefault(_inputText);
 var _config = require("../../../config/config");
-const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedSignageEquipmentQuantity , onChangeAction , currentAnim  })=>{
+const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedSignageEquipmentQuantity , onChangeAction , image  })=>{
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         children: [
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: "Quelles quantit\xe9s de chaque \xe9l\xe9ment ?"
+                children: "Indiquez votre adresse mail ci-dessous pour recevoir une estimation budg\xe9taire de votre projet"
             }, void 0, false, {
                 fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                lineNumber: 19,
+                lineNumber: 18,
                 columnNumber: 7
             }, undefined),
             selectedSignageEquipment.map((oneSelectedSignageEquipement, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
                     className: "container-how-items",
                     children: [
+                        /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
+                            src: image[index],
+                            alt: ""
+                        }, void 0, false, {
+                            fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
+                            lineNumber: 24,
+                            columnNumber: 11
+                        }, undefined),
                         /*#__PURE__*/ _jsxDevRuntime.jsxDEV("p", {
                             children: oneSelectedSignageEquipement.label
                         }, void 0, false, {
@@ -30531,7 +30536,7 @@ const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedS
                     ]
                 }, oneSelectedSignageEquipement.value, true, {
                     fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-                    lineNumber: 21,
+                    lineNumber: 20,
                     columnNumber: 9
                 }, undefined)
             ),
@@ -30551,7 +30556,7 @@ const CalculateCost = ({ email , setEmail , selectedSignageEquipment , selectedS
         ]
     }, void 0, true, {
         fileName: "src/components/wizzardComponents/pages/calculate-cost.jsx",
-        lineNumber: 18,
+        lineNumber: 17,
         columnNumber: 5
     }, undefined);
 };
@@ -30624,7 +30629,7 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reducer = require("../../../functions/reducer");
 var _reducerDefault = parcelHelpers.interopDefault(_reducer);
 var _s = $RefreshSig$();
-const TotalCost = ({ quantity , signagesEquipements , image , currentAnim  })=>{
+const TotalCost = ({ quantity , signagesEquipements , image  })=>{
     _s();
     const [currentTotal, setCurrentTotal] = _react.useState(0);
     const cheatTotal = [];
@@ -30639,7 +30644,6 @@ const TotalCost = ({ quantity , signagesEquipements , image , currentAnim  })=>{
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV("table", {
-                border: "1",
                 children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tbody", {
                     children: Object.keys(quantity).map((oneKey, index)=>{
                         _react.useEffect(()=>{
@@ -30648,21 +30652,21 @@ const TotalCost = ({ quantity , signagesEquipements , image , currentAnim  })=>{
                         return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("tr", {
                             children: [
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                    children: signagesEquipements[index].label
+                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
+                                        src: image[index],
+                                        alt: "Image du modèle " + signagesEquipements[index].label
+                                    }, void 0, false, {
+                                        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
+                                        lineNumber: 22,
+                                        columnNumber: 21
+                                    }, undefined)
                                 }, void 0, false, {
                                     fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
                                     lineNumber: 22,
                                     columnNumber: 17
                                 }, undefined),
                                 /*#__PURE__*/ _jsxDevRuntime.jsxDEV("td", {
-                                    children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
-                                        src: image[index],
-                                        alt: "Image du modèle " + signagesEquipements[index].label
-                                    }, void 0, false, {
-                                        fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
-                                        lineNumber: 23,
-                                        columnNumber: 21
-                                    }, undefined)
+                                    children: signagesEquipements[index].label
                                 }, void 0, false, {
                                     fileName: "src/components/wizzardComponents/pages/total-cost.jsx",
                                     lineNumber: 23,
