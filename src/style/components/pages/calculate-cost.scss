@@ -1,9 +1,24 @@
 .container-how-items {
-    
+    margin-top: 2rem;
+    margin-right: 30%;
+    margin-left: 33%;
+    width: 30%;
     display: flex; 
-    justify-content: center;
     align-items: center;
+
+    img {
+        height: 20%;
+        width: 20%;
+    }
+
+    p {
+        color: $color-1;
+        font-weight: bolder;  
+        font-size: 1.2rem;
+    }
     select {
         height: 20px;
+        position: absolute;
+        right: 33%;
     }
 }

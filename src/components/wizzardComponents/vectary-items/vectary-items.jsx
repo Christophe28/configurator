@@ -12,7 +12,6 @@ import Iframe from './iframe';
 import updateSvg from '../../../functions/update-svg';
 
 const VectaryItems = ({ setPicto, setIsLoaded, models, pictureSleeve }) => {
-    // const viewerModels = [];
     
     useEffect(() => {
         const run = async () => {
@@ -21,11 +20,11 @@ const VectaryItems = ({ setPicto, setIsLoaded, models, pictureSleeve }) => {
             models.map(async (model, index) => {
                 
                 const viewerApi = new VctrApi("Model_" + model.modelId);
-                // viewerModels.push(viewerApi);
+
                 await viewerApi.init();
                 
                 const allScene = await viewerApi.getObjects();
-                console.log(allScene);
+
                 if("Model_" + model.modelId === viewerApi.id) {
                     for(let meshToHide in model.meshToHide) {
                         viewerApi.setVisibility(model.meshToHide[meshToHide], false, false);

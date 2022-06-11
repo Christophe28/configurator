@@ -11,17 +11,17 @@ const CalculateCost = ({
   selectedSignageEquipment,
   selectedSignageEquipmentQuantity,
   onChangeAction,
-  currentAnim
+  image
 }) => {
   return (
-
     <div>
-      <h2>Quelles quantités de chaque élément ?</h2>
+      <h2>Indiquez votre adresse mail ci-dessous pour recevoir une estimation budgétaire de votre projet</h2>
       {selectedSignageEquipment.map((oneSelectedSignageEquipement, index) => (
         <div
           key={oneSelectedSignageEquipement.value}
           className="container-how-items"
         >
+          <img src={image[index]} alt="" />
           <p>{oneSelectedSignageEquipement.label}</p>
           <Dropdown
             items={productQuantity}

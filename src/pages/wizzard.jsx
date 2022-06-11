@@ -201,6 +201,7 @@ const Wizzard = () => {
         currentAnim={currentAnim}
         setEmail={setEmailUser}
         email={emailUser}
+        image={pictoVectaryModel}
         onChangeAction={(itemValue, quantity) =>
           setSelectedSignageEquipmentQuantity((oldState) => {
             const newState = { ...oldState };
