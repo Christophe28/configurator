@@ -1,8 +1,13 @@
 .container-total-cost {
-    padding-top: 5%;
-    table {
-        margin: auto; 
 
+    table {
+        margin: auto;
+        width: 60%;
+
+        td {
+            width: 15%;
+            font-size: 1.5rem;
+        }
         img {
             width: 50%;
             height: 50%;

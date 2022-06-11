@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import reducer from "../../../functions/reducer";
 
-const TotalCost = ({ quantity, signagesEquipements, image, currentAnim }) => {
+const TotalCost = ({ quantity, signagesEquipements, image }) => {
   const [currentTotal, setCurrentTotal] = useState(0);
 
   const cheatTotal = [];
@@ -11,7 +11,7 @@ const TotalCost = ({ quantity, signagesEquipements, image, currentAnim }) => {
   return (
     <div className="container-total-cost">
       <h2>Merci nous revenons vers vous avec une offre </h2>
-      <table border="1">
+      <table>
         <tbody>
           {Object.keys(quantity).map((oneKey, index) => {
             useEffect(() => {
@@ -19,8 +19,8 @@ const TotalCost = ({ quantity, signagesEquipements, image, currentAnim }) => {
             }, [])
             return (
               <tr key={quantity[oneKey] + index}>
-                <td>{signagesEquipements[index].label}</td>
                 <td><img src={image[index]} alt={"Image du modèle " + signagesEquipements[index].label} /></td>
+                <td>{signagesEquipements[index].label}</td>
                 <td>X {quantity[oneKey]}</td>
               </tr>
             );

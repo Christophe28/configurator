@@ -43,28 +43,28 @@ const Wizzard = () => {
   //=============Animation=============//
   const welcomAnim = useSpring({
     reset: true,
-    config: { duration: 1000 },
+    config: { duration: 500 },
     from: { opacity: 0, y: 600 },
     to: { opacity: 1, y: 0 }
   })
 
   const comeBack = useSpring({
       reset: true,
-      config: { duration: 1000 },
-      from: { opacity: 0, x: -600 },
-      to: { opacity: 1, x: 0 }
+      config: { duration: 500 },
+      from: { opacity: 0, y: -600 },
+      to: { opacity: 1, y: 0 }
   })
 
   const leavePage = useSpring({
       reset: true,
-      config: { duration: 1000 },
-      from: { opacity: 1, x: 0 },
-      to: { opacity: 0, x: -600 }
+      config: { duration: 500 },
+      from: { opacity: 1, y: 0 },
+      to: { opacity: 0, y: -600 }
   })
   
   const previousLeave = useSpring({
     reset: true,
-    config: { duration: 1000 },
+    config: { duration: 500 },
     from: { opacity: 1, y: 0 },
     to: { opacity: 0, y: 600 }
   })
@@ -78,8 +78,8 @@ const Wizzard = () => {
     setCurrentAnim();
   }
   const waitEndOfAnnim = () => {
-    setTimeout(changePage, 2000);
-    setTimeout(waitForRefreshAnim, 3000);
+    setTimeout(changePage, 1000);
+    setTimeout(waitForRefreshAnim, 1500);
   }
 
   //Before
@@ -89,8 +89,8 @@ const Wizzard = () => {
   }
 
   const waitComposantLeavePage = () => {
-    setTimeout(comeBackComposant, 2000);
-    setTimeout(waitForRefreshAnim, 3000);
+    setTimeout(comeBackComposant, 1000);
+    setTimeout(waitForRefreshAnim, 1500);
   }
 
   useEffect(() => {

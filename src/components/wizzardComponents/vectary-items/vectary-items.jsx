@@ -25,12 +25,12 @@ const VectaryItems = ({ setPicto, setIsLoaded, models, pictureSleeve }) => {
                 await viewerApi.init();
                 
                 const allScene = await viewerApi.getObjects();
+                console.log(allScene);
                 if("Model_" + model.modelId === viewerApi.id) {
                     for(let meshToHide in model.meshToHide) {
                         viewerApi.setVisibility(model.meshToHide[meshToHide], false, false);
                     }
                 }
-                // console.log(model);
                 updateSvg(viewerApi, pictureSleeve, allScene, models);
                 
                 if(viewerApi.isReady === true) {
