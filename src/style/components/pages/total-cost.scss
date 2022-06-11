@@ -1,5 +1,5 @@
 .container-total-cost {
-
+    
     table {
         margin: auto;
         width: 60%;
@@ -7,6 +7,9 @@
         td {
             width: 15%;
             font-size: 1.5rem;
+            font-family: $font-1;
+            font-weight: 900;
+            color: $color-1;
         }
         img {
             width: 50%;

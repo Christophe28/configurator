@@ -27,13 +27,13 @@ body {
             input {
                 background-color: $color-3;
                 color: $color-2;
-                width: 12rem;
+                width: 14rem;
                 height: 3rem;
                 border-radius: 25;
-                border: 1px solid $color-1;
                 font-weight: bolder;
                 font-size: 1.5rem;
                 background-color: blue;
+                padding: 0.5rem;
                 -webkit-appearance: none;
                 &:hover {
                     cursor: pointer;
@@ -42,9 +42,14 @@ body {
             
             .nextInput {
                 background-color: $color-3;
+                border: 1px solid $color-3;
+                margin-left: 1.5rem;
             }
             .previousInput {
                 background-color: $color-4;
+                border: 1px solid $color-4;
+                padding-right: 10px;
+                margin-right: 1.5rem;
             }
         }
     }
