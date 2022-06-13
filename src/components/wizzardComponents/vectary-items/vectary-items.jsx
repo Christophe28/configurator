@@ -27,7 +27,6 @@ const VectaryItems = ({ setPicto, setIsLoaded, models, pictureSleeve }) => {
 
                 if("Model_" + model.modelId === viewerApi.id) {
                     for(let meshToHide in model.meshToHide) {
-                        console.log(meshToHide)
                         viewerApi.setVisibility(model.meshToHide[meshToHide], false, false);
                     }
                 }

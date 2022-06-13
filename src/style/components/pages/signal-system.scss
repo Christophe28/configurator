@@ -3,6 +3,10 @@
     padding-right: 10%;
     display: flex;
     justify-content: center;
+    @media screen and (max-width: 1365px) {
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
     
     div {
         margin: 2rem;
