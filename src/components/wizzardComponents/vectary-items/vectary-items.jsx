@@ -22,11 +22,12 @@ const VectaryItems = ({ setPicto, setIsLoaded, models, pictureSleeve }) => {
                 const viewerApi = new VctrApi("Model_" + model.modelId);
 
                 await viewerApi.init();
-                
+
                 const allScene = await viewerApi.getObjects();
 
                 if("Model_" + model.modelId === viewerApi.id) {
                     for(let meshToHide in model.meshToHide) {
+                        console.log(meshToHide)
                         viewerApi.setVisibility(model.meshToHide[meshToHide], false, false);
                     }
                 }

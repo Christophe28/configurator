@@ -1,19 +1,13 @@
 .container-checkboxes {
-    @media screen and (max-width: 600px) {
-        padding: 20px;
-    }
 
     div {
-        @media screen and (max-width: 600px) {
-            display: flex;
-            justify-content: flex-start;
-        }
 
         input {
-            @media screen and (max-width: 600px){
-                width: 1.5rem;
-                height: 1.5rem;
+            @media screen and (max-width: 865px) {
+                width: 2rem;
+                height: 2rem;
             }
+
             width: 2.5rem;
             height: 2.5rem;
             vertical-align: bottom;     
@@ -23,12 +17,13 @@
                 cursor: pointer;
             }
         }
-
+    
         label {
-            @media screen and (max-width: 600px) {
-                font-size: 0.95rem;
-                width: 1rem;
+            @media screen and (max-width: 865px) {
+                font-size: 1rem;
+                width: 70%;
             }
+
             font-size: 1.25rem;
             font-weight: bolder;
             display: inline-block;

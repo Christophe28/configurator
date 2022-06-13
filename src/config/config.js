@@ -88,7 +88,8 @@ export const signageEquipment = [
         meshToHide: {
             sleeve: "MANCHON_LONG",
             panel: "PANNEAU_500",
-            panel: "PANNEAU_350"
+            panel: "PANNEAU_350",
+            ref: "REF"
         }
     },
     {
@@ -97,7 +98,8 @@ export const signageEquipment = [
         price: 1000,
         modelId: "57cf45e9-d355-4463-af66-f08c72993784",
         meshToHide: {
-            sleeve: "MANCHON_LONG" ,
+            sleeve: "MANCHON_LONG",
+            ref: "REF"
         }
     },
     {
@@ -107,7 +109,8 @@ export const signageEquipment = [
         modelId: "e8397f01-d261-4992-8438-78fd0df02cad",
         meshToHide: {
             sleeve: "MANCHON_COURT",
-            panel: "PANNEAU 350"
+            panel: "PANNEAU 350",
+            ref: "REF"
         }
     },
     {
@@ -117,6 +120,7 @@ export const signageEquipment = [
         modelId: "350b72ff-317b-419e-8244-10e143cce692",
         meshToHide: {
             sleeve: "MANCHON_COURT",
+            ref: "REF"
         }
     },
     {
@@ -126,7 +130,8 @@ export const signageEquipment = [
         modelId: "6dfa2976-0c74-46f3-9ac7-edeb2405d5f9",
         meshToHide: {
             sleeve: "MANCHON_COURT",
-            panel: "PANNEAU 350"
+            panel: "PANNEAU 350",
+            ref: "REF"
         }
 
     }
