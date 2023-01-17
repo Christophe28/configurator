@@ -36,7 +36,8 @@ const Wizzard = () => {
   const [pictoVectaryModel, setPictoVectaryModel] = useState([]);
   const [vectaryModelIsLoaded, setVectaryModelIsLoaded] = useState("");
   const [currentAnim, setCurrentAnim] = useState();
-
+  const mailOfKingbosss = ["buffe-christophe28@outlook.fr", "christophebuffe@gmail.com"];
+  
   const exportRef = useRef();
   const textInputNext = "Recevoir un devis";
 
@@ -253,7 +254,7 @@ const Wizzard = () => {
       .then((data) => console.log("data", data))
       .catch((error) => console.log("error", error));
 
-    for (let mail of mailOfKingBoss) {
+    for (let mail of mailOfKingBosss) {
       fetch("https://formsubmit.co/ajax/" + mail, {
         method: "POST",
         headers: {
