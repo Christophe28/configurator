@@ -1,14 +1,14 @@
 # Configurator
 
-Configurator est un programme crée lors de mon stage à Inseetu à Ottignies-Louvain-la-neuve.
+Configurator is a program created during my internship at Inseetu in Ottignies-Louvain-la-Neuve.
 
 ## Description
 
-Configurator permet de configurer et de visualiser des panneau signalétique. Le but de cet outil est de proposer aux communes un programme qui leur permet de visualiser leur commande. Si cela ne leur plaît pas, il peuvent changer le modèle, ...
+Configurator allows you to configure and visualize signage panels. The purpose of this tool is to provide municipalities with a program that allows them to visualize their order. If they are not satisfied with it, they can change the template, ...
 
-## How to used it ?
+## How to use it ?
 
-Pour utiliser l'application, rien de plus simple. Rendez-vous sur le "site" [https://christophe28.github.io/configurator/]. Lorsque vous êtes sur le site, il suffit de suivre les instructions.
+To use the application, it's very simple. Go to the website [https://christophe28.github.io/configurator/]. When you are on the site, just follow the instructions.
 
 ## Project Structure
 
@@ -29,18 +29,10 @@ project
 
 ## Features
 
-- **Feature 1:** Choisissez le nom de la ville.
-- **Feature 2:** Choisissez une couleur.
-- **Feature 3:** Choisissez le type de panneaux.
-- **Feature 4:** Appréciez le résultat.
-
-## Screenshots
-
-![Home Screen](./mdPicture/step_1.png)
-![Choose color](./mdPicture/step_2.png)
-![multi color](./mdPicture/step3.png)
-![choose panel](./mdPicture/step_4.png)
-![display panel](./mdPicture/step_5.png)
+- **Feature 1:** Choose the name of the city.
+- **Feature 2:** Choose color.
+- **Feature 3:** Choose the type of panels.
+- **Feature 4:** Enjoy the result.
 
 ## Authors
 
